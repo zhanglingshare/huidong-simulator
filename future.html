@@ -255,6 +255,7 @@ function run(){
 
   // 直方图
   const bins=42,min=Math.floor(s.p10*.92),max=Math.ceil(s.p90*1.06),step=(max-min)/bins;
+  const tbi=Math.max(0,Math.min(bins-1,Math.round((TARGET-min)/step-.5)));
   const labels=[],data=[];
   for(let b=0;b<bins;b++){labels.push(Math.round(min+step*(b+.5)));data.push(0)}
   s.sorted.forEach(r=>{const bi=Math.min(bins-1,Math.max(0,Math.floor((r-min)/step)));data[bi]++});
@@ -265,7 +266,7 @@ function run(){
     xAxis:{type:'category',data:labels,axisLabel:{color:'#6b7d96',interval:Math.floor(bins/8)},axisLine:{lineStyle:{color:'#2b3a55'}}},
     yAxis:{type:'value',axisLabel:{color:'#6b7d96'},splitLine:{lineStyle:{color:'#1c2739'}}},
     series:[{type:'bar',data:data.map((v,i)=>({value:v,itemStyle:{color:labels[i]>=TARGET?'#22d3ee':'#3b82f6',opacity:.82}})),barCategoryGap:'15%',
-      markLine:{silent:true,symbol:'none',data:[{xAxis:String(Math.round(TARGET)),lineStyle:{color:'#a78bfa',width:2,type:'dashed'},label:{color:'#a78bfa',formatter:'约1200亿',position:'start'}}]}}]
+      markLine:{silent:true,symbol:'none',data:[{xAxis:tbi,lineStyle:{color:'#a78bfa',width:2,type:'dashed'},label:{color:'#a78bfa',formatter:'约1200亿',position:'start'}}]}}]
   });
 
   // 堆叠

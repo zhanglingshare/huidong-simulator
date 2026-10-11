@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>惠东被忽略的</title>
+<script src="lib/echarts.min.js"></script>
+<script src="model.js"></script>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.65 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.nav{position:sticky;top:0;z-index:50;display:flex;gap:5px;align-items:center;padding:9px 14px;background:rgba(8,11,18,.95);border-bottom:1px solid #1b2434;overflow-x:auto}
+.nav b{font-size:14px;margin-right:6px;flex:none}
+.nav a{background:#131c2b;color:#93a4bd;border:1px solid #22304a;padding:6px 12px;border-radius:20px;font-size:12.5px;text-decoration:none;white-space:nowrap;flex:none}
+.nav a.on{background:#0e7490;border-color:#0891b2;color:#fff;font-weight:600}
+.wrap{max-width:680px;margin:auto;padding:16px}
+.card{background:#0e1523;border:1px solid #1c2739;border-radius:14px;padding:18px;margin-bottom:14px}
+h1{font-size:22px;margin:0 0 4px}.sub{color:#8fa3bf;font-size:13px}
+h2{font-size:16px;margin:0 0 6px}
+.finding{margin-bottom:18px}
+.finding .num{display:inline-block;background:#0e7490;color:#fff;border-radius:8px;padding:2px 10px;font-size:12px;font-weight:700;margin-bottom:6px}
+.finding .t{font-size:15px;font-weight:700;color:#fff;margin-bottom:4px}
+.finding .d{font-size:13px;color:#a9b6c9;line-height:1.95}
+.chart{width:100%;height:220px;margin-top:8px}
+.means{margin-top:7px;font-size:12px;color:#a5f3fc;line-height:1.75}
+.vote{background:#131c2b;border-radius:10px;padding:14px;margin-top:8px}
+.vote button{flex:1;min-width:70px;border-radius:10px;padding:10px 6px;cursor:pointer;font-size:11.5px;font-weight:700;margin:3px}
+</style></head><body>
+
+<div class="nav">
+  <span style="font-weight:800;color:#fff;padding:6px 8px;white-space:nowrap">惠东产业风洞</span>
+  <a href="index.html">① 今日话题</a><a href="town.html">🏘️ 各镇吃喝玩乐</a><a href="network.html">② 关系网</a><a href="who.html">③ 基本面</a><a href="choices.html">④ 五条路</a><a href="future.html">⑤ 未来</a><a href="windtunnel.html">⑥ 风洞</a><a href="blindspot.html" class="on">⑦ 被忽略</a><a href="report.html">⑧ 报告</a><a href="ending.html">⑨ 结语</a>
+</div>
+
+<div class="wrap">
+  <h1>惠东可能被忽略的五件事</h1>
+  <p class="sub">不是短板，是还没被算进来的牌——而且大多同那片海有关。</p>
+
+  <div class="card" style="margin-top:12px">
+    <div class="finding">
+      <div class="num">发现 1</div>
+      <div class="t">同一片海，多种用法，岸线怎么商量着用</div>
+      <div class="d">214公里海岸线上，双月湾、巽寮湾要干净海域做旅游，太平岭核电、LNG、海上风电要岸线与产能，港口海龟湾是大陆唯一海龟国家级保护区，渔排渔业要海湾，女鞋厂贴海布局。同一片海多种用法，怎么各美其美、商量着用，是惠东最值得长期算的一笔。</div>
+      <div class="means">👉 <b>对你我意味着：</b>海是惠东所有人的共同家底。搞旅游的、养鱼的、做能源的把岸线商量好，这片海才能一直既好看、又生财、还护得住海龟。</div>
+    </div>
+    <div class="finding">
+      <div class="num">发现 2</div>
+      <div class="t">🐢 海龟湾：大陆唯一的海龟国家级保护区</div>
+      <div class="d">港口海龟湾是大陆唯一的海龟国家级自然保护区，海龟对海域水质、沙滩安静极为挑剔。这条生态红线看似“不直接产GDP”，却是惠东海洋生态最硬的招牌，也是滨海旅游最珍贵的底气。</div>
+      <div class="means">👉 <b>对你我意味着：</b>守护海龟，就是守护“惠东的海足够干净”这块金字招牌——生态好了，旅游、养殖、居住才都有长久的底气。</div>
+    </div>
+    <div class="finding">
+      <div class="num">发现 3</div>
+      <div class="t">台风天：对全县是小数字，对一户人家是大事情</div>
+      <div class="d">今年强台风“红霞”登陆，模型测算当年净损失约6.3亿（旅游停业约2.3、渔业与海洋牧场约4.0），占全县GDP不到1%；按抗台标准建设的核电、风电几乎无损。对全县是小数字，对一户旺季民宿、一片渔排，可能是一整年的指望。</div>
+      <div class="means">👉 <b>对你我意味着：</b>灾后的保险赔付、救助和补网投苗速度，直接决定一户人家多久能缓过来——把这些提前备足，比灾后干着急更管用。</div>
+      <div id="tyChart" class="chart"></div>
+    </div>
+    <div class="finding">
+      <div class="num">发现 4</div>
+      <div class="t">👠 女鞋贴海布局：从代工走量到时尚品牌</div>
+      <div class="d">吉隆、黄埠是“中国女鞋生产基地”，2026年产值目标500亿；沙滩女鞋时尚文化嘉年华、鞋文化节、稔平半岛女鞋展示展销中心接连上新。贴海布局的鞋厂，正从“代工走量”走向“时尚品牌+电商”。</div>
+      <div class="means">👉 <b>对你我意味着：</b>鞋厂有了自己的牌子和线上销路，利润留在家门口，年轻的设计、电商人才才愿意回吉隆、黄埠，不必都往外跑。</div>
+    </div>
+    <div class="finding">
+      <div class="num">发现 5</div>
+      <div class="t">🥔 冬种马铃薯、赤岸蚝：把“时差”变成品牌</div>
+      <div class="d">惠东是“中国冬种马铃薯之乡”、国家地理标志，冬种春收、错峰供应大湾区；铁涌赤岸生蚝秋冬正肥。把气候与海域的“时差”变成品牌溢价，是农渔增收的巧劲。</div>
+      <div class="means">👉 <b>对你我意味着：</b>冬天北方缺菜、惠东有薯，秋天蚝正肥——把这些“人无我有”的东西做成牌子，农户、养殖户就能卖出好价钱。</div>
+    </div>
+  </div>
+
+  <div class="card" style="border-color:#fbbf24">
+    <h2>🗳️ 你觉得惠东最该先补哪一课？</h2>
+    <div class="vote" id="voteGrid" style="display:flex;flex-wrap:wrap"></div>
+    <div id="voteOut" style="margin-top:10px;font-size:12.5px;color:#cbd5e1"></div>
+  </div>
+
+  <div style="font-size:11px;color:#5b6b82;line-height:1.8">数据来源：惠东县统计公报、政府工作报告、文旅与农业农村公开数据、南方+/惠州日报。模型为作者假设，非官方预测。</div>
+</div>
+<script>
+// 台风“红霞”分产业当年损失（亿）
+echarts.init(document.getElementById('tyChart')).setOption({
+  backgroundColor:'transparent',
+  grid:{left:90,right:40,top:20,bottom:30},
+  xAxis:{type:'value',axisLabel:{color:'#64748b'},splitLine:{lineStyle:{color:'#1c2739'}}},
+  yAxis:{type:'category',data:['海上风电','核电','旅游停业','渔业/海洋牧场'],axisLabel:{color:'#cbd5e1',fontSize:11.5}},
+  series:[{type:'bar',barWidth:18,
+    data:[
+      {value:0,itemStyle:{color:#0891b2}},
+      {value:0,itemStyle:{color:#0891b2}},
+      {value:2.3,itemStyle:{color:'#fbbf24'}},
+      {value:4.0,itemStyle:{color:'#f87171'}}],
+    label:{show:true,position:'right',color:'#94a3b8',formatter:'{c} 亿'}}]
+});
+(function(){
+  const KEY="huidong_vote_v1";
+  const opts=[
+    {k:"shore",label:"岸线商量着用",c:"#0891b2"},
+    {k:"turtle",label:"守护海龟湾",c:"#34d399"},
+    {k:"recover",label:"保险与复产",c:"#f59e0b"},
+    {k:"shoe",label:"女鞋创品牌",c:"#ec4899"},
+    {k:"farm",label:"农渔做品牌",c:"#22d3ee"}
+  ];
+  let d=JSON.parse(localStorage.getItem(KEY)||'{}');
+  opts.forEach(o=>{if(typeof d[o.k]!=="number")d[o.k]=0;});
+  document.getElementById('voteGrid').innerHTML=opts.map(o=>
+    `<button style="background:${o.c}22;border:1px solid ${o.c};color:${o.c}" onclick="pick('${o.k}')">${o.label}</button>`).join("");
+  window.pick=function(k){
+    const cur=opts.find(o=>o.k===k);
+    if(localStorage.getItem(KEY+"_done")){
+      document.getElementById('voteOut').innerHTML=`你这一票投给了 <b style="color:${cur.c}">${cur.label}</b>。`;return;
+    }
+    d[k]++;localStorage.setItem(KEY,JSON.stringify(d));localStorage.setItem(KEY+"_done","1");
+    document.getElementById('voteOut').innerHTML=`你这一票投给了 <b style="color:${cur.c}">${cur.label}</b>。<span style="color:#64748b">（本机选择，不同人的投票暂不汇总，不代表全体）</span>`;
+  };
+})();
+</script>
+</body></html>

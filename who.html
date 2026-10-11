@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>惠东产业风洞 · 基本面</title>
+<script src="lib/echarts.min.js"></script>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.nav{position:sticky;top:0;z-index:50;display:flex;gap:5px;align-items:center;padding:9px 14px;background:rgba(8,11,18,.95);border-bottom:1px solid #1b2434;overflow-x:auto}
+.nav b{font-size:14px;margin-right:6px;flex:none}
+.nav a{background:#131c2b;color:#93a4bd;border:1px solid #22304a;padding:6px 12px;border-radius:20px;font-size:12.5px;text-decoration:none;white-space:nowrap;flex:none}
+.nav a.on{background:#0e7490;border-color:#0891b2;color:#fff;font-weight:600}
+.wrap{max-width:960px;margin:auto;padding:16px}
+h1{font-size:20px;margin:0 0 2px}
+.sub{color:#8fa3bf;font-size:13px;margin:0 0 16px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:700px){.kpis{grid-template-columns:repeat(2,1fr)}}
+.kpi{background:#0e1523;border:1px solid #1c2739;border-radius:10px;padding:14px;text-align:center}
+.kpi .v{font-size:22px;font-weight:800;color:#22d3ee;font-variant-numeric:tabular-nums}
+.kpi .l{font-size:11px;color:#6b7280;margin-top:2px}
+.kpi .d{font-size:10.5px;color:#67e8f9;margin-top:2px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+@media(max-width:700px){.grid2{grid-template-columns:1fr}}
+.card{background:#0e1523;border:1px solid #1c2739;border-radius:12px;padding:16px}
+.card h2{font-size:14px;margin:0 0 8px;color:#cbd5e1}
+.chart{width:100%;height:280px}
+.plain{background:#082630;border:1px solid #134047;border-left:3px solid #0891b2;border-radius:8px;padding:10px 12px;font-size:12.5px;line-height:1.9;color:#cff3f8;margin-top:10px}
+.plain .lab{display:block;font-size:10.5px;font-weight:800;color:#22d3ee;letter-spacing:1px;margin-bottom:3px}
+.next{text-align:center;margin-top:18px}
+.next a{background:#0e7490;color:#fff;padding:10px 24px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block}
+</style></head><body>
+
+<div class="nav">
+  <b>惠东产业风洞</b>
+  <a href="index.html">① 今日话题</a>
+  <a href="town.html">🏘️ 各镇吃喝玩乐</a>
+  <a href="network.html">② 世界怎么长</a>
+  <a href="who.html" class="on">③ 基本面</a>
+  <a href="choices.html">④ 五条路</a>
+  <a href="future.html">⑤ 未来</a>
+  <a href="windtunnel.html">⑥ 风洞测试</a>
+  <a href="blindspot.html">⑦ 忽略了什么</a>
+  <a href="report.html">⑧ 分析报告</a>
+  <a href="ending.html">⑨ 结语</a>
+</div>
+
+<div class="wrap">
+  <h1>惠东现在长什么样</h1>
+  <p class="sub">数据来自2025统计公报与县情公开资料。临大亚湾、红海湾的海洋大县，到底是什么结构？</p>
+
+  <div class="kpis">
+    <div class="kpi"><div class="v">861.25亿</div><div class="l">GDP</div><div class="d">+4.0%</div></div>
+    <div class="kpi"><div class="v">+12.1%</div><div class="l">规上工业增加值</div><div class="d">总产值576亿 +13.6%</div></div>
+    <div class="kpi"><div class="v">103.3万</div><div class="l">常住人口</div><div class="d">城镇化63.8%</div></div>
+    <div class="kpi"><div class="v">近1800万</div><div class="l">年游客</div><div class="d">滨海旅游大县</div></div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h2>📈 GDP怎么涨上来的</h2>
+      <div id="c1" class="chart"></div>
+      <div class="plain" style="margin-top:8px"><span class="lab">人话</span>惠东2021年跨过700亿、2023年跨过800亿，2025年861亿。线稳步往上，最近这一段靠工业提速。</div>
+    </div>
+    <div class="card">
+      <h2>🥧 三次产业结构</h2>
+      <div id="c2" class="chart"></div>
+      <div class="plain" style="margin-top:8px"><span class="lab">人话</span>三产占53%、二产35.5%、一产11.5%。惠东是“三产打头、工业提速、农渔不小”——和博罗（工业占一半多）不一样。</div>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h2>🏭 工业里什么在涨</h2>
+      <div id="c3" class="chart"></div>
+      <div class="plain" style="margin-top:8px"><span class="lab">人话</span>规上工业总产值+13.6%、增加值+12.1%，比GDP的4%快得多——工业是惠东的提速器；一季度工业投资+36.6%，新产能在落子。</div>
+    </div>
+    <div class="card">
+      <h2>🌊 海洋家底有多少</h2>
+      <div id="c4" class="chart"></div>
+      <div class="plain" style="margin-top:8px"><span class="lab">人话</span>214公里海岸线、66个岛、18个海湾、6个天然渔港。海域约3200平方公里，和陆地（约3529）差不多——惠东的家底在海上。</div>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h2>✂️ 工业在提速，投资有冷有热</h2>
+      <div id="c5" class="chart"></div>
+      <div class="plain" style="margin-top:8px"><span class="lab">人话</span>规上工业增加值+12.1%、一季度工业投资+36.6%，热的是先进制造与能源；固定资产投资这几年在调整（十四五年均约-1.8%），冷的是地产相关。</div>
+    </div>
+    <div class="card">
+      <h2>👥 人在哪</h2>
+      <div id="c6" class="chart"></div>
+      <div class="plain" style="margin-top:8px"><span class="lab">人话</span>常住103.3万，城镇约66万、农村约37万。惠东是“滨海城区+大片山区”，山区镇还连着农渔人口。</div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:12px">
+    <h2>🎯 从861亿到约1200亿，差多少</h2>
+    <div id="c7" class="chart" style="height:260px"></div>
+    <div class="plain">
+      <span class="lab">人话</span>2025年861亿，模型用2030年约1200亿作外延参考（不是官方刚性目标）。五年要涨约39%、年均约6.9%，比2025年实际4.0%快。这中间的差距，靠清洁能源、新材料、滨海旅游几条路填。
+    </div>
+  </div>
+
+  <div class="next"><a href="choices.html">下一步：五条路 →</a></div>
+</div>
+
+<script>
+const dark={text:'#93a4bd',axis:'#2b3a55'};
+const baseGrid={left:50,right:20,top:30,bottom:30};
+
+echarts.init(document.getElementById('c1')).setOption({
+  backgroundColor:'transparent',
+  tooltip:{trigger:'axis',backgroundColor:'#16203a',borderColor:'#2b3a55',textStyle:{color:'#e6edf3'}},
+  grid:baseGrid,
+  xAxis:{type:'category',data:['2020','2021','2022','2023','2024','2025'],axisLine:{lineStyle:{color:dark.axis}},axisLabel:{color:dark.text}},
+  yAxis:{type:'value',axisLine:{lineStyle:{color:dark.axis}},axisLabel:{color:dark.text},splitLine:{lineStyle:{color:'#1c2739'}}},
+  series:[{type:'line',data:[607.6,703.4,752.1,806.8,828.3,861.25],smooth:true,lineStyle:{color:'#22d3ee',width:3},areaStyle:{color:{type:'linear',x:0,y:0,x2:0,y2:1,colorStops:[{offset:0,color:'rgba(34,211,238,.3)'},{offset:1,color:'rgba(34,211,238,0)'}]}},itemStyle:{color:'#22d3ee'},label:{show:true,color:'#67e8f9',fontSize:10}}]
+});
+
+echarts.init(document.getElementById('c2')).setOption({
+  backgroundColor:'transparent',
+  tooltip:{trigger:'item',backgroundColor:'#16203a',borderColor:'#2b3a55',textStyle:{color:'#e6edf3'}},
+  legend:{bottom:0,textStyle:{color:dark.text,fontSize:11}},
+  series:[{type:'pie',radius:['40%','70%'],center:['50%','45%'],
+    data:[{value:99.00,name:'一产 11.5%',itemStyle:{color:'#84cc16'}},{value:305.39,name:'二产 35.5%',itemStyle:{color:'#0891b2'}},{value:456.86,name:'三产 53.0%',itemStyle:{color:'#3b82f6'}}],
+    label:{color:'#cbd5e1',fontSize:11,formatter:'{b}'}
+  }]
+});
+
+echarts.init(document.getElementById('c3')).setOption({
+  backgroundColor:'transparent',
+  tooltip:{trigger:'axis',backgroundColor:'#16203a',borderColor:'#2b3a55',textStyle:{color:'#e6edf3'}},
+  grid:{left:110,right:30,top:20,bottom:30},
+  xAxis:{type:'value',axisLine:{lineStyle:{color:dark.axis}},axisLabel:{color:dark.text},splitLine:{lineStyle:{color:'#1c2739'}}},
+  yAxis:{type:'category',data:['全部工业增加值','规上工业增加值','电子信息(年均)','规上工业总产值','工业投资(一季度)'],axisLine:{lineStyle:{color:dark.axis}},axisLabel:{color:dark.text,fontSize:10.5}},
+  series:[{type:'bar',data:[
+    {value:9.4,itemStyle:{color:'#0e7490'}},
+    {value:12.1,itemStyle:{color:'#0891b2'}},
+    {value:13.0,itemStyle:{color:'#0891b2'}},
+    {value:13.6,itemStyle:{color:'#22d3ee'}},
+    {value:36.6,itemStyle:{color:'#3b82f6'}}
+  ],barWidth:16,label:{show:true,position:'right',color:'#67e8f9',fontSize:11,formatter:'{c}%'}}]
+});
+
+echarts.init(document.getElementById('c4')).setOption({
+  backgroundColor:'transparent',
+  tooltip:{trigger:'axis',backgroundColor:'#16203a',borderColor:'#2b3a55',textStyle:{color:'#e6edf3'}},
+  grid:{left:100,right:30,top:20,bottom:30},
+  xAxis:{type:'value',axisLine:{lineStyle:{color:dark.axis}},axisLabel:{color:dark.text},splitLine:{lineStyle:{color:'#1c2739'}}},
+  yAxis:{type:'category',data:['天然渔港(个)','大小海湾(个)','岛屿(个)','海岸线(公里)'],axisLine:{lineStyle:{color:dark.axis}},axisLabel:{color:dark.text}},
+  series:[{type:'bar',data:[
+    {value:6,itemStyle:{color:'#155e75'}},
+    {value:18,itemStyle:{color:'#0e7490'}},
+    {value:66,itemStyle:{color:'#0891b2'}},
+    {value:214,itemStyle:{color:'#22d3ee'}}
+  ],barWidth:18,label:{show:true,position:'right',color:'#67e8f9',fontSize:11}}]
+});
+
+echarts.init(document.getElementById('c5')).setOption({
+  backgroundColor:'transparent',
+  tooltip:{trigger:'axis',backgroundColor:'#16203a',borderColor:'#2b3a55',textStyle:{color:'#e6edf3'}},
+  grid:{left:60,right:20,top:20,bottom:40},
+  xAxis:{type:'category',data:['固投(十四五年均)','规上工业增加值','工业投资(一季度)'],axisLine:{lineStyle:{color:dark.axis}},axisLabel:{color:dark.text,fontSize:10,interval:0}},
+  yAxis:{type:'value',axisLine:{lineStyle:{color:dark.axis}},axisLabel:{color:dark.text,formatter:'{value}%'},splitLine:{lineStyle:{color:'#1c2739'}}},
+  series:[{type:'bar',data:[
+    {value:-1.8,itemStyle:{color:'#f87171'}},
+    {value:12.1,itemStyle:{color:'#22d3ee'}},
+    {value:36.6,itemStyle:{color:'#3b82f6'}}
+  ],barWidth:30,label:{show:true,position:'top',color:'#cbd5e1',fontSize:10,formatter:'{c}%'}}]
+});
+
+echarts.init(document.getElementById('c6')).setOption({
+  backgroundColor:'transparent',
+  tooltip:{trigger:'item',backgroundColor:'#16203a',borderColor:'#2b3a55',textStyle:{color:'#e6edf3'}},
+  legend:{bottom:0,textStyle:{color:dark.text,fontSize:11}},
+  series:[{type:'pie',radius:['40%','70%'],center:['50%','45%'],
+    data:[{value:65.9,name:'城镇 63.8%',itemStyle:{color:'#3b82f6'}},{value:37.4,name:'农村 36.2%',itemStyle:{color:'#84cc16'}}],
+    label:{color:'#cbd5e1',fontSize:11,formatter:'{b}'}
+  }]
+});
+
+echarts.init(document.getElementById('c7')).setOption({
+  backgroundColor:'transparent',
+  tooltip:{trigger:'axis',backgroundColor:'#16203a',borderColor:'#2b3a55',textStyle:{color:'#e6edf3'}},
+  legend:{top:0,textStyle:{color:dark.text,fontSize:10}},
+  grid:baseGrid,
+  xAxis:{type:'category',data:['2025','2026','2027','2028','2029','2030'],axisLine:{lineStyle:{color:dark.axis}},axisLabel:{color:dark.text}},
+  yAxis:{type:'value',min:800,axisLine:{lineStyle:{color:dark.axis}},axisLabel:{color:dark.text},splitLine:{lineStyle:{color:'#1c2739'}}},
+  series:[
+    {name:'实际',type:'line',data:[861.25,null,null,null,null,null],lineStyle:{color:'#22d3ee',width:3},itemStyle:{color:'#22d3ee'},symbolSize:10},
+    {name:'参考轨道(年均约6.9%)',type:'line',data:[861.25,920.7,984.2,1052.1,1124.7,1202],lineStyle:{color:'#fbbf24',width:2,type:'dashed'},itemStyle:{color:'#fbbf24'}},
+    {name:'当前速度外推(4.0%)',type:'line',data:[861.25,895.7,931.5,968.8,1007.5,1047.8],lineStyle:{color:'#f87171',width:2,type:'dotted'},itemStyle:{color:'#f87171'}}
+  ]
+});
+</script>
+
+<div class="likebar">
+  <button onclick="likePage()">👍 <span id="pcount">0</span></button>
+  <button onclick="sharePage()">🔁 转给朋友</button>
+</div>
+<style>
+.likebar{position:relative;bottom:auto;transform:none;display:flex;justify-content:center;margin:20px 0;background:rgba(15,23,42,.96);border:1px solid #0891b2;border-radius:24px;padding:9px 20px;gap:22px;z-index:999;box-shadow:0 6px 24px rgba(0,0,0,.6)}
+.likebar button{background:none;border:none;color:#e2e8f0;font-size:14px;cursor:pointer}
+.likebar button:active{transform:scale(1.15)}
+</style>
+<script>
+(function(){
+  var k="like_"+location.pathname;
+  var n=parseInt(localStorage.getItem(k)||"0");
+  document.getElementById("pcount").textContent=n;
+  window.likePage=function(){n++;localStorage.setItem(k,n);document.getElementById("pcount").textContent=n;};
+  window.sharePage=function(){
+    var m=document.getElementById("shareModal");
+    if(!m){
+      m=document.createElement("div");m.id="shareModal";
+      m.style.cssText="position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px";
+      m.onclick=function(){m.remove();};
+      m.innerHTML='<div style="background:#0f172a;padding:20px;border-radius:14px;text-align:center" onclick="event.stopPropagation()"><div style="color:#fff;font-size:14px;margin-bottom:12px">截图二维码，发给朋友/群</div><img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data='+encodeURIComponent(location.href)+'" style="width:200px;height:200px;background:#fff;padding:8px;border-radius:8px"><div style="color:#94a3b8;font-size:12px;margin-top:12px">扫码打开</div></div>';
+      document.body.appendChild(m);
+    }
+    navigator.clipboard && navigator.clipboard.writeText(location.href);
+  };
+})();
+</script>
+</body></html>

@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>惠东产业风洞 · 建构世界</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.65 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.nav{position:sticky;top:0;z-index:50;display:flex;gap:5px;align-items:center;padding:9px 14px;background:rgba(8,11,18,.95);border-bottom:1px solid #1b2434;overflow-x:auto}
+.nav b{font-size:14px;margin-right:6px;flex:none}
+.nav a{background:#131c2b;color:#93a4bd;border:1px solid #22304a;padding:6px 12px;border-radius:20px;font-size:12.5px;text-decoration:none;white-space:nowrap;flex:none}
+.nav a.on{background:#0e7490;border-color:#0891b2;color:#fff;font-weight:600}
+.wrap{max-width:920px;margin:auto;padding:16px}
+h1{font-size:20px;margin:0 0 2px}
+.sub{color:#8fa3bf;font-size:13px;margin:0 0 12px}
+.stage{background:radial-gradient(ellipse at center,#082028,#080b12);border:1px solid #1c2739;border-radius:12px;position:relative;overflow:hidden}
+svg{display:block;width:100%;height:auto}
+.actbar{display:flex;gap:10px;align-items:center;margin:12px 0;flex-wrap:wrap}
+.btn{background:#0e7490;color:#fff;border:0;padding:9px 20px;border-radius:8px;font-size:13.5px;font-weight:600;cursor:pointer}
+.cnt{font-size:12px;color:#7d8da5;font-variant-numeric:tabular-nums}
+.acttitle{position:absolute;top:12px;left:50%;transform:translateX(-50%);font-size:13px;font-weight:700;letter-spacing:2px;color:#cbd5e1;z-index:5}
+.legend{position:absolute;bottom:9px;left:12px;font-size:10.5px;color:#6b7d96;display:flex;gap:12px;flex-wrap:wrap;z-index:5}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px;vertical-align:middle}
+.gnode{opacity:0;animation:flyIn .55s cubic-bezier(.2,.8,.3,1) forwards}
+.gnode circle{filter:drop-shadow(0 0 6px currentColor)}
+@keyframes flyIn{
+  0%{opacity:0;transform:translateY(-42px)}
+  60%{opacity:1;transform:translateY(3px)}
+  100%{opacity:1;transform:translateY(0)}
+}
+.edge{animation:drawEdge .6s ease-out forwards}
+@keyframes drawEdge{to{stroke-dashoffset:0}}
+.k3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+@media(max-width:700px){.k3{grid-template-columns:1fr}}
+.k3 .b{background:#0e1523;border:1px solid #1c2739;border-radius:10px;padding:13px}
+.k3 .b .l{font-size:11px;color:#8fa3bf}
+.k3 .b .v{font-size:19px;font-weight:800;margin-top:4px}
+.plain{margin-top:9px;background:#082630;border:1px solid #134047;border-left:3px solid #0891b2;border-radius:8px;padding:10px 12px;font-size:12.5px;line-height:1.9;color:#cff3f8}
+.plain .lab{display:block;font-size:10.5px;font-weight:800;color:#22d3ee;letter-spacing:1px;margin-bottom:3px}
+.next{text-align:center;margin-top:16px}
+.next a{background:#0e7490;color:#fff;padding:11px 24px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block}
+#after{display:none}
+.rank-row{display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:12px}
+.rank-row .name{width:100px;flex:none;color:#cbd5e1;text-align:right;font-size:11px}
+.rank-row .bar-bg{flex:1;height:14px;background:#0a0f1a;border-radius:3px;overflow:hidden}
+.rank-row .bar{height:100%;border-radius:3px}
+.rank-row .val{width:55px;flex:none;font-size:11px;color:#93a4bd;font-variant-numeric:tabular-nums}
+.algo-note{font-size:11px;color:#5b6b82;margin-top:8px;padding:8px 10px;background:#0a0f1a;border-radius:6px;border-left:2px solid #2b3a55}
+.blood-tag{display:inline-block;font-size:9px;padding:1px 5px;border-radius:3px;font-weight:700;margin-left:4px}
+.blood-A{background:#14532d;color:#86efac}
+.blood-B{background:#1e3a5f;color:#93c5fd}
+.blood-C{background:#4a3a12;color:#fcd34d}
+.blood-D{background:#4a1a1a;color:#fca5a5}
+</style></head><body>
+
+<div class="nav">
+  <b>惠东产业风洞</b>
+  <a href="index.html">① 今日话题</a>
+  <a href="town.html">🏘️ 各镇吃喝玩乐</a>
+  <a href="network.html" class="on">② 世界怎么长</a>
+  <a href="who.html">③ 基本面</a>
+  <a href="choices.html">④ 五条路</a>
+  <a href="future.html">⑤ 未来</a>
+  <a href="windtunnel.html">⑥ 风洞测试</a>
+  <a href="blindspot.html">⑦ 忽略了什么</a>
+  <a href="report.html">⑧ 分析报告</a>
+  <a href="ending.html">⑨ 结语</a>
+</div>
+
+<div class="wrap">
+  <h1>把惠东放进大湾区，看它怎么长</h1>
+  <p class="sub">33个主体、46条可佐证主边，会自己一层层长出来。注意最粗的那根线，连到哪一片海。</p>
+
+  <div class="actbar">
+    <button class="btn" id="bReplay">↻ 重新建构</button>
+    <span class="cnt" id="cnt">准备中…</span>
+  </div>
+
+  <div class="stage">
+    <div class="acttitle" id="acttitle"></div>
+    <svg id="svg" viewBox="0 0 860 620">
+      <g id="edges"></g>
+      <g id="nodes"></g>
+    </svg>
+    <div class="legend">
+      <span><i class="dot" style="background:#0891b2"></i>惠东产业</span>
+      <span><i class="dot" style="background:#9aa6b8"></i>镇街空间</span>
+      <span><i class="dot" style="background:#f97316"></i>人</span>
+      <span><i class="dot" style="background:#a78bfa"></i>外部城市</span>
+    </div>
+  </div>
+
+  <div id="after">
+    <div class="k3">
+      <div class="b"><div class="l">现在连得最多</div><div class="v" id="kDegree" style="color:#22d3ee">—</div><div style="font-size:11px;color:#6b7d96;margin-top:3px" id="kDegreeDesc"></div></div>
+      <div class="b"><div class="l">网络密度</div><div class="v" style="color:#fbbf24">约9%</div><div style="font-size:11px;color:#6b7d96;margin-top:3px">46/528，大量潜在连接是暗的</div></div>
+      <div class="b"><div class="l">最不能断的（必经度第一）</div><div class="v" id="kBetween" style="color:#a78bfa">—</div><div style="font-size:11px;color:#6b7d96;margin-top:3px" id="kBetweenDesc"></div></div>
+    </div>
+
+    <div class="plain">
+      <span class="lab">人话</span>
+      惠东不是只靠海，但它最紧的那几根线，都连在同一片海上。双月湾、巽寮要干净的海，太平岭核电、海上风电、LNG要岸线，港口海龟湾是不能碰的生态红线，渔排养殖户要一片海湾——一片海、多种用法，也彼此商量着用。今年台风“红霞”来时，按抗台标准建的核电、风电几乎没受伤，受冲击的是滨海民宿和渔排——这正是惠东要在风洞里算清楚的事。<span class="blood-tag blood-A">A 实测</span>
+    </div>
+
+    <div style="margin-top:14px">
+      <div style="font-size:13px;font-weight:700;margin-bottom:8px;color:#cbd5e1">谁连得最多？</div>
+      <div id="degreeRanks"></div>
+    </div>
+
+    <div style="margin-top:14px">
+      <div style="font-size:13px;font-weight:700;margin-bottom:8px;color:#cbd5e1">谁在关键路径上？</div>
+      <div id="betweenRanks"></div>
+    </div>
+
+    <div class="algo-note">
+      数据血统：<span class="blood-tag blood-A">A 实测</span>统计公报/官方发布 ｜
+      <span class="blood-tag blood-B">B 推估</span>镇街与产业联系 ｜
+      <span class="blood-tag blood-C">C 假设</span>岸线共用边权重 ｜
+      网络结构由作者根据公开主体与关系构建，边权重含假设，可改参数复跑。
+    </div>
+  </div>
+
+  <div class="next"><a href="who.html">下一步：惠东的基本面 →</a></div>
+</div>
+
+<script>
+const NODES=[
+  {id:"sz",name:"深圳",x:80,y:430,type:"ext",w:3,label:"大湾区客源·产业"},
+  {id:"gz",name:"广州",x:80,y:110,type:"ext",w:1,label:"省会·客源"},
+  {id:"hy",name:"惠阳·惠城",x:60,y:290,type:"ext",w:2,label:"西连惠州主城"},
+  {id:"ss",name:"深汕合作区",x:800,y:430,type:"ext",w:2,label:"东连特别合作区"},
+  {id:"hk",name:"香港",x:130,y:545,type:"ext",w:1,label:"高端客源"},
+  {id:"ps",name:"平山",x:430,y:300,type:"space",w:3,label:"县城·商圈"},
+  {id:"dl",name:"大岭",x:360,y:355,type:"space",w:2,label:"产业新城"},
+  {id:"rs",name:"稔山",x:325,y:470,type:"space",w:2,label:"高铁门户"},
+  {id:"xl",name:"巽寮",x:420,y:535,type:"space",w:3,label:"年迎约390万"},
+  {id:"ph",name:"平海",x:560,y:505,type:"space",w:3,label:"双月湾·古城"},
+  {id:"gk",name:"港口",x:655,y:535,type:"space",w:2,label:"海龟湾"},
+  {id:"tc",name:"铁涌",x:475,y:445,type:"space",w:2,label:"赤岸蚝乡"},
+  {id:"hb",name:"黄埠",x:695,y:445,type:"space",w:2,label:"能源·女鞋"},
+  {id:"jl",name:"吉隆",x:615,y:395,type:"space",w:2,label:"女鞋名镇"},
+  {id:"bpz",name:"白盆珠",x:315,y:130,type:"space",w:1,label:"水库生态"},
+  {id:"dz",name:"多祝",x:420,y:190,type:"space",w:1,label:"山区大镇"},
+  {id:"ad",name:"安墩",x:530,y:125,type:"space",w:1,label:"温泉·蜜乡"},
+  {id:"gt",name:"高潭",x:670,y:125,type:"space",w:1,label:"红色老区"},
+  {id:"np",name:"太平岭核电",x:735,y:375,type:"ind",w:3,label:"华龙一号·6台"},
+  {id:"wind",name:"海上风电",x:725,y:565,type:"ind",w:2,label:"百万千瓦"},
+  {id:"lng",name:"LNG接收站",x:775,y:490,type:"ind",w:2,label:"海上天然气"},
+  {id:"mat",name:"新材料产业园",x:295,y:285,type:"ind",w:3,label:"千亿级集群"},
+  {id:"sci",name:"两大科学装置",x:245,y:225,type:"ind",w:2,label:"HIAF·CiADS"},
+  {id:"shoe",name:"女鞋时尚",x:575,y:345,type:"ind",w:3,label:"中国女鞋基地"},
+  {id:"tour",name:"滨海文旅",x:505,y:475,type:"ind",w:3,label:"年近1800万人次"},
+  {id:"pot",name:"冬种马铃薯",x:295,y:425,type:"ind",w:2,label:"国家地理标志"},
+  {id:"fish",name:"海洋渔业",x:445,y:540,type:"ind",w:2,label:"海洋牧场·渔港"},
+  {id:"w1",name:"滨海游客",x:500,y:590,type:"talent",w:3,label:"年近1800万"},
+  {id:"w2",name:"制造工人",x:545,y:295,type:"talent",w:2,label:"女鞋·制造"},
+  {id:"w3",name:"能源建设者",x:700,y:315,type:"talent",w:2,label:"核电建设"},
+  {id:"w4",name:"渔民养殖户",x:395,y:575,type:"talent",w:2,label:"渔排·渔船"},
+  {id:"w5",name:"山区农业人口",x:455,y:95,type:"talent",w:1,label:"农林人口"},
+  {id:"w6",name:"深圳周末客",x:160,y:475,type:"talent",w:2,label:"高铁自驾客源"}
+];
+
+const EDGES=[
+  ["w6","sz",4,"A"],["sz","rs",3,"A"],["w6","xl",3,"B"],["w6","ph",3,"B"],
+  ["gz","tour",2,"B"],["hk","tour",2,"C"],["hy","ps",3,"A"],
+  ["ss","hb",2,"B"],
+  ["tour","xl",4,"A"],["tour","ph",4,"A"],["tour","gk",3,"A"],
+  ["w1","tour",4,"A"],["xl","ph",3,"A"],["ph","gk",3,"A"],
+  ["rs","xl",2,"B"],["tc","tour",2,"B"],
+  ["np","hb",4,"A"],["w3","np",3,"A"],["wind","gk",3,"A"],
+  ["lng","hb",3,"A"],["np","lng",2,"B"],
+  ["shoe","jl",4,"A"],["shoe","hb",3,"A"],["w2","shoe",3,"A"],["jl","hb",2,"A"],
+  ["fish","tc",3,"A"],["fish","gk",2,"B"],["w4","fish",3,"A"],
+  ["tc","pot",2,"B"],["pot","rs",3,"A"],["pot","tc",2,"B"],
+  ["mat","dl",3,"A"],["mat","ps",2,"B"],["sci","mat",2,"B"],["dl","ps",3,"A"],
+  ["dz","ps",2,"B"],["bpz","dz",2,"C"],["ad","dz",2,"C"],["gt","ad",2,"C"],
+  ["w5","dz",2,"C"],
+  ["tour","np",2,"C"],["fish","np",2,"C"],["gk","wind",2,"C"],
+  ["w2","dl",2,"B"],["w3","hb",2,"B"],["rs","tc",2,"B"]
+];
+
+const COLORS={ind:"#0891b2",space:"#9aa6b8",talent:"#f97316",ext:"#a78bfa"};
+const BLOOD_COLORS={A:"#22c55e",B:"#3b82f6",C:"#fbbf24",D:"#f87171"};
+const SVGNS="http://www.w3.org/2000/svg";
+
+function nodeById(id){return NODES.find(n=>n.id===id)}
+function buildGraph(){
+  const adj={};NODES.forEach(n=>adj[n.id]=[]);
+  EDGES.forEach(([f,t])=>{adj[f].push(t);adj[t].push(f)});
+  return adj;
+}
+function betweenness(adj){
+  const scores={};NODES.forEach(n=>scores[n.id]=0);
+  for(const src of NODES){
+    const S=[],P={},sig={},d={};
+    NODES.forEach(n=>{P[n.id]=[];sig[n.id]=0;d[n.id]=-1});
+    sig[src.id]=1;d[src.id]=0;
+    const Q=[src.id];
+    while(Q.length){
+      const v=Q.shift();S.push(v);
+      for(const w of adj[v]){
+        if(d[w]<0){d[w]=d[v]+1;Q.push(w)}
+        if(d[w]===d[v]+1){sig[w]+=sig[v];P[w].push(v)}
+      }
+    }
+    const delta={};NODES.forEach(n=>delta[n.id]=0);
+    while(S.length){
+      const w=S.pop();
+      for(const v of P[w]){delta[v]+=(sig[v]/sig[w])*(1+delta[w])}
+      if(w!==src.id)scores[w]+=delta[w];
+    }
+  }
+  return scores;
+}
+
+let timers=[];
+function clearTimers(){timers.forEach(t=>clearTimeout(t));timers=[]}
+function later(fn,ms){const t=setTimeout(fn,ms);timers.push(t);return t}
+
+function nodeMarkup(n){
+  const r=10+n.w*3;
+  const KEY={"ph":"一片海多种用法","np":"华龙一号","tour":"年近1800万"};
+  const note=KEY[n.id]||"";
+  const ring=note?`<circle cx="${n.x}" cy="${n.y}" r="${r+6}" fill="none" stroke="#f87171" stroke-width="2" stroke-dasharray="3 3" opacity="0.9"></circle>`:"";
+  const tag=note?`<text x="${n.x}" y="${n.y+r+20}" text-anchor="middle" fill="#fca5a5" font-size="9" font-weight="700">📍 ${note}</text>`:"";
+  return `
+    <circle cx="${n.x}" cy="${n.y}" r="${r}" fill="${COLORS[n.type]}" fill-opacity="0.2" stroke="${COLORS[n.type]}" stroke-width="1.5"/>${ring}
+    <text x="${n.x}" y="${n.y+4}" text-anchor="middle" fill="#e6edf3" font-size="${n.w>=3?11:9}" font-weight="${n.w>=3?700:400}">${n.name}</text>
+    <text x="${n.x}" y="${n.y+r+10}" text-anchor="middle" fill="#7d8fa5" font-size="7.5">${n.label}</text>${tag}
+  `;
+}
+
+
+function start(){
+  clearTimers();
+  const adj=buildGraph();
+  const degree={};NODES.forEach(n=>degree[n.id]=adj[n.id].length);
+  const btw=betweenness(adj);
+
+  const eg=document.getElementById("edges");
+  const ng=document.getElementById("nodes");
+  eg.innerHTML="";ng.innerHTML="";
+  document.getElementById("after").style.display="none";
+  document.getElementById("cnt").textContent="建构中…";
+
+  const phases=[
+    {title:"① 外部城市：深圳、广州、香港、惠阳、深汕",filter:n=>n.type==="ext"},
+    {title:"② 惠东镇街沿海与山区落下",filter:n=>n.type==="space"},
+    {title:"③ 能源与产业节点接上",filter:n=>n.type==="ind"},
+    {title:"④ 游客与人落下",filter:n=>n.type==="talent"},
+  ];
+
+  let clock=0;
+  const nodeGroups={};
+  phases.forEach(ph=>{
+    later(()=>{document.getElementById("acttitle").textContent=ph.title},clock);
+    NODES.filter(ph.filter).forEach((n,i)=>{
+      later(()=>{
+        const g=document.createElementNS(SVGNS,"g");
+        g.setAttribute("class","gnode");
+        g.innerHTML=nodeMarkup(n);
+        ng.appendChild(g);
+        nodeGroups[n.id]=g;
+      },clock+i*130);
+    });
+    clock+=NODES.filter(ph.filter).length*130+700;
+  });
+
+  later(()=>{
+    document.getElementById("acttitle").textContent="⑤ 线长出来：注意最粗的那根连到哪片海";
+    EDGES.forEach(([f,t,w,blood],i)=>{
+      const n1=nodeById(f),n2=nodeById(t);
+      const isCross=n1.type==="ext"||n2.type==="ext";
+      const line=document.createElementNS(SVGNS,"line");
+      line.setAttribute("x1",n1.x);line.setAttribute("y1",n1.y);
+      line.setAttribute("x2",n2.x);line.setAttribute("y2",n2.y);
+      let color;
+      if(isCross)color="#a78bfa";
+      else color=BLOOD_COLORS[blood];
+      const elen=Math.hypot(n2.x-n1.x,n2.y-n1.y);
+      line.setAttribute("stroke",color);
+      line.setAttribute("stroke-width",w);
+      line.setAttribute("stroke-opacity",isCross?0.85:0.4);
+      line.setAttribute("stroke-linecap","round");
+      line.setAttribute("class","edge");
+      line.setAttribute("stroke-dasharray",elen);
+      line.setAttribute("stroke-dashoffset",elen);
+      line.style.animationDelay=(i*0.055)+"s";
+      eg.appendChild(line);
+    });
+    later(()=>{
+      document.getElementById("acttitle").textContent="";
+      showAfter(degree,btw);
+    },EDGES.length*55+900);
+  },clock);
+}
+
+function showAfter(degree,btw){
+  document.getElementById("after").style.display="block";
+  document.getElementById("cnt").textContent=`33个节点 · ${EDGES.length}条主边 · 建构完成`;
+
+  const degSorted=Object.entries(degree).sort((a,b)=>b[1]-a[1]);
+  const topDeg=nodeById(degSorted[0][0]);
+  document.getElementById("kDegree").textContent=topDeg.name;
+  document.getElementById("kDegreeDesc").textContent=`连了${degSorted[0][1]}条线，全场第一`;
+  const maxDeg=Math.max(...Object.values(degree));
+  document.getElementById("degreeRanks").innerHTML=degSorted.slice(0,8).map(([id,v])=>{
+    const n=nodeById(id);
+    return `<div class="rank-row">
+      <span class="name">${n.name}</span>
+      <div class="bar-bg"><div class="bar" style="width:${v/maxDeg*100}%;background:${COLORS[n.type]}"></div></div>
+      <span class="val">${v}条</span>
+    </div>`;
+  }).join("");
+
+  const btwSorted=Object.entries(btw).sort((a,b)=>b[1]-a[1]);
+  const topBtw=nodeById(btwSorted[0][0]);
+  document.getElementById("kBetween").textContent=topBtw.name;
+  document.getElementById("kBetweenDesc").textContent=`最短路径经过最多`;
+  const maxBtw=btwSorted[0][1]||1;
+  document.getElementById("betweenRanks").innerHTML=btwSorted.slice(0,8).map(([id,v])=>{
+    const n=nodeById(id);
+    return `<div class="rank-row">
+      <span class="name">${n.name}</span>
+      <div class="bar-bg"><div class="bar" style="width:${v/maxBtw*100}%;background:#a78bfa"></div></div>
+      <span class="val">${v.toFixed(0)}</span>
+    </div>`;
+  }).join("");
+}
+
+document.getElementById("bReplay").onclick=start;
+start();
+</script>
+
+<div class="likebar">
+  <button onclick="likePage()">👍 <span id="pcount">0</span></button>
+  <button onclick="sharePage()">🔁 转给朋友</button>
+</div>
+<style>
+.likebar{position:relative;bottom:auto;transform:none;display:flex;justify-content:center;margin:20px 0;background:rgba(15,23,42,.96);border:1px solid #0891b2;border-radius:24px;padding:9px 20px;gap:22px;z-index:999;box-shadow:0 6px 24px rgba(0,0,0,.6)}
+.likebar button{background:none;border:none;color:#e2e8f0;font-size:14px;cursor:pointer}
+.likebar button:active{transform:scale(1.15)}
+</style>
+<script>
+(function(){
+  var k="like_"+location.pathname;
+  var n=parseInt(localStorage.getItem(k)||"0");
+  document.getElementById("pcount").textContent=n;
+  window.likePage=function(){n++;localStorage.setItem(k,n);document.getElementById("pcount").textContent=n;};
+  window.sharePage=function(){
+    var m=document.getElementById("shareModal");
+    if(!m){
+      m=document.createElement("div");m.id="shareModal";
+      m.style.cssText="position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px";
+      m.onclick=function(){m.remove();};
+      m.innerHTML='<div style="background:#0f172a;padding:20px;border-radius:14px;text-align:center" onclick="event.stopPropagation()"><div style="color:#fff;font-size:14px;margin-bottom:12px">截图二维码，发给朋友/群</div><img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data='+encodeURIComponent(location.href)+'" style="width:200px;height:200px;background:#fff;padding:8px;border-radius:8px"><div style="color:#94a3b8;font-size:12px;margin-top:12px">扫码打开</div></div>';
+      document.body.appendChild(m);
+    }
+    navigator.clipboard && navigator.clipboard.writeText(location.href);
+  };
+})();
+</script>
+</body></html>

@@ -89,18 +89,28 @@ const HT = {
     return {tourism, fishery, energy: 0, total: tourism + fishery};
   },
 
-  // 台风后客流恢复曲线（周）：当周谷底，逐周回升，约 5–7 周回到趋势
+  // 台风后客流恢复曲线（周）：停业周谷底→逐周回升→改期客流短暂回补→回到趋势。
+  // 曲线积分（换算金额）与 typhoonLoss 的旅游净损失严格同源（同一组停业天数与回补比例）
   typhoonCurve(strength, days) {
     strength = strength == null ? 1 : strength;
-    const weeks = [], loss = [];
-    const trough = Math.min(95, 55 + strength * 35); // 当周客流损失幅度%
-    for (let w = 0; w <= 8; w++) {
+    days = days == null ? 7 : days;
+    const T = this.TYPHOON, W = 10, D = days / 7;
+    const trough = Math.min(0.95, 0.55 + 0.35 * strength); // 登陆当周客流损失率
+    const weeks = [], g = [], rb = [];
+    for (let w = 0; w <= W; w++) {
       weeks.push('第' + w + '周');
-      let v;
-      if (w === 0) v = trough;
-      else v = trough * Math.exp(-0.75 * w);   // 指数恢复
-      loss.push(+Math.max(0, v).toFixed(1));
+      const lo = Math.max(w, 0), hi = Math.min(w + 1, D), cf = Math.max(0, hi - lo);
+      const dt = (w + 0.5) - D;
+      const rec = dt > 0 ? trough * Math.exp(-0.7 * dt) : 0; // 停业结束后的滞后损失
+      g.push(cf * trough + (1 - cf) * rec);
+      const x = (w + 0.5) - (D + 1.5);
+      rb.push(Math.exp(-(x * x) / 2));                        // 改期回补客流形状
     }
+    const Ag = g.reduce((a, b) => a + b, 0);
+    const target = D * (1 - T.rebook) * strength;             // 目标净损失（周）
+    const rbi = rb.reduce((a, b) => a + b, 0);
+    const B = rbi > 0 ? (Ag - target) / rbi : 0;
+    const loss = g.map((v, w) => +((v - B * rb[w]) * 100).toFixed(1));
     return {weeks, loss};
   },
 

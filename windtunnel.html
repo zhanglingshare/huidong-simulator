@@ -72,7 +72,7 @@ h2{font-size:16px;margin:0 0 8px}
     <h2>📉 台风冲击与恢复（滨海客流）</h2>
     <div id="recChart" class="chart"></div>
     <div class="deep" id="recText"></div>
-    <div class="note">恢复曲线描述滨海旅游的短期形态；上方GDP数字才是统一模型对2030全年的真实计算。台风损失已按“脉冲+恢复”计入，保守地不假设长期口碑损失。</div>
+    <div class="note">恢复曲线描述滨海旅游的短期形态，曲线积分与计入GDP的旅游净损失同源（同一组停业天数与改期回补比例）；上方GDP数字是统一模型对2030全年的计算。保守地不假设长期口碑损失。</div>
   </div>
 
   <div class="card" style="border-color:#0891b2">
@@ -116,19 +116,19 @@ function draw(){
 
   // 9周恢复（第0周为登陆当周）
   const curve = ST>0 ? HT.typhoonCurve(ST,D)
-    : {weeks:Array.from({length:9},(_,i)=>'第'+i+'周'),loss:Array(9).fill(0)};
+    : {weeks:Array.from({length:11},(_,i)=>'第'+i+'周'),loss:Array(11).fill(0)};
   const flow = curve.loss.map(L=>+(100-L).toFixed(1));
   recChart.setOption({
     backgroundColor:'transparent',
     grid:{left:45,right:20,top:20,bottom:30},
     xAxis:{type:'category',data:curve.weeks,axisLabel:{color:'#64748b',fontSize:10}},
-    yAxis:{type:'value',min:0,max:110,axisLabel:{color:'#64748b',formatter:'{value}%'}},
+    yAxis:{type:'value',min:0,max:140,axisLabel:{color:'#64748b',formatter:'{value}%'}},
     series:[{type:'line',data:flow,smooth:true,itemStyle:{color:'#22d3ee'},areaStyle:{color:'#22d3ee22'},
       markLine:{data:[{yAxis:100,label:{formatter:'正常',color:'#64748b'}}],lineStyle:{color:'#475569',type:'dashed'}}}]
   });
   recText.innerHTML = ST===0
     ? '无台风，滨海客流保持旺季正常。'
-    : `登陆当周滨海客流几近停摆（谷底约<b style="color:#f87171">${Math.round(Math.min(...flow))}%</b>），浴场重开后约5–7周回到趋势。对全县GDP，这是约${(loss.total/HT.BASE*100).toFixed(1)}%的小数字；对旺季民宿主和养殖户，却是一整年的指望——保险与复产的意义，就在这个落差里。`;
+    : `登陆当周滨海客流几近停摆（谷底约<b style="color:#f87171">${Math.round(Math.min(...flow))}%</b>）；浴场重开后客流逐周回升，改期出行的人在随后两三周集中回流、客流短暂高于正常，约5–7周回到趋势。这条曲线换算成金额，正是上面计入的旅游停业净损失，两笔账对得上。对全县GDP，这是约${(loss.total/HT.BASE*100).toFixed(1)}%的小数字；对旺季民宿主和养殖户，却是一整年的指望——保险与复产的意义，就在这个落差里。`;
 }
 [strengthS,daysS,delayS,shoeS].forEach(s=>s.oninput=draw);
 draw();

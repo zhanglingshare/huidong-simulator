@@ -116,6 +116,16 @@ h1{font-size:20px;margin:0 0 2px}
     <div class="big" id="gapNum" style="font-size:18px;margin:0">—</div>
   </div>
 
+  <h2 style="font-size:16px;margin:20px 0 4px">🔍 换把尺子，再看五条路</h2>
+  <div style="font-size:12px;color:#8fa3bf;margin-bottom:10px;line-height:1.7">同一片海，问法不同，头名就不同：比“谁撑起的盘子大”，和比“谁稳饭碗、守岸线”，根本不是同一道题。</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">
+    <button class="rbtn" data-k="gdp"  style="background:#0e7490;border:1px solid #0891b2;color:#fff;padding:8px 14px;border-radius:18px;font-size:12.5px;cursor:pointer">📈 经济总量</button>
+    <button class="rbtn" data-k="jobs" style="background:#131c2b;border:1px solid #22304a;color:#93a4bd;padding:8px 14px;border-radius:18px;font-size:12.5px;cursor:pointer">👥 就业饭碗</button>
+    <button class="rbtn" data-k="eco"  style="background:#131c2b;border:1px solid #22304a;color:#93a4bd;padding:8px 14px;border-radius:18px;font-size:12.5px;cursor:pointer">🌿 生态岸线</button>
+  </div>
+  <div id="rulerChart" style="width:100%;height:262px"></div>
+  <div id="rulerText" class="plain" style="margin-top:10px"></div>
+
   <div class="plain">
     <span class="lab">人话</span>
     惠东和博罗不一样。博罗在算“怎么承接东莞、深圳”，惠东在算“同一片海，怎么既养旅游、又出能源、还护好海龟湾”。五条路不是补短板——是把海的文章做足：清洁能源、新材料、滨海旅游、女鞋、农渔。数字是粗估，不是官方承诺。
@@ -124,7 +134,8 @@ h1{font-size:20px;margin:0 0 2px}
   <div class="next"><a href="future.html">下一步：跑一万次未来 →</a></div>
 </div>
 
-<script src="model.js?v=20261012"></script>
+<script src="lib/echarts.min.js"></script>
+<script src="model.js?v=20261012b"></script>
 <script>
 const SEED=42,N=4000,P=HT.DEFAULT_PATHS;
 // 五条全开基线
@@ -158,6 +169,46 @@ function recalc(){
   gn.style.color=gap<=0?"#34d399":gap<100?"#fbbf24":"#f87171";
 }
 recalc();
+</script>
+
+<script>
+// 价值实验：换把尺子，五条路重新排序
+const VT = HT.valueTable();
+const RMETA = {
+  gdp:  {q: "谁撑起的经济盘子最大？",
+    note: "清洁能源这样的大项目撑起惠东经济的骨架，盘子要做大，首先靠它们。"},
+  jobs: {q: "每多投一亿元，谁带回的饭碗最多？",
+    note: "女鞋、农渔、滨海旅游每亿元带动的岗位是能源大项目的好几倍，它们守着海边千家万户的日子。"},
+  eco:  {q: "谁对岸线与海洋更友好？",
+    note: "特色农渔、滨海旅游的生态友好度最高，守护着岸线、海龟湾和这片海的底色。守住绿水青山，才有长久的发展。"}
+};
+const rulerChart = echarts.init(document.getElementById("rulerChart"));
+const rbtns = document.querySelectorAll(".rbtn");
+function drawRuler(k) {
+  const rows = VT[k].slice().reverse(), top = VT[k][0];
+  rulerChart.setOption({
+    backgroundColor: "transparent",
+    grid: {left: 92, right: 52, top: 10, bottom: 24},
+    xAxis: {type: "value", axisLabel: {color: "#64748b", fontSize: 10}, splitLine: {lineStyle: {color: "#1b2434"}}},
+    yAxis: {type: "category", data: rows.map(x => x.name), axisLabel: {color: "#cbd5e1", fontSize: 11}},
+    series: [{type: "bar", barWidth: 16,
+      data: rows.map(x => ({value: x.val, itemStyle: {color: (x.name === top.name ? x.color : x.color + "55"), borderRadius: 4}})),
+      label: {show: true, position: "right", color: "#e2e8f0", fontSize: 10,
+        formatter: p => p.value + rows[p.dataIndex].unit}}]
+  });
+  document.getElementById("rulerText").innerHTML =
+    '<span class="lab">' + RMETA[k].q + '</span>这把尺子下，排在第一的是 <b style="color:#22d3ee">' + top.name + '</b>。' + RMETA[k].note +
+    '<br>尺子没有对错，只是想先护住什么；成熟的布局，是让五条路各归其位，组合成最稳的那一手。';
+  rbtns.forEach(b => {
+    const on = b.dataset.k === k;
+    b.style.background = on ? "#0e7490" : "#131c2b";
+    b.style.color = on ? "#fff" : "#93a4bd";
+    b.style.border = on ? "1px solid #0891b2" : "1px solid #22304a";
+  });
+}
+rbtns.forEach(b => b.onclick = () => drawRuler(b.dataset.k));
+drawRuler("gdp");
+window.addEventListener("resize", () => rulerChart.resize());
 </script>
 
 <div class="likebar">

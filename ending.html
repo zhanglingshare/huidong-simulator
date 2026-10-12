@@ -38,11 +38,15 @@ body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.7 -apple-system,"Ping
 .sign{font-size:12.5px;color:#8fa3bf;margin-top:18px;line-height:1.9}.sign b{color:#fbbf24}
 .btn{background:#0e7490;color:#fff;border:0;padding:11px 24px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-block;margin:4px}
 .btn.ghost{background:transparent;border:1px solid #2b3c5a;color:#cbd5e1}
+.row{display:flex;gap:10px;margin-bottom:9px;align-items:flex-start}
+.flag{flex:none;width:46px;background:#155e75;color:#67e8f9;border-radius:7px;padding:5px 0;text-align:center;font-size:11px;font-weight:700}
+.row .txt{flex:1;font-size:12.5px;color:#d3dce8;line-height:1.8}
+.worldnote{background:#061a20;border:1px solid #13414c;border-radius:8px;padding:10px 12px;font-size:12.3px;color:#d3f4f8;margin-top:6px;line-height:1.85}
 </style></head><body>
 
 <div class="nav">
   <span>惠东产业风洞</span>
-  <a href="index.html">① 今日话题</a><a href="town.html">🏘️ 各镇吃喝玩乐</a><a href="network.html">② 关系网</a><a href="who.html">③ 基本面</a><a href="choices.html">④ 五条路</a><a href="future.html">⑤ 未来</a><a href="windtunnel.html">⑥ 风洞</a><a href="blindspot.html">⑦ 被忽略</a><a href="report.html">⑧ 报告</a><a href="ending.html" class="on">⑨ 结语</a>
+  <a href="index.html">① 今日话题</a><a href="town.html">🏘️ 各镇吃喝玩乐</a><a href="network.html">② 关系网</a><a href="who.html">③ 基本面</a><a href="choices.html">④ 五条路</a><a href="future.html">⑤ 未来</a><a href="windtunnel.html">⑥ 风洞</a><a href="blindspot.html">⑦ 被忽略</a><a href="report.html" class="on">⑧ 报告</a><a href="ending.html">⑨ 结语</a>
 </div>
 
 <div class="wrap">
@@ -53,12 +57,13 @@ body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.7 -apple-system,"Ping
   </div>
 
   <div class="card">
-    <h2>🌊 桥、道、床、海——四个区县四种命门</h2>
+    <h2>🌊 桥、道、床、海、邻——五个区县五种命门</h2>
     <div class="quote">惠城的命门是<b>桥</b>——江北江南，通勤天天过江，堵的是日常。</div>
     <div class="quote">博罗的命门是<b>道</b>——连着东莞，产业顺着通道流进来。</div>
     <div class="quote">龙门的命门是<b>床</b>——几十倍人流涌进来，却留不住人过夜。</div>
     <div class="quote">惠东的命门是<b>海</b>——财富与风险同一片海，旅游、能源、渔业、生态共用一条岸线。</div>
-    <div class="deep" style="margin-top:10px">四个区县没有高低，只有“题不一样”。城区算通勤、工业县算通道、生态县算留宿、临海县算那片海——同一套风洞，换一个区县，就换一道命门。</div>
+    <div class="quote">惠阳的命门是<b>邻</b>——与深圳一路之隔，订单、就业、客流与风浪，都从这一路之隔来。</div>
+    <div class="deep" style="margin-top:10px">五个区县没有高低，只有“题不一样”。城区算通勤、工业县算通道、生态县算留宿、临海县算那片海、临深区算那个邻——同一套风洞，换一个区县，就换一道命门。</div>
     <div id="cmpGdp" class="chart"></div>
     <div id="cmpThird" class="chart"></div>
   </div>
@@ -69,6 +74,17 @@ body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.7 -apple-system,"Ping
       海洋强国、数字中国、生态文明、乡村振兴与粤港澳大湾区建设，方向很清楚：蓝色国土要能变成老百姓摸得着的收入，海洋生态也要世代护得住。<br><br>
       对惠东这样海域3200平方公里、海岸线214公里的海洋大县，关键不是“要不要向海发展”，而是<b style="color:#22d3ee">怎么在守好海洋生态的同时，把海的资源变成产业、变成岗位、变成收入</b>——按时投产的核电风电、卖出品牌的赤岸蚝、护得住的海龟湾，都是“向海图强”的具体一笔。
     </div>
+  </div>
+
+  <div class="card">
+    <h2>🌍 放眼世界，“先算后干”早已是通行做法</h2>
+    <p style="font-size:12.5px;color:#9aa9bd;margin:0 0 12px">越是成熟的经济体，越舍得在区域决策前的推演上下功夫。</p>
+    <div class="row"><div class="flag">新加坡</div><div class="txt">试错不起，建成全球首个国家级数字孪生 <b>Virtual Singapore</b>，整座城装进电脑，规划、建设、应急都先“试一遍”。</div></div>
+    <div class="row"><div class="flag">美国</div><div class="txt">州和地方政府常用区域经济模型（<b>REMI、IMPLAN</b>），加税、修路、能源政策出台前，先算清带来多少就业、多少收入。</div></div>
+    <div class="row"><div class="flag">日本</div><div class="txt">国土交通省主导 <b>Project PLATEAU</b>，为约250个城市建成三维城市模型并开放数据，规划、防洪防灾先在上面模拟。</div></div>
+    <div class="row"><div class="flag">韩国</div><div class="txt">把“数字孪生国土”写进国家空间政策，首尔用数字孪生实时模拟、调度交通，智慧城市先行试点。</div></div>
+    <div class="row"><div class="flag">英国</div><div class="txt">成立“地方经济增长实证中心” <b>What Works Centre</b>，用证据回答“哪些政策真能拉动地方经济”。</div></div>
+    <div class="worldnote">这些地方并非更聪明，而是更早懂得——<b style="color:#fbbf24">决策前多花一分“算”的功夫，决策后就能少交十分“试错”的学费。</b>惠东涉海的每一个重大选择，更值得把“先算后干”用在前面。</div>
   </div>
 
   <div class="card">
@@ -116,6 +132,24 @@ body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.7 -apple-system,"Ping
   </div>
 
   <div class="card">
+    <h2>📊 能力对照：已做到的，与努力方向</h2>
+    <div id="chRadar" class="chart"></div>
+    <p style="font-size:12px;color:#9aa9bd;text-align:center;margin:8px 0 0">绿线是当前Demo已具备的能力，橙线是正式版努力的方向——这是能力项“有没有”的对照，不是主观评分高低。</p>
+  </div>
+
+  <div class="card">
+    <h2>🔬 正式版，还要接受更严格的检验</h2>
+    <div class="grid6">
+      <div class="feat"><b>更多压力测试</b><span>台风、核电延迟、旺季客流波动等多重压力同时发生的组合情景。</span></div>
+      <div class="feat"><b>更细地找“命门”</b><span>把每个项目、每条岸线、每个参数逐一扰动，找出“最不能出错”的位置。</span></div>
+      <div class="feat"><b>成千上万次推演</b><span>让未来在不同条件下反复演化，给出更稳健的可能性分布，而不是一个数字。</span></div>
+      <div class="feat"><b>更真实的数据</b><span>对接入住率、海洋牧场、渔港与交通等更多真实来源，逐步减少假设成分。</span></div>
+      <div class="feat"><b>可交互 · 可核对</b><span>决策者自己改参数、提问题、现场推演，每一步都能回到公开资料核对。</span></div>
+      <div class="feat"><b>从看见到怎么走</b><span>不止于看见哪里要紧，更进一步和一线一起，推演具体行动怎么走、先后如何排。</span></div>
+    </div>
+  </div>
+
+  <div class="card">
     <h2>🧭 这台风洞能帮你看什么</h2>
     <div class="grid6">
       <div class="feat"><b>① 今日话题</b><span>最近24小时在聊什么</span></div>
@@ -136,6 +170,22 @@ body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.7 -apple-system,"Ping
       这些都在这张网里。<br>
       <b>惠东怎么变，和你有关。</b>
     </div>
+    <div style="background:#081f26;border:1px solid #155e75;border-left:3px solid #22d3ee;border-radius:10px;padding:14px 16px;margin:20px 0;font-size:13px;color:#d3f4f8;line-height:1.9;text-align:left">
+      <b style="color:#67e8f9">这个风洞为谁做？</b><br>
+      给<b style="color:#fff">决策者</b>：参数公开可改，台风、核电延迟、旺季客流拨一下看系统怎么响应，开工前先压一压。<br>
+      也给<b style="color:#fff">普通人</b>：你开的民宿、你养的蚝、你上班的鞋厂、你周末去的那片海，都在这张网里。一场台风、一次投产延迟，会怎样影响你的工作和日子？<b style="color:#fff">只用公开数据跑一遍，讲人话。</b>
+    </div>
+    <p style="text-align:left;color:#9aa9bd;font-size:13px;margin:18px 0 8px">🧭 这台风洞，带你一层层看惠东</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;text-align:left;margin-bottom:10px">
+      <a href="town.html" style="background:#081a22;border:1px solid #13343d;border-radius:8px;padding:10px;color:#d3f4f8;text-decoration:none;font-size:12px">🏘️ 各镇吃喝玩乐<br>14镇街吃什么玩什么</a>
+      <a href="network.html" style="background:#081a22;border:1px solid #13343d;border-radius:8px;padding:10px;color:#d3f4f8;text-decoration:none;font-size:12px">② 关系网<br>双月湾·核电·广深客</a>
+      <a href="who.html" style="background:#081a22;border:1px solid #13343d;border-radius:8px;padding:10px;color:#d3f4f8;text-decoration:none;font-size:12px">③ 基本面<br>861亿海洋家底</a>
+      <a href="choices.html" style="background:#081a22;border:1px solid #13343d;border-radius:8px;padding:10px;color:#d3f4f8;text-decoration:none;font-size:12px">④ 五条路<br>能源新材料旅游女鞋农渔</a>
+      <a href="future.html" style="background:#081a22;border:1px solid #13343d;border-radius:8px;padding:10px;color:#d3f4f8;text-decoration:none;font-size:12px">⑤ 未来<br>跑很多遍看落在哪</a>
+      <a href="windtunnel.html" style="background:#081a22;border:1px solid #13343d;border-radius:8px;padding:10px;color:#d3f4f8;text-decoration:none;font-size:12px">⑥ 风洞<br>台风脉冲+恢复</a>
+      <a href="blindspot.html" style="background:#081a22;border:1px solid #13343d;border-radius:8px;padding:10px;color:#d3f4f8;text-decoration:none;font-size:12px">⑦ 被忽略<br>海龟湾·小GDP大民生</a>
+      <a href="report.html" style="background:#081a22;border:1px solid #13343d;border-radius:8px;padding:10px;color:#d3f4f8;text-decoration:none;font-size:12px">⑧ 一页报告<br>图文讲清惠东</a>
+    </div>
     <div style="margin-top:20px">
       <a class="btn" href="index.html">重新看一遍</a>
       <a class="btn ghost" href="windtunnel.html">🎲 你来当一次县长</a>
@@ -148,31 +198,48 @@ body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.7 -apple-system,"Ping
 </div>
 
 <script>
-const axis={axisLabel:{color:'#64748b'},splitLine:{lineStyle:{color:'#1c2739'}}};
-const regions=['惠城','博罗','龙门','惠东'];
-// GDP 对比
+const axis={axisLabel:{color:'#64748b'},splitLine:{lineStyle:{color:'#102a33'}}};
+const regions=['惠城','博罗','龙门','惠东','惠阳'];
 echarts.init(document.getElementById('cmpGdp')).setOption({
  backgroundColor:'transparent',grid:{left:46,right:20,top:28,bottom:24},
- title:{text:'四区县 GDP（亿元，2025）',textStyle:{color:'#cbd5e1',fontSize:12.5},left:6,top:2},
+ title:{text:'五区县 GDP（亿元，2025）',textStyle:{color:'#cbd5e1',fontSize:12.5},left:6,top:2},
  xAxis:{type:'category',data:regions,axisLabel:{color:'#cbd5e1'}},
  yAxis:Object.assign({type:'value'},axis),
- series:[{type:'bar',barWidth:36,data:[
+ series:[{type:'bar',barWidth:34,data:[
    {value:1203,itemStyle:{color:'#3b82f6'}},{value:1005,itemStyle:{color:'#22c55e'}},
-   {value:217.6,itemStyle:{color:'#a78bfa'}},{value:861.25,itemStyle:{color:'#22d3ee'}}],
+   {value:217.6,itemStyle:{color:'#a78bfa'}},{value:861.25,itemStyle:{color:'#22d3ee'}},
+   {value:878.04,itemStyle:{color:'#fb923c'}}],
    label:{show:true,position:'top',color:'#e2e8f0',fontSize:11}}],
  tooltip:{trigger:'axis'}
 });
-// 三产占比对比
 echarts.init(document.getElementById('cmpThird')).setOption({
  backgroundColor:'transparent',grid:{left:46,right:20,top:28,bottom:24},
- title:{text:'四区县第三产业占比（%）',textStyle:{color:'#cbd5e1',fontSize:12.5},left:6,top:2},
+ title:{text:'五区县第三产业占比（%）',textStyle:{color:'#cbd5e1',fontSize:12.5},left:6,top:2},
  xAxis:{type:'category',data:regions,axisLabel:{color:'#cbd5e1'}},
  yAxis:Object.assign({type:'value',max:80},axis),
- series:[{type:'bar',barWidth:36,data:[
+ series:[{type:'bar',barWidth:34,data:[
    {value:70,itemStyle:{color:'#3b82f6'}},{value:34.7,itemStyle:{color:'#22c55e'}},
-   {value:50.5,itemStyle:{color:'#a78bfa'}},{value:53.0,itemStyle:{color:'#22d3ee'}}],
+   {value:50.5,itemStyle:{color:'#a78bfa'}},{value:53.0,itemStyle:{color:'#22d3ee'}},
+   {value:31.7,itemStyle:{color:'#fb923c'}}],
    label:{show:true,position:'top',formatter:'{c}%',color:'#e2e8f0',fontSize:11}}],
  tooltip:{trigger:'axis'}
+});
+echarts.init(document.getElementById('chRadar')).setOption({
+ backgroundColor:'transparent',
+ tooltip:{backgroundColor:'#16203a',borderColor:'#2b3a55',textStyle:{color:'#e6edf3'}},
+ legend:{bottom:0,textStyle:{color:'#9aa9bd',fontSize:11},data:['当前Demo已具备','正式版努力方向']},
+ radar:{center:['50%','47%'],radius:'60%',
+  indicator:[
+   {name:'压力测试广度',max:100},{name:'找命门精度',max:100},{name:'数据真实程度',max:100},
+   {name:'未来情景丰富度',max:100},{name:'决策交互深度',max:100}],
+  axisName:{color:'#cbd5e1',fontSize:10.5},
+  splitLine:{lineStyle:{color:'#1c3a44'}},splitArea:{areaStyle:{color:['rgba(255,255,255,.015)','rgba(255,255,255,.03)']}},
+  axisLine:{lineStyle:{color:'#1c3a44'}}},
+ series:[{type:'radar',
+  data:[
+   {value:[70,68,75,66,72],name:'当前Demo已具备',lineStyle:{color:'#22c55e'},itemStyle:{color:'#22c55e'},areaStyle:{color:'rgba(34,197,94,.18)'}},
+   {value:[92,90,90,90,92],name:'正式版努力方向',lineStyle:{color:'#fb923c'},itemStyle:{color:'#fb923c'},areaStyle:{color:'rgba(251,146,60,.12)'}}
+  ]}]
 });
 </script>
 </body></html>

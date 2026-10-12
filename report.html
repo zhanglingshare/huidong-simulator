@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>惠东一页报告 · 惠东产业风洞</title>
+<title>惠东产业分析报告（Demo版）· 张凌</title>
 <script src="model.js"></script>
 <script src="lib/echarts.min.js"></script>
 <style>
@@ -10,26 +10,48 @@ body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.7 -apple-system,"Ping
 .nav span{font-weight:800;color:#fff;padding:6px 8px;white-space:nowrap}
 .nav a{background:#131c2b;color:#93a4bd;border:1px solid #22304a;padding:6px 12px;border-radius:20px;font-size:12.5px;text-decoration:none;white-space:nowrap;flex:none}
 .nav a.on{background:#0e7490;border-color:#0891b2;color:#fff;font-weight:600}
-.wrap{max-width:760px;margin:auto;padding:16px}
-.card{background:#0e1523;border:1px solid #1c2739;border-radius:14px;padding:18px;margin-bottom:14px}
-h1{font-size:23px;margin:0 0 4px}.sub{color:#8fa3bf;font-size:13px}
-h2{font-size:16.5px;margin:0 0 11px}
-.kpi{display:inline-block;text-align:center;width:31%;padding:11px 0;background:#131c2b;border-radius:10px;margin:1%}
-.kpi .v{font-size:18px;font-weight:800;color:#fbbf24}.kpi .l{font-size:11px;color:#94a3b8}
-.row{font-size:13.5px;line-height:2;color:#c8d3e0;margin-top:8px}
-.red{color:#f87171}.green{color:#22d3ee}.yellow{color:#fbbf24}.blue{color:#60a5fa}.purple{color:#c084fc}
-.chart{width:100%;height:280px;margin-top:10px}
-.find{display:flex;gap:11px;margin:11px 0;align-items:flex-start}
-.find .n{flex:none;width:30px;height:30px;border-radius:50%;background:#0e7490;color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:13px}
-.find .t{font-size:14px;font-weight:700;color:#fff}
-.find .d{font-size:12.5px;color:#94a3b8;line-height:1.75;margin-top:2px}
-table{width:100%;border-collapse:collapse;margin-top:8px;font-size:12.5px}
-th,td{border:1px solid #1c2739;padding:8px 10px;text-align:left;line-height:1.6}
-th{background:#131c2b;color:#cbd5e1}
-.lvl{display:inline-block;font-size:10.5px;padding:1px 8px;border-radius:9px;font-weight:700}
-.lvl.a{background:#0891b222;color:#22d3ee;border:1px solid #0891b2}
-.lvl.b{background:#f59e0b22;color:#fbbf24;border:1px solid #f59e0b}
-.lvl.c{background:#64748b22;color:#94a3b8;border:1px solid #64748b}
+.wrap{max-width:820px;margin:auto;padding:16px}
+.cover{text-align:center;padding:38px 20px;background:linear-gradient(160deg,#082630,#0a0f1a);border:1px solid #1c2739;border-radius:16px;margin-bottom:14px}
+.cover .kick{font-size:12px;letter-spacing:3px;color:#22d3ee;margin-bottom:12px}
+.cover h1{font-size:26px;line-height:1.4;margin:0 0 10px}
+.cover .meta{font-size:12.5px;color:#9aa9bd;margin-top:16px}
+.card{background:#0e1523;border:1px solid #1c2739;border-radius:12px;padding:18px;margin-bottom:14px}
+.card h2{font-size:16px;margin:0 0 12px;padding-bottom:8px;border-bottom:1px solid #1c2739}
+.card h3{font-size:13.5px;color:#22d3ee;margin:18px 0 6px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:12px 0}
+@media(max-width:700px){.kpis{grid-template-columns:repeat(2,1fr)}}
+.kpi{background:#0a0f1a;border:1px solid #1c2739;border-radius:10px;padding:12px;text-align:center}
+.kpi .v{font-size:18px;font-weight:800;color:#fbbf24}
+.kpi .l{font-size:10.5px;color:#9aa9bd;margin-top:3px}
+.lights{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0}
+@media(max-width:700px){.lights{grid-template-columns:1fr 1fr}}
+.light{border-radius:10px;padding:11px 12px;font-size:12px;border:1px solid}
+.light .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px}
+.g{background:#081f26;border-color:#155e75}.g .dot{background:#22d3ee}
+.y{background:#1a1808;border-color:#713f12}.y .dot{background:#eab308}
+.r{background:#1a0c0c;border-color:#7f1d1d}.r .dot{background:#ef4444}
+ol.find{margin:0;padding-left:20px}
+ol.find li{margin-bottom:10px;line-height:1.75}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:700px){.two{grid-template-columns:1fr}}
+.people{background:linear-gradient(160deg,#082630,#0e1523);border:1px solid #155e75}
+.people .q{font-size:14px;font-weight:700;color:#22d3ee;margin-bottom:8px}
+.people .a{font-size:12.5px;color:#cbd5e1;line-height:1.85}
+.action{display:flex;gap:12px;margin-bottom:10px;align-items:flex-start}
+.action .pri{flex:none;width:46px;height:46px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff}
+.action .body{flex:1}
+.action .body b{font-size:13.5px}
+.action .body p{font-size:12px;color:#9aa9bd;margin:3px 0 0}
+.src-list{font-size:12.5px;color:#cbd5e1;line-height:2}
+.src-list .grade{display:inline-block;width:22px;height:22px;line-height:22px;text-align:center;border-radius:50%;font-size:10px;font-weight:700;margin-right:6px}
+.bound{font-size:12.5px;line-height:1.9;color:#cbd5e1}
+.tagline{font-size:12px;color:#9aa9bd;font-style:italic;margin-top:8px}
+.disc{font-size:11.5px;color:#9aa9bd;line-height:1.8;text-align:center}
+.btn{background:#0e7490;color:#fff;border:0;padding:10px 22px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-block}
+.bigquote{font-size:15px;line-height:2;text-align:center;color:#e6edf3}
+.plain{margin-top:9px;background:#061a20;border:1px solid #13414c;border-left:3px solid #0891b2;border-radius:8px;padding:9px 11px;font-size:12.3px;line-height:1.85;color:#d3f4f8}
+.plain .lab{display:block;font-size:10.5px;font-weight:800;color:#22d3ee;letter-spacing:1px;margin-bottom:3px}
+.chartbox{width:100%;height:210px}
 </style></head><body>
 
 <div class="nav">
@@ -38,162 +60,239 @@ th{background:#131c2b;color:#cbd5e1}
 </div>
 
 <div class="wrap">
-  <h1>惠东一页报告</h1>
-  <p class="sub">用公开数据，把惠东讲清楚。不是预测，是风洞——把假设摆上台面，看系统怎么响应。</p>
 
-  <div class="card" style="border:1px solid #fbbf24;background:linear-gradient(135deg,#081f26,#0e1523)">
-    <h2 style="font-size:15px;color:#fcd34d;margin-bottom:9px">📖 别急着看数字——这份报告，和你有什么关系？</h2>
-    <div class="row" style="margin-top:0">
-      · 看到“GDP”别犯怵，它就是<b class="yellow">“惠东一年挣多少”</b>——861亿，每一块都连着那片海。<br>
-      · <b class="green">“海”</b>，是惠东财富和风险共同的来处：旅游、核电、风电、LNG、养鱼、护海龟，用的是同一片海。<br>
-      · <b class="blue">“能源与女鞋”</b>，是稔平半岛南岸的塔吊和吉隆黄埠的鞋厂——投产达产、品牌升级，家门口的岗位和收入就更稳。<br>
-      · <b class="purple">“三件事”</b>，是惠东想更好、最该先使劲的三个地方。<br><br>
-      <b style="color:#fff">这份报告里没有一件和你无关。你大可以把自己当成惠东县长，边看边想：换作是我，会先做哪一件？</b>
+  <div class="cover">
+    <div class="kick">区域产业决策风洞 · 第四类样本</div>
+    <h1>惠东县产业决策<br>模拟推演分析报告</h1>
+    <div style="font-size:13px;color:#cbd5e1">——同一片海，财富与风险同源网络的一次压力测试（Demo版）</div>
+    <div class="meta">作者：<b style="color:#fbbf24">张凌 博士</b> &nbsp;|&nbsp; 2026年10月 · 广东惠州</div>
+  </div>
+
+  <div class="card" style="border-color:#0891b2;background:linear-gradient(135deg,#081f26,#0e1523)">
+    <h2 style="font-size:15px;color:#a5f3fc">📖 别急着看数字——这份报告，和你有什么关系？</h2>
+    <div style="font-size:13px;line-height:2;color:#d3f4f8">
+      · “GDP”就是<b style="color:#fbbf24">“惠东一年挣多少”</b>——861亿，每一块都连着那片海。<br>
+      · <b style="color:#22d3ee">“海”</b>是惠东财富和风险共同的来处：旅游、核电、风电、LNG、养鱼、护海龟，用的是同一片海。<br>
+      · <b style="color:#60a5fa">“能源与女鞋”</b>，是稔平半岛南岸的塔吊和吉隆黄埠的鞋厂——投产达产、品牌升级，家门口的岗位和收入就更稳。<br><br>
+      <b style="color:#fff">你大可以把自己当成惠东县长，边看边想：换作是我，会先做哪一件？</b>
     </div>
   </div>
 
   <div class="card">
     <h2>一、一页看懂：现在什么状态</h2>
-    <div class="kpi"><div class="v">861.25亿</div><div class="l">GDP 2025</div></div>
-    <div class="kpi"><div class="v">+4.0%</div><div class="l">增速</div></div>
-    <div class="kpi"><div class="v">214公里</div><div class="l">海岸线</div></div>
-    <div class="row">
-      一产99亿（11.5%）、二产305.4亿（35.5%）、三产456.9亿（53.0%），三块加总对得上861.25。这是一个<b class="green">临大亚湾、红海湾的海洋大县</b>——海域3200平方公里、66个岛屿，家底一半在服务业、超过三分之一在工业。
+    <div class="lights">
+      <div class="light g"><span class="dot"></span>海洋大县：海岸线214公里</div>
+      <div class="light g"><span class="dot"></span>规上工业+13.6%、提速明显</div>
+      <div class="light g"><span class="dot"></span>年迎客近1800万人次</div>
+      <div class="light y"><span class="dot"></span>GDP增速4.0%，稳中向好</div>
+      <div class="light y"><span class="dot"></span>客流仍较集中在旺季</div>
+      <div class="light r"><span class="dot"></span>台风季有脉冲式冲击</div>
+      <div class="light r"><span class="dot"></span>一户民宿受灾=一年指望</div>
+      <div class="light r"><span class="dot"></span>岸线多种用法需统筹</div>
     </div>
+    <p style="font-size:13px;color:#cbd5e1;margin:8px 0 0">一句话：<b style="color:#fbbf24">海是惠东最大的家底，也是最需要统筹和守护的地方。</b>同一片海既要养旅游、出能源，又要护生态、保民生，商量着用才能各美其美。</p>
   </div>
 
   <div class="card">
     <h2>二、五条核心发现（决策者可能没算进来的）</h2>
-    <div class="find"><div class="n">1</div><div><div class="t">同一片海多种用法，岸线怎么商量着用</div><div class="d">214公里岸线上，旅游要干净海域、核电风电LNG要岸线产能、海龟湾是生态红线、渔业要海湾、女鞋贴海布局。怎么各美其美，是惠东最值得长期算的一笔。</div></div></div>
-    <div class="find"><div class="n">2</div><div><div class="t">🐢 海龟湾：大陆唯一海龟国家级保护区</div><div class="d">海龟对水质、沙滩安静极挑剔。这条红线看似不直接产GDP，却是“惠东的海足够干净”最硬的招牌，也是滨海旅游的底气。</div></div></div>
-    <div class="find"><div class="n">3</div><div><div class="t">台风天：对全县是小数字，对一户是大事情</div><div class="d">强台风“红霞”当年净损失约6.3亿、占GDP不到1%；核电、风电按抗台标准建设几乎无损。可对一户旺季民宿、一片渔排，可能是一整年的指望。</div></div></div>
-    <div class="find"><div class="n">4</div><div><div class="t">👠 女鞋贴海布局：从代工走量到时尚品牌</div><div class="d">吉隆、黄埠是“中国女鞋生产基地”，2026年产值目标500亿；沙滩嘉年华、鞋文化节、展示展销中心上新，正走向“时尚品牌+电商”。</div></div></div>
-    <div class="find"><div class="n">5</div><div><div class="t">🥔 冬种马铃薯、赤岸蚝：把“时差”变品牌</div><div class="d">“中国冬种马铃薯之乡”、国家地理标志，冬种春收错峰供应；赤岸蚝秋冬正肥。把气候与海域的时差变成溢价，是农渔增收的巧劲。</div></div></div>
-    <div id="findChart" class="chart"></div>
+    <ol class="find">
+      <li><b>同一片海多种用法，岸线怎么商量着用。</b>214公里岸线上旅游要干净海域、核电风电LNG要岸线产能、海龟湾是生态红线、渔业要海湾、女鞋贴海布局；怎么各美其美，是惠东最值得长期算的一笔。</li>
+      <li><b>海龟湾：大陆唯一海龟国家级保护区。</b>海龟对水质、沙滩安静极挑剔；这条红线看似不直接产GDP，却是“惠东的海足够干净”最硬的招牌，也是滨海旅游的底气。</li>
+      <li><b>台风天：对全县是小数字，对一户是大事情。</b>强台风“红霞”当年净损失约6.3亿、占GDP不到1%，核电风电按抗台标准建设几乎无损；可对一户旺季民宿、一片渔排，可能是一整年的指望。</li>
+      <li><b>女鞋贴海布局：从代工走量到时尚品牌。</b>吉隆、黄埠是“中国女鞋生产基地”，正走向“时尚品牌+电商”，鞋文化节与展示展销中心上新。</li>
+      <li><b>冬种马铃薯、赤岸蚝：把“时差”变品牌。</b>“中国冬种马铃薯之乡”冬种春收错峰供应，赤岸蚝秋冬正肥；把气候与海域的时差变成溢价，是农渔增收的巧劲。</li>
+    </ol>
+    <div id="findChart" class="chartbox" style="height:250px"></div>
   </div>
 
   <div class="card">
-    <h2>三、离2030参考线还有多远</h2>
-    <div class="kpi"><div class="v">约1200亿</div><div class="l">参考线</div></div>
-    <div class="kpi"><div class="v" id="m50">—</div><div class="l">模型中位数</div></div>
-    <div class="kpi"><div class="v" id="mhit">—</div><div class="l">过线比例</div></div>
-    <div class="row" id="mrange"></div>
+    <h2>三、我们站在哪：基本面快照</h2>
+    <div class="kpis">
+      <div class="kpi"><div class="v">861.25亿</div><div class="l">GDP · +4.0%</div></div>
+      <div class="kpi"><div class="v">576亿</div><div class="l">规上工业 · +13.6%</div></div>
+      <div class="kpi"><div class="v">214.3km</div><div class="l">海岸线</div></div>
+      <div class="kpi"><div class="v">103.3万</div><div class="l">常住人口</div></div>
+      <div class="kpi"><div class="v">345.2亿</div><div class="l">社消零</div></div>
+      <div class="kpi"><div class="v">56.53亿</div><div class="l">一般公共预算收入</div></div>
+      <div class="kpi"><div class="v">近1800万</div><div class="l">年游客人次</div></div>
+      <div class="kpi"><div class="v">3200km²</div><div class="l">海域面积</div></div>
+    </div>
+    <div class="two">
+      <div>
+        <h3 style="margin-top:6px">三次产业结构</h3>
+        <div class="chartbox"><div id="struct" class="chartbox"></div></div>
+        <div class="plain"><span class="lab">人话版</span>惠东每赚100块，有53块来自旅游、餐饮、商场这些服务业，35块来自工业（能源、新材料、女鞋），11块多来自农渔。这是一座<b>靠海吃海、文旅与能源双轮驱动</b>的县。这么多行当共用一片海，海的好坏直接决定惠东的日子。</div>
+      </div>
+      <div>
+        <h3 style="margin-top:6px">三次产业增加值（亿元）</h3>
+        <div class="chartbox"><div id="indval" class="chartbox"></div></div>
+        <div class="plain"><span class="lab">人话版</span>三产457亿是最大块，二产305亿、一产99亿。三产靠海、二产也靠海，海洋是惠东的“主心骨”。把海护好、把岸线用好，三块产业才能一起往上走。</div>
+      </div>
+    </div>
   </div>
 
   <div class="card">
-    <h2>四、哪些因素最牵动结果（真实拨动、当场重算）</h2>
-    <div class="row" style="margin-top:0">下面不是写死的系数，是把每个驱动单独关掉或加压、用同一个种子当场重算得到的中位数变化（亿元）。条越长，说明这一项越值得优先使劲。</div>
-    <div id="tornado" class="chart" style="height:320px"></div>
+    <h2>四、离2030参考线还有多远</h2>
+    <div class="kpis" style="grid-template-columns:repeat(3,1fr)">
+      <div class="kpi"><div class="v">约1200亿</div><div class="l">参考线</div></div>
+      <div class="kpi"><div class="v" id="m50">—</div><div class="l">模型中位数</div></div>
+      <div class="kpi"><div class="v" id="mhit">—</div><div class="l">过线比例</div></div>
+    </div>
+    <div class="two">
+      <div>
+        <h3 style="margin-top:6px">清洁能源产业锚点（亿元）</h3>
+        <div class="chartbox"><div id="anchor" class="chartbox"></div></div>
+        <div class="plain"><span class="lab">人话版</span>稔平半岛清洁能源（核电、海上风电、LNG、抽蓄）2025年约80亿、目标120亿——这是惠东工业提速最硬的引擎，也是“向海图强”的主战场。它按抗台标准建设，风浪面前几乎无损，本身就是一种韧性。</div>
+      </div>
+      <div>
+        <h3 style="margin-top:6px">2030年三种可能（模型当场算）</h3>
+        <div class="chartbox"><div id="scen" class="chartbox"></div></div>
+        <div class="plain"><span class="lab">人话版</span>跑很多遍，2030最可能落在<b id="scenRange"></b>。清洁能源、新材料两条扛大头，旅游、女鞋、农渔让惠东不靠单一引擎；台风是脉冲、核电延迟是慢变量，任何一个掉链子，分布就往下移。这不是定数，是把假设摆上台面。</div>
+      </div>
+    </div>
   </div>
 
-  <div class="card">
+  <div class="card" style="border-color:#155e75">
     <h2>五、决策者最该重视的三件事</h2>
-    <div class="row">
-      <b class="green">一、把海的多种用法商量好</b>——旅游、能源、渔业、生态各美其美，护好海龟湾这条红线，滨海旅游才有长久的干净底气。<br>
-      <b class="yellow">二、让清洁能源、新材料按时投产达产</b>——太平岭核电、海上风电、LNG、新材料产业园与两大科学装置如期推进，工业基本盘才稳。<br>
-      <b class="blue">三、给女鞋和农渔品牌升级通道</b>——时尚品牌+电商、赤岸蚝与马铃薯品牌化，把利润和年轻人留在家门口；台风保险与复产则是兜住民生的底线。
+    <h3>1. 命门可能不在“要不要向海”，在“一片海怎么商量着用”</h3>
+    <p style="font-size:13px;color:#cbd5e1;margin:0">旅游、能源、渔业、生态对海的需求不一样，岸线统筹、护好海龟湾这条红线，滨海旅游才有长久的干净底气；各美其美，才不会互相挤占。</p>
+    <h3>2. 抓手优先级：先做“影响大、自己可控”的</h3>
+    <div class="chartbox" style="height:260px"><div id="matrix" class="chartbox"></div></div>
+    <div class="plain"><span class="lab">人话版</span>越靠右上角，越是“自己说了算、又管用”的事——岸线统筹、台风保险与复产、女鞋农渔品牌都在这一片；而全球能源价格、外部客流虽然量大，钥匙却不完全在自己手里。先把能掌控、见效快的事办好。</div>
+    <h3>3. 台风脉冲：预案和保险比事后补救从容</h3>
+    <p style="font-size:13px;color:#cbd5e1;margin:0">台风对全县是小数字，对一户旺季民宿、一片渔排可能是一整年指望。<b style="color:#f87171">台风保险、复产预案、淡季全季经营，兜住的正是最普通的民生。</b></p>
+  </div>
+
+  <div class="card">
+    <h2>六、哪些因素最牵动结果（真实拨动、当场重算）</h2>
+    <div style="font-size:12.5px;color:#cbd5e1">下面不是写死的系数，是把每个驱动单独关掉或加压、用同一个种子当场重算得到的中位数变化（亿元）。条越长，越值得优先使劲。</div>
+    <div class="chartbox" style="height:330px"><div id="tornado" class="chartbox"></div></div>
+    <p style="font-size:11px;color:#fbbf24;margin:6px 0 0">注：图中数值为模型在当前假设参数下、同种子成对重算的中位数差，非现实实测；参数是否合理需用真实数据校准。</p>
+    <div class="plain"><span class="lab">参数微分 · 补充视角</span>除了“关掉某条路”，本报告还做了参数扰动：保持其他路不变，只把某条路均值单独上调或下调20%、用同一个种子重跑。结果提示在模型内部，<b>清洁能源</b>这条路参数最敏感，<b>特色农渔</b>最不敏感，新材料、旅游、女鞋居中。<br><br><b>两本账别混：</b>“参数微分”回答哪个参数和结果绑得紧，“事件注入”（台风、核电延迟）回答这件事发生会怎样。还要注意——“敏感”不等于“重要”，现实中先做哪件，要结合可控性、成本和见效速度一起看。</div>
+  </div>
+
+  <div class="card people">
+    <h2 style="border-color:#155e75">七、这和普通老百姓有什么关系</h2>
+    <div class="two">
+      <div><div class="q">台风来了，对我影响大吗？</div><div class="a">对全县是小数字，可一户旺季民宿、一片渔排可能押着一年指望。有台风保险、复产预案，受灾后能快恢复，心里就有底。</div></div>
+      <div><div class="q">核电、风电给我带来啥？</div><div class="a">清洁能源项目带来家门口的岗位、税收和配套，而且按抗台标准建设、风浪里几乎无损，是惠东稳当的工业家底。</div></div>
+      <div><div class="q">我在鞋厂/渔排干活，怕什么？</div><div class="a">女鞋靠品牌和电商升级、渔业靠海洋牧场与品牌化，路子越宽、招牌越响，抗风浪能力越强，岗位和收入就越稳。</div></div>
+      <div><div class="q">海龟湾、干净的海，和我有关吗？</div><div class="a">海龟愿意来，说明海足够干净；这是滨海旅游最硬的底气。海护好了，民宿、海鲜档、游客生意才能长久兴旺。</div></div>
     </div>
   </div>
 
   <div class="card">
-    <h2>六、行动建议（按轻重缓急）</h2>
-    <table>
-      <tr><th>时序</th><th>重点</th><th>牵动什么</th></tr>
-      <tr><td>近期（先做）</td><td>稳核电、新材料投产节奏，备好台风保险与复产预案</td><td>稳住工业基本盘，旺季受灾后民宿养殖户能快恢复</td></tr>
-      <tr><td>中期（培育）</td><td>女鞋时尚品牌+电商、滨海全季旅游、农渔品牌</td><td>把利润留在家门口，补上滨海淡季，农渔卖出溢价</td></tr>
-      <tr><td>持续（打底）</td><td>岸线统筹、海龟保护、渔港与海洋牧场、公共服务</td><td>一片海多种用法各美其美，留住滨海的家庭与人才</td></tr>
-    </table>
+    <h2>八、行动建议（按轻重缓急）</h2>
+    <div class="action"><div class="pri" style="background:#155e75">优先</div><div class="body"><b>统筹一片海的多种用法</b><p>做好岸线规划、护好海龟湾生态红线，让旅游、能源、渔业、生态各美其美。</p></div></div>
+    <div class="action"><div class="pri" style="background:#155e75">优先</div><div class="body"><b>稳能源新材料投产达产</b><p>推进核电、海上风电、LNG、新材料与科学装置如期建设，稳住工业提速基本盘。</p></div></div>
+    <div class="action"><div class="pri" style="background:#0e7490">重要</div><div class="body"><b>兜住台风民生底线</b><p>推广台风保险、完善复产预案，发展全季全时旅游，帮民宿养殖户平滑旺季与灾年。</p></div></div>
+    <div class="action"><div class="pri" style="background:#0e7490">重要</div><div class="body"><b>升级女鞋与农渔品牌</b><p>女鞋时尚品牌+电商，赤岸蚝、马铃薯、海味品牌化，把利润和年轻人留在家门口。</p></div></div>
+    <div class="action"><div class="pri" style="background:#1d4ed8">持续</div><div class="body"><b>夯实公共服务与渔港底座</b><p>教育、医疗、渔港、海洋牧场与营商环境长期打底，留住滨海的家庭与人才。</p></div></div>
+    <p style="font-size:11px;color:#7c8b99;margin:10px 0 0">建议方向对应官方“向海图强、海洋强县、生态文明、民生保障”等战略表述，为模拟推演的优先级提示，非替代官方决策。</p>
   </div>
 
   <div class="card">
-    <h2>七、数据来源与分级</h2>
-    <table>
-      <tr><th>内容</th><th>等级</th><th>口径</th></tr>
-      <tr><td>GDP、三次产业、人口、岸线、海域</td><td><span class="lvl a">实测</span></td><td>统计公报、政府工作报告、县情概况公开数据</td></tr>
-      <tr><td>游客人次、旅游收入、国庆数据</td><td><span class="lvl a">实测</span></td><td>文旅部门公开数据、南方+/惠州日报报道</td></tr>
-      <tr><td>台风当年损失、客流恢复</td><td><span class="lvl b">推估</span></td><td>基于公开停业、复产报道的模型测算，非官方统计</td></tr>
-      <tr><td>五条路径增量、压力损失</td><td><span class="lvl b">假设</span></td><td>作者设定的情景参数，非官方预测，可公开修改</td></tr>
-    </table>
-  </div>
-
-  <div class="card">
-    <h2>八、模型边界与免责</h2>
-    <div class="row" style="margin-top:0">
-      这是一个<b class="blue">决策辅助与压力测试工具</b>，不是预测器，也不做现实因果断言；反事实情景无法直接在现实中验证。本报告<b class="yellow">不展示平台后台真实阅读、转发、点赞数据</b>，话题以关注档（高/较高/中）标注来源权威与多源程度。结论会随参数变化，换一组合理假设，结果可能不同——这正是它鼓励你做的事：动手改、当场算。
+    <h2>九、数据来源与分级</h2>
+    <div class="src-list">
+      <div><span class="grade" style="background:#155e75;color:#fff">A</span><b>实测</b>：统计公报、政府工作报告、计划执行报告中直接给出的数字</div>
+      <div><span class="grade" style="background:#1e40af;color:#fff">B</span><b>推估</b>：台风当年损失、客流恢复，按公开停业与复产报道测算</div>
+      <div><span class="grade" style="background:#713f12;color:#fff">C</span><b>假设</b>：五条路径增量、压力损失等情景参数，非官方预测，可公开修改</div>
     </div>
-  </div>
-
-  <div class="card" style="border-color:#0891b2">
-    <h2 style="font-size:15px;color:#a5f3fc;margin-bottom:9px">🤝 看到这儿，轮到你了</h2>
-    <div class="row" style="margin-top:0">
-      <b class="purple">🪞 代入：</b>你在惠东上班、做买卖、带孩子，这些数字就是你每天过的日子。<br>
-      <b class="yellow">🧭 决策：</b>岸线、能源、女鞋农渔——如果你来拍板，先使劲哪一件？<br>
-      <b class="blue">🔁 参与：</b>转给同样关心惠东的家人朋友，看看大家选的一不一样。<br>
-      <b class="green">🎁 收获：</b>看懂一个临海县怎么“算账”，再看自己的工作和生意，也会清楚不少。<br><br>
-      <b style="color:#fff">惠东的事，说到底，是每一个惠东人的事。</b>
-    </div>
-    <div style="margin-top:12px;display:flex;gap:12px;justify-content:center">
-      <button onclick="rlike()" style="background:#0e7490;color:#fff;border:0;padding:9px 20px;border-radius:20px;font-size:13px;font-weight:700;cursor:pointer">👍 <span id="rcount">0</span></button>
-      <button onclick="rshare()" style="background:#f59e0b;color:#1a1206;border:0;padding:9px 20px;border-radius:20px;font-size:13px;font-weight:700;cursor:pointer">🔁 转给朋友</button>
+    <h3>主要公开来源</h3>
+    <div style="font-size:12px;color:#cbd5e1;line-height:2">
+      · 惠州市、惠东县人民政府门户网站<br>
+      · 惠东县2025年国民经济和社会发展统计公报<br>
+      · 2026年惠东县政府工作报告、计划草案报告<br>
+      · 惠东县文旅部门公开数据、南方+/惠州日报报道<br>
+      · 稔平半岛能源项目、海龟湾保护区及女鞋产业公开资料
     </div>
   </div>
 
   <div class="card">
-    <h2>九、作者介绍</h2>
-    <div class="row" style="margin-top:0">
-      <b class="yellow">张凌 博士</b>，高校副教授、南粤优秀教师。长期从事区域产业、数字化与决策方法研究与教学。本系列（惠城·博罗·龙门·惠东）由作者<b class="green">独立完成，无任何基金资助</b>，代码以 MIT 协议开源，欢迎各地在署名的基础上，复制到自己的区县一起“先算后干”。
+    <h2>十、模型边界与免责声明</h2>
+    <div class="bound">
+      1. <b>不是预测器</b>：不预测具体产值或项目成败，只在公开数据与明确假设下给出叙事分布与结构提示。<br>
+      2. <b>不做因果断言</b>：统一使用“关联、同步、结构提示”，路径系数为模型内部关联强度，不代表现实因果作用。<br>
+      3. <b>反事实不可验证，但参数可核对</b>：每个参数都能回到公开资料核对。<br>
+      4. <b>可复现</b>：使用固定随机种子，同种子必同结果；结果由代码当场计算，非硬编码。<br>
+      5. <b>两本账</b>：参数微分（逐个参数±20%扰动）与事件注入（台风、核电延迟）分开计算、分开解读。<br>
+      6. <b>不构成投资建议</b>，亦不替代官方决策；结论随假设改变而改变。
     </div>
   </div>
+
+  <div class="card">
+    <p class="bigquote" style="margin:4px 0">大项目、大客流会被记住一时，<br>但只有<b style="color:#fbbf24">那片海世代清澈、靠海的人年年有奔头</b>，惠东才有未来。</p>
+    <p class="disc" style="margin-top:14px">本报告为Demo演示版本。<b>数据时效性：</b>2025年GDP、三次产业、规上工业等来自统计公报或政府工作报告，部分为快报数，2026年统计公报发布后可能微调。台风“红霞”为2026年真实事件，损失为基于公开报道的测算。模拟结果不代表对未来的精确预测，亦不构成投资建议。</p>
+  </div>
+
+  <div style="text-align:center;margin:22px 0"><a class="btn" href="index.html">回到首页</a></div>
 </div>
 
 <script>
+const axc='#9aa9bd', tc='#7c8b99';
 const base=HT.run(42,8000,HT.DEFAULT_PATHS);
 document.getElementById('m50').textContent=Math.round(base.p50)+'亿';
 document.getElementById('mhit').textContent=Math.round(base.hit)+'%';
-document.getElementById('mrange').innerHTML=
- '跑很多遍，2030最可能落在<b class="yellow">'+Math.round(base.p10)+'–'+Math.round(base.p90)+'亿</b>。中位数约'+Math.round(base.p50)+'亿、过线率约'+Math.round(base.hit)+'%——刚过半，不算稳。清洁能源、新材料两条扛大头，旅游、女鞋、农渔让惠东不靠单一引擎；台风是脉冲、核电延迟是慢变量，任何一个掉链子，分布就往下移。';
+document.getElementById('scenRange').textContent=Math.round(base.p10)+'–'+Math.round(base.p90)+'亿';
 
-// 关键增速对比（%）
-const growth=[
- ['国庆旅游收入',4.5],['GDP',4.0],['国庆游客',6.7],
- ['规上工业增加值',12.1],['规上工业总产值',13.6]
-].sort((a,b)=>a[1]-b[1]);
-echarts.init(document.getElementById('findChart')).setOption({
- backgroundColor:'transparent',
- grid:{left:105,right:40,top:18,bottom:26},
- xAxis:{type:'value',axisLabel:{color:'#64748b',formatter:'{value}%'},splitLine:{lineStyle:{color:'#1c2739'}}},
- yAxis:{type:'category',data:growth.map(g=>g[0]),axisLabel:{color:'cbd5e1',fontSize:11.5}},
- series:[{type:'bar',barWidth:16,data:growth.map(g=>g[1]),
-   itemStyle:{color:new echarts.graphic.LinearGradient(0,0,1,0,[{offset:0,color:'#0e7490'},{offset:1,color:'#22d3ee'}])},
-   label:{show:true,position:'right',formatter:'{c}%',color:'#e2e8f0',fontSize:11}}],
- tooltip:{trigger:'axis'}
-});
+function init(id){return echarts.init(document.getElementById(id));}
+const CYAN=new echarts.graphic.LinearGradient(0,0,1,0,[{offset:0,color:'#0e7490'},{offset:1,color:'#22d3ee'}]);
 
-// 敏感性：关路径（改 paths）或加压（opts），同种子真实重算 p50
-function p50off(idx){
-  const paths=HT.DEFAULT_PATHS.map((p,j)=>j===idx?Object.assign({},p,{mu:0}):p);
-  return HT.run(42,8000,paths).p50;
-}
-function p50opts(opts){return HT.run(42,8000,HT.DEFAULT_PATHS,opts).p50;}
-const drivers=[
- ['清洁能源落空',p50off(0)],['新材料落空',p50off(1)],['滨海旅游落空',p50off(2)],
- ['女鞋落空',p50off(3)],['农渔落空',p50off(4)],
- ['台风“红霞”',p50opts({typhoon:{strength:1,days:7}})],
- ['核电延迟1年',p50opts({nuclearDelay:1})]
-];
-let rows=drivers.map(([label,p])=>({label,d:Math.round(base.p50-p)}));
-rows.sort((a,b)=>a.d-b.d);
-echarts.init(document.getElementById('tornado')).setOption({
- backgroundColor:'transparent',
- grid:{left:105,right:45,top:16,bottom:24},
- xAxis:{type:'value',name:'中位数少多少(亿)',nameTextStyle:{color:'#64748b'},axisLabel:{color:'#64748b'},splitLine:{lineStyle:{color:'#1c2739'}}},
- yAxis:{type:'category',data:rows.map(r=>r.label),axisLabel:{color:'#cbd5e1',fontSize:11.5}},
- series:[{type:'bar',data:rows.map(r=>r.d),barWidth:16,
-   itemStyle:{color:new echarts.graphic.LinearGradient(0,0,1,0,[{offset:0,color:'#0e7490'},{offset:1,color:'#22d3ee'}])},
-   label:{show:true,position:'right',formatter:'{c}亿',color:'#e2e8f0',fontSize:11}}],
- tooltip:{trigger:'axis'}
-});
+const growth=[['国庆旅游收入',4.5],['GDP',4.0],['国庆游客',6.7],['规上工业增加值',12.1],['规上工业总产值',13.6]].sort((a,b)=>a[1]-b[1]);
+init('findChart').setOption({backgroundColor:'transparent',grid:{left:108,right:44,top:16,bottom:24},
+ xAxis:{type:'value',axisLabel:{color:tc,formatter:'{value}%'},splitLine:{lineStyle:{color:'#102a33'}}},
+ yAxis:{type:'category',data:growth.map(g=>g[0]),axisLabel:{color:'#cbd5e1',fontSize:11}},
+ series:[{type:'bar',barWidth:14,data:growth.map(g=>g[1]),itemStyle:{color:CYAN},label:{show:true,position:'right',formatter:'{c}%',color:'#cbd5e1',fontSize:10}}],tooltip:{trigger:'axis'}});
 
+init('struct').setOption({backgroundColor:'transparent',tooltip:{trigger:'item'},legend:{bottom:0,textStyle:{color:axc,fontSize:10}},
+ series:[{type:'pie',radius:['42%','68%'],center:['50%','45%'],
+  data:[{name:'三产 53.0%',value:53,itemStyle:{color:'#22d3ee'}},{name:'二产 35.5%',value:35.5,itemStyle:{color:'#0891b2'}},{name:'一产 11.5%',value:11.5,itemStyle:{color:'#94a3b8'}}],
+  label:{color:'#cbd5e1',fontSize:10}}]});
+
+init('indval').setOption({backgroundColor:'transparent',grid:{left:48,right:20,top:24,bottom:30},
+ xAxis:{type:'category',data:['一产','二产','三产'],axisLabel:{color:'#cbd5e1'}},
+ yAxis:{type:'value',axisLabel:{color:tc},splitLine:{lineStyle:{color:'#102a33'}}},
+ series:[{type:'bar',barWidth:40,data:[{value:99,itemStyle:{color:'#94a3b8'}},{value:305.4,itemStyle:{color:'#0891b2'}},{value:456.9,itemStyle:{color:'#22d3ee'}}],
+  label:{show:true,position:'top',formatter:'{c}亿',color:'#cbd5e1',fontSize:10}}],tooltip:{trigger:'axis'}});
+
+init('anchor').setOption({backgroundColor:'transparent',grid:{left:50,right:20,top:24,bottom:30},
+ xAxis:{type:'category',data:['清洁能源·2025','目标·2030'],axisLabel:{color:'#cbd5e1',fontSize:11}},
+ yAxis:{type:'value',axisLabel:{color:tc},splitLine:{lineStyle:{color:'#102a33'}}},
+ series:[{type:'bar',barWidth:46,data:[{value:80,itemStyle:{color:'#0e7490'}},{value:120,itemStyle:{color:'#22d3ee'}}],
+  label:{show:true,position:'top',formatter:'{c}亿',color:'#cbd5e1',fontSize:10}}],tooltip:{trigger:'axis'}});
+
+init('scen').setOption({backgroundColor:'transparent',grid:{left:50,right:20,top:24,bottom:30},
+ xAxis:{type:'category',data:['偏低','中位','偏高'],axisLabel:{color:'#cbd5e1'}},
+ yAxis:{type:'value',min:800,axisLabel:{color:tc},splitLine:{lineStyle:{color:'#102a33'}}},
+ series:[{type:'bar',barWidth:42,data:[
+   {value:+base.p10.toFixed(0),itemStyle:{color:'#f87171'}},{value:+base.p50.toFixed(0),itemStyle:{color:'#fbbf24'}},{value:+base.p90.toFixed(0),itemStyle:{color:'#22c55e'}}],
+  label:{show:true,position:'top',formatter:'{c}亿',color:'#cbd5e1',fontSize:10},
+  markLine:{data:[{yAxis:1200}],lineStyle:{color:'#60a5fa',type:'dashed'},label:{formatter:'参考线1200'}}
+ }],tooltip:{trigger:'axis'}});
+
+init('matrix').setOption({backgroundColor:'transparent',grid:{left:54,right:30,top:24,bottom:40},
+ xAxis:{name:'自己可控 →',nameLocation:'middle',nameGap:26,min:0,max:10,axisLabel:{color:tc},splitLine:{lineStyle:{color:'#102a33'}}},
+ yAxis:{name:'影响 →',min:0,max:10,axisLabel:{color:tc},splitLine:{lineStyle:{color:'#102a33'}}},
+ series:[{type:'scatter',symbolSize:16,
+  data:[[8.4,8.4,'岸线统筹'],[7.8,8,'台风保险复产'],[7.4,7.6,'女鞋农渔品牌'],[8,6.4,'投产盯节点'],[6.2,5,'全季旅游'],[5.6,4,'海洋牧场'],[4,3,'外部客流'],[3,2.4,'全球能源价']],
+  itemStyle:{color:'#22d3ee'},
+  label:{show:true,position:'right',formatter:p=>p.data[2],color:'#cbd5e1',fontSize:9.5}}],tooltip:{formatter:p=>p.data[2]}});
+
+function p50off(idx){const paths=HT.DEFAULT_PATHS.map((p,j)=>j===idx?Object.assign({},p,{mu:0}):p);return HT.run(42,8000,paths).p50;}
+function p50opts(o){return HT.run(42,8000,HT.DEFAULT_PATHS,o).p50;}
+const drivers=[['清洁能源落空',p50off(0)],['新材料落空',p50off(1)],['滨海旅游落空',p50off(2)],['女鞋落空',p50off(3)],['农渔落空',p50off(4)],['台风“红霞”',p50opts({typhoon:{strength:1,days:7}})],['核电延迟1年',p50opts({nuclearDelay:1})]];
+let rows=drivers.map(([l,p])=>({l,d:Math.round(base.p50-p)})).sort((a,b)=>a.d-b.d);
+init('tornado').setOption({backgroundColor:'transparent',grid:{left:104,right:46,top:14,bottom:24},
+ xAxis:{type:'value',name:'中位数少多少(亿)',nameTextStyle:{color:tc},axisLabel:{color:tc},splitLine:{lineStyle:{color:'#102a33'}}},
+ yAxis:{type:'category',data:rows.map(r=>r.l),axisLabel:{color:'#cbd5e1',fontSize:11}},
+ series:[{type:'bar',barWidth:14,data:rows.map(r=>r.d),itemStyle:{color:CYAN},label:{show:true,position:'right',formatter:'{c}亿',color:'#cbd5e1',fontSize:10}}],tooltip:{trigger:'axis'}});
+</script>
+
+<div style="display:flex;justify-content:center;margin:20px 0;background:rgba(15,23,42,.96);border:1px solid #0891b2;border-radius:24px;padding:9px 20px;gap:22px">
+  <button onclick="rlike()" style="background:none;border:none;color:#e2e8f0;font-size:14px;cursor:pointer">👍 <span id="rcount">0</span> <span style="font-size:11px;color:#9aa9bd">有用(本地记录)</span></button>
+  <button onclick="rshare()" style="background:none;border:none;color:#e2e8f0;font-size:14px;cursor:pointer">🔁 转给朋友</button>
+</div>
+<script>
 var rk="like_report_huidong",rn=parseInt(localStorage.getItem(rk)||"0");rcount.textContent=rn;
 function rlike(){rn++;localStorage.setItem(rk,rn);rcount.textContent=rn;}
 function rshare(){

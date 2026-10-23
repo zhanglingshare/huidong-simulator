@@ -6,46 +6,61 @@
 *{box-sizing:border-box}
 body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
 .nav{position:sticky;top:0;z-index:50;display:flex;gap:5px;align-items:center;padding:9px 14px;background:rgba(8,11,18,.95);border-bottom:1px solid #1b2434;overflow-x:auto}
-.nav b{font-size:14px;margin-right:6px;flex:none}
+.nav b{font-size:14px;margin-right:6px;flex:none;color:#fff}
 .nav a{background:#131c2b;color:#93a4bd;border:1px solid #22304a;padding:6px 12px;border-radius:20px;font-size:12.5px;text-decoration:none;white-space:nowrap;flex:none}
 .nav a.on{background:#0e7490;border-color:#0891b2;color:#fff;font-weight:600}
-.wrap{max-width:960px;margin:auto;padding:16px}
-h1{font-size:20px;margin:0 0 2px}
-.sub{color:#8fa3bf;font-size:13px;margin:0 0 16px}
-.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+.wrap{max-width:1200px;margin:auto;padding:18px}
+
+/* hero */
+.hero{position:relative;text-align:center;padding:44px 22px 38px;background:
+   radial-gradient(ellipse at 50% 130%, #0e3a4a 0%, #082630 40%, #0a0f1a 78%);
+  border:1px solid #1c2739;border-radius:16px;margin-bottom:16px;overflow:hidden}
+.hero .kick{font-size:11px;letter-spacing:4px;color:#67e8f9;margin-bottom:10px}
+.hero h1{font-size:26px;line-height:1.4;margin:0;color:#fff}
+.hero h1 .sea{color:#fbbf24}
+.hero .sub{font-size:13px;color:#a9b6c9;margin:12px auto 0;max-width:620px;line-height:1.8}
+
+/* KPI */
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
 @media(max-width:700px){.kpis{grid-template-columns:repeat(2,1fr)}}
-.kpi{background:#0e1523;border:1px solid #1c2739;border-radius:10px;padding:14px;text-align:center}
-.kpi .v{font-size:22px;font-weight:800;color:#22d3ee;font-variant-numeric:tabular-nums}
-.kpi .l{font-size:11px;color:#6b7280;margin-top:2px}
-.kpi .d{font-size:10.5px;color:#67e8f9;margin-top:2px}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
-@media(max-width:700px){.grid2{grid-template-columns:1fr}}
-.card{background:#0e1523;border:1px solid #1c2739;border-radius:12px;padding:16px}
-.card h2{font-size:14px;margin:0 0 8px;color:#cbd5e1}
+.kpi{background:#0e1523;border:1px solid #1c2739;border-radius:14px;padding:18px;text-align:center;transition:.25s}
+.kpi:hover{border-color:#0891b2;transform:translateY(-2px)}
+.kpi .v{font-size:26px;font-weight:800;color:#22d3ee;font-variant-numeric:tabular-nums}
+.kpi .l{font-size:12px;color:#9aa9bd;margin-top:4px}
+.kpi .d{font-size:11px;color:#fbbf24;margin-top:4px}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+@media(max-width:800px){.grid2{grid-template-columns:1fr}}
+.card{background:#0e1523;border:1px solid #1c2739;border-radius:14px;padding:18px}
+.card h2{font-size:15px;margin:0 0 10px;color:#cbd5e1}
 .chart{width:100%;height:280px}
-.plain{background:#082630;border:1px solid #134047;border-left:3px solid #0891b2;border-radius:8px;padding:10px 12px;font-size:12.5px;line-height:1.9;color:#cff3f8;margin-top:10px}
-.plain .lab{display:block;font-size:10.5px;font-weight:800;color:#22d3ee;letter-spacing:1px;margin-bottom:3px}
-.next{text-align:center;margin-top:18px}
-.next a{background:#0e7490;color:#fff;padding:10px 24px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block}
-@media(min-width:1024px){.wrap{max-width:1200px!important;padding:24px}}</style></head><body>
+.plain{background:#082630;border:1px solid #134047;border-left:3px solid #0891b2;border-radius:10px;padding:12px 14px;font-size:12.5px;line-height:1.9;color:#cff3f8;margin-top:12px}
+.plain .lab{display:block;font-size:10.5px;font-weight:800;color:#22d3ee;letter-spacing:1px;margin-bottom:4px}
+.next{text-align:center;margin:24px 0}
+.next a{background:#0e7490;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block}
+</style></head><body>
 
 <div class="nav">
   <b>惠东产业风洞</b>
   <a href="index.html">① 今日话题</a>
   <a href="town.html">🏘️ 各镇吃喝玩乐</a>
-  <a href="network.html">② 世界怎么长</a>
+  <a href="network.html">② 关系网</a>
   <a href="who.html" class="on">③ 基本面</a>
   <a href="choices.html">④ 五条路</a>
   <a href="future.html">⑤ 未来</a>
-  <a href="windtunnel.html">⑥ 风洞测试</a>
-  <a href="blindspot.html">⑦ 忽略了什么</a>
-  <a href="report.html">⑧ 分析报告</a>
+  <a href="windtunnel.html">⑥ 风洞</a>
+  <a href="blindspot.html">⑦ 被忽略</a>
+  <a href="report.html">⑧ 报告</a>
   <a href="ending.html">⑨ 结语</a>
 </div>
 
 <div class="wrap">
-  <h1>惠东现在长什么样</h1>
-  <p class="sub">数据来自2025统计公报与县情公开资料。临大亚湾、红海湾的海洋大县，到底是什么结构？</p>
+
+  <div class="hero">
+    <div class="kick">HUIDONG · FUNDAMENTALS</div>
+    <h1>惠东现在<span class="sea">长什么样</span></h1>
+    <p class="sub">数据来自 2025 统计公报与县情公开资料。<br>临大亚湾、红海湾的海洋大县，到底是什么结构？</p>
+  </div>
 
   <div class="kpis">
     <div class="kpi"><div class="v">861.25亿</div><div class="l">GDP</div><div class="d">+4.0%</div></div>
@@ -58,12 +73,12 @@ h1{font-size:20px;margin:0 0 2px}
     <div class="card">
       <h2>📈 GDP怎么涨上来的</h2>
       <div id="c1" class="chart"></div>
-      <div class="plain" style="margin-top:8px"><span class="lab">人话</span>惠东2021年跨过700亿、2023年跨过800亿，2025年861亿。线稳步往上，最近这一段靠工业提速。</div>
+      <div class="plain"><span class="lab">人话</span>惠东2021年跨过700亿、2023年跨过800亿，2025年861亿。线稳步往上，最近这一段靠工业提速。</div>
     </div>
     <div class="card">
       <h2>🥧 三次产业结构</h2>
       <div id="c2" class="chart"></div>
-      <div class="plain" style="margin-top:8px"><span class="lab">人话</span>三产占53%、二产35.5%、一产11.5%。惠东是“三产打头、工业提速、农渔不小”——和博罗（工业占一半多）不一样。</div>
+      <div class="plain"><span class="lab">人话</span>三产占53%、二产35.5%、一产11.5%。惠东是"三产打头、工业提速、农渔不小"——和博罗（工业占一半多）不一样。</div>
     </div>
   </div>
 
@@ -71,12 +86,12 @@ h1{font-size:20px;margin:0 0 2px}
     <div class="card">
       <h2>🏭 工业里什么在涨</h2>
       <div id="c3" class="chart"></div>
-      <div class="plain" style="margin-top:8px"><span class="lab">人话</span>规上工业总产值+13.6%、增加值+12.1%，比GDP的4%快得多——工业是惠东的提速器；一季度工业投资+36.6%，新产能在落子。</div>
+      <div class="plain"><span class="lab">人话</span>规上工业总产值+13.6%、增加值+12.1%，比GDP的4%快得多——工业是惠东的提速器；一季度工业投资+36.6%，新产能在落子。</div>
     </div>
     <div class="card">
       <h2>🌊 海洋家底有多少</h2>
       <div id="c4" class="chart"></div>
-      <div class="plain" style="margin-top:8px"><span class="lab">人话</span>214公里海岸线、66个岛、18个海湾、6个天然渔港。海域约3200平方公里，和陆地（约3529）差不多——惠东的家底在海上。</div>
+      <div class="plain"><span class="lab">人话</span>214公里海岸线、66个岛、18个海湾、6个天然渔港。海域约3200平方公里，和陆地（约3529）差不多——惠东的家底在海上。</div>
     </div>
   </div>
 
@@ -84,21 +99,19 @@ h1{font-size:20px;margin:0 0 2px}
     <div class="card">
       <h2>✂️ 工业在提速，投资有冷有热</h2>
       <div id="c5" class="chart"></div>
-      <div class="plain" style="margin-top:8px"><span class="lab">人话</span>规上工业增加值+12.1%、一季度工业投资+36.6%，热的是先进制造与能源；固定资产投资这几年在调整（十四五年均约-1.8%），冷的是地产相关。</div>
+      <div class="plain"><span class="lab">人话</span>规上工业增加值+12.1%、一季度工业投资+36.6%，热的是先进制造与能源；固定资产投资这几年在调整（十四五年均约-1.8%），冷的是地产相关。</div>
     </div>
     <div class="card">
       <h2>👥 人在哪</h2>
       <div id="c6" class="chart"></div>
-      <div class="plain" style="margin-top:8px"><span class="lab">人话</span>常住103.3万，城镇约66万、农村约37万。惠东是“滨海城区+大片山区”，山区镇还连着农渔人口。</div>
+      <div class="plain"><span class="lab">人话</span>常住103.3万，城镇约66万、农村约37万。惠东是"滨海城区+大片山区"，山区镇还连着农渔人口。</div>
     </div>
   </div>
 
-  <div class="card" style="margin-bottom:12px">
+  <div class="card" style="margin-bottom:14px">
     <h2>🎯 从861亿到约1200亿，差多少</h2>
     <div id="c7" class="chart" style="height:260px"></div>
-    <div class="plain">
-      <span class="lab">人话</span>2025年861亿，模型用2030年约1200亿作外延参考（不是官方刚性目标）。五年要涨约39%、年均约6.9%，比2025年实际4.0%快。这中间的差距，靠清洁能源、新材料、滨海旅游几条路填。
-    </div>
+    <div class="plain"><span class="lab">人话</span>2025年861亿，模型用2030年约1200亿作外延参考（不是官方刚性目标）。五年要涨约39%、年均约6.9%，比2025年实际4.0%快。这中间的差距，靠清洁能源、新材料、滨海旅游几条路填。</div>
   </div>
 
   <div class="next"><a href="choices.html">下一步：五条路 →</a></div>
@@ -192,34 +205,5 @@ echarts.init(document.getElementById('c7')).setOption({
     {name:'当前速度外推(4.0%)',type:'line',data:[861.25,895.7,931.5,968.8,1007.5,1047.8],lineStyle:{color:'#f87171',width:2,type:'dotted'},itemStyle:{color:'#f87171'}}
   ]
 });
-</script>
-
-<div class="likebar">
-  <button onclick="likePage()">👍 <span id="pcount">0</span></button>
-  <button onclick="sharePage()">🔁 转给朋友</button>
-</div>
-<style>
-.likebar{position:relative;bottom:auto;transform:none;display:flex;justify-content:center;margin:20px 0;background:rgba(15,23,42,.96);border:1px solid #0891b2;border-radius:24px;padding:9px 20px;gap:22px;z-index:999;box-shadow:0 6px 24px rgba(0,0,0,.6)}
-.likebar button{background:none;border:none;color:#e2e8f0;font-size:14px;cursor:pointer}
-.likebar button:active{transform:scale(1.15)}
-@media(min-width:1024px){.wrap{max-width:1200px!important;padding:24px}}</style>
-<script>
-(function(){
-  var k="like_"+location.pathname;
-  var n=parseInt(localStorage.getItem(k)||"0");
-  document.getElementById("pcount").textContent=n;
-  window.likePage=function(){n++;localStorage.setItem(k,n);document.getElementById("pcount").textContent=n;};
-  window.sharePage=function(){
-    var m=document.getElementById("shareModal");
-    if(!m){
-      m=document.createElement("div");m.id="shareModal";
-      m.style.cssText="position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px";
-      m.onclick=function(){m.remove();};
-      m.innerHTML='<div style="background:#0f172a;padding:20px;border-radius:14px;text-align:center" onclick="event.stopPropagation()"><div style="color:#fff;font-size:14px;margin-bottom:12px">截图二维码，发给朋友/群</div><img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data='+encodeURIComponent(location.href)+'" style="width:200px;height:200px;background:#fff;padding:8px;border-radius:8px"><div style="color:#94a3b8;font-size:12px;margin-top:12px">扫码打开</div></div>';
-      document.body.appendChild(m);
-    }
-    navigator.clipboard && navigator.clipboard.writeText(location.href);
-  };
-})();
 </script>
 </body></html>

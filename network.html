@@ -1,73 +1,89 @@
 <!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>惠东产业风洞 · 建构世界</title>
+<title>惠东产业风洞 · 关系网</title>
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.65 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
 .nav{position:sticky;top:0;z-index:50;display:flex;gap:5px;align-items:center;padding:9px 14px;background:rgba(8,11,18,.95);border-bottom:1px solid #1b2434;overflow-x:auto}
-.nav b{font-size:14px;margin-right:6px;flex:none}
+.nav b{font-size:14px;margin-right:6px;flex:none;color:#fff}
 .nav a{background:#131c2b;color:#93a4bd;border:1px solid #22304a;padding:6px 12px;border-radius:20px;font-size:12.5px;text-decoration:none;white-space:nowrap;flex:none}
 .nav a.on{background:#0e7490;border-color:#0891b2;color:#fff;font-weight:600}
-.wrap{max-width:920px;margin:auto;padding:16px}
-h1{font-size:20px;margin:0 0 2px}
-.sub{color:#8fa3bf;font-size:13px;margin:0 0 12px}
-.stage{background:radial-gradient(ellipse at center,#082028,#080b12);border:1px solid #1c2739;border-radius:12px;position:relative;overflow:hidden}
+.wrap{max-width:1200px;margin:auto;padding:18px}
+
+/* hero */
+.hero{position:relative;text-align:center;padding:44px 22px 38px;background:
+   radial-gradient(ellipse at 50% 130%, #0e3a4a 0%, #082630 40%, #0a0f1a 78%);
+  border:1px solid #1c2739;border-radius:16px;margin-bottom:16px;overflow:hidden}
+.hero .kick{font-size:11px;letter-spacing:4px;color:#67e8f9;margin-bottom:10px}
+.hero h1{font-size:26px;line-height:1.4;margin:0;color:#fff}
+.hero h1 .sea{color:#fbbf24}
+.hero .sub{font-size:13px;color:#a9b6c9;margin:12px auto 0;max-width:620px;line-height:1.8}
+
+.actbar{display:flex;gap:10px;align-items:center;margin-bottom:14px;flex-wrap:wrap}
+.btn{background:#0e7490;color:#fff;border:0;padding:10px 22px;border-radius:8px;font-size:13.5px;font-weight:600;cursor:pointer}
+.cnt{font-size:12px;color:#7d8fa5;font-variant-numeric:tabular-nums}
+
+.stage{background:radial-gradient(ellipse at center,#082028,#080b12);border:1px solid #1c2739;border-radius:14px;position:relative;overflow:hidden;margin-bottom:16px}
 svg{display:block;width:100%;height:auto}
-.actbar{display:flex;gap:10px;align-items:center;margin:12px 0;flex-wrap:wrap}
-.btn{background:#0e7490;color:#fff;border:0;padding:9px 20px;border-radius:8px;font-size:13.5px;font-weight:600;cursor:pointer}
-.cnt{font-size:12px;color:#7d8da5;font-variant-numeric:tabular-nums}
 .acttitle{position:absolute;top:12px;left:50%;transform:translateX(-50%);font-size:13px;font-weight:700;letter-spacing:2px;color:#cbd5e1;z-index:5}
 .legend{position:absolute;bottom:9px;left:12px;font-size:10.5px;color:#6b7d96;display:flex;gap:12px;flex-wrap:wrap;z-index:5}
 .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px;vertical-align:middle}
 .gnode{opacity:0;animation:flyIn .55s cubic-bezier(.2,.8,.3,1) forwards}
 .gnode circle{filter:drop-shadow(0 0 6px currentColor)}
-@keyframes flyIn{
-  0%{opacity:0;transform:translateY(-42px)}
-  60%{opacity:1;transform:translateY(3px)}
-  100%{opacity:1;transform:translateY(0)}
-}
+@keyframes flyIn{0%{opacity:0;transform:translateY(-42px)}60%{opacity:1;transform:translateY(3px)}100%{opacity:1;transform:translateY(0)}}
 .edge{animation:drawEdge .6s ease-out forwards}
 @keyframes drawEdge{to{stroke-dashoffset:0}}
-.k3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+
+.k3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
 @media(max-width:700px){.k3{grid-template-columns:1fr}}
-.k3 .b{background:#0e1523;border:1px solid #1c2739;border-radius:10px;padding:13px}
+.k3 .b{background:#0e1523;border:1px solid #1c2739;border-radius:12px;padding:16px}
 .k3 .b .l{font-size:11px;color:#8fa3bf}
-.k3 .b .v{font-size:19px;font-weight:800;margin-top:4px}
-.plain{margin-top:9px;background:#082630;border:1px solid #134047;border-left:3px solid #0891b2;border-radius:8px;padding:10px 12px;font-size:12.5px;line-height:1.9;color:#cff3f8}
-.plain .lab{display:block;font-size:10.5px;font-weight:800;color:#22d3ee;letter-spacing:1px;margin-bottom:3px}
-.next{text-align:center;margin-top:16px}
-.next a{background:#0e7490;color:#fff;padding:11px 24px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block}
-#after{display:none}
+.k3 .b .v{font-size:20px;font-weight:800;margin-top:4px}
+.k3 .b .d{font-size:11px;color:#6b7d96;margin-top:4px;line-height:1.6}
+
+.plain{margin-bottom:14px;background:#082630;border:1px solid #134047;border-left:3px solid #0891b2;border-radius:10px;padding:14px 16px;font-size:13px;line-height:1.9;color:#cff3f8}
+.plain .lab{display:block;font-size:10.5px;font-weight:800;color:#22d3ee;letter-spacing:1px;margin-bottom:4px}
+
+.rank-section{margin-bottom:16px}
+.rank-title{font-size:14px;font-weight:700;margin-bottom:10px;color:#cbd5e1}
 .rank-row{display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:12px}
 .rank-row .name{width:100px;flex:none;color:#cbd5e1;text-align:right;font-size:11px}
 .rank-row .bar-bg{flex:1;height:14px;background:#0a0f1a;border-radius:3px;overflow:hidden}
 .rank-row .bar{height:100%;border-radius:3px}
 .rank-row .val{width:55px;flex:none;font-size:11px;color:#93a4bd;font-variant-numeric:tabular-nums}
-.algo-note{font-size:11px;color:#5b6b82;margin-top:8px;padding:8px 10px;background:#0a0f1a;border-radius:6px;border-left:2px solid #2b3a55}
+
+.algo-note{font-size:11px;color:#5b6b82;padding:10px 12px;background:#0a0f1a;border-radius:8px;border-left:2px solid #2b3a55;line-height:1.8}
 .blood-tag{display:inline-block;font-size:9px;padding:1px 5px;border-radius:3px;font-weight:700;margin-left:4px}
 .blood-A{background:#14532d;color:#86efac}
 .blood-B{background:#1e3a5f;color:#93c5fd}
 .blood-C{background:#4a3a12;color:#fcd34d}
-.blood-D{background:#4a1a1a;color:#fca5a5}
-@media(min-width:1024px){.wrap{max-width:1200px!important;padding:24px}}</style></head><body>
+
+.next{text-align:center;margin:20px 0}
+.next a{background:#0e7490;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block}
+#after{display:none}
+</style></head><body>
 
 <div class="nav">
   <b>惠东产业风洞</b>
   <a href="index.html">① 今日话题</a>
   <a href="town.html">🏘️ 各镇吃喝玩乐</a>
-  <a href="network.html" class="on">② 世界怎么长</a>
+  <a href="network.html" class="on">② 关系网</a>
   <a href="who.html">③ 基本面</a>
   <a href="choices.html">④ 五条路</a>
   <a href="future.html">⑤ 未来</a>
-  <a href="windtunnel.html">⑥ 风洞测试</a>
-  <a href="blindspot.html">⑦ 忽略了什么</a>
-  <a href="report.html">⑧ 分析报告</a>
+  <a href="windtunnel.html">⑥ 风洞</a>
+  <a href="blindspot.html">⑦ 被忽略</a>
+  <a href="report.html">⑧ 报告</a>
   <a href="ending.html">⑨ 结语</a>
 </div>
 
 <div class="wrap">
-  <h1>把惠东放进大湾区，看它怎么长</h1>
-  <p class="sub">33个主体、46条可佐证主边，会自己一层层长出来。注意最粗的那根线，连到哪一片海。</p>
+
+  <div class="hero">
+    <div class="kick">HUIDONG · NETWORK</div>
+    <h1>把惠东放进大湾区，看它<span class="sea">怎么长</span></h1>
+    <p class="sub">33 个主体、46 条可佐证主边，会自己一层层长出来。<br>注意最粗的那根线，连到哪一片海。</p>
+  </div>
 
   <div class="actbar">
     <button class="btn" id="bReplay">↻ 重新建构</button>
@@ -90,23 +106,23 @@ svg{display:block;width:100%;height:auto}
 
   <div id="after">
     <div class="k3">
-      <div class="b"><div class="l">现在连得最多</div><div class="v" id="kDegree" style="color:#22d3ee">—</div><div style="font-size:11px;color:#6b7d96;margin-top:3px" id="kDegreeDesc"></div></div>
-      <div class="b"><div class="l">网络密度</div><div class="v" style="color:#fbbf24">约9%</div><div style="font-size:11px;color:#6b7d96;margin-top:3px">46/528，大量潜在连接是暗的</div></div>
-      <div class="b"><div class="l">最不能断的（必经度第一）</div><div class="v" id="kBetween" style="color:#a78bfa">—</div><div style="font-size:11px;color:#6b7d96;margin-top:3px" id="kBetweenDesc"></div></div>
+      <div class="b"><div class="l">现在连得最多</div><div class="v" id="kDegree" style="color:#22d3ee">—</div><div class="d" id="kDegreeDesc"></div></div>
+      <div class="b"><div class="l">网络密度</div><div class="v" style="color:#fbbf24">约9%</div><div class="d">46/528，大量潜在连接是暗的</div></div>
+      <div class="b"><div class="l">最不能断的（必经度第一）</div><div class="v" id="kBetween" style="color:#a78bfa">—</div><div class="d" id="kBetweenDesc"></div></div>
     </div>
 
     <div class="plain">
       <span class="lab">人话</span>
-      惠东不是只靠海，但它最紧的那几根线，都连在同一片海上。双月湾、巽寮要干净的海，太平岭核电、海上风电、LNG要岸线，港口海龟湾是不能碰的生态红线，渔排养殖户要一片海湾——一片海、多种用法，也彼此商量着用。今年台风“红霞”来时，按抗台标准建的核电、风电几乎没受伤，受冲击的是滨海民宿和渔排——这正是惠东要在风洞里算清楚的事。<span class="blood-tag blood-A">A 实测</span>
+      惠东不是只靠海，但它最紧的那几根线，都连在同一片海上。双月湾、巽寮要干净的海，太平岭核电、海上风电、LNG 要岸线，港口海龟湾是不能碰的生态红线，渔排养殖户要一片海湾——一片海、多种用法，也彼此商量着用。今年台风"红霞"来时，按抗台标准建的核电、风电几乎没受伤，受冲击的是滨海民宿和渔排——这正是惠东要在风洞里算清楚的事。<span class="blood-tag blood-A">A 实测</span>
     </div>
 
-    <div style="margin-top:14px">
-      <div style="font-size:13px;font-weight:700;margin-bottom:8px;color:#cbd5e1">谁连得最多？</div>
+    <div class="rank-section">
+      <div class="rank-title">谁连得最多？</div>
       <div id="degreeRanks"></div>
     </div>
 
-    <div style="margin-top:14px">
-      <div style="font-size:13px;font-weight:700;margin-bottom:8px;color:#cbd5e1">谁在关键路径上？</div>
+    <div class="rank-section">
+      <div class="rank-title">谁在关键路径上？</div>
       <div id="betweenRanks"></div>
     </div>
 
@@ -157,11 +173,9 @@ const NODES=[
   {id:"w5",name:"山区农业人口",x:455,y:95,type:"talent",w:1,label:"农林人口"},
   {id:"w6",name:"深圳周末客",x:160,y:475,type:"talent",w:2,label:"高铁自驾客源"}
 ];
-
 const EDGES=[
   ["w6","sz",4,"A"],["sz","rs",3,"A"],["w6","xl",3,"B"],["w6","ph",3,"B"],
-  ["gz","tour",2,"B"],["hk","tour",2,"C"],["hy","ps",3,"A"],
-  ["ss","hb",2,"B"],
+  ["gz","tour",2,"B"],["hk","tour",2,"C"],["hy","ps",3,"A"],["ss","hb",2,"B"],
   ["tour","xl",4,"A"],["tour","ph",4,"A"],["tour","gk",3,"A"],
   ["w1","tour",4,"A"],["xl","ph",3,"A"],["ph","gk",3,"A"],
   ["rs","xl",2,"B"],["tc","tour",2,"B"],
@@ -172,13 +186,11 @@ const EDGES=[
   ["tc","pot",2,"B"],["pot","rs",3,"A"],["pot","tc",2,"B"],
   ["mat","dl",3,"A"],["mat","ps",2,"B"],["sci","mat",2,"B"],["dl","ps",3,"A"],
   ["dz","ps",2,"B"],["bpz","dz",2,"C"],["ad","dz",2,"C"],["gt","ad",2,"C"],
-  ["w5","dz",2,"C"],
-  ["tour","np",2,"C"],["fish","np",2,"C"],["gk","wind",2,"C"],
+  ["w5","dz",2,"C"],["tour","np",2,"C"],["fish","np",2,"C"],["gk","wind",2,"C"],
   ["w2","dl",2,"B"],["w3","hb",2,"B"],["rs","tc",2,"B"]
 ];
-
 const COLORS={ind:"#0891b2",space:"#9aa6b8",talent:"#f97316",ext:"#a78bfa"};
-const BLOOD_COLORS={A:"#22c55e",B:"#3b82f6",C:"#fbbf24",D:"#f87171"};
+const BLOOD_COLORS={A:"#22c55e",B:"#3b82f6",C:"#fbbf24"};
 const SVGNS="http://www.w3.org/2000/svg";
 
 function nodeById(id){return NODES.find(n=>n.id===id)}
@@ -221,20 +233,16 @@ function nodeMarkup(n){
   const note=KEY[n.id]||"";
   const ring=note?`<circle cx="${n.x}" cy="${n.y}" r="${r+6}" fill="none" stroke="#f87171" stroke-width="2" stroke-dasharray="3 3" opacity="0.9"></circle>`:"";
   const tag=note?`<text x="${n.x}" y="${n.y+r+20}" text-anchor="middle" fill="#fca5a5" font-size="9" font-weight="700">📍 ${note}</text>`:"";
-  return `
-    <circle cx="${n.x}" cy="${n.y}" r="${r}" fill="${COLORS[n.type]}" fill-opacity="0.2" stroke="${COLORS[n.type]}" stroke-width="1.5"/>${ring}
+  return `<circle cx="${n.x}" cy="${n.y}" r="${r}" fill="${COLORS[n.type]}" fill-opacity="0.2" stroke="${COLORS[n.type]}" stroke-width="1.5"/>${ring}
     <text x="${n.x}" y="${n.y+4}" text-anchor="middle" fill="#e6edf3" font-size="${n.w>=3?11:9}" font-weight="${n.w>=3?700:400}">${n.name}</text>
-    <text x="${n.x}" y="${n.y+r+10}" text-anchor="middle" fill="#7d8fa5" font-size="7.5">${n.label}</text>${tag}
-  `;
+    <text x="${n.x}" y="${n.y+r+10}" text-anchor="middle" fill="#7d8fa5" font-size="7.5">${n.label}</text>${tag}`;
 }
-
 
 function start(){
   clearTimers();
   const adj=buildGraph();
   const degree={};NODES.forEach(n=>degree[n.id]=adj[n.id].length);
   const btw=betweenness(adj);
-
   const eg=document.getElementById("edges");
   const ng=document.getElementById("nodes");
   eg.innerHTML="";ng.innerHTML="";
@@ -247,9 +255,7 @@ function start(){
     {title:"③ 能源与产业节点接上",filter:n=>n.type==="ind"},
     {title:"④ 游客与人落下",filter:n=>n.type==="talent"},
   ];
-
   let clock=0;
-  const nodeGroups={};
   phases.forEach(ph=>{
     later(()=>{document.getElementById("acttitle").textContent=ph.title},clock);
     NODES.filter(ph.filter).forEach((n,i)=>{
@@ -258,7 +264,6 @@ function start(){
         g.setAttribute("class","gnode");
         g.innerHTML=nodeMarkup(n);
         ng.appendChild(g);
-        nodeGroups[n.id]=g;
       },clock+i*130);
     });
     clock+=NODES.filter(ph.filter).length*130+700;
@@ -272,9 +277,7 @@ function start(){
       const line=document.createElementNS(SVGNS,"line");
       line.setAttribute("x1",n1.x);line.setAttribute("y1",n1.y);
       line.setAttribute("x2",n2.x);line.setAttribute("y2",n2.y);
-      let color;
-      if(isCross)color="#a78bfa";
-      else color=BLOOD_COLORS[blood];
+      let color=isCross?"#a78bfa":BLOOD_COLORS[blood];
       const elen=Math.hypot(n2.x-n1.x,n2.y-n1.y);
       line.setAttribute("stroke",color);
       line.setAttribute("stroke-width",w);
@@ -296,7 +299,6 @@ function start(){
 function showAfter(degree,btw){
   document.getElementById("after").style.display="block";
   document.getElementById("cnt").textContent=`33个节点 · ${EDGES.length}条主边 · 建构完成`;
-
   const degSorted=Object.entries(degree).sort((a,b)=>b[1]-a[1]);
   const topDeg=nodeById(degSorted[0][0]);
   document.getElementById("kDegree").textContent=topDeg.name;
@@ -304,13 +306,8 @@ function showAfter(degree,btw){
   const maxDeg=Math.max(...Object.values(degree));
   document.getElementById("degreeRanks").innerHTML=degSorted.slice(0,8).map(([id,v])=>{
     const n=nodeById(id);
-    return `<div class="rank-row">
-      <span class="name">${n.name}</span>
-      <div class="bar-bg"><div class="bar" style="width:${v/maxDeg*100}%;background:${COLORS[n.type]}"></div></div>
-      <span class="val">${v}条</span>
-    </div>`;
+    return `<div class="rank-row"><span class="name">${n.name}</span><div class="bar-bg"><div class="bar" style="width:${v/maxDeg*100}%;background:${COLORS[n.type]}"></div></div><span class="val">${v}条</span></div>`;
   }).join("");
-
   const btwSorted=Object.entries(btw).sort((a,b)=>b[1]-a[1]);
   const topBtw=nodeById(btwSorted[0][0]);
   document.getElementById("kBetween").textContent=topBtw.name;
@@ -318,44 +315,11 @@ function showAfter(degree,btw){
   const maxBtw=btwSorted[0][1]||1;
   document.getElementById("betweenRanks").innerHTML=btwSorted.slice(0,8).map(([id,v])=>{
     const n=nodeById(id);
-    return `<div class="rank-row">
-      <span class="name">${n.name}</span>
-      <div class="bar-bg"><div class="bar" style="width:${v/maxBtw*100}%;background:#a78bfa"></div></div>
-      <span class="val">${v.toFixed(0)}</span>
-    </div>`;
+    return `<div class="rank-row"><span class="name">${n.name}</span><div class="bar-bg"><div class="bar" style="width:${v/maxBtw*100}%;background:#a78bfa"></div></div><span class="val">${v.toFixed(0)}</span></div>`;
   }).join("");
 }
 
 document.getElementById("bReplay").onclick=start;
 start();
-</script>
-
-<div class="likebar">
-  <button onclick="likePage()">👍 <span id="pcount">0</span></button>
-  <button onclick="sharePage()">🔁 转给朋友</button>
-</div>
-<style>
-.likebar{position:relative;bottom:auto;transform:none;display:flex;justify-content:center;margin:20px 0;background:rgba(15,23,42,.96);border:1px solid #0891b2;border-radius:24px;padding:9px 20px;gap:22px;z-index:999;box-shadow:0 6px 24px rgba(0,0,0,.6)}
-.likebar button{background:none;border:none;color:#e2e8f0;font-size:14px;cursor:pointer}
-.likebar button:active{transform:scale(1.15)}
-@media(min-width:1024px){.wrap{max-width:1200px!important;padding:24px}}</style>
-<script>
-(function(){
-  var k="like_"+location.pathname;
-  var n=parseInt(localStorage.getItem(k)||"0");
-  document.getElementById("pcount").textContent=n;
-  window.likePage=function(){n++;localStorage.setItem(k,n);document.getElementById("pcount").textContent=n;};
-  window.sharePage=function(){
-    var m=document.getElementById("shareModal");
-    if(!m){
-      m=document.createElement("div");m.id="shareModal";
-      m.style.cssText="position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px";
-      m.onclick=function(){m.remove();};
-      m.innerHTML='<div style="background:#0f172a;padding:20px;border-radius:14px;text-align:center" onclick="event.stopPropagation()"><div style="color:#fff;font-size:14px;margin-bottom:12px">截图二维码，发给朋友/群</div><img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data='+encodeURIComponent(location.href)+'" style="width:200px;height:200px;background:#fff;padding:8px;border-radius:8px"><div style="color:#94a3b8;font-size:12px;margin-top:12px">扫码打开</div></div>';
-      document.body.appendChild(m);
-    }
-    navigator.clipboard && navigator.clipboard.writeText(location.href);
-  };
-})();
 </script>
 </body></html>

@@ -1,62 +1,86 @@
 <!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>惠东产业风洞 · 五条路</title>
+<script src="lib/echarts.min.js"></script>
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
 .nav{position:sticky;top:0;z-index:50;display:flex;gap:5px;align-items:center;padding:9px 14px;background:rgba(8,11,18,.95);border-bottom:1px solid #1b2434;overflow-x:auto}
-.nav b{font-size:14px;margin-right:6px;flex:none}
+.nav b{font-size:14px;margin-right:6px;flex:none;color:#fff}
 .nav a{background:#131c2b;color:#93a4bd;border:1px solid #22304a;padding:6px 12px;border-radius:20px;font-size:12.5px;text-decoration:none;white-space:nowrap;flex:none}
 .nav a.on{background:#0e7490;border-color:#0891b2;color:#fff;font-weight:600}
 .nav .sp{margin-left:auto;font-size:11.5px;color:#64748b;flex:none}
-.wrap{max-width:800px;margin:auto;padding:16px}
-h1{font-size:20px;margin:0 0 2px}
-.sub{color:#8fa3bf;font-size:13px;margin:0 0 16px}
-.path{background:#0e1523;border:1px solid #1c2739;border-radius:12px;padding:16px;margin-bottom:10px;display:flex;gap:14px;align-items:flex-start;cursor:pointer;transition:.2s}
-.path:hover{border-color:#0891b2}
+.wrap{max-width:1200px;margin:auto;padding:18px}
+
+/* hero */
+.hero{position:relative;text-align:center;padding:44px 22px 38px;background:
+   radial-gradient(ellipse at 50% 130%, #0e3a4a 0%, #082630 40%, #0a0f1a 78%);
+  border:1px solid #1c2739;border-radius:16px;margin-bottom:16px;overflow:hidden}
+.hero .kick{font-size:11px;letter-spacing:4px;color:#67e8f9;margin-bottom:10px}
+.hero h1{font-size:26px;line-height:1.4;margin:0;color:#fff}
+.hero h1 .sea{color:#fbbf24}
+.hero .sub{font-size:13px;color:#a9b6c9;margin:12px auto 0;max-width:640px;line-height:1.8}
+
+.path{background:#0e1523;border:1px solid #1c2739;border-radius:14px;padding:18px;margin-bottom:12px;display:flex;gap:16px;align-items:flex-start;cursor:pointer;transition:.25s}
+.path:hover{border-color:#0891b2;transform:translateY(-1px)}
 .path.off{opacity:.4}
-.path .icon{font-size:28px;flex:none}
+.path .icon{font-size:32px;flex:none}
 .path .body{flex:1}
-.path .t{font-size:15px;font-weight:700;margin-bottom:4px}
-.path .d{font-size:12px;color:#8fa3bf;line-height:1.6}
-.path .src{font-size:10px;color:#5b6b82;margin-top:4px}
-.path .num{font-size:14px;font-weight:700;color:#fbbf24;margin-top:6px}
-.switch{width:44px;height:24px;background:#1c2739;border-radius:12px;position:relative;flex:none;margin-top:4px;transition:.2s}
-.switch::after{content:'';position:absolute;width:20px;height:20px;background:#6b7280;border-radius:50%;top:2px;left:2px;transition:.2s}
+.path .t{font-size:16px;font-weight:700;margin-bottom:6px;color:#fff}
+.path .d{font-size:12.5px;color:#8fa3bf;line-height:1.75}
+.path .src{font-size:10.5px;color:#5b6b82;margin-top:6px}
+.path .num{font-size:13px;font-weight:700;color:#fbbf24;margin-top:8px}
+.switch{width:48px;height:26px;background:#1c2739;border-radius:13px;position:relative;flex:none;margin-top:4px;transition:.2s}
+.switch::after{content:'';position:absolute;width:22px;height:22px;background:#6b7280;border-radius:50%;top:2px;left:2px;transition:.2s}
 .path.on .switch{background:#0e7490}
-.path.on .switch::after{left:22px;background:#fff}
-.gap{background:#0a0f1a;border:1px solid #1c2739;border-radius:12px;padding:16px;margin-top:14px;text-align:center}
+.path.on .switch::after{left:24px;background:#fff}
+
+.gap{background:#0a0f1a;border:1px solid #1c2739;border-radius:14px;padding:20px;margin-top:16px;text-align:center}
 .gap .big{font-size:28px;font-weight:800;color:#fbbf24}
-.next{text-align:center;margin-top:18px}
-.next a{background:#0e7490;color:#fff;padding:10px 24px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block}
-.plain{background:#082630;border:1px solid #134047;border-left:3px solid #0891b2;border-radius:8px;padding:10px 12px;font-size:12.5px;line-height:1.9;color:#cff3f8;margin-top:10px}
-.plain .lab{display:block;font-size:10.5px;font-weight:800;color:#22d3ee;letter-spacing:1px;margin-bottom:3px}
-@media(min-width:1024px){.wrap{max-width:1200px!important;padding:24px}}</style></head><body>
+.gap .row{display:flex;gap:30px;justify-content:center;flex-wrap:wrap;margin:10px 0}
+.gap .row .item{text-align:center}
+.gap .row .lab{font-size:11px;color:#6b7280;margin-bottom:4px}
+
+.ruler-title{font-size:16px;margin:24px 0 4px;color:#cbd5e1}
+.ruler-desc{font-size:12.5px;color:#8fa3bf;margin-bottom:12px;line-height:1.7}
+.rbtns{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.rbtn{background:#131c2b;border:1px solid #22304a;color:#93a4bd;padding:9px 16px;border-radius:18px;font-size:12.5px;cursor:pointer;transition:.2s}
+.rbtn.on{background:#0e7490;border-color:#0891b2;color:#fff;font-weight:600}
+
+.plain{background:#082630;border:1px solid #134047;border-left:3px solid #0891b2;border-radius:10px;padding:14px 16px;font-size:12.5px;line-height:1.9;color:#cff3f8;margin-top:14px}
+.plain .lab{display:block;font-size:10.5px;font-weight:800;color:#22d3ee;letter-spacing:1px;margin-bottom:4px}
+.next{text-align:center;margin:24px 0}
+.next a{background:#0e7490;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block}
+</style></head><body>
 
 <div class="nav">
   <b>惠东产业风洞</b>
   <a href="index.html">① 今日话题</a>
   <a href="town.html">🏘️ 各镇吃喝玩乐</a>
-  <a href="network.html">② 世界怎么长</a>
+  <a href="network.html">② 关系网</a>
   <a href="who.html">③ 基本面</a>
   <a href="choices.html" class="on">④ 五条路</a>
   <a href="future.html">⑤ 未来</a>
-  <a href="windtunnel.html">⑥ 风洞测试</a>
-  <a href="blindspot.html">⑦ 忽略了什么</a>
-  <a href="report.html">⑧ 分析报告</a>
+  <a href="windtunnel.html">⑥ 风洞</a>
+  <a href="blindspot.html">⑦ 被忽略</a>
+  <a href="report.html">⑧ 报告</a>
   <a href="ending.html">⑨ 结语</a>
   <span class="sp">公开规划+公开数据粗估</span>
 </div>
 
 <div class="wrap">
-  <h1>惠东的五条路</h1>
-  <p class="sub">从约861亿到参考目标约1200亿。点开关，同一套模型会立刻重算2030年的中位数与达标可能——这是假设下的测算，不是把五条路简单相加，也不是完成率。</p>
+
+  <div class="hero">
+    <div class="kick">HUIDONG · FIVE PATHS</div>
+    <h1>惠东的<span class="sea">五条路</span></h1>
+    <p class="sub">从约 861 亿到参考目标约 1200 亿。<br>点开关，同一套模型会立刻重算 2030 年的中位数与达标可能。<br>这是假设下的测算，不是把五条路简单相加，也不是完成率。</p>
+  </div>
 
   <div class="path on" data-i="0">
     <div class="icon">⚛️</div>
     <div class="body">
       <div class="t">清洁能源（太平岭核电·海上风电·LNG）</div>
-      <div class="d">太平岭核电6台百万千瓦、总投资1200多亿，1、2号2026年相继投产、一期全面建成；港口海上风电是大湾区首个百万千瓦级；LNG接收站一期投产。“风光核气储”一体化，能源年产值超80亿、2026年目标120亿。<br><span style="color:#67e8f9">→ 走通了你会感到：稔平半岛南岸塔吊林立，建成后是稳定的绿色GDP</span></div>
+      <div class="d">太平岭核电6台百万千瓦、总投资1200多亿，1、2号2026年相继投产；港口海上风电是大湾区首个百万千瓦级；LNG接收站一期投产。"风光核气储"一体化，能源年产值超80亿、2026年目标120亿。<br><span style="color:#67e8f9">→ 走通了你会感到：稔平半岛南岸塔吊林立，建成后是稳定的绿色GDP</span></div>
       <div class="src">来源：惠州市政府网、惠东县政府公开信息</div>
       <div class="num">…</div>
     </div>
@@ -67,7 +91,7 @@ h1{font-size:20px;margin:0 0 2px}
     <div class="icon">🧪</div>
     <div class="body">
       <div class="t">新材料与大科学装置（惠州新材料产业园）</div>
-      <div class="d">惠州新材料产业园年产值超50亿，县里提出建设“千亿级新材料集群”；两大科学装置HIAF、CiADS落地，加速器科技与新材料协同。<br><span style="color:#67e8f9">→ 走通了你会感到：大岭一带园区更满、高技能岗位增多</span></div>
+      <div class="d">惠州新材料产业园年产值超50亿，县里提出建设"千亿级新材料集群"；两大科学装置HIAF、CiADS落地，加速器科技与新材料协同。<br><span style="color:#67e8f9">→ 走通了你会感到：大岭一带园区更满、高技能岗位增多</span></div>
       <div class="src">来源：惠东县政府、南方+</div>
       <div class="num">…</div>
     </div>
@@ -78,7 +102,7 @@ h1{font-size:20px;margin:0 0 2px}
     <div class="icon">🏖️</div>
     <div class="body">
       <div class="t">滨海旅游升级（双月湾·巽寮湾）</div>
-      <div class="d">年游客近1800万，2026国庆76.4万人次、登顶同程全国热门县域目的地榜首；海上打铁花、滨海嘉年华、巨型黄鸭接连上新。从“旺季爆满、平日偏淡”走向“全季全时”。<br><span style="color:#67e8f9">→ 走通了你会感到：民宿平日也有客、周边海鲜档人气稳</span></div>
+      <div class="d">年游客近1800万，2026国庆76.4万人次、登顶同程全国热门县域目的地榜首；海上打铁花、滨海嘉年华、巨型黄鸭接连上新。从"旺季爆满、平日偏淡"走向"全季全时"。<br><span style="color:#67e8f9">→ 走通了你会感到：民宿平日也有客、周边海鲜档人气稳</span></div>
       <div class="src">来源：南方+、官方文旅推介</div>
       <div class="num">…</div>
     </div>
@@ -89,7 +113,7 @@ h1{font-size:20px;margin:0 0 2px}
     <div class="icon">👠</div>
     <div class="body">
       <div class="t">女鞋时尚（吉隆·黄埠）</div>
-      <div class="d">“中国女鞋生产基地”，2026年产值目标500亿；沙滩女鞋时尚文化嘉年华、鞋文化节、稔平半岛女鞋展示展销中心。从“代工走量”走向“时尚品牌+电商”。<br><span style="color:#67e8f9">→ 走通了你会感到：鞋厂有了自己的牌子，年轻人愿意留下来</span></div>
+      <div class="d">"中国女鞋生产基地"，2026年产值目标500亿；沙滩女鞋时尚文化嘉年华、鞋文化节、稔平半岛女鞋展示展销中心。从"代工走量"走向"时尚品牌+电商"。<br><span style="color:#67e8f9">→ 走通了你会感到：鞋厂有了自己的牌子，年轻人愿意留下来</span></div>
       <div class="src">来源：惠东县政府、南方+</div>
       <div class="num">…</div>
     </div>
@@ -108,39 +132,36 @@ h1{font-size:20px;margin:0 0 2px}
   </div>
 
   <div class="gap">
-    <div style="font-size:12px;color:#6b7280;margin-bottom:8px">同一套模型、固定随机种子，按当前开关实时算（不是把五个数字直接相加）</div>
-    <div style="display:flex;gap:22px;justify-content:center;flex-wrap:wrap;margin-bottom:8px">
-      <div><div style="font-size:11px;color:#6b7280">2030 中位数</div><div class="big" id="curP50" style="font-size:22px;margin:0">—</div></div>
-      <div><div style="font-size:11px;color:#6b7280">达标可能</div><div class="big" id="curHit" style="font-size:22px;color:#22d3ee;margin:0">—</div></div>
+    <div style="font-size:12px;color:#6b7280;margin-bottom:10px">同一套模型、固定随机种子，按当前开关实时算（不是把五个数字直接相加）</div>
+    <div class="row">
+      <div class="item"><div class="lab">2030 中位数</div><div class="big" id="curP50" style="font-size:24px;margin:0">—</div></div>
+      <div class="item"><div class="lab">达标可能</div><div class="big" id="curHit" style="font-size:24px;color:#22d3ee;margin:0">—</div></div>
     </div>
-    <div class="big" id="gapNum" style="font-size:18px;margin:0">—</div>
+    <div class="big" id="gapNum" style="font-size:20px;margin:0">—</div>
   </div>
 
-  <h2 style="font-size:16px;margin:20px 0 4px">🔍 换把尺子，再看五条路</h2>
-  <div style="font-size:12px;color:#8fa3bf;margin-bottom:10px;line-height:1.7">同一片海，问法不同，头名就不同：比“谁撑起的盘子大”，和比“谁稳饭碗、守岸线”，根本不是同一道题。</div>
-  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">
-    <button class="rbtn" data-k="gdp"  style="background:#0e7490;border:1px solid #0891b2;color:#fff;padding:8px 14px;border-radius:18px;font-size:12.5px;cursor:pointer">📈 经济总量</button>
-    <button class="rbtn" data-k="jobs" style="background:#131c2b;border:1px solid #22304a;color:#93a4bd;padding:8px 14px;border-radius:18px;font-size:12.5px;cursor:pointer">👥 就业饭碗</button>
-    <button class="rbtn" data-k="eco"  style="background:#131c2b;border:1px solid #22304a;color:#93a4bd;padding:8px 14px;border-radius:18px;font-size:12.5px;cursor:pointer">🌿 生态岸线</button>
+  <div class="ruler-title">🔍 换把尺子，再看五条路</div>
+  <div class="ruler-desc">同一片海，问法不同，头名就不同：比"谁撑起的盘子大"，和比"谁稳饭碗、守岸线"，根本不是同一道题。</div>
+  <div class="rbtns">
+    <button class="rbtn on" data-k="gdp">📈 经济总量</button>
+    <button class="rbtn" data-k="jobs">👥 就业饭碗</button>
+    <button class="rbtn" data-k="eco">🌿 生态岸线</button>
   </div>
-  <div id="rulerChart" style="width:100%;height:262px"></div>
-  <div id="rulerText" class="plain" style="margin-top:10px"></div>
+  <div id="rulerChart" style="width:100%;height:280px"></div>
+  <div id="rulerText" class="plain" style="margin-top:12px"></div>
 
   <div class="plain">
     <span class="lab">人话</span>
-    惠东和博罗不一样。博罗在算“怎么承接东莞、深圳”，惠东在算“同一片海，怎么既养旅游、又出能源、还护好海龟湾”。五条路不是补短板——是把海的文章做足：清洁能源、新材料、滨海旅游、女鞋、农渔。数字是粗估，不是官方承诺。
+    惠东和博罗不一样。博罗在算"怎么承接东莞、深圳"，惠东在算"同一片海，怎么既养旅游、又出能源、还护好海龟湾"。五条路不是补短板——是把海的文章做足：清洁能源、新材料、滨海旅游、女鞋、农渔。数字是粗估，不是官方承诺。
   </div>
 
   <div class="next"><a href="future.html">下一步：跑一万次未来 →</a></div>
 </div>
 
-<script src="lib/echarts.min.js"></script>
-<script src="model.js?v=20261012f"></script>
+<script src="model.js?v=20261023a"></script>
 <script>
 const SEED=42,N=4000,P=HT.DEFAULT_PATHS;
-// 五条全开基线
 const full=HT.run(SEED,N,P);
-// 每条路径单独带来的中位数增量：同种子、同次数，仅关闭该条后与全开比较
 const margin=P.map((p,j)=>{
   const off=P.filter((_,k)=>k!==j);
   return full.p50-HT.run(SEED,N,off).p50;
@@ -169,35 +190,30 @@ function recalc(){
   gn.style.color=gap<=0?"#34d399":gap<100?"#fbbf24":"#f87171";
 }
 recalc();
-</script>
 
-<script>
-// 价值实验：换把尺子，五条路重新排序
+// 价值实验三档尺子
 const VT = HT.valueTable();
 const RMETA = {
-  gdp:  {q: "谁撑起的经济盘子最大？",
-    note: "清洁能源这样的大项目撑起惠东经济的骨架，盘子要做大，首先靠它们。"},
-  jobs: {q: "每多投一亿元，谁带回的饭碗最多？",
-    note: "女鞋、农渔、滨海旅游每亿元带动的岗位是能源大项目的好几倍，它们守着海边千家万户的日子。"},
-  eco:  {q: "谁对岸线与海洋更友好？",
-    note: "特色农渔、滨海旅游的生态友好度最高，守护着岸线、海龟湾和这片海的底色。守住绿水青山，才有长久的发展。"}
+  gdp:  {q: "谁撑起的经济盘子最大？", note: "清洁能源这样的大项目撑起惠东经济的骨架，盘子要做大，首先靠它们。"},
+  jobs: {q: "每多投一亿元，谁带回的饭碗最多？", note: "女鞋、农渔、滨海旅游每亿元带动的岗位是能源大项目的好几倍，它们守着海边千家万户的日子。"},
+  eco:  {q: "谁对岸线与海洋更友好？", note: "特色农渔、滨海旅游的生态友好度最高，守护着岸线、海龟湾和这片海的底色。守住绿水青山，才有长久的发展。"}
 };
 const rulerChart = echarts.init(document.getElementById("rulerChart"));
 const rbtns = document.querySelectorAll(".rbtn");
 function drawRuler(k) {
-  const sorted = VT[k], top = sorted[0];   // 已按该尺子降序
+  const sorted = VT[k], top = sorted[0];
   rulerChart.setOption({
     backgroundColor: "transparent",
     grid: {left: 46, right: 16, top: 34, bottom: 60},
     xAxis: {type: "category", data: sorted.map(x => x.name),
-      axisLabel: {color: "#cbd5e1", fontSize: 9, interval: 0, rotate: 26},
+      axisLabel: {color: "#cbd5e1", fontSize: 10, interval: 0, rotate: 20},
       axisTick: {show: false}, axisLine: {lineStyle: {color: "#22304a"}}},
     yAxis: {type: "value", axisLabel: {color: "#64748b", fontSize: 10},
       splitLine: {lineStyle: {color: "#1b2434"}}},
     series: [{type: "bar", barWidth: "48%",
       data: sorted.map(x => ({value: x.val,
         itemStyle: {color: (x.name === top.name ? x.color : x.color + "55"), borderRadius: [4, 4, 0, 0]}})),
-      label: {show: true, position: "top", color: "#e2e8f0", fontSize: 9,
+      label: {show: true, position: "top", color: "#e2e8f0", fontSize: 10,
         formatter: p => p.value + sorted[p.dataIndex].unit}}]
   }, true);
   document.getElementById("rulerText").innerHTML =
@@ -205,42 +221,11 @@ function drawRuler(k) {
     '<br>尺子没有对错，只是想先护住什么；成熟的布局，是让五条路各归其位，组合成最稳的那一手。';
   rbtns.forEach(b => {
     const on = b.dataset.k === k;
-    b.style.background = on ? "#0e7490" : "#131c2b";
-    b.style.color = on ? "#fff" : "#93a4bd";
-    b.style.border = on ? "1px solid #0891b2" : "1px solid #22304a";
+    b.classList.toggle("on", on);
   });
 }
 rbtns.forEach(b => b.onclick = () => drawRuler(b.dataset.k));
 drawRuler("gdp");
 window.addEventListener("resize", () => rulerChart.resize());
-</script>
-
-<div class="likebar">
-  <button onclick="likePage()">👍 <span id="pcount">0</span></button>
-  <button onclick="sharePage()">🔁 转给朋友</button>
-</div>
-<style>
-.likebar{position:relative;bottom:auto;transform:none;display:flex;justify-content:center;margin:20px 0;background:rgba(15,23,42,.96);border:1px solid #0891b2;border-radius:24px;padding:9px 20px;gap:22px;z-index:999;box-shadow:0 6px 24px rgba(0,0,0,.6)}
-.likebar button{background:none;border:none;color:#e2e8f0;font-size:14px;cursor:pointer}
-.likebar button:active{transform:scale(1.15)}
-@media(min-width:1024px){.wrap{max-width:1200px!important;padding:24px}}</style>
-<script>
-(function(){
-  var k="like_"+location.pathname;
-  var n=parseInt(localStorage.getItem(k)||"0");
-  document.getElementById("pcount").textContent=n;
-  window.likePage=function(){n++;localStorage.setItem(k,n);document.getElementById("pcount").textContent=n;};
-  window.sharePage=function(){
-    var m=document.getElementById("shareModal");
-    if(!m){
-      m=document.createElement("div");m.id="shareModal";
-      m.style.cssText="position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px";
-      m.onclick=function(){m.remove();};
-      m.innerHTML='<div style="background:#0f172a;padding:20px;border-radius:14px;text-align:center" onclick="event.stopPropagation()"><div style="color:#fff;font-size:14px;margin-bottom:12px">截图二维码，发给朋友/群</div><img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data='+encodeURIComponent(location.href)+'" style="width:200px;height:200px;background:#fff;padding:8px;border-radius:8px"><div style="color:#94a3b8;font-size:12px;margin-top:12px">扫码打开</div></div>';
-      document.body.appendChild(m);
-    }
-    navigator.clipboard && navigator.clipboard.writeText(location.href);
-  };
-})();
 </script>
 </body></html>

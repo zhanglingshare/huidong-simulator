@@ -5,47 +5,110 @@
 *{box-sizing:border-box}
 body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
 .nav{position:sticky;top:0;z-index:50;display:flex;gap:5px;align-items:center;padding:9px 14px;background:rgba(8,11,18,.95);border-bottom:1px solid #1b2434;backdrop-filter:blur(8px);overflow-x:auto}
-.nav b{font-size:14px;margin-right:6px;letter-spacing:.5px;flex:none}
+.nav b{font-size:14px;margin-right:6px;letter-spacing:.5px;flex:none;color:#fff}
 .nav a{background:#131c2b;color:#93a4bd;border:1px solid #22304a;padding:6px 12px;border-radius:20px;font-size:12.5px;text-decoration:none;white-space:nowrap;flex:none}
 .nav a.on{background:#0e7490;border-color:#0891b2;color:#fff;font-weight:600}
-.wrap{max-width:720px;margin:auto;padding:16px}
-.head{display:flex;align-items:center;gap:16px;margin-bottom:14px}
+.wrap{max-width:1200px;margin:auto;padding:18px}
+
+/* 海夜景 hero */
+.hero{position:relative;text-align:center;padding:50px 22px 44px;background:
+   radial-gradient(ellipse at 50% 130%, #0e3a4a 0%, #082630 40%, #0a0f1a 78%);
+  border:1px solid #1c2739;border-radius:16px;margin-bottom:16px;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;
+  background:
+   radial-gradient(circle at 18% 82%, rgba(251,191,36,.18) 0%, transparent 7%),
+   radial-gradient(circle at 32% 88%, rgba(251,191,36,.12) 0%, transparent 5%),
+   radial-gradient(circle at 62% 76%, rgba(34,211,238,.15) 0%, transparent 9%),
+   radial-gradient(circle at 78% 84%, rgba(251,191,36,.14) 0%, transparent 6%),
+   radial-gradient(circle at 50% 100%, rgba(34,211,238,.1) 0%, transparent 15%);
+  pointer-events:none}
+.hero .kick{font-size:11px;letter-spacing:4px;color:#67e8f9;margin-bottom:12px;position:relative}
+.hero h1{font-size:28px;line-height:1.4;margin:0;position:relative;color:#fff}
+.hero h1 .sea{color:#fbbf24}
+.hero .sub{font-size:13px;color:#a9b6c9;margin:14px auto 0;max-width:640px;line-height:1.9;position:relative}
+
+/* 雷达扫描 */
+.scan-row{display:flex;align-items:center;gap:18px;margin-bottom:16px;background:#0e1523;border:1px solid #1c2739;border-radius:14px;padding:16px 20px}
 .radar{width:72px;height:72px;flex:none;position:relative}
-h1{font-size:22px;margin:0 0 2px;letter-spacing:.5px}
-.sub{color:#8fa3bf;font-size:13px;margin:0}
-.toolbar{display:flex;gap:8px;align-items:center;margin-bottom:10px;flex-wrap:wrap}
-.cat{background:#131c2b;color:#93a4bd;border:1px solid #22304a;padding:5px 14px;border-radius:16px;font-size:12.5px;cursor:pointer;transition:.2s}
-.cat.on{background:#0e7490;border-color:#0891b2;color:#fff;font-weight:600}
-.refresh{background:#f59e0b;color:#1a1206;border:0;padding:6px 16px;border-radius:16px;font-size:12.5px;font-weight:700;cursor:pointer;margin-left:auto}
+.scan-info{font-size:11.5px;color:#7c8b99;margin-top:4px;line-height:1.7}
+.refresh{background:#f59e0b;color:#1a1206;border:0;padding:8px 18px;border-radius:18px;font-size:12.5px;font-weight:700;cursor:pointer;flex:none}
 .refresh:active{transform:scale(.96)}
-.scan-info{font-size:11px;color:#5b6b82;margin-bottom:12px}
-.next{text-align:center;margin-top:18px}
-.next a{background:#0e7490;color:#fff;padding:10px 24px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block}
-.disc{margin-top:14px;font-size:11px;color:#5b6b82;text-align:center}
+
+/* 14镇街选择 */
+.town-panel{background:linear-gradient(135deg,#0c2630,#0f172a);border:1px solid #0891b2;border-radius:14px;padding:16px 18px;margin-bottom:14px}
+.town-panel .t{font-size:15px;font-weight:800;color:#fff;margin-bottom:4px}
+.town-panel .d{font-size:12.5px;color:#94a3b8;margin-bottom:10px}
+.town-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+@media(max-width:700px){.town-grid{grid-template-columns:repeat(4,1fr)}}
+.town-grid button{background:#0891b222;border:1px solid #0891b244;color:#a5f3fc;border-radius:8px;padding:8px 4px;cursor:pointer;font-size:12px;font-weight:700;transition:.2s}
+.town-grid button:hover{background:#0891b244;transform:translateY(-1px)}
+.town-out{margin-top:10px;font-size:12.5px;color:#cbd5e1;line-height:1.7}
+
+/* 惠东骄傲 */
+.proud-panel{background:linear-gradient(135deg,#10222b,#0f172a);border:1px solid #fbbf24;border-radius:14px;padding:16px 18px;margin-bottom:14px}
+.proud-panel .t{font-size:15px;font-weight:800;color:#fff;margin-bottom:4px}
+.proud-panel .d{font-size:12.5px;color:#94a3b8;margin-bottom:10px}
+.proud-row{display:flex;gap:8px;flex-wrap:wrap}
+.proud-row button{flex:1;min-width:90px;border-radius:10px;padding:10px 6px;cursor:pointer;font-size:12px;font-weight:700;border:1px solid}
+.proud-out{margin-top:10px;font-size:12.5px;color:#cbd5e1;line-height:1.7}
+
+/* 分类筛选 */
+.toolbar{display:flex;gap:8px;align-items:center;margin-bottom:10px;flex-wrap:wrap}
+.cat{background:#131c2b;color:#93a4bd;border:1px solid #22304a;padding:6px 16px;border-radius:16px;font-size:12.5px;cursor:pointer;transition:.2s}
+.cat.on{background:#0e7490;border-color:#0891b2;color:#fff;font-weight:600}
+
+/* 话题卡 */
+.topic-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:700px){.topic-grid{grid-template-columns:1fr}}
+.tcard{border-radius:14px;padding:16px;cursor:pointer;transition:.25s;border:1px solid transparent}
+.tcard:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.tcard .meta{font-size:11px;color:#94a3b8}
+.tcard .title{font-size:16px;font-weight:800;color:#fff;margin:8px 0 8px;line-height:1.45}
+.tcard .row{display:flex;align-items:center;justify-content:space-between}
+.tier{font-size:11px;font-weight:800;border-radius:8px;padding:3px 10px}
+.like-btn{font-size:12px;color:#94a3b8;cursor:pointer}
+.detail{font-size:12px;color:#cbd5e1;margin-top:10px;display:none;line-height:1.75}
+.detail a{color:#7dd3fc;text-decoration:underline}
+
+.next{text-align:center;margin:24px 0}
+.next a{background:#0e7490;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block}
+.disc{margin-top:14px;font-size:11px;color:#5b6b82;text-align:center;line-height:1.8}
+
 @keyframes fd{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 @keyframes spin{to{transform:rotate(360deg)}}
 .scanline{transform-origin:center;animation:spin 3s linear infinite}
 .scanline.fast{animation-duration:.8s}
 @keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
 .pulse{animation:pulse 1.5s ease-in-out infinite}
-@media(min-width:1024px){.wrap{max-width:1200px!important;padding:24px}}</style></head><body>
+</style></head><body>
 
 <div class="nav">
   <b>惠东产业风洞</b>
   <a href="index.html" class="on">① 今日话题</a>
   <a href="town.html">🏘️ 各镇吃喝玩乐</a>
-  <a href="network.html">② 世界怎么长</a>
+  <a href="network.html">② 关系网</a>
   <a href="who.html">③ 基本面</a>
   <a href="choices.html">④ 五条路</a>
   <a href="future.html">⑤ 未来</a>
-  <a href="windtunnel.html">⑥ 风洞测试</a>
-  <a href="blindspot.html">⑦ 忽略了什么</a>
-  <a href="report.html">⑧ 分析报告</a>
+  <a href="windtunnel.html">⑥ 风洞</a>
+  <a href="blindspot.html">⑦ 被忽略</a>
+  <a href="report.html">⑧ 报告</a>
   <a href="ending.html">⑨ 结语</a>
 </div>
 
 <div class="wrap">
-  <div class="head">
+
+  <!-- 海夜景 hero -->
+  <div class="hero">
+    <div class="kick">HUIDONG WIND TUNNEL · TODAY</div>
+    <h1>今日<span class="sea">惠东</span>，一片海的动静</h1>
+    <p class="sub">扫一遍公开渠道，按关注程度排。<br>
+    数据来源：政府公报、各镇公开信息、南方+/惠州日报、微博/抖音/头条热榜。<br>
+    <span style="font-size:11px;color:#5b6b82">本页不展示平台后台真实阅读/转发/点赞，改用关注档（高/较高/中）标注。</span></p>
+  </div>
+
+  <!-- 雷达扫描 -->
+  <div class="scan-row">
     <svg class="radar" viewBox="0 0 80 80">
       <circle cx="40" cy="40" r="36" fill="none" stroke="#1c2739" stroke-width="1"/>
       <circle cx="40" cy="40" r="24" fill="none" stroke="#1c2739" stroke-width="1"/>
@@ -57,29 +120,30 @@ h1{font-size:22px;margin:0 0 2px;letter-spacing:.5px}
         <circle cx="40" cy="6" r="2" fill="#0891b2"/>
       </g>
     </svg>
-    <div>
-      <h1>今日惠东话题</h1>
-      <p class="sub">扫一遍公开渠道，按关注程度排。点卡片看详情。<br><span style="font-size:11px;color:#5b6b82">数据来源：惠东县政府工作报告、统计公报与各镇公开信息、南方+/惠州日报等媒体，以及微博/抖音/头条等公开热榜。统计区间：近期公开信息，每日自动刷新（优先最近1天）。本页不展示平台后台真实阅读、转发、点赞，改用关注档（高/较高/中）标注。</span></p>
+    <div style="flex:1">
+      <div style="font-size:14px;font-weight:700;color:#e6edf3">当日话题扫描</div>
+      <div class="scan-info" id="scanInfo">正在读取当日话题…</div>
     </div>
+    <button class="refresh" id="btnScan">🔄 重新扫描</button>
   </div>
 
   <!-- 你是哪个镇的 -->
-  <div style="margin:12px 0;padding:14px;background:linear-gradient(135deg,#0c2630,#0f172a);border:1px solid #0891b2;border-radius:14px">
-    <div style="font-size:15px;font-weight:800;color:#fff;margin-bottom:4px">🏘️ 你是惠东哪个镇的？</div>
-    <div style="font-size:12.5px;color:#94a3b8;margin-bottom:10px">2个街道、12个镇，滨海与山区各有各的饭碗。点你的镇，看它最近在发生什么。</div>
-    <div id="townGrid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px"></div>
-    <div id="townOut" style="margin-top:10px;font-size:12.5px;color:#cbd5e1;line-height:1.6"></div>
+  <div class="town-panel">
+    <div class="t">🏘️ 你是惠东哪个镇的？</div>
+    <div class="d">2 个街道、12 个镇，滨海与山区各有各的饭碗。</div>
+    <div class="town-grid" id="townGrid"></div>
+    <div class="town-out" id="townOut"></div>
   </div>
 
   <!-- 惠东骄傲 -->
-  <div style="margin:12px 0;padding:14px;background:linear-gradient(135deg,#10222b,#0f172a);border:1px solid #fbbf24;border-radius:14px">
-    <div style="font-size:15px;font-weight:800;color:#fff;margin-bottom:4px">🏆 向外人介绍惠东，你最先说哪样？</div>
-    <div style="font-size:12.5px;color:#94a3b8;margin-bottom:10px">惠东是惠东。双月湾、海龟湾、赤岸蚝、女鞋——这是我们自己的家底。</div>
-    <div id="proudGrid" style="display:flex;gap:8px;flex-wrap:wrap"></div>
-    <div id="proudOut" style="margin-top:10px;font-size:12.5px;color:#cbd5e1;line-height:1.6"></div>
+  <div class="proud-panel">
+    <div class="t">🏆 向外人介绍惠东，你最先说哪样？</div>
+    <div class="d">双月湾、海龟湾、赤岸蚝、女鞋、太平岭核电——这是我们的家底。</div>
+    <div class="proud-row" id="proudGrid"></div>
+    <div class="proud-out" id="proudOut"></div>
   </div>
 
-
+  <!-- 分类筛选 -->
   <div class="toolbar">
     <button class="cat on" data-c="all">全部</button>
     <button class="cat" data-c="ind">🔵 产业</button>
@@ -87,25 +151,21 @@ h1{font-size:22px;margin:0 0 2px;letter-spacing:.5px}
     <button class="cat" data-c="city">⚪ 城市</button>
     <button class="cat" data-c="agri">🌾 农渔</button>
     <button class="cat" data-c="fun">🏖️ 文旅</button>
-    <button class="refresh" id="btnScan">🔄 重新扫描</button>
   </div>
-  <div class="scan-info" id="scanInfo">正在读取当日话题…</div>
 
-  <div id="topicList"></div>
+  <div class="topic-grid" id="topicList"></div>
 
   <div class="next"><a href="network.html">下一步：看惠东怎么长出来 →</a></div>
-  <div class="disc">话题均来自公开渠道、每日自动刷新；本页不展示平台后台真实阅读、转发、点赞，按关注档（高/较高/中）标注。</div>
+  <div class="disc">话题均来自公开渠道、每日自动刷新；关注档为公开热度估算，非平台后台统计。</div>
 </div>
 
 <script>
 let curCat="all";
-let liveTopics=[];
-
-const catMap={industry:"ind",livelihood:"life",city:"city",agriculture:"agri",tourism:"fun",food:"fun",gossip:"city"};
 let allData=[];
 let hotMeta={};
 
-// 读取当日话题快照（由数据雷达每日生成、推送）
+const catMap={industry:"ind",livelihood:"life",city:"city",agriculture:"agri",tourism:"fun",food:"fun",gossip:"city"};
+
 async function loadHot(){
   let j;
   for(let a=0;a<3;a++){
@@ -123,39 +183,45 @@ async function loadHot(){
   }));
 }
 
-function allTopics(){return allData;}
-
 function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+
 function render(){
-  let list=curCat==="all"?allTopics():allTopics().filter(x=>x.c===curCat);
-  const grads={ind:"linear-gradient(135deg,#1e3a8a,#0f1a2e)",life:"linear-gradient(135deg,#7c2d12,#1a0f0f)",city:"linear-gradient(135deg,#374151,#0f1a2e)",agri:"linear-gradient(135deg,#1a2f0e,#0f1a2e)",fun:"linear-gradient(135deg,#155e63,#0f1a2e)"};
+  let list=curCat==="all"?allData:allData.filter(x=>x.c===curCat);
+  const grads={
+    ind:"linear-gradient(135deg,#1e3a8a,#0f1a2e)",
+    life:"linear-gradient(135deg,#7c2d12,#1a0f0f)",
+    city:"linear-gradient(135deg,#374151,#0f1a2e)",
+    agri:"linear-gradient(135deg,#1a2f0e,#0f1a2e)",
+    fun:"linear-gradient(135deg,#155e63,#0f1a2e)"
+  };
   const catName={ind:"产业",life:"民生",city:"城市",agri:"农渔",fun:"文旅"};
   const tierColor={"高":"#f87171","较高":"#fbbf24","中":"#34d399"};
   const el=document.getElementById("topicList");
-  el.style.cssText="display:grid;grid-template-columns:1fr 1fr;gap:10px";
   el.innerHTML=list.map((x)=>{
     const liveBadge=x.live?'<span style="background:#dc2626;color:#fff;font-size:9px;padding:1px 5px;border-radius:3px;margin-left:5px">实时</span>':'';
     const tc=tierColor[x.tier]||"#34d399";
-    return `<div class="tcard" data-t="${esc(x.t)}" style="background:${grads[x.c]||grads.city};border-radius:12px;padding:14px;cursor:pointer">
-      <div style="font-size:11px;color:#94a3b8">${catName[x.c]||"城市"}${liveBadge} · ${esc(x.srcLevel||"")} · ${esc(x.src||"")}</div>
-      <div style="font-size:16px;font-weight:800;color:#fff;margin:8px 0 6px;line-height:1.4">${esc(x.t)}</div>
-      <div style="display:flex;align-items:center;justify-content:space-between">
-        <span style="font-size:11px;font-weight:800;color:${tc};border:1px solid ${tc};border-radius:8px;padding:3px 10px">关注 · ${esc(x.tier||"")}</span>
-        <span class="likeBtn" onclick="event.stopPropagation();like(this,'${esc(x.t)}')" style="font-size:12px;color:#94a3b8;cursor:pointer">👍 <b class="ln">0</b></span>
+    return `<div class="tcard" data-t="${esc(x.t)}" style="background:${grads[x.c]||grads.city}">
+      <div class="meta">${catName[x.c]||"城市"}${liveBadge} · ${esc(x.srcLevel||"")} · ${esc(x.src||"")}</div>
+      <div class="title">${esc(x.t)}</div>
+      <div class="row">
+        <span class="tier" style="color:${tc};border:1px solid ${tc}">关注 · ${esc(x.tier||"")}</span>
+        <span class="like-btn" onclick="event.stopPropagation();like(this,'${esc(x.t)}')">👍 <b class="ln">0</b></span>
       </div>
-      <div class="detail" style="font-size:11.5px;color:#cbd5e1;margin-top:8px;display:none">${esc(x.d||"")}${x.url?'<div style="margin-top:8px"><a href="'+esc(x.url)+'" target="_blank" rel="noopener nofollow" style="color:#7dd3fc;text-decoration:underline" onclick="event.stopPropagation()">查看原始报道 ↗</a></div>':''}</div>
+      <div class="detail">${esc(x.d||"")}${x.url?'<div style="margin-top:8px"><a href="'+esc(x.url)+'" target="_blank" rel="noopener nofollow" onclick="event.stopPropagation()">查看原始报道 ↗</a></div>':''}</div>
     </div>`;
-  }).join("")||'<div style="grid-column:1/-1;color:#5b6b82;text-align:center;padding:26px 0">今日话题快照暂不可用（读取失败），可点「重新扫描」重试；页面其余内容不受影响。</div>';
+  }).join("")||'<div style="grid-column:1/-1;color:#5b6b82;text-align:center;padding:26px 0">今日话题快照暂不可用，可点「重新扫描」重试。</div>';
   document.querySelectorAll("#topicList .tcard").forEach(c=>{
     c.onclick=()=>{const d=c.querySelector(".detail");d.style.display=d.style.display==="none"?"block":"none";};
   });
 }
+
 function like(el,t){
   let n=parseInt(el.querySelector(".ln").textContent)+1;
   el.querySelector(".ln").textContent=n;
   localStorage.setItem("like_"+t,n);
   el.style.transform="scale(1.2)";setTimeout(()=>el.style.transform="",200);
 }
+
 document.querySelectorAll(".cat").forEach(b=>{
   b.onclick=()=>{
     document.querySelectorAll(".cat").forEach(x=>x.classList.remove("on"));
@@ -181,7 +247,7 @@ document.getElementById("btnScan").onclick=async function(){
   }catch(e){
     this.innerHTML="🔄 重新扫描";
     document.getElementById("scanline").classList.remove("fast");
-    document.getElementById("scanInfo").textContent="扫描失败：快照暂不可用（请检查网络后重试）；页面其余内容不受影响。";
+    document.getElementById("scanInfo").textContent="扫描失败：快照暂不可用；页面其余内容不受影响。";
   }
   render();
 };
@@ -190,41 +256,11 @@ document.getElementById("btnScan").onclick=async function(){
   let hotOk=true;
   try{ await loadHot(); }
   catch(e){ hotOk=false; hotMeta={}; allData=[]; }
-  document.getElementById("scanInfo").textContent=hotOk?scanText():"今日话题快照暂不可用（读取失败），可点「重新扫描」重试；页面其余内容不受影响。";
+  document.getElementById("scanInfo").textContent=hotOk?scanText():"今日话题快照暂不可用，可点「重新扫描」重试。";
   render();
 })();
-</script>
 
-<div class="likebar">
-  <button onclick="likePage()">👍 <span id="pcount">0</span></button>
-  <button onclick="sharePage()">🔁 转给朋友</button>
-</div>
-<style>
-.likebar{position:relative;bottom:auto;transform:none;display:flex;justify-content:center;align-items:center;margin:20px 0;background:rgba(15,23,42,.96);border:1px solid #0891b2;border-radius:24px;padding:9px 20px;gap:22px;z-index:999;box-shadow:0 6px 24px rgba(0,0,0,.6)}
-.likebar button{background:none;border:none;color:#e2e8f0;font-size:14px;cursor:pointer}
-.likebar button:active{transform:scale(1.15)}
-@media(min-width:1024px){.wrap{max-width:1200px!important;padding:24px}}</style>
-<script>
-(function(){
-  var k="like_"+location.pathname;
-  var n=parseInt(localStorage.getItem(k)||"0");
-  document.getElementById("pcount").textContent=n;
-  window.likePage=function(){n++;localStorage.setItem(k,n);document.getElementById("pcount").textContent=n;};
-  window.sharePage=function(){
-    var m=document.getElementById("shareModal");
-    if(!m){
-      m=document.createElement("div");m.id="shareModal";
-      m.style.cssText="position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px";
-      m.onclick=function(){m.remove();};
-      m.innerHTML='<div style="background:#0f172a;padding:20px;border-radius:14px;text-align:center" onclick="event.stopPropagation()"><div style="color:#fff;font-size:14px;margin-bottom:12px">截图二维码，发给朋友/群</div><img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data='+encodeURIComponent(location.href)+'" style="width:200px;height:200px;background:#fff;padding:8px;border-radius:8px"><div style="color:#94a3b8;font-size:12px;margin-top:12px">扫码打开</div></div>';
-      document.body.appendChild(m);
-    }
-    navigator.clipboard && navigator.clipboard.writeText(location.href);
-  };
-})();
-</script>
-<script>
-// 你是惠东哪个镇的
+// 14镇街
 (function(){
   const TOWNS=[
     {n:"平山",tag:"县城中心",say:"县政府在平山，惠东的门面与商圈。"},
@@ -243,16 +279,15 @@ document.getElementById("btnScan").onclick=async function(){
     {n:"高潭",tag:"红色老区",say:"革命老区，红色+绿色旅游。"}
   ];
   document.getElementById("townGrid").innerHTML=TOWNS.map(t=>
-    `<button onclick="pickTown('${t.n}')" style="background:#0891b222;border:1px solid #0891b244;color:#a5f3fc;border-radius:8px;padding:8px 4px;cursor:pointer;font-size:12px;font-weight:700">${t.n}</button>`
+    `<button onclick="pickTown('${t.n}')">${t.n}</button>`
   ).join("");
   window.pickTown=function(n){
     const t=TOWNS.find(x=>x.n===n);if(!t)return;
     document.getElementById("townOut").innerHTML=`你是<b style="color:#22d3ee">${t.n}人</b>——${t.tag}。<br>${t.say}<br><span style="color:#6b7280">这个镇在惠东这盘棋里，占的是${t.tag}这个位置。</span>`;
   };
 })();
-</script>
-<script>
-// 惠东骄傲：向外人先说什么
+
+// 惠东骄傲
 (function(){
   const KEY="huidong_proud_v1";
   const opts=[
@@ -265,7 +300,7 @@ document.getElementById("btnScan").onclick=async function(){
   let d=JSON.parse(localStorage.getItem(KEY)||'{}');
   opts.forEach(o=>{if(typeof d[o.k]!=="number")d[o.k]=0;});
   document.getElementById("proudGrid").innerHTML=opts.map(o=>
-    `<button onclick="pickProud('${o.k}')" style="flex:1;min-width:80px;background:${o.c}22;border:1px solid ${o.c};color:${o.c};border-radius:10px;padding:10px 6px;cursor:pointer;font-size:12px;font-weight:700">${o.label}</button>`
+    `<button onclick="pickProud('${o.k}')" style="background:${o.c}22;border-color:${o.c};color:${o.c}">${o.label}</button>`
   ).join("");
   window.pickProud=function(k){
     if(localStorage.getItem(KEY+"_done"))return;

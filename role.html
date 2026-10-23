@@ -1,53 +1,90 @@
 <!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>惠东产业风洞 · 你在网里哪个位置</title>
+<title>惠东产业风洞 · 你在网里</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:#080b12;color:#e6edf3;font:14px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
 .nav{position:sticky;top:0;z-index:50;display:flex;gap:5px;align-items:center;padding:9px 14px;background:rgba(8,11,18,.95);border-bottom:1px solid #1b2434;overflow-x:auto}
-.nav b{font-size:14px;margin-right:6px;flex:none}
+.nav b{font-size:14px;margin-right:6px;flex:none;color:#fff}
 .nav a{background:#131c2b;color:#93a4bd;border:1px solid #22304a;padding:6px 12px;border-radius:20px;font-size:12.5px;text-decoration:none;white-space:nowrap;flex:none}
-.nav a.on{background:#15803d;border-color:#22c55e;color:#fff;font-weight:600}
-.wrap{max-width:1200px;margin:auto;padding:20px 16px}
-h1{font-size:22px;margin-bottom:4px}.sub{color:#8fa3bf;font-size:13px;margin-bottom:16px}
-.roles{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:16px}
-.rc{background:#0e1523;border:1px solid #1c2739;border-radius:10px;padding:14px;cursor:pointer;text-align:center;transition:.2s}
-.rc:hover{border-color:#22c55e}.rc.on{border-color:#22c55e;background:#0f1f18}
-.rc .i{font-size:28px}.rc .t{font-size:14px;font-weight:700;margin-top:4px}.rc .s{font-size:11px;color:#7d8fa8;margin-top:2px}
+.nav a.on{background:#0e7490;border-color:#0891b2;color:#fff;font-weight:600}
+.wrap{max-width:1200px;margin:auto;padding:18px}
+
+.hero{position:relative;text-align:center;padding:44px 22px 38px;background:
+   radial-gradient(ellipse at 50% 130%, #0e3a4a 0%, #082630 40%, #0a0f1a 78%);
+  border:1px solid #1c2739;border-radius:16px;margin-bottom:16px;overflow:hidden}
+.hero .kick{font-size:11px;letter-spacing:4px;color:#67e8f9;margin-bottom:10px}
+.hero h1{font-size:26px;line-height:1.4;margin:0;color:#fff}
+.hero h1 .sea{color:#fbbf24}
+.hero .sub{font-size:13px;color:#a9b6c9;margin:12px auto 0;max-width:560px;line-height:1.8}
+
+.roles{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:16px}
+.rc{background:#0e1523;border:1px solid #1c2739;border-radius:12px;padding:16px;cursor:pointer;text-align:center;transition:.25s}
+.rc:hover{border-color:#0891b2;transform:translateY(-2px)}
+.rc.on{border-color:#0891b2;background:#0f1f2b;box-shadow:0 0 20px rgba(8,145,178,.2)}
+.rc .i{font-size:32px}
+.rc .t{font-size:14px;font-weight:700;margin-top:6px;color:#fff}
+.rc .s{font-size:11px;color:#7d8fa8;margin-top:4px}
+
 .grid2{display:grid;grid-template-columns:1.2fr 1fr;gap:14px}
 @media(max-width:800px){.grid2{grid-template-columns:1fr}}
-.card{background:#0e1523;border:1px solid #1c2739;border-radius:10px;padding:14px;margin-bottom:10px}
-.card b{font-size:13px;color:#cbd5e1}.mut{color:#64748b;font-size:12px}
-.worry{background:#1a1015;border-left:3px solid #f87171;padding:8px 10px;margin:6px 0;border-radius:4px;font-size:12.5px;color:#fca5a5}
-.chk{display:flex;gap:8px;align-items:flex-start;padding:8px;border:1px solid #1c2739;border-radius:6px;margin:6px 0;cursor:pointer}
-.chk:hover{border-color:#22c55e}.chk.on{border-color:#22c55e;background:#0f1f18}
-.chk input{margin-top:3px}.chk .t{font-size:13px;font-weight:600}.chk .d{font-size:12px;color:#8fa3bf;margin:2px 0}.chk .g{font-size:11px;color:#4ade80}
-.cmp{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #1c2739;font-size:12.5px}
-.cmp .l{color:#8fa3bf}.cmp .r.cy{color:#fbbf24;font-weight:600}
-.met{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #1c2739;font-size:12.5px}
-.met .n{color:#8fa3bf}.met .a{color:#94a3b8}.met .b{color:#4ade80;font-weight:700}
+.card{background:#0e1523;border:1px solid #1c2739;border-radius:14px;padding:16px;margin-bottom:12px}
+.card b{font-size:13.5px;color:#cbd5e1}
+.mut{color:#64748b;font-size:12px}
+.worry{background:#1a1015;border-left:3px solid #f87171;padding:10px 12px;margin:8px 0;border-radius:0 6px 6px 0;font-size:12.5px;color:#fca5a5}
+.chk{display:flex;gap:10px;align-items:flex-start;padding:10px;border:1px solid #1c2739;border-radius:8px;margin:8px 0;cursor:pointer;transition:.2s}
+.chk:hover{border-color:#0891b2}
+.chk.on{border-color:#0891b2;background:#0f1f2b}
+.chk input{margin-top:3px}
+.chk .t{font-size:13px;font-weight:600;color:#e6edf3}
+.chk .d{font-size:12px;color:#8fa3bf;margin:3px 0}
+.chk .g{font-size:11px;color:#22d3ee}
+.cmp{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #1c2739;font-size:12.5px}
+.cmp .l{color:#8fa3bf}
+.cmp .r.cy{color:#fbbf24;font-weight:600}
+.met{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #1c2739;font-size:12.5px}
+.met .n{color:#8fa3bf}
+.met .a{color:#94a3b8}
+.met .b{color:#22d3ee;font-weight:700}
 svg{width:100%;height:auto;background:radial-gradient(ellipse at 50% 45%,#0a1626,#060910);border-radius:10px}
-.disc{margin-top:16px;font-size:11px;color:#5b6b8b;padding:10px;background:#0a0f1a;border-radius:8px;line-height:1.6}
+.disc{margin-top:16px;font-size:11px;color:#5b6b8b;padding:12px;background:#0a0f1a;border-radius:8px;line-height:1.7}
 </style></head><body>
+
 <div class="nav"><b>惠东产业风洞</b>
-<a href="index.html">① 今日话题</a><a href="town.html">各镇吃喝玩乐</a><a href="network.html">② 世界怎么长</a>
-<a href="role.html" class="on">🎭 你在网里</a><a href="who.html">③ 基本面</a><a href="choices.html">④ 五条路</a>
-<a href="future.html">⑤ 未来</a><a href="windtunnel.html">⑥ 风洞</a><a href="blindspot.html">⑦ 忽略了什么</a>
-<a href="report.html">⑧ 报告</a><a href="ending.html">⑨ 结语</a></div>
-<div class="wrap">
-<h1>🌊 你在惠东这张网里，是哪个点？</h1>
-<p class="sub">山/海/城——你靠哪边吃饭？</p>
-<div class="roles" id="roleBox"></div>
-<div class="grid2">
-<div class="card"><b>你的局部网络</b> <span class="mut" id="egoTip">先选一种活法</span><svg id="svg" viewBox="0 0 800 600"></svg></div>
-<div>
-<div class="card"><b>我的处境</b><div id="posBox"></div></div>
-<div class="card"><b>我可能在担心什么</b><div id="worBox"></div></div>
-<div class="card"><b>可能存在哪些机会</b><div id="chBox"></div></div>
-<div class="card"><b>结构指标 · 前→后</b><div id="metBox"></div></div>
-</div></div>
-<div class="disc">边界：静态结构估算，不推演时间、不估算产值。数据来源：惠东县统计公报、管委会公开报告。</div>
+<a href="index.html">① 今日话题</a>
+<a href="town.html">🏘️ 各镇吃喝玩乐</a>
+<a href="network.html">② 关系网</a>
+<a href="role.html" class="on">🎭 你在网里</a>
+<a href="who.html">③ 基本面</a>
+<a href="choices.html">④ 五条路</a>
+<a href="future.html">⑤ 未来</a>
+<a href="windtunnel.html">⑥ 风洞</a>
+<a href="blindspot.html">⑦ 被忽略</a>
+<a href="report.html">⑧ 报告</a>
+<a href="ending.html">⑨ 结语</a>
 </div>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div class="kick">HUIDONG · YOUR PLACE</div>
+    <h1>你在惠东这张网里，<span class="sea">是哪个点？</span></h1>
+    <p class="sub">山 / 海 / 城——你靠哪边吃饭？<br>选一种活法，看看你身边连着谁、又怕什么、机会在哪。</p>
+  </div>
+
+  <div class="roles" id="roleBox"></div>
+  <div class="grid2">
+    <div class="card"><b>你的局部网络</b> <span class="mut" id="egoTip">先选一种活法</span><svg id="svg" viewBox="0 0 800 600"></svg></div>
+    <div>
+      <div class="card"><b>我的处境</b><div id="posBox"></div></div>
+      <div class="card"><b>我可能在担心什么</b><div id="worBox"></div></div>
+      <div class="card"><b>可能存在哪些机会</b><div id="chBox"></div></div>
+      <div class="card"><b>结构指标 · 前→后</b><div id="metBox"></div></div>
+    </div>
+  </div>
+  <div class="disc">边界：静态结构估算，不推演时间、不估算产值。数据来源：惠东县统计公报、管委会公开报告。</div>
+</div>
+
 <script>
 const NODES=[
 {id:"xz",name:"平山",x:400,y:300,t:"city"},{id:"dl",name:"大岭",x:350,y:220,t:"ind"},
@@ -67,7 +104,7 @@ const EDGES=[["xz","w1"],["dl","cl"],["bp","cl"],["dl","sz2"],["bp","sz2"],
 ["xz","dl"],["xz","hl"],["jq","ps"],["lq","an"],["sz2","dl"]];
 const NM={};NODES.forEach((n,i)=>NM[n.id]=i);
 const EI=EDGES.map(e=>[NM[e[0]],NM[e[1]]]).filter(e=>e[0]!=null&&e[1]!=null);
-const COLORS={ind:"#22c55e",city:"#3b82f6",agri:"#84cc16",tour:"#a78bfa",people:"#f97316",ext:"#64748b"};
+const COLORS={ind:"#0891b2",city:"#3b82f6",agri:"#34d399",tour:"#a78bfa",people:"#f97316",ext:"#64748b"};
 const ROLES=[
 {k:"shoe",i:"👟",t:"鞋厂工人",s:"大岭白花这一层",
  nodes:["dl","bp","cl","w2"],
@@ -118,4 +155,5 @@ const rb=document.getElementById("roleBox");
 ROLES.forEach((r,i)=>{const d=document.createElement("div");d.className="rc";
   d.innerHTML=`<div class="i">${r.i}</div><div class="t">${r.t}</div><div class="s">${r.s}</div>`;
   d.onclick=()=>pick(i);rb.appendChild(d);});pick(0);
-</script></body></html>
+</script>
+</body></html>

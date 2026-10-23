@@ -2,48 +2,73 @@
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>惠东产业风洞 · 风洞</title>
 <script src="lib/echarts.min.js"></script>
-<script src="model.js?v=20261012f"></script>
+<script src="model.js?v=20261023a"></script>
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.65 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
 .nav{position:sticky;top:0;z-index:50;display:flex;gap:5px;align-items:center;padding:9px 14px;background:rgba(8,11,18,.95);border-bottom:1px solid #1b2434;overflow-x:auto}
-.nav b{font-size:14px;margin-right:6px;flex:none}
+.nav b{font-size:14px;margin-right:6px;flex:none;color:#fff}
 .nav a{background:#131c2b;color:#93a4bd;border:1px solid #22304a;padding:6px 12px;border-radius:20px;font-size:12.5px;text-decoration:none;white-space:nowrap;flex:none}
 .nav a.on{background:#0e7490;border-color:#0891b2;color:#fff;font-weight:600}
-.wrap{max-width:680px;margin:auto;padding:16px}
-.card{background:#0e1523;border:1px solid #1c2739;border-radius:14px;padding:18px;margin-bottom:14px}
-h1{font-size:22px;margin:0 0 4px}.sub{color:#8fa3bf;font-size:13px;line-height:1.8}
-h2{font-size:16px;margin:0 0 8px}
-.slider-row{margin-bottom:14px}
-.slider-row label{font-size:13px;color:#cbd5e1;display:block;margin-bottom:4px}
-.slider-row input{width:100%}.slider-row span{color:#fbbf24;font-weight:700}
-.chart{width:100%;height:260px;margin-top:8px}
-.deep{font-size:13px;line-height:2;color:#c8d3e0;margin-top:10px}
-.real{background:#0a141f;border:1px solid #155e75;border-radius:10px;padding:14px;margin-top:10px}
-.real .tag{font-size:11px;color:#67e8f9;font-weight:700;margin-bottom:8px}
-.kpi{display:inline-block;text-align:center;width:31%;padding:8px 0;background:#0a0f1a;border-radius:10px;margin:1%}
-.kpi .v{font-size:18px;font-weight:800;color:#fbbf24}.kpi .l{font-size:10.5px;color:#94a3b8}
-.lossline{font-size:12.5px;color:#bae6fd;line-height:1.9;margin-top:10px;background:#0a0f1a;border-radius:8px;padding:10px 12px}
-.note{border-left:3px solid #22d3ee;background:#0a141f;border-radius:0 8px 8px 0;padding:9px 12px;margin-top:10px;font-size:12.5px;color:#bae6fd;line-height:1.85}
-.bridge{border-radius:11px;padding:13px 15px;margin:12px 0;font-size:12.5px;line-height:1.85}
+.wrap{max-width:1200px;margin:auto;padding:18px}
+
+/* hero */
+.hero{position:relative;text-align:center;padding:44px 22px 38px;background:
+   radial-gradient(ellipse at 50% 130%, #0e3a4a 0%, #082630 40%, #0a0f1a 78%);
+  border:1px solid #1c2739;border-radius:16px;margin-bottom:16px;overflow:hidden}
+.hero .kick{font-size:11px;letter-spacing:4px;color:#67e8f9;margin-bottom:10px}
+.hero h1{font-size:26px;line-height:1.4;margin:0;color:#fff}
+.hero h1 .sea{color:#fbbf24}
+.hero .sub{font-size:13px;color:#a9b6c9;margin:12px auto 0;max-width:640px;line-height:1.8}
+
+.card{background:#0e1523;border:1px solid #1c2739;border-radius:14px;padding:20px;margin-bottom:14px}
+h2{font-size:16px;margin:0 0 14px;color:#cbd5e1}
+
+.slider-row{margin-bottom:18px}
+.slider-row label{font-size:13px;color:#cbd5e1;display:block;margin-bottom:6px}
+.slider-row input{width:100%;accent-color:#0891b2}
+.slider-row span{color:#fbbf24;font-weight:700;font-size:13px}
+
+.real{background:#0a141f;border:1px solid #155e75;border-radius:14px;padding:18px;margin-bottom:14px}
+.real .tag{font-size:11px;color:#67e8f9;font-weight:700;margin-bottom:12px;letter-spacing:1px}
+.kpi{display:inline-block;text-align:center;width:32%;padding:12px 0;background:#0a0f1a;border-radius:12px;margin:0.5%}
+.kpi .v{font-size:24px;font-weight:800;color:#fbbf24}
+.kpi .l{font-size:11px;color:#94a3b8;margin-top:4px}
+.lossline{font-size:13px;color:#bae6fd;line-height:1.9;margin-top:12px;background:#0a0f1a;border-radius:10px;padding:12px 14px}
+
+.chart{width:100%;height:280px;margin-top:10px}
+.deep{font-size:13.5px;line-height:2;color:#c8d3e0;margin-top:12px}
+.note{border-left:3px solid #22d3ee;background:#0a141f;border-radius:0 10px 10px 0;padding:12px 14px;margin-top:12px;font-size:12.5px;color:#bae6fd;line-height:1.85}
+.bridge{border-radius:12px;padding:16px 18px;margin:14px 0;font-size:13px;line-height:1.9}
 .b-orange{background:#1a1206;border:1px solid #f59e0b55;color:#fde68a}
-.likebar{display:flex;justify-content:center;margin:14px 0 4px;background:rgba(15,23,42,.96);border:1px solid #0891b2;border-radius:24px;padding:9px 20px;gap:22px}
-.likebar button{background:none;border:none;color:#e2e8f0;font-size:14px;cursor:pointer;font-family:inherit}
-@media(min-width:1024px){.wrap{max-width:1200px!important;padding:24px}}</style></head><body>
+</style></head><body>
 
 <div class="nav">
-  <span style="font-weight:800;color:#fff;padding:6px 8px;white-space:nowrap">惠东产业风洞</span>
-  <a href="index.html">① 今日话题</a><a href="town.html">🏘️ 各镇吃喝玩乐</a><a href="network.html">② 关系网</a><a href="who.html">③ 基本面</a><a href="choices.html">④ 五条路</a><a href="future.html">⑤ 未来</a><a href="windtunnel.html" class="on">⑥ 风洞</a><a href="blindspot.html">⑦ 被忽略</a><a href="report.html">⑧ 报告</a><a href="ending.html">⑨ 结语</a>
+  <b>惠东产业风洞</b>
+  <a href="index.html">① 今日话题</a>
+  <a href="town.html">🏘️ 各镇吃喝玩乐</a>
+  <a href="network.html">② 关系网</a>
+  <a href="who.html">③ 基本面</a>
+  <a href="choices.html">④ 五条路</a>
+  <a href="future.html">⑤ 未来</a>
+  <a href="windtunnel.html" class="on">⑥ 风洞</a>
+  <a href="blindspot.html">⑦ 被忽略</a>
+  <a href="report.html">⑧ 报告</a>
+  <a href="ending.html">⑨ 结语</a>
 </div>
 
 <div class="wrap">
-  <h1>风洞：台风压一压，模型真的重算</h1>
-  <p class="sub">四个滑块都接进统一模型——台风强度、停业天数、核电延迟、女鞋景气一动，下面的GDP数字随参数真实变化，不是只改曲线和文字。默认就是今年真实登陆的强台风“红霞”。</p>
 
-  <div class="card" style="margin-top:12px">
+  <div class="hero">
+    <div class="kick">HUIDONG · WIND TUNNEL</div>
+    <h1>风洞：台风压一压，<span class="sea">模型真的重算</span></h1>
+    <p class="sub">四个滑块都接进统一模型——台风强度、停业天数、核电延迟、女鞋景气一动，<br>下面的 GDP 数字随参数真实变化，不是只改曲线和文字。<br>默认就是今年真实登陆的强台风"红霞"。</p>
+  </div>
+
+  <div class="card">
     <h2>🎛️ 压力参数</h2>
     <div class="slider-row">
-      <label>台风强度（相对“红霞”，0＝无台风）</label>
+      <label>台风强度（相对"红霞"，0＝无台风）</label>
       <input type="range" id="strength" min="0" max="150" value="100"><span id="strengthV">红霞级（14级）</span>
     </div>
     <div class="slider-row">
@@ -64,7 +89,7 @@ h2{font-size:16px;margin:0 0 8px}
     <div class="tag">📐 统一模型真实输出（跑一万遍）</div>
     <div class="kpi"><div class="v" id="oP50">—</div><div class="l">2030 GDP中位数</div></div>
     <div class="kpi"><div class="v" id="oHit">—</div><div class="l">过约1200比例</div></div>
-    <div class="kpi"><div class="v" id="oRange">—</div><div class="l">80%区间</div></div>
+    <div class="kpi"><div class="v" id="oRange">—</div><div class="l">80%区间（P10-P90）</div></div>
     <div class="lossline" id="lossLine"></div>
   </div>
 
@@ -78,23 +103,28 @@ h2{font-size:16px;margin:0 0 8px}
   <div class="card" style="border-color:#0891b2">
     <h2>🎲 如果你是惠东县长</h2>
     <div class="deep">
-      台风压<b style="color:#f87171">民宿、海鲜档、养殖户的旺季现金流</b>——渔业保险、灾后救助、补网投苗的复产节奏，是把“小GDP、大民生”接住的杠杆。<br>
+      台风压<b style="color:#f87171">民宿、海鲜档、养殖户的旺季现金流</b>——渔业保险、灾后救助、补网投苗的复产节奏，是把"小GDP、大民生"接住的杠杆。<br>
       核电投产延迟压<b style="color:#fbbf24">清洁能源长期基本盘</b>——每延迟一年，清洁能源路径约折减18亿。<br>
       一个值得看见的对比：台风当年净损失约6亿、占全县GDP不到1%，可对一户旺季民宿、一片渔排，可能是一整年的指望；而按抗台标准建设的核电、风电几乎不停摆——多元的海洋产业布局，本身就是韧性。
     </div>
   </div>
 
-  <div class="bridge b-orange">🔍 <b>风洞压一压，决策者该追问什么？</b><br>台风是“突然来、慢慢恢复”，考验预警转移、保险覆盖和复产速度；核电、女鞋是“慢变量”，考验投产节奏与品牌升级。两类风险性质不同，预案也该不同。压测不是为了吓谁，而是让“万一”再来时，人安全、家业稳、恢复快。</div>
+  <div class="bridge b-orange">🔍 <b>风洞压一压，决策者该追问什么？</b><br>台风是"突然来、慢慢恢复"，考验预警转移、保险覆盖和复产速度；核电、女鞋是"慢变量"，考验投产节奏与品牌升级。两类风险性质不同，预案也该不同。压测不是为了吓谁，而是让"万一"再来时，人安全、家业稳、恢复快。</div>
 
-  <div class="likebar">
-    <button onclick="likePage()">👍 <span id="pcount">0</span></button>
-    <button onclick="sharePage()">🔁 转给朋友</button>
+  <div class="next" style="text-align:center;margin:24px 0">
+    <a href="report.html" style="background:#0e7490;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block">📊 带着你的参数去看报告 →</a>
   </div>
 </div>
+
 <script>
 const strengthS=document.getElementById('strength'),daysS=document.getElementById('days'),
       delayS=document.getElementById('delay'),shoeS=document.getElementById('shoe');
 let recChart=echarts.init(document.getElementById('recChart'));
+
+function saveScenario(opts){
+  try{localStorage.setItem('hd_scenario',JSON.stringify(opts));}catch(e){}
+}
+
 function draw(){
   const ST=+strengthS.value/100, D=+daysS.value, ND=+delayS.value, SF=+shoeS.value/100;
   strengthV.textContent = ST===0?'无台风':(Math.abs(ST-1)<0.005?'红霞级（14级）':Math.round(ST*100)+'% 红霞级');
@@ -104,6 +134,8 @@ function draw(){
   if(ST>0) opts.typhoon={strength:ST,days:D};
   if(ND>0) opts.nuclearDelay=ND;
   if(Math.abs(SF-1)>0.001) opts.shoeFactor=SF;
+  saveScenario(opts);
+
   const r=HT.run(42,10000,HT.DEFAULT_PATHS,opts);
   oP50.textContent=Math.round(r.p50)+'亿';
   oHit.textContent=Math.round(r.hit)+'%';
@@ -114,7 +146,6 @@ function draw(){
     ? `🌀 台风当年净损失约 <b style="color:#fbbf24">${loss.total.toFixed(1)}亿</b>：旅游停业约${loss.tourism.toFixed(1)}亿（已扣${Math.round(HT.TYPHOON.rebook*100)}%改期回补）、渔业与海洋牧场约${loss.fishery.toFixed(1)}亿；核电、海上风电按抗台标准建设，几乎无损。`
     : '🌀 无台风情景：旅游、渔业保持旺季正常。';
 
-  // 9周恢复（第0周为登陆当周）
   const curve = ST>0 ? HT.typhoonCurve(ST,D)
     : {weeks:Array.from({length:11},(_,i)=>'第'+i+'周'),loss:Array(11).fill(0)};
   const flow = curve.loss.map(L=>+(100-L).toFixed(1));
@@ -132,16 +163,5 @@ function draw(){
 }
 [strengthS,daysS,delayS,shoeS].forEach(s=>s.oninput=draw);
 draw();
-
-// 点赞/转发（本机计数，不伪装全站）
-var lk="like_"+location.pathname,ln=parseInt(localStorage.getItem(lk)||"0");pcount.textContent=ln;
-function likePage(){ln++;localStorage.setItem(lk,ln);pcount.textContent=ln;}
-function sharePage(){
- const m=document.createElement("div");
- m.style.cssText="position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px";
- m.onclick=()=>m.remove();
- m.innerHTML='<div style="background:#0f172a;padding:20px;border-radius:14px;text-align:center"><div style="color:#fff;font-size:14px;margin-bottom:12px">截图二维码，发给朋友/群</div><img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data='+encodeURIComponent(location.href)+'" style="width:200px;height:200px;background:#fff;padding:8px;border-radius:8px"><div style="color:#94a3b8;font-size:12px;margin-top:12px">扫码打开</div></div>';
- document.body.appendChild(m);navigator.clipboard&&navigator.clipboard.writeText(location.href);
-}
 </script>
 </body></html>

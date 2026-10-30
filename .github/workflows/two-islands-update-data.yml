@@ -29,7 +29,7 @@ jobs:
       - name: Commit only dual-island data changes
         shell: bash
         run: |
-          git add hainan-singapore-2035/data/latest.json hainan-singapore-2035/data/history/
+          git add data/latest.json data/history/
           if git diff --cached --quiet; then
             echo "No source changes; nothing to commit."
             exit 0

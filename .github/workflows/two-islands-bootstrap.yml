@@ -152,7 +152,7 @@ jobs:
           git add -A
           while IFS= read -r path; do
             case "$path" in
-              hainan-singapore-2035/*|hainan-singapore-2035-source.tar.xz.parts/*|.github/workflows/two-islands-ci.yml|.github/workflows/two-islands-update-data.yml|.github/workflows/two-islands-bootstrap.yml) ;;
+              hainan-singapore-2035/*|hainan-singapore-2035-source.tar.xz.parts/*) ;;
               *) echo "Refusing unexpected path: $path"; exit 1 ;;
             esac
           done < <(git diff --cached --name-only)

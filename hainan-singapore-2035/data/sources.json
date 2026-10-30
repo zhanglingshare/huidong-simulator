@@ -1,0 +1,43 @@
+{
+  "sources": [
+    {
+      "id": "hainan-2025-report",
+      "name": "海南2025统计公报",
+      "url": "https://stats.hainan.gov.cn/tjj/tjgb/fzgb/2023_88252/202602/t20260226_4032927.html",
+      "allowed_hosts": [
+        "stats.hainan.gov.cn"
+      ],
+      "purpose": "年度经济与人口基线；审校后更新指标"
+    },
+    {
+      "id": "hainan-free-trade-port",
+      "name": "海南自由贸易港政策",
+      "url": "https://www.hnftp.gov.cn/",
+      "allowed_hosts": [
+        "www.hnftp.gov.cn",
+        "hnftp.gov.cn"
+      ],
+      "purpose": "政策进度；变化需人工核验"
+    },
+    {
+      "id": "singstat-national-accounts",
+      "name": "新加坡国民账户最新表",
+      "url": "https://www.singstat.gov.sg/find-data/get-latest-data",
+      "allowed_hosts": [
+        "www.singstat.gov.sg",
+        "singstat.gov.sg"
+      ],
+      "purpose": "GDP与经济口径；须审校修订日期"
+    },
+    {
+      "id": "mpa-port-2025",
+      "name": "新加坡2025港航通报",
+      "url": "https://www.mpa.gov.sg/media-centre/details/singapore-posts-record-port-performance-in-2025-and-develops-future-readiness-through-industry-collaborations-for-2026",
+      "allowed_hosts": [
+        "www.mpa.gov.sg",
+        "mpa.gov.sg"
+      ],
+      "purpose": "2025航运统计基线；新发布需审校"
+    }
+  ]
+}

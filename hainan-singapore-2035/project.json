@@ -1,0 +1,10 @@
+{
+  "project_key": "two-islands-2035-20261030",
+  "title": "海南岛 × 新加坡 2035 决策风洞",
+  "license": "MIT",
+  "github_repository": "zhanglingshare/huidong-simulator",
+  "data_branch": "main",
+  "data_manifest": "hainan-singapore-2035/data/latest.json",
+  "data_mode": "synthetic_demo",
+  "engine_version": "synthetic-2.0"
+}

@@ -1,0 +1,3 @@
+import { evaluate,initialInputs } from '../../../lib/engine';
+export async function GET(){return Response.json(evaluate(initialInputs()),{headers:{'Cache-Control':'no-store'}});}
+export async function POST(request:Request){try{if(Number(request.headers.get('content-length')||0)>32768)return Response.json({error:'方案过大'},{status:413});const text=await request.text();if(text.length>32768)return Response.json({error:'方案过大'},{status:413});return Response.json(evaluate(JSON.parse(text)),{headers:{'Cache-Control':'no-store'}});}catch(e){return Response.json({error:e instanceof Error?e.message:'计算失败'},{status:400});}}

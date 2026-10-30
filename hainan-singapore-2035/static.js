@@ -110,17 +110,11 @@ function draw(){
     group.append(el('circle',{cx:p.x,cy:p.y,r:6.2,class:'node-dot',fill:color}));
     group.append(el('text',{x:p.x,y:p.y-29,class:'node-label','text-anchor':'middle'},[n.name]));
     group.append(el('text',{x:p.x,y:p.y+39,class:'node-sub','text-anchor':'middle'},[n.sub]));
-    group.addEventListener('pointerdown',evt=>{evt.preventDefault();group.setPointerCapture(evt.pointerId);drag={id:n.id,x:evt.clientX,y:evt.clientY,moved:false};});
-    group.addEventListener('pointermove',evt=>{
-      if(!drag||drag.id!==n.id)return;
-      const svg=$('#network-svg'),matrix=svg.getScreenCTM();if(!matrix)return;
-      const pt=svg.createSVGPoint();pt.x=evt.clientX;pt.y=evt.clientY;
-      const v=pt.matrixTransform(matrix.inverse());
-      if(Math.abs(evt.clientX-drag.x)+Math.abs(evt.clientY-drag.y)>4)drag.moved=true;
-      state.positions[n.id]={x:clamp(v.x,48,910),y:clamp(v.y,65,485)};draw();
+    group.addEventListener('pointerdown',evt=>{
+      evt.preventDefault();
+      $('#network-svg').setPointerCapture(evt.pointerId);
+      drag={id:n.id,x:evt.clientX,y:evt.clientY,moved:false};
     });
-    group.addEventListener('pointerup',()=>{if(!drag)return;const moved=drag.moved;drag=null;if(!moved)selectNode(n.id);});
-    group.addEventListener('pointercancel',()=>{drag=null;});
     group.addEventListener('click',evt=>{if(evt.detail===0)selectNode(n.id);});
     group.addEventListener('keydown',evt=>{if(evt.key==='Enter'||evt.key===' '){evt.preventDefault();selectNode(n.id);}});
     nodes.append(group);
@@ -160,7 +154,24 @@ function refreshHeader(){
   $('#section-id').textContent=sid;$('#section-title').textContent=title;$('#section-sub').textContent=sub;
   $('#year-chip').textContent=state.year;
   $('#network-status').textContent=`双岛关系网 · ${state.year} 年 · ${events[state.event].title}`;
-  document.querySelectorAll('[data-stage]').forEach(btn=>{const on=btn.dataset.stage===state.stage;btn.classList.toggle('active',on);btn.setAttribute('aria-current',on?'step':'false');});
+  const svgRoot=$('#network-svg');
+svgRoot.addEventListener('pointermove',evt=>{
+  if(!drag)return;
+  const matrix=svgRoot.getScreenCTM();if(!matrix)return;
+  const pt=svgRoot.createSVGPoint();pt.x=evt.clientX;pt.y=evt.clientY;
+  const v=pt.matrixTransform(matrix.inverse());
+  if(Math.abs(evt.clientX-drag.x)+Math.abs(evt.clientY-drag.y)>5)drag.moved=true;
+  if(!drag.moved)return;
+  state.positions[drag.id]={x:clamp(v.x,48,910),y:clamp(v.y,65,485)};
+  draw();
+});
+svgRoot.addEventListener('pointerup',()=>{
+  if(!drag)return;
+  const id=drag.id,moved=drag.moved;drag=null;
+  if(!moved)selectNode(id);
+});
+svgRoot.addEventListener('pointercancel',()=>{drag=null;});
+document.querySelectorAll('[data-stage]').forEach(btn=>{const on=btn.dataset.stage===state.stage;btn.classList.toggle('active',on);btn.setAttribute('aria-current',on?'step':'false');});
   document.querySelectorAll('[data-lens]').forEach(btn=>btn.classList.toggle('selected',btn.dataset.lens===state.lens));
   const i=stages.indexOf(state.stage);
   $('#prev-stage').disabled=i===0;$('#prev-stage').style.opacity=i===0?'.4':'1';

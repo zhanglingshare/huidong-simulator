@@ -150,12 +150,12 @@ jobs:
         shell: bash
         run: |
           git add -A
-          unexpected=$(git diff --cached --name-only | grep -Ev '^(hainan-singapore-2035/|hainan-singapore-2035-source\\.tar\\.xz\\.parts/|\\.github/workflows/two-islands-(ci|update-data|bootstrap)\\.yml$)' || true)
-          if [ -n "$unexpected" ]; then
-            echo "Refusing unexpected paths:"
-            echo "$unexpected"
-            exit 1
-          fi
+          while IFS= read -r path; do
+            case "$path" in
+              hainan-singapore-2035/*|hainan-singapore-2035-source.tar.xz.parts/*|.github/workflows/two-islands-ci.yml|.github/workflows/two-islands-update-data.yml|.github/workflows/two-islands-bootstrap.yml) ;;
+              *) echo "Refusing unexpected path: $path"; exit 1 ;;
+            esac
+          done < <(git diff --cached --name-only)
           git config user.name 'two-islands-import[bot]'
           git config user.email 'two-islands-import[bot]@users.noreply.github.com'
           if git diff --cached --quiet; then exit 0; fi

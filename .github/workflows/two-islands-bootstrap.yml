@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'hainan-singapore-2035-source.tar.xz'
+      - 'hainan-singapore-2035-source.tar.xz.parts/**'
   workflow_dispatch:
 
 permissions:
@@ -21,14 +22,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Check source archive
-        run: test -s hainan-singapore-2035-source.tar.xz
+      - name: Reassemble the uploaded source archive
+        shell: bash
+        run: |
+          if [ -d hainan-singapore-2035-source.tar.xz.parts ]; then
+            cat hainan-singapore-2035-source.tar.xz.parts/part-* | base64 --decode > hainan-singapore-2035-source.tar.xz
+          fi
+          test -s hainan-singapore-2035-source.tar.xz
+          tar -tJf hainan-singapore-2035-source.tar.xz >/dev/null
 
       - name: Extract only into the isolated subdirectory
         run: |
           mkdir -p hainan-singapore-2035
           tar -xJf hainan-singapore-2035-source.tar.xz -C hainan-singapore-2035
-          rm hainan-singapore-2035-source.tar.xz
+          rm -f hainan-singapore-2035-source.tar.xz
+          rm -rf hainan-singapore-2035-source.tar.xz.parts
           test -f hainan-singapore-2035/project.json
           test -f hainan-singapore-2035/app/page.tsx
           test -f hainan-singapore-2035/data/latest.json
@@ -141,10 +149,10 @@ jobs:
       - name: Commit the isolated subproject only
         shell: bash
         run: |
+          git add -A hainan-singapore-2035 hainan-singapore-2035-source.tar.xz.parts hainan-singapore-2035-source.tar.xz .github/workflows/two-islands-ci.yml .github/workflows/two-islands-update-data.yml
+          git rm --quiet .github/workflows/two-islands-bootstrap.yml
           git config user.name 'two-islands-import[bot]'
           git config user.email 'two-islands-import[bot]@users.noreply.github.com'
-          git add hainan-singapore-2035 .github/workflows/two-islands-ci.yml .github/workflows/two-islands-update-data.yml
-          git rm --quiet .github/workflows/two-islands-bootstrap.yml
           if git diff --cached --quiet; then exit 0; fi
-          git commit -m "feat: attach isolated Two Islands 2035 v2.1"
+          git commit -m "feat: import isolated Two Islands 2035 v2.1"
           git push

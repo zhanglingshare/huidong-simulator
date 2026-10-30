@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#07111b">
+  <meta name="description" content="海南岛与新加坡2035，独立互动演示：用合理的选择探索2026—2035年的连接变化和未被注意的约束。">
+  <title>双岛2035 · 海南岛 × 新加坡｜交互式决策风洞</title>
+  <link rel="stylesheet" href="./static.css?v=20261031a">
+  <script src="./static.js?v=20261031a" defer></script>
+</head>
+<body>
+  <div class="ambient a"></div><div class="ambient b"></div>
+  <header class="global-header">
+    <a class="brand" href="./index.html" aria-label="双岛2035首页"><span class="brand-mark"><i></i><i></i></span><span class="brand-text"><strong>双岛<span>2035</span></strong><small>HAINAN × SINGAPORE</small></span></a>
+    <div class="header-mid"><span class="live-orb"></span> 2026—2035 / 连接世界实验</div>
+    <div class="header-right"><span class="version">HTML 体验版</span><a class="source-link" href="https://github.com/zhanglingshare/huidong-simulator/tree/main/hainan-singapore-2035" target="_blank" rel="noopener noreferrer">项目源码 <span aria-hidden="true">↗</span></a></div>
+  </header>
+  <div class="top-story">
+    <div class="eyebrow"><span></span> TWO ISLANDS · ONE CONNECTED FUTURE</div>
+    <h1>如果有一条连接断了，<em>哪座岛先感到疼？</em></h1>
+    <p>贸易、人才、金融、物流。表面上是两座岛的竞争，真正改变未来的，可能是你没有看见的那一条线。</p>
+    <div class="story-facts"><span>两座岛</span><b>×</b><span>十年变化</span><b>×</b><span>一次可反悔的选择</span></div>
+  </div>
+  <div class="app-shell">
+    <nav class="rail" aria-label="体验章节">
+      <div class="rail-caption">EXPLORE / 选择你的视角</div>
+      <div id="stages" class="stage-list">
+        <button data-stage="world" class="step active"><span class="step-no">01</span><span><strong>世界入口</strong><small>先看见看不见的连接</small></span><span class="step-arrow">↗</span></button>
+        <button data-stage="change" class="step"><span class="step-no">02</span><span><strong>看见变化</strong><small>让一条新闻引起连锁反应</small></span><span class="step-arrow">↗</span></button>
+        <button data-stage="strategy" class="step"><span class="step-no">03</span><span><strong>制定战略</strong><small>资源有限，不能全都要</small></span><span class="step-arrow">↗</span></button>
+        <button data-stage="run" class="step"><span class="step-no">04</span><span><strong>推演现场</strong><small>看十年内关系怎样改变</small></span><span class="step-arrow">↗</span></button>
+        <button data-stage="future" class="step"><span class="step-no">05</span><span><strong>未来分叉</strong><small>同样的冲击，不一样的终点</small></span><span class="step-arrow">↗</span></button>
+        <button data-stage="blind" class="step"><span class="step-no">06</span><span><strong>盲区与桥梁</strong><small>真正该补的可能不是短板</small></span><span class="step-arrow">↗</span></button>
+      </div>
+      <div class="rail-bottom"><span class="hint-signal"></span><div><strong>不是未来预测</strong><p>本页是公开 HTML 互动体验。完整 v2.1 引擎保留在独立服务端工程中。</p></div></div>
+    </nav>
+    <main class="workspace" id="workspace">
+      <div class="workspace-head">
+        <div><span class="section-id" id="section-id">01 / THE CONNECTED WORLD</span><h2 id="section-title">一张会变化的连接网</h2><p id="section-sub">点击节点，发现两座岛看似无关、却彼此牵动的地方。</p></div>
+        <div class="year-chip"><small>观察年份</small><strong id="year-chip">2026</strong></div>
+      </div>
+      <div class="world-panel" id="world-panel">
+        <div class="network-toolbar"><div class="network-status"><i></i><span id="network-status">双岛连接世界 · 演示节点</span></div><div class="lens-switch" role="group" aria-label="关系类别"><button type="button" data-lens="all" class="selected">全部</button><button type="button" data-lens="物流">物流</button><button type="button" data-lens="产业">产业</button><button type="button" data-lens="人才">人才</button></div></div>
+        <div class="network-area"><svg id="network-svg" viewBox="0 0 960 550" aria-label="可交互的海南与新加坡关系网络" role="img">
+          <defs>
+            <radialGradient id="halo-hn"><stop stop-color="#43eac7" stop-opacity=".2"/><stop offset="1" stop-color="#43eac7" stop-opacity="0"/></radialGradient><radialGradient id="halo-sg"><stop stop-color="#fbbd7b" stop-opacity=".18"/><stop offset="1" stop-color="#fbbd7b" stop-opacity="0"/></radialGradient>
+            <pattern id="grid" width="42" height="42" patternUnits="userSpaceOnUse"><path d="M42 0H0V42" stroke="#7c9fa7" stroke-opacity=".065" fill="none"/></pattern>
+          </defs>
+          <rect width="960" height="550" fill="url(#grid)"/><ellipse cx="240" cy="273" rx="300" ry="245" fill="url(#halo-hn)"/><ellipse cx="735" cy="275" rx="280" ry="250" fill="url(#halo-sg)"/>
+          <g id="edge-layer"></g><g id="node-layer"></g>
+        </svg><div class="network-foot"><span>● 海南</span><span>● 新加坡</span><span>─ 跨岛关联</span><span>··· 受压连接</span></div><span class="drag-tip">拖拽节点 / 点击探索</span></div>
+      </div>
+      <div id="stage-detail" aria-live="polite"></div>
+      <div class="action-bar"><button id="prev-stage" class="small-secondary">← 上一个视角</button><div class="action-right"><button id="reset-state" class="small-secondary">重置体验</button><button id="next-stage" class="primary-cta">进入下一幕 <span>→</span></button></div></div>
+    </main>
+    <aside class="insight" aria-label="实时发现与证据">
+      <div class="aside-label"><span class="pulse"></span> NOW OBSERVING / 实时观察</div>
+      <div class="focus-card"><div class="focus-top"><span>你刚刚触碰到</span><span class="focus-star">✦</span></div><h3 id="focus-title">两座岛之间的连接</h3><p id="focus-desc">点击中间的节点，看看一个局部变化会牵动哪些关系。</p><div class="focus-extra" id="focus-extra">关系不是越多越好，关键是哪些连接一旦失效，会让其他连接也失去价值。</div></div>
+      <div class="counter-intuitive"><div class="aside-tag">POSSIBLY OVERLOOKED</div><div class="surprise-mark">“</div><h3 id="surprise-title">港口再强，也不能自动制造人才。</h3><p id="surprise-desc">如果物流提速，却没有服务和人才跟上，有些新机会反而会绕路离开。</p></div>
+      <div class="intel-card"><div class="intel-head"><strong>真实参考资料</strong><span id="intel-version">加载中</span></div><div id="intel-data" class="intel-data"><p class="loading">正在读取官方参考指标…</p></div><p class="intel-warning">参考数据与合成体验路径相互独立。不同币种、人口口径和港口单位不可直接比较。</p></div>
+      <div class="share-card"><strong>把发现带走</strong><p>一键复制当前选择与观察年份，和别人讨论不同的判断。</p><button id="share" class="share-btn">复制判断卡 ↗</button><span id="share-msg" aria-live="polite"></span></div>
+    </aside>
+  </div>
+  <footer class="footer">双岛 2035 · 独立 HTML 交互体验 <span>｜</span> 所有情景分数、关系强度和未来路径均为合成演示，不是经济预测或投资建议 <span>｜</span> 不修改惠东原风洞</footer>
+</body>
+</html>

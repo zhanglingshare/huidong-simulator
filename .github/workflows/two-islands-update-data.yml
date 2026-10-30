@@ -2,8 +2,6 @@ name: Two Islands 2035 official-source updates
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 1 * * *'
 
 permissions:
   contents: write

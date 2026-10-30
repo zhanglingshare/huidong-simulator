@@ -1,0 +1,64 @@
+name: Two Islands 2035 Cloudflare staging deploy
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: two-islands-2035-cloudflare-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: hainan-singapore-2035
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      TWO_ISLANDS_D1_DATABASE_ID: ${{ secrets.TWO_ISLANDS_D1_DATABASE_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Ensure only the intended project is deployed
+        run: |
+          test "$(node -p "require('./project.json').project_key")" = "two-islands-2035-20261030"
+          for name in CLOUDFLARE_API_TOKEN CLOUDFLARE_ACCOUNT_ID TWO_ISLANDS_D1_DATABASE_ID; do
+            if [ -z "${!name:-}" ]; then
+              echo "::error::Missing GitHub Actions secret $name. Deployment not started."
+              exit 1
+            fi
+          done
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: pnpm/action-setup@v4
+        with:
+          version: '11.25.0'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pnpm install --frozen-lockfile
+      - run: npm test
+      - run: npm run typecheck
+      - run: npm run build
+      - name: Prepare private Worker configuration
+        run: |
+          node scripts/deploy/prepare-cloudflare.mjs
+          config="$(find dist -name wrangler.json -type f)"
+          test "$(printf '%s\n' "$config" | wc -l)" -eq 1
+          echo "TWO_ISLANDS_WRANGLER_CONFIG=$config" >> "$GITHUB_ENV"
+      - name: Apply isolated D1 migration
+        run: |
+          pnpm exec wrangler d1 execute DB --remote --yes \
+            --config "$TWO_ISLANDS_WRANGLER_CONFIG" \
+            --file drizzle/0000_milky_stryfe.sql
+      - name: Deploy to Cloudflare (without a public route)
+        run: pnpm exec wrangler deploy --config "$TWO_ISLANDS_WRANGLER_CONFIG"
+      - name: State access boundary
+        run: |
+          echo "Worker deployed with workers_dev=false and preview_urls=false."
+          echo "An independently authenticated Cloudflare Access route is required before the site is browseable."

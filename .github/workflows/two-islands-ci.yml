@@ -36,6 +36,15 @@ jobs:
       - run: npm test
       - run: npm run typecheck
       - run: npm run build
+      - name: Validate standalone HTML JavaScript syntax
+        run: node --check static.js
+      - name: Validate standalone HTML entry
+        run: |
+          test -s index.html
+          test -s static.css
+          test -s static.js
+          grep -q 'static.js' index.html
+          grep -q 'static.css' index.html
       - name: Check standalone Worker deployment config (dry run)
         env:
           TWO_ISLANDS_D1_DATABASE_ID: 11111111-1111-4111-8111-111111111111

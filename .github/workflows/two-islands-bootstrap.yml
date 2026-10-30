@@ -1,0 +1,150 @@
+name: Import isolated Two Islands 2035 source
+
+on:
+  push:
+    paths:
+      - 'hainan-singapore-2035-source.tar.xz'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: two-islands-2035-bootstrap
+  cancel-in-progress: false
+
+jobs:
+  import:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check source archive
+        run: test -s hainan-singapore-2035-source.tar.xz
+
+      - name: Extract only into the isolated subdirectory
+        run: |
+          mkdir -p hainan-singapore-2035
+          tar -xJf hainan-singapore-2035-source.tar.xz -C hainan-singapore-2035
+          rm hainan-singapore-2035-source.tar.xz
+          test -f hainan-singapore-2035/project.json
+          test -f hainan-singapore-2035/app/page.tsx
+          test -f hainan-singapore-2035/data/latest.json
+          python3 - <<'PY'
+          import json
+          p = 'hainan-singapore-2035/project.json'
+          d = json.load(open(p, encoding='utf-8'))
+          assert d.get('project_key') == 'two-islands-2035-20261030'
+          assert d.get('github_repository') == 'zhanglingshare/huidong-simulator'
+          assert d.get('data_manifest') == 'hainan-singapore-2035/data/latest.json'
+          PY
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: '11.25.0'
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install and verify the isolated project
+        working-directory: hainan-singapore-2035
+        run: |
+          pnpm install --frozen-lockfile
+          npm test
+          npm run typecheck
+          npm run build
+
+      - name: Install project-scoped workflows
+        shell: bash
+        run: |
+          cat > .github/workflows/two-islands-ci.yml <<'YAML'
+          name: Two Islands 2035 CI
+          on:
+            push:
+              paths:
+                - 'hainan-singapore-2035/**'
+                - '.github/workflows/two-islands-ci.yml'
+            pull_request:
+              paths:
+                - 'hainan-singapore-2035/**'
+                - '.github/workflows/two-islands-ci.yml'
+            workflow_dispatch:
+          permissions:
+            contents: read
+          jobs:
+            verify:
+              runs-on: ubuntu-latest
+              timeout-minutes: 25
+              defaults:
+                run:
+                  working-directory: hainan-singapore-2035
+              steps:
+                - uses: actions/checkout@v4
+                - uses: actions/setup-node@v4
+                  with:
+                    node-version: '22'
+                - uses: pnpm/action-setup@v4
+                  with:
+                    version: '11.25.0'
+                - uses: actions/setup-python@v5
+                  with:
+                    python-version: '3.11'
+                - run: pnpm install --frozen-lockfile
+                - run: npm test
+                - run: npm run typecheck
+                - run: npm run build
+          YAML
+
+          cat > .github/workflows/two-islands-update-data.yml <<'YAML'
+          name: Two Islands 2035 official-source updates
+          on:
+            workflow_dispatch:
+            schedule:
+              - cron: '0 0 * * *'
+          permissions:
+            contents: write
+          concurrency:
+            group: two-islands-2035-data
+            cancel-in-progress: false
+          jobs:
+            collect:
+              runs-on: ubuntu-latest
+              timeout-minutes: 15
+              defaults:
+                run:
+                  working-directory: hainan-singapore-2035
+              steps:
+                - uses: actions/checkout@v4
+                - uses: actions/setup-python@v5
+                  with:
+                    python-version: '3.11'
+                - run: python3 -m unittest discover -s tests -p 'test_*.py' -v
+                - run: python3 scripts/update_data.py
+                - name: Commit only dual-island data changes
+                  shell: bash
+                  run: |
+                    git add data/latest.json data/history/
+                    if git diff --cached --quiet; then exit 0; fi
+                    git config user.name 'two-islands-data[bot]'
+                    git config user.email 'two-islands-data[bot]@users.noreply.github.com'
+                    git commit -m "data: refresh two-islands official source metadata"
+                    git push
+          YAML
+
+      - name: Commit the isolated subproject only
+        shell: bash
+        run: |
+          git config user.name 'two-islands-import[bot]'
+          git config user.email 'two-islands-import[bot]@users.noreply.github.com'
+          git add hainan-singapore-2035 .github/workflows/two-islands-ci.yml .github/workflows/two-islands-update-data.yml
+          git rm --quiet .github/workflows/two-islands-bootstrap.yml
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "feat: attach isolated Two Islands 2035 v2.1"
+          git push

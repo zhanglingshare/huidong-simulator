@@ -2,6 +2,15 @@
 
 一个以“连接如何变化”为主线的开源决策风洞。六页共享同一个实验：世界入口、看见变化、制定战略、推演现场、未来分叉、盲区与桥梁。
 
+## 直接打开 HTML 体验页
+
+- **在线体验：** https://zhanglingshare.github.io/huidong-simulator/hainan-singapore-2035/
+- **单文件入口：** [index.html](./index.html)（配套 [static.css](./static.css) 与 [static.js](./static.js)）
+- **正式应用源码：** [app/page.tsx](./app/page.tsx)，服务端推演位于 [lib/engine.ts](./lib/engine.ts)。
+
+HTML 页面提供无需服务器即可体验的六幕、可拖拽关系网络、事件变化、资源分配、十年动画、情景对照与候选桥梁；合成体验指数不是真实预测，也不是服务器 v2.1 引擎输出。GitHub Pages 仅托管这套 HTML 交互体验；正式服务器应用依旧需要独立 Cloudflare Workers、D1 和可靠身份校验。
+
+
 **v2.1续建：已加入经官方来源逐项核对的2025年参考指标（只在情报流展示），全部推演参数、网络关系、2026—2035情景结果仍为合成演示，尚未使用真实经济参数标定。**
 
 ## 功能

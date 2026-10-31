@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
   "project_key": "two-islands-2035-20261030",
-  "version": "b6edd0103a258676",
-  "updated_at": "2026-10-30",
+  "version": "20261031-1d2bcd19",
+  "updated_at": "2026-10-31T09:56:02+08:00",
   "mode": "reviewed_official_reference_only",
   "documents": [],
   "indicators": [
@@ -107,8 +107,48 @@
       "definition": "集装箱吞吐量，20英尺标准箱计量；不可直接与海南货物吨数比较",
       "notes": "新加坡海事及港务管理局年度港口通报",
       "model_impact": "none: reference evidence only; independent synthetic engine"
+    },
+    {
+      "tier": "A",
+      "status": "observed",
+      "reviewed_by": "official-primary-source-check",
+      "reviewed_at": "2026-10-31T09:56:02+08:00",
+      "region": "新加坡",
+      "model_impact": "none: reference evidence only; independent synthetic engine",
+      "id": "sg-pop-2026-rounded",
+      "label": "新加坡2026年6月总人口（官方摘要四舍五入值）",
+      "source_url": "https://www.singstat.gov.sg/publication-resources/population-trends-2026",
+      "published_at": "2026-09-25",
+      "value": 6.21,
+      "unit": "百万人",
+      "period": "2026-06",
+      "definition": "6月末总人口，含居民及非居民；官方摘要保留两位小数，不能据此推算精确人数或与海南年末常住人口直接比较。",
+      "notes": "官方摘要：较2025年6月增长1.6%。保留2025记录；这是新观测期，不是历史数值修订。",
+      "previous_observation_id": "sg-pop-2025",
+      "revision_relation": "new_observation_period; rounded publication precision"
+    },
+    {
+      "tier": "A",
+      "status": "observed",
+      "reviewed_by": "official-primary-source-check",
+      "reviewed_at": "2026-10-31T09:56:02+08:00",
+      "region": "新加坡",
+      "model_impact": "none: reference evidence only; independent synthetic engine",
+      "id": "sg-real-gdp-yoy-2026q3-advance",
+      "label": "新加坡2026年第三季度实际GDP同比增速（预估）",
+      "source_url": "https://www.meti.gov.sg/newsroom/singapore-s-gdp-grew-by-5-4-per-cent-in-the-third-quarter-of-2026/",
+      "published_at": "2026-10-14",
+      "value": 5.4,
+      "unit": "%",
+      "period": "2026-Q3",
+      "definition": "季度实际GDP较上年同季增速；advance estimate，非名义GDP金额、非前三季度累计增速，后续可修订。",
+      "notes": "同一通报公布季调环比增长1.1%；不将环比与同比混用。SingStat预估说明主要依据季度前两个月资料。",
+      "estimation_status": "advance_estimate",
+      "corroborating_source_url": "https://www.singstat.gov.sg/advgdp",
+      "revision_relation": "initial_record_of_advance_estimate; no previous same-period record"
     }
   ],
   "events": [],
-  "failures": []
+  "failures": [],
+  "previous_version": "b6edd0103a258676"
 }

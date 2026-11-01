@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
   "project_key": "two-islands-2035-20261030",
-  "version": "20261031-1d2bcd19",
-  "updated_at": "2026-10-31T09:56:02+08:00",
+  "version": "20261101-43780e44",
+  "updated_at": "2026-11-01",
   "mode": "reviewed_official_reference_only",
   "documents": [],
   "indicators": [
@@ -146,9 +146,47 @@
       "estimation_status": "advance_estimate",
       "corroborating_source_url": "https://www.singstat.gov.sg/advgdp",
       "revision_relation": "initial_record_of_advance_estimate; no previous same-period record"
+    },
+    {
+      "tier": "A",
+      "status": "observed",
+      "published_at": "2026-10-30",
+      "reviewed_by": "official-primary-source-check",
+      "reviewed_at": "2026-11-01",
+      "region": "新加坡",
+      "period": "2026-Q3",
+      "unit": "人",
+      "source_url": "https://www.mom.gov.sg/newsroom/press-releases/2026/1030-labour-market-advance-release-3q-2026",
+      "estimation_status": "preliminary",
+      "revision_relation": "initial_record_of_advance_release; subject_to_revision",
+      "model_impact": "none: reference evidence only; independent synthetic engine",
+      "id": "sg-employment-change-2026q3-advance",
+      "label": "新加坡2026年第三季度就业人数净增（预估）",
+      "value": 27700,
+      "definition": "第三季度就业人数变化，居民及非居民合计；不含外籍家庭佣工，非年初至今累计、非新增招聘总次数。",
+      "notes": "官方季度初步数据；细分行业与居民/非居民数据有待完整报告。就业增长不能直接作为高端人才流入或专业服务能力增长的代理。"
+    },
+    {
+      "tier": "A",
+      "status": "observed",
+      "published_at": "2026-10-30",
+      "reviewed_by": "official-primary-source-check",
+      "reviewed_at": "2026-11-01",
+      "region": "新加坡",
+      "period": "2026-Q3",
+      "unit": "人",
+      "source_url": "https://www.mom.gov.sg/newsroom/press-releases/2026/1030-labour-market-advance-release-3q-2026",
+      "estimation_status": "preliminary",
+      "revision_relation": "initial_record_of_advance_release; subject_to_revision",
+      "model_impact": "none: reference evidence only; independent synthetic engine",
+      "id": "sg-retrenchments-2026q3-advance",
+      "label": "新加坡2026年第三季度裁员人数（预估）",
+      "value": 4800,
+      "definition": "第三季度retrenchments人数；季度初步值，非失业人数存量、非失业率，不能与净就业变化直接相减。",
+      "notes": "统计概念保留MOM原文；不将裁员规模解释为海南获得的人才或企业迁移。"
     }
   ],
   "events": [],
   "failures": [],
-  "previous_version": "b6edd0103a258676"
+  "previous_version": "20261031-1d2bcd19"
 }

@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
   "project_key": "two-islands-2035-20261030",
-  "version": "20261101-43780e44",
-  "updated_at": "2026-11-01",
+  "version": "20261102-370bfa47",
+  "updated_at": "2026-11-02",
   "mode": "reviewed_official_reference_only",
   "documents": [],
   "indicators": [
@@ -186,7 +186,35 @@
       "notes": "统计概念保留MOM原文；不将裁员规模解释为海南获得的人才或企业迁移。"
     }
   ],
-  "events": [],
+  "events": [
+    {
+      "id": "hn-trade-facilitation-2026-187",
+      "label": "四部门公开海南自贸港贸易自由化便利化16项措施",
+      "tier": "A",
+      "status": "verified",
+      "source_url": "https://zmqgs.mofcom.gov.cn/zcfg/myl/art/2026/art_0622853ab3934ccea86ba6b08be28bb0.html",
+      "published_at": "2026-10-29T11:15:00+08:00",
+      "issued_at": "2026-10-09",
+      "effective_at": null,
+      "observed_at": null,
+      "reviewed_by": "official-primary-source-check",
+      "reviewed_at": "2026-11-02",
+      "region": "海南",
+      "period": "2026-10-29政策公开",
+      "document_number": "商自贸发〔2026〕187号",
+      "definition": "已核验的是官方政策公开及所列措施；文件落款不等同公开日，也不代表各措施已全部落地或产生业务成效。",
+      "description": "措施涉及保税业务、专业服务开放、境外资格认可、外籍人员便利化及跨区域协作等。部分事项附有后续条件，需按具体条款跟踪执行。",
+      "official_announcement_url": "https://www.mofcom.gov.cn/syxwfb/art/2026/art_1289017d0bac4306b1e7e0eb87eae489.html",
+      "source_notes": "原文页面注明有删减；商务部新闻办公室同日原创说明为16项措施。两个页面属同一发布体系，不计作独立交叉证据。",
+      "revision_relation": "initial_policy_publication_record; no prior same-document event",
+      "follow_up_evidence_needed": [
+        "各条款实际适用与办理时间",
+        "配套规则、审批和业务落地记录",
+        "服务、人才及贸易流量变化的独立观测"
+      ],
+      "model_impact": "none: verified policy publication only; no automatic parameter, edge-weight or forecast update"
+    }
+  ],
   "failures": [],
-  "previous_version": "20261031-1d2bcd19"
+  "previous_version": "20261101-43780e44"
 }

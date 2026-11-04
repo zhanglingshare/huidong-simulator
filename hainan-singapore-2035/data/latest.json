@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
   "project_key": "two-islands-2035-20261030",
-  "version": "20261103-9815db8d",
-  "updated_at": "2026-11-03T01:21:15.427Z",
+  "version": "20261104-29eaac75",
+  "updated_at": "2026-11-04T01:50:22.382Z",
   "mode": "reviewed_official_reference_only",
   "documents": [],
   "indicators": [
@@ -294,6 +294,168 @@
       "source_url": "https://www.mpa.gov.sg/api/media/ecc61d4d-f7ed-4be0-aaa6-85167afe57af/cargo-throughput_Sep-2026.xlsx",
       "source_locator": "xl/worksheets/sheet1.xml：A40=Sep*，B40=50230.99；A1单位，A45初步估计脚注。",
       "notes": "原表星号为初步估计；各分项与总量可能存在小数取舍，保留总量原公布值，不自动年化。"
+    },
+    {
+      "tier": "A",
+      "status": "observed",
+      "reviewed_by": "official-primary-source-check",
+      "reviewed_at": "2026-11-04T01:50:22.382Z",
+      "region": "新加坡",
+      "model_impact": "none: reference evidence only; independent synthetic engine",
+      "source_url": "https://www.singstat.gov.sg/news/advance-estimates-of-singapores-direct-investment-abroad-2025",
+      "source_document_url": "https://www.singstat.gov.sg/files/e6f1df36-03c0-44e7-99c3-b0243b063170.pdf",
+      "currency_reference_url": "https://www.singstat.gov.sg/find-data/explore-data-themes/trade-investment/direct-investment-abroad/latest-news-data",
+      "published_at": "2026-11-03",
+      "published_at_precision": "day",
+      "period": "2025年末",
+      "observation_period": {
+        "as_of": "2025-12-31",
+        "kind": "stock"
+      },
+      "estimation_status": "advance_estimate_preliminary",
+      "revision_relation": "initial_verified_record_for_this_measure_and_period; subject_to_official_revision; prior_observations_retained",
+      "source_notes": "采用11月3日具名预估发布的约数；同主题序列单位S$m用于确认币种，未混用该动态页面较旧的2024年数值。网页和附件属于同一发布体系，不计作独立交叉证据。",
+      "id": "sg-dia-stock-2025-advance-rounded",
+      "label": "新加坡2025年末对外直接投资存量（预估约数）",
+      "value": 1850,
+      "unit": "十亿新元",
+      "original_unit": "$ bil (SGD; rounded release figure)",
+      "currency": "SGD",
+      "definition": "新加坡公司对境外企业具有长期利益和显著管理影响的直接投资年末存量，包括直接股权投资和净公司间借贷；不是2025年投资流出额、来新投资额或对海南投资额。",
+      "precision": "rounded_to_nearest_billion_as_published",
+      "notes": "保留原发布约数1850十亿新元；预估可修订，不补造小数，也不折算人民币。"
+    },
+    {
+      "tier": "A",
+      "status": "observed",
+      "reviewed_by": "official-primary-source-check",
+      "reviewed_at": "2026-11-04T01:50:22.382Z",
+      "region": "新加坡",
+      "model_impact": "none: reference evidence only; independent synthetic engine",
+      "source_url": "https://www.singstat.gov.sg/news/advance-estimates-of-singapores-direct-investment-abroad-2025",
+      "source_document_url": "https://www.singstat.gov.sg/files/e6f1df36-03c0-44e7-99c3-b0243b063170.pdf",
+      "currency_reference_url": "https://www.singstat.gov.sg/find-data/explore-data-themes/trade-investment/direct-investment-abroad/latest-news-data",
+      "published_at": "2026-11-03",
+      "published_at_precision": "day",
+      "period": "2025年末",
+      "observation_period": {
+        "as_of": "2025-12-31",
+        "kind": "stock"
+      },
+      "estimation_status": "advance_estimate_preliminary",
+      "revision_relation": "initial_verified_record_for_this_measure_and_period; subject_to_official_revision; prior_observations_retained",
+      "source_notes": "采用11月3日具名预估发布的约数；同主题序列单位S$m用于确认币种，未混用该动态页面较旧的2024年数值。网页和附件属于同一发布体系，不计作独立交叉证据。",
+      "id": "sg-dia-stock-yoy-2025-advance",
+      "label": "新加坡2025年末对外直接投资存量同比变化（预估）",
+      "value": 11.8,
+      "unit": "%",
+      "original_unit": "% year-on-year",
+      "definition": "2025年末企业对外直接投资存量相对上年末的同比变化；不是全年投资流出额增长、投资回报率或海南相关流量增幅。"
+    },
+    {
+      "tier": "A",
+      "status": "observed",
+      "reviewed_by": "official-primary-source-check",
+      "reviewed_at": "2026-11-04T01:50:22.382Z",
+      "region": "新加坡",
+      "model_impact": "none: reference evidence only; independent synthetic engine",
+      "source_url": "https://www.singstat.gov.sg/news/business-expectations-of-services-sector-4q2026",
+      "source_document_url": "https://www.singstat.gov.sg/files/d6eb3c21-e995-4b23-b63c-a4187ce6446e.pdf",
+      "published_at": "2026-11-02",
+      "published_at_precision": "day",
+      "unit": "%",
+      "original_unit": "Net Weighted Balance (%)",
+      "measurement_type": "survey_expectation",
+      "observation_period": {
+        "start": "2026-09",
+        "end": "2026-10",
+        "precision": "month",
+        "kind": "survey_fieldwork"
+      },
+      "period": "2026年第四季度调查（2026年9—10月采集）",
+      "reference_quarter": "2026-Q4",
+      "revision_relation": "initial_verified_record_for_this_measure_and_survey_round; no_prior_same_period_record",
+      "source_notes": "A类指官方调查发布事实；所问未来情况尚未发生。样本约1600家，回应企业约占被选样本营收70%；并非全体企业覆盖率。不得当作实际增长率、已发生招聘人数、人才沉淀或模型预测。",
+      "id": "sg-services-outlook-nwb-2026q4",
+      "label": "新加坡服务业未来半年景气预期净加权余额（2026年第四季度调查）",
+      "value": 15,
+      "expectation_period": {
+        "start": "2026-10",
+        "end": "2027-03",
+        "precision": "month"
+      },
+      "definition": "对2026年10月至2027年3月经营环境回答改善与转弱的企业加权占比之差；官方以%公布净加权余额。按营收在企业层面、增加值在行业层面加权，属于方向性预期而非增长率。",
+      "source_locator": "官方新闻General Business Outlook；附件第1、4页。"
+    },
+    {
+      "tier": "A",
+      "status": "observed",
+      "reviewed_by": "official-primary-source-check",
+      "reviewed_at": "2026-11-04T01:50:22.382Z",
+      "region": "新加坡",
+      "model_impact": "none: reference evidence only; independent synthetic engine",
+      "source_url": "https://www.singstat.gov.sg/news/business-expectations-of-services-sector-4q2026",
+      "source_document_url": "https://www.singstat.gov.sg/files/d6eb3c21-e995-4b23-b63c-a4187ce6446e.pdf",
+      "published_at": "2026-11-02",
+      "published_at_precision": "day",
+      "unit": "%",
+      "original_unit": "Net Weighted Balance (%)",
+      "measurement_type": "survey_expectation",
+      "observation_period": {
+        "start": "2026-09",
+        "end": "2026-10",
+        "precision": "month",
+        "kind": "survey_fieldwork"
+      },
+      "period": "2026年第四季度调查（2026年9—10月采集）",
+      "reference_quarter": "2026-Q4",
+      "revision_relation": "initial_verified_record_for_this_measure_and_survey_round; no_prior_same_period_record",
+      "source_notes": "A类指官方调查发布事实；所问未来情况尚未发生。样本约1600家，回应企业约占被选样本营收70%；并非全体企业覆盖率。不得当作实际增长率、已发生招聘人数、人才沉淀或模型预测。",
+      "id": "sg-services-revenue-nwb-2026q4",
+      "label": "新加坡服务业营业收入预期净加权余额（2026年第四季度调查）",
+      "value": 16,
+      "expectation_period": {
+        "start": "2026-10",
+        "end": "2026-12",
+        "precision": "month"
+      },
+      "definition": "对2026年10月至12月营业收入回答增加与减少的企业加权占比之差；官方以%公布净加权余额。按营收在企业层面、增加值在行业层面加权，非实际营收增幅。",
+      "source_locator": "官方新闻Operating Revenue and Employment Forecast；附件第1、3、4页。"
+    },
+    {
+      "tier": "A",
+      "status": "observed",
+      "reviewed_by": "official-primary-source-check",
+      "reviewed_at": "2026-11-04T01:50:22.382Z",
+      "region": "新加坡",
+      "model_impact": "none: reference evidence only; independent synthetic engine",
+      "source_url": "https://www.singstat.gov.sg/news/business-expectations-of-services-sector-4q2026",
+      "source_document_url": "https://www.singstat.gov.sg/files/d6eb3c21-e995-4b23-b63c-a4187ce6446e.pdf",
+      "published_at": "2026-11-02",
+      "published_at_precision": "day",
+      "unit": "%",
+      "original_unit": "Net Weighted Balance (%)",
+      "measurement_type": "survey_expectation",
+      "observation_period": {
+        "start": "2026-09",
+        "end": "2026-10",
+        "precision": "month",
+        "kind": "survey_fieldwork"
+      },
+      "period": "2026年第四季度调查（2026年9—10月采集）",
+      "reference_quarter": "2026-Q4",
+      "revision_relation": "initial_verified_record_for_this_measure_and_survey_round; no_prior_same_period_record",
+      "source_notes": "A类指官方调查发布事实；所问未来情况尚未发生。样本约1600家，回应企业约占被选样本营收70%；并非全体企业覆盖率。不得当作实际增长率、已发生招聘人数、人才沉淀或模型预测。",
+      "id": "sg-services-employment-nwb-2026q4",
+      "label": "新加坡服务业就业预期净加权余额（2026年第四季度调查）",
+      "value": 11,
+      "expectation_period": {
+        "start": "2026-10",
+        "end": "2026-12",
+        "precision": "month"
+      },
+      "definition": "对2026年10月至12月就业回答增加与减少的企业加权占比之差；企业及行业层面均按就业规模加权，官方以%公布净加权余额。非已实现就业增长率、净增就业人数或高端人才数量。",
+      "source_locator": "官方新闻Operating Revenue and Employment Forecast；附件第1、3、4页。"
     }
   ],
   "events": [
@@ -326,5 +488,5 @@
     }
   ],
   "failures": [],
-  "previous_version": "20261102-370bfa47"
+  "previous_version": "20261103-9815db8d"
 }

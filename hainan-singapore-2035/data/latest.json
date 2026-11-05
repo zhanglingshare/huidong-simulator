@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
   "project_key": "two-islands-2035-20261030",
-  "version": "20261104-29eaac75",
-  "updated_at": "2026-11-04T01:50:22.382Z",
+  "version": "20261105-238075fe",
+  "updated_at": "2026-11-05T01:13:04.564Z",
   "mode": "reviewed_official_reference_only",
   "documents": [],
   "indicators": [
@@ -485,8 +485,51 @@
         "服务、人才及贸易流量变化的独立观测"
       ],
       "model_impact": "none: verified policy publication only; no automatic parameter, edge-weight or forecast update"
+    },
+    {
+      "id": "sg-mdh-port-marine-circular-2026-11",
+      "label": "新加坡港海事健康申报通告更新（PC11/2026）",
+      "tier": "A",
+      "status": "effective",
+      "source_url": "https://www.mpa.gov.sg/media-centre/details/port-marine-circular-no-11-of-2026-maritime-declaration-of-health",
+      "source_document_url": "https://www.mpa.gov.sg/api/media/dad93d6b-44f0-41f6-9446-cf7dbdfe0916/pc26-11.pdf",
+      "published_at": "2026-11-04",
+      "published_at_precision": "day",
+      "issued_at": "2026-11-04",
+      "underlying_notice_issued_at": "2026-10-30",
+      "underlying_notice_published_at": null,
+      "effective_at": "2026-10-30",
+      "effective_at_basis": "附件NEA通知第1段明示的要求生效日；不等同MPA通告公开日。",
+      "observed_at": null,
+      "reviewed_by": "official-primary-source-check",
+      "reviewed_at": "2026-11-05T01:13:04.564Z",
+      "region": "新加坡",
+      "period": "MPA于2026-11-04公开通告；附件要求注明自2026-10-30生效",
+      "document_number": "Port Marine Circular No. 11 of 2026",
+      "supersedes_document_number": "Port Marine Circular No. 03 of 2026",
+      "definition": "核验的是新版通告、附件所列适用类别和明示生效日期；尚无本事件导致实际港口延误或吞吐变化的观测。",
+      "description": "适用于符合附件条件的到港船舶，包括过去21天涉及所列国家或地区的航次、人员行程，以及船上有相关健康情形的船舶；不将其扩写为所有到港船舶无差别新增要求。",
+      "original_unit": "不适用（政策事件）；申报时限原文单位为小时，措辞存在冲突。",
+      "source_locator": "PDF第1页MPA通告；第2页NEA通知及生效日期；第3页适用地区清单；第4页Annex B表单。",
+      "verification_conflicts": [
+        {
+          "field": "submission_lead_time",
+          "mpa_cover_page": "at least 12 hours before arrival",
+          "nea_notice_body": "12 hours before arrival",
+          "annex_b_form": "a maximum of 12 hours before arrival",
+          "resolution": "pending_official_clarification; no operational deadline inferred"
+        }
+      ],
+      "source_notes": "附件扫描页经逐页核读；通告与附件同属此官方发布包，不计作独立交叉证据。",
+      "revision_relation": "official_document_supersession: PC11/2026 replaces PC03/2026; initial manifest event; no previous event overwritten",
+      "follow_up_evidence_needed": [
+        "官方澄清至少/至多12小时的措辞冲突",
+        "适用航次的执行记录及实际等待时间",
+        "任何经济或港口业务影响的独立观测"
+      ],
+      "model_impact": "none: policy reference only; no automatic parameter, edge-weight or forecast update"
     }
   ],
   "failures": [],
-  "previous_version": "20261103-9815db8d"
+  "previous_version": "20261104-29eaac75"
 }

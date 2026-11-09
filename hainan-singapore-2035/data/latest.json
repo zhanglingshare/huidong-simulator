@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
   "project_key": "two-islands-2035-20261030",
-  "version": "20261107-00cb961d",
-  "updated_at": "2026-11-07T01:15:13.007Z",
+  "version": "20261109-a2e407c9",
+  "updated_at": "2026-11-09T01:29:45.906Z",
   "mode": "reviewed_official_reference_only",
   "documents": [],
   "indicators": [
@@ -652,8 +652,119 @@
         "任何经济或港口业务影响的独立观测"
       ],
       "model_impact": "none: policy reference only; no automatic parameter, edge-weight or forecast update"
+    },
+    {
+      "id": "sg-oil-patches-2026-11-01",
+      "label": "MPA通报新加坡南部海域发现油污斑块",
+      "tier": "A",
+      "status": "verified",
+      "source_url": "https://www.mpa.gov.sg/media-centre/details/oil-patches-sighted-off-pulau-sebarok-pulau-semakau-and-selat-pauh",
+      "published_at": "2026-11-01",
+      "published_at_precision": "day",
+      "effective_at": null,
+      "observed_at": "2026-11-01",
+      "alert_received_at": "2026-11-01T10:25:00+08:00",
+      "alert_time_precision": "approximate_minute_as_reported",
+      "reviewed_by": "official-primary-source-check",
+      "reviewed_at": "2026-11-09T01:29:45.906Z",
+      "region": "新加坡",
+      "period": "2026-11-01发现及同日官方通报；不代表2026-11-09实时状态",
+      "observation_period": {
+        "start": "2026-11-01",
+        "end": "2026-11-01",
+        "precision": "day",
+        "kind": "incident_report"
+      },
+      "original_unit": "不适用（事件）；来源未公布泄漏量、面积、损失或延误时长。",
+      "definition": "记录MPA对油污斑块及应对行动的具名通报；港航未受影响仅指该通报发布时的官方说明，不推断后续清理完成或经济损失为零。",
+      "description": "MPA称接报后巡查确认Pulau Sebarok、Pulau Semakau及Selat Pauh附近油污斑块，已动员清污资源；通报表示当时航行交通和港口运营未受影响，油污来源仍在调查。",
+      "operational_impact": {
+        "as_of": "2026-11-01",
+        "reported_by": "MPA",
+        "navigational_traffic": "no_impact_reported_at_release",
+        "port_operations": "no_impact_reported_at_release",
+        "later_status": "not_verified"
+      },
+      "source_locator": "MPA具名通报第1—6段。",
+      "source_notes": "A类仅为已核对的监管机构公开事实；单一官方通报，不把新闻转载计为独立证据。本次补录既有公开事件，并非11月9日新发生。",
+      "revision_relation": "initial_verified_manifest_record_of_2026-11-01_incident; no_prior_same_incident_record; prior_events_retained",
+      "follow_up_evidence_needed": [
+        "污染源及清理完成的官方后续通报",
+        "泄漏规模、实际延误及经济影响的独立观测"
+      ],
+      "model_impact": "none: incident reference only; no automatic parameter, edge-weight or forecast update"
+    },
+    {
+      "id": "sg-no-green-shipping-research-call-2026",
+      "label": "MPA公布新加坡—挪威绿色航运联合科研征集",
+      "tier": "A",
+      "status": "verified",
+      "source_url": "https://www.mpa.gov.sg/media-centre/details/singapore-and-norway-launch-joint-research-grant-call-to-advance-greener-shipping",
+      "published_at": "2026-11-05",
+      "published_at_precision": "day",
+      "effective_at": null,
+      "observed_at": null,
+      "reviewed_by": "official-primary-source-check",
+      "reviewed_at": "2026-11-09T01:29:45.906Z",
+      "region": "新加坡",
+      "period": "2026-11-05MPA公告；RCN征集页2026-10-21已发布、2026-11-06更新；申请尚未开放",
+      "observation_period": {
+        "as_of": "2026-11-05",
+        "precision": "day",
+        "kind": "official_announcement"
+      },
+      "original_unit": "S$ million；NOK million；日期为征集时间，不是已拨款或完工时间。",
+      "definition": "已核验的是联合科研征集及公布的资金上限、申请窗口；不等于已获批项目、实付资金、减排成果、吞吐增长或人才流入。",
+      "description": "MPA、挪威研究理事会及新加坡海事研究院公布面向绿色航运的联合征集，涵盖替代燃料、船舶能效和数字化。申请于2026-12-02开放，2027-01-20截止；获选项目最长可获四年支持。",
+      "application_window": {
+        "opens_at": "2026-12-02",
+        "opens_at_precision": "day",
+        "closes_at": "2027-01-20T13:00:00+01:00",
+        "closes_at_timezone": "Europe/Oslo",
+        "status_at_review": "not_yet_open"
+      },
+      "announced_funding_caps": [
+        {
+          "provider": "SMI",
+          "beneficiary_scope": "Singapore research partners",
+          "value": 2.7,
+          "unit": "million SGD",
+          "currency": "SGD",
+          "original_unit": "S$ million",
+          "kind": "announced_call_envelope_not_disbursement"
+        },
+        {
+          "provider": "RCN",
+          "beneficiary_scope": "Norwegian research partners",
+          "value": 20,
+          "unit": "million NOK",
+          "currency": "NOK",
+          "original_unit": "NOK million",
+          "kind": "announced_call_envelope_not_disbursement"
+        }
+      ],
+      "corroborating_source_url": "https://www.forskningsradet.no/en/call-for-proposals/2027/norway-and-singapore-joint-maritime-research-call/",
+      "source_publication_times": [
+        {
+          "publisher": "MPA",
+          "published_at": "2026-11-05"
+        },
+        {
+          "publisher": "RCN",
+          "published_at": "2026-10-21",
+          "updated_at": "2026-11-06"
+        }
+      ],
+      "source_locator": "MPA公告第1、3、4、6段；RCN征集页Important dates及About the call。",
+      "source_notes": "MPA索引正文与RCN官方征集页核对日期和金额；MPA文章本次直连超时。RCN为共同主办方的一手材料，非新闻转载；同一项目的双边发布不作为成效的独立证据。两种币种分别保留，不相加。",
+      "revision_relation": "initial_verified_manifest_record_of_this_joint_call; counterpart_page_predates_MPA_announcement; no_prior_event_overwritten",
+      "follow_up_evidence_needed": [
+        "正式获批项目及资金拨付记录",
+        "合作项目实际开展和可核验的减排、效率或人才成果"
+      ],
+      "model_impact": "none: programme announcement only; no automatic parameter, edge-weight or forecast update"
     }
   ],
   "failures": [],
-  "previous_version": "20261105-238075fe"
+  "previous_version": "20261107-00cb961d"
 }

@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
   "project_key": "two-islands-2035-20261030",
-  "version": "20261109-a2e407c9",
-  "updated_at": "2026-11-09T01:29:45.906Z",
+  "version": "20261110-66736e31",
+  "updated_at": "2026-11-10T01:52:04.925Z",
   "mode": "reviewed_official_reference_only",
   "documents": [],
   "indicators": [
@@ -763,8 +763,45 @@
         "合作项目实际开展和可核验的减排、效率或人才成果"
       ],
       "model_impact": "none: programme announcement only; no automatic parameter, edge-weight or forecast update"
+    },
+    {
+      "id": "hn-customs-operations-management-2026-11-02",
+      "label": "海南三部门明确封关“一线”及岛内销售加工增值管理事项",
+      "tier": "A",
+      "status": "effective",
+      "source_url": "https://www.hainan.gov.cn/hainan/0101/202611/926377e2319c47eb8ff62e034689d5a0.shtml",
+      "published_at": "2026-11-02T20:02:00+08:00",
+      "published_at_precision": "minute",
+      "publication_date_basis": "海南省政府正式通知页面标示的发布时间；本次为补录，不作为11月10日新发布。",
+      "issued_at": "2026-11-02",
+      "effective_at": "2026-11-02",
+      "effective_at_precision": "day",
+      "effective_at_basis": "正文末条明确“本通知自公布之日起实施”；页面公布日为2026-11-02，不据此伪造精确生效时分。",
+      "observed_at": null,
+      "reviewed_by": "official-primary-source-check",
+      "reviewed_at": "2026-11-10T01:52:04.925Z",
+      "region": "海南",
+      "period": "2026-11-02正式公布并生效；2026-11-10核验补录，未核验业务成效",
+      "observation_period": {
+        "as_of": "2026-11-02",
+        "precision": "day",
+        "kind": "official_policy_publication_and_stated_effectiveness"
+      },
+      "original_unit": "%（加工增值比例门槛）；不是税率、利润率或经济增长率。事件无已核验的金额、企业数量或港口流量。",
+      "definition": "核验对象为海南省财政厅、发展改革委、商务厅正式通知的规则及明示生效日；政策有效不等于企业已享惠、成本已下降或网络联系已增强。",
+      "description": "通知明确：符合未发生流转或加工等改变货物状态条件的境外保税仓储货物，后续进入自贸港其他区域时参照“一线”进口政策；鼓励类产业企业生产的含进口料件、在自贸港加工增值达到或超过30%的货物，在岛内销售时参照经“二线”进入内地适用的加工增值政策文件要求。",
+      "eligibility_scope": "岛内销售条款须同时满足鼓励类产业企业、含进口料件、在海南自贸港加工增值达到或超过30%等条件；不扩写为所有进口货物或岛内商品普遍免税。",
+      "source_locator": "海南省政府公示公告页面；正文第一、二部分及末尾实施条款、三部门落款。",
+      "source_notes": "已直接读取省政府所载来源为海南省财政厅的正式通知全文；它是政策文件公开页，非新闻报道。财政厅解读页返回403，未用商业解读补充条款；原页面未列文号，不采用二手页面中的文号。新闻提及的首单金额未获业务部门一手凭据，未录为事实指标。",
+      "revision_relation": "initial_verified_manifest_record_of_this_notification; distinct_from_commerce_notice_2026_187; no_prior_event_overwritten",
+      "follow_up_evidence_needed": [
+        "海关或业务主管部门关于首单及后续办理的原始记录",
+        "实际享惠企业数、货值与减免税额的明确口径和观测期",
+        "政策对贸易、成本或产业协作影响的独立观测"
+      ],
+      "model_impact": "none: verified policy rules and stated effectiveness only; no automatic parameter, edge-weight or forecast update"
     }
   ],
   "failures": [],
-  "previous_version": "20261107-00cb961d"
+  "previous_version": "20261109-a2e407c9"
 }

@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
   "project_key": "two-islands-2035-20261030",
-  "version": "20261110-66736e31",
-  "updated_at": "2026-11-10T01:52:04.925Z",
+  "version": "20261112-spc2026",
+  "updated_at": "2026-11-12T01:46:48.910Z",
   "mode": "reviewed_official_reference_only",
   "documents": [],
   "indicators": [
@@ -800,8 +800,42 @@
         "政策对贸易、成本或产业协作影响的独立观测"
       ],
       "model_impact": "none: verified policy rules and stated effectiveness only; no automatic parameter, edge-weight or forecast update"
+    },
+    {
+      "id": "sg-smart-port-challenge-2026-finale",
+      "label": "新加坡第十届智慧港口挑战赛公布结果",
+      "tier": "A",
+      "status": "observed",
+      "region": "新加坡",
+      "published_at": "2026-11-11",
+      "observed_at": "2026-11-11",
+      "effective_at": null,
+      "period": "2026届赛事，截至2026-11-11总决赛",
+      "observation_period": {
+        "as_of": "2026-11-11",
+        "precision": "day",
+        "kind": "competition_edition"
+      },
+      "source_url": "https://www.mpa.gov.sg/media-centre/details/smart-port-challenge-2026-marks-10-years-of-growing-maritime-innovation",
+      "source_locator": "MPA与NUSX公告导语、第5段及附件A",
+      "reviewed_by": "official-primary-source-check",
+      "reviewed_at": "2026-11-12T01:46:48.910Z",
+      "original_unit": "proposals / start-ups / countries",
+      "definition": "本届赛事收到的提案数、提交提案的初创企业数及其来源国家数，按主办方公告口径统计。",
+      "description": "MPA与NUSX于11月11日公布赛事结果。本届收到来自39个国家281家初创企业的586份提案，其中21家企业入选加速计划。",
+      "edition_counts": {
+        "proposals": 586,
+        "submitting_startups": 281,
+        "countries": 39,
+        "accelerator_selected_startups": 21
+      },
+      "revision_relation": "initial_verified_record_for_2026_edition",
+      "follow_up_evidence_needed": [
+        "实际启动或完成的港口试点、商用部署及运营成效"
+      ],
+      "model_impact": "none: observed competition activity"
     }
   ],
   "failures": [],
-  "previous_version": "20261109-a2e407c9"
+  "previous_version": "20261110-66736e31"
 }

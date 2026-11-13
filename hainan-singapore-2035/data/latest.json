@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
   "project_key": "two-islands-2035-20261030",
-  "version": "20261112-spc2026",
-  "updated_at": "2026-11-12T01:46:48.910Z",
+  "version": "20261113-lng-fsu",
+  "updated_at": "2026-11-13T01:38:16Z",
   "mode": "reviewed_official_reference_only",
   "documents": [],
   "indicators": [
@@ -834,8 +834,46 @@
         "实际启动或完成的港口试点、商用部署及运营成效"
       ],
       "model_impact": "none: observed competition activity"
+    },
+    {
+      "id": "sg-lng-fsu-licence-applications-2026-11-12",
+      "label": "新加坡海事及港务管理局开放液化天然气浮式储存装置运营牌照申请",
+      "tier": "A",
+      "status": "verified",
+      "region": "新加坡",
+      "published_at": "2026-11-12",
+      "published_at_precision": "day",
+      "effective_at": null,
+      "observed_at": null,
+      "period": "截至2026-11-12，MPA确认已开放申请；申请截止于2027-02-04 17:00（新加坡时间）",
+      "observation_period": {
+        "as_of": "2026-11-12",
+        "precision": "day",
+        "kind": "licensing_application_open_as_of_publication"
+      },
+      "source_url": "https://www.mpa.gov.sg/media-centre/details/mpa-opens-applications-for-lng-floating-storage-unit-licences-in-singapore",
+      "source_locator": "MPA正式公告第1、3—7段及页面标注发布日期",
+      "reviewed_by": "official-primary-source-check",
+      "reviewed_at": "2026-11-13T01:38:16Z",
+      "original_unit": "套（申请征集范围）；m³（单套储存能力资格门槛）；年（牌照有效期）",
+      "definition": "MPA公开征集新加坡锚地液化天然气（LNG）浮式储存装置（FSU）运营牌照申请的公告，记录申请窗口与资格要求。",
+      "description": "MPA于2026-11-12公告申请已开放，征集范围为最多两套浮式储存装置。申请面向现有LNG船用燃料供应牌照持有人，申请者须拥有或租赁至少一套储存能力达到130,000 m³的装置，并在新加坡船舶注册处登记。每张牌照有效期为五年。",
+      "application_open_as_of": "2026-11-12",
+      "application_deadline": "2027-02-04T17:00:00+08:00",
+      "licensing_terms": {
+        "maximum_units_in_call": 2,
+        "minimum_storage_capacity_per_qualifying_unit_m3": 130000,
+        "licence_validity_years": 5
+      },
+      "source_notes": "公告确认截至发布日已开放申请，未单列开放时分或牌照生效日期。装置数量上限和储量门槛为征集条件。",
+      "revision_relation": "initial_verified_record_of_this_fsu_licence_application_call; no_prior_event_overwritten",
+      "follow_up_evidence_needed": [
+        "MPA发牌结果及各牌照生效日期",
+        "实际投运日期、装置储量及再装载量"
+      ],
+      "model_impact": "none: application opening and published eligibility terms only"
     }
   ],
   "failures": [],
-  "previous_version": "20261110-66736e31"
+  "previous_version": "20261112-spc2026"
 }

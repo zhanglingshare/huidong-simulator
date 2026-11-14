@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
   "project_key": "two-islands-2035-20261030",
-  "version": "20261113-official-evidence",
-  "updated_at": "2026-11-13T01:54:18Z",
+  "version": "20261114-official-evidence",
+  "updated_at": "2026-11-14T01:46:37Z",
   "mode": "reviewed_official_reference_only",
   "documents": [],
   "indicators": [
@@ -795,6 +795,116 @@
       "definition": "海南省人大常委会秘书长披露的原“百万人才进海南”行动计划累计引进各类人才数，按2025年11月统计。该指标衡量原计划累计引进人数，区别于新行动计划、期末人才存量和当期净流入。",
       "revision_relation": "initial_verified_historical_baseline_for_the_previous_talent_programme",
       "model_impact": "none: reference evidence only; independent synthetic engine"
+    },
+    {
+      "tier": "A",
+      "reviewed_by": "official-primary-source-check",
+      "reviewed_at": "2026-11-14T01:46:37Z",
+      "status": "observed",
+      "model_impact": "none: reference evidence only; independent synthetic engine",
+      "region": "新加坡",
+      "source_url": "https://www.singstat.gov.sg/news/advance-estimates-of-foreign-direct-investment-in-singapore-stock-as-at-end-2025",
+      "source_document_url": "https://www.singstat.gov.sg/files/0e288a68-ce6d-4d4e-b2b3-e455872f9881.pdf",
+      "currency_reference_url": "https://www.singstat.gov.sg/find-data/explore-data-themes/trade-investment/foreign-direct-investment/latest-news-data",
+      "published_at": "2026-10-30",
+      "published_at_precision": "day",
+      "period": "2025年末",
+      "observation_period": {
+        "as_of": "2025-12-31",
+        "kind": "year_end_stock"
+      },
+      "estimation_status": "advance_estimate_preliminary",
+      "revision_relation": "initial_verified_record_of_inward_fdi_for_this_measure_and_period; subject_to_official_revision",
+      "source_notes": "回补新加坡统计局2026年10月30日具名预估发布。滚动统计表仅用于核对币种及同一口径，金额采用具名公告的十亿新元精度。既有对外直接投资存量是另一方向的指标。",
+      "id": "sg-inward-fdi-stock-2025-advance-rounded",
+      "label": "新加坡2025年末外来直接投资存量（预估）",
+      "value": 3506,
+      "unit": "十亿新元",
+      "original_unit": "$ billion (SGD)",
+      "currency": "SGD",
+      "source_locator": "2026-10-30公告导语及同日PDF的FDI IN SINGAPORE BY COMPONENT, 2025；币种见同主题表 S$m。",
+      "definition": "计入新加坡企业部门的外来直接投资期末存量，由直接股权投资及企业间净贷款构成，按2025年末的时点统计。"
+    },
+    {
+      "tier": "A",
+      "reviewed_by": "official-primary-source-check",
+      "reviewed_at": "2026-11-14T01:46:37Z",
+      "status": "observed",
+      "model_impact": "none: reference evidence only; independent synthetic engine",
+      "region": "新加坡",
+      "source_url": "https://www.singstat.gov.sg/news/advance-estimates-of-foreign-direct-investment-in-singapore-stock-as-at-end-2025",
+      "source_document_url": "https://www.singstat.gov.sg/files/0e288a68-ce6d-4d4e-b2b3-e455872f9881.pdf",
+      "currency_reference_url": "https://www.singstat.gov.sg/find-data/explore-data-themes/trade-investment/foreign-direct-investment/latest-news-data",
+      "published_at": "2026-10-30",
+      "published_at_precision": "day",
+      "period": "2025年末",
+      "observation_period": {
+        "as_of": "2025-12-31",
+        "kind": "year_end_stock"
+      },
+      "estimation_status": "advance_estimate_preliminary",
+      "revision_relation": "initial_verified_record_of_inward_fdi_for_this_measure_and_period; subject_to_official_revision",
+      "source_notes": "回补新加坡统计局2026年10月30日具名预估发布。滚动统计表仅用于核对币种及同一口径，金额采用具名公告的十亿新元精度。既有对外直接投资存量是另一方向的指标。",
+      "id": "sg-inward-fdi-stock-yoy-2025-advance",
+      "label": "新加坡2025年末外来直接投资存量同比（预估）",
+      "value": 9.9,
+      "unit": "%",
+      "original_unit": "% year-on-year",
+      "source_locator": "2026-10-30新加坡统计局公告Key Highlights。",
+      "definition": "新加坡企业部门外来直接投资存量的2025年末同比变化，基于上年末同类存量。"
+    },
+    {
+      "tier": "A",
+      "reviewed_by": "official-primary-source-check",
+      "reviewed_at": "2026-11-14T01:46:37Z",
+      "status": "observed",
+      "model_impact": "none: reference evidence only; independent synthetic engine",
+      "region": "海南",
+      "source_url": "https://hnxwfbt.hinews.cn/xinwen/show-3409.html",
+      "published_at": "2026-11-12T20:32:00+08:00",
+      "published_at_precision": "minute",
+      "currency": "CNY",
+      "unit": "亿元人民币",
+      "original_unit": "亿元",
+      "revision_relation": "initial_verified_record_for_this_measure_and_period",
+      "source_notes": "海南省新闻办公室的发布会实录，省国资委主任披露的省属企业口径。",
+      "id": "hn-provincial-soe-assets-2025",
+      "label": "海南2025年末省属企业资产总额",
+      "value": 7935,
+      "period": "2025年末",
+      "observation_period": {
+        "as_of": "2025-12-31",
+        "kind": "year_end_stock"
+      },
+      "source_locator": "海南省新闻办公室2026-11-12实录，省国资委主任主发布中复盘“十四五”的段落。",
+      "definition": "省国资委发布会所列海南省属企业2025年末资产总额，属期末企业资产存量。"
+    },
+    {
+      "tier": "A",
+      "reviewed_by": "official-primary-source-check",
+      "reviewed_at": "2026-11-14T01:46:37Z",
+      "status": "observed",
+      "model_impact": "none: reference evidence only; independent synthetic engine",
+      "region": "海南",
+      "source_url": "https://hnxwfbt.hinews.cn/xinwen/show-3409.html",
+      "published_at": "2026-11-12T20:32:00+08:00",
+      "published_at_precision": "minute",
+      "currency": "CNY",
+      "unit": "亿元人民币",
+      "original_unit": "亿元",
+      "revision_relation": "initial_verified_record_for_this_measure_and_period",
+      "source_notes": "海南省新闻办公室的发布会实录，省国资委主任披露的省属企业口径。",
+      "id": "hn-provincial-soe-fixed-investment-2021-2025",
+      "label": "海南省属企业固定资产投资（2021—2025年累计）",
+      "value": 1580.8,
+      "period": "2021—2025年（“十四五”累计）",
+      "observation_period": {
+        "start": "2021-01-01",
+        "end": "2025-12-31",
+        "kind": "five_year_cumulative"
+      },
+      "source_locator": "海南省新闻办公室2026-11-12实录，省国资委主任主发布中复盘“十四五”的段落。",
+      "definition": "省国资委披露的海南省属企业“十四五”期间累计完成的固定资产投资金额。"
     }
   ],
   "events": [
@@ -1157,8 +1267,202 @@
         "境外主体实际参与项目的可核验数据"
       ],
       "model_impact": "none: verified legislation and scheduled commencement only"
+    },
+    {
+      "tier": "A",
+      "reviewed_by": "official-primary-source-check",
+      "reviewed_at": "2026-11-14T01:46:37Z",
+      "status": "observed",
+      "effective_at": null,
+      "observed_at": "2026-11-12",
+      "region": "新加坡",
+      "id": "sg-leading-maritime-cities-2026-ranking",
+      "label": "2026年《全球领先海事城市》报告公布，新加坡综合排名第一",
+      "published_at": "2026-11-12",
+      "published_at_precision": "day",
+      "period": "2026版报告于11月12日公开；MPA于11月13日发布通报",
+      "observation_period": {
+        "edition_year": 2026,
+        "kind": "report_edition"
+      },
+      "source_url": "https://www.dnv.com/news/2026/Singapore-tops-maritime-hub-ranking-as-asia-takes-three-of-top-five/",
+      "source_document_url": "https://menon.no/en/projects/the-leading-maritime-cities-of-the-world-2026",
+      "official_confirmation_url": "https://www.mpa.gov.sg/media-centre/details/singapore-retains-position-as-worlds-leading-maritime-city-in-2026",
+      "official_confirmation_published_at": "2026-11-13",
+      "source_locator": "DNV联合编制方发布页面正文排名与方法段落；MPA 2026-11-13通报第1、2段。",
+      "original_unit": "名次（序位）",
+      "definition": "DNV与Menon Economics按五大维度发布的2026版海事城市综合排名。综合指数结合统计数据与专家调查。",
+      "description": "新加坡综合第一，在航运、港口与物流、吸引力与竞争力三项居首，海事金融与法律第三，海事技术第四。",
+      "reported_ranks": {
+        "overall": 1,
+        "shipping": 1,
+        "ports_and_logistics": 1,
+        "attractiveness_and_competitiveness": 1,
+        "maritime_finance_and_law": 3,
+        "maritime_technology": 4
+      },
+      "source_notes": "报告编制者是排名的一手来源。MPA通报指向同一报告。报告本版更新部分指标，跨届比较须考虑方法变化。",
+      "revision_relation": "initial_verified_record_of_the_2026_lmc_edition",
+      "follow_up_evidence_needed": [
+        "分项服务产出、就业和港航业务量的独立观测"
+      ],
+      "model_impact": "none: published benchmark ranking only"
+    },
+    {
+      "tier": "A",
+      "reviewed_by": "official-primary-source-check",
+      "reviewed_at": "2026-11-14T01:46:37Z",
+      "status": "observed",
+      "effective_at": null,
+      "observed_at": "2026-11-13",
+      "region": "新加坡",
+      "id": "sg-meridian-fx-apac-test-findings-2026-11-13",
+      "label": "新加坡、英国及泰国央行发布跨境外汇同步结算试验结果",
+      "published_at": "2026-11-13",
+      "published_at_precision": "day",
+      "period": "截至2026-11-13公开报告，三家央行已完成受控测试",
+      "observation_period": {
+        "as_of": "2026-11-13",
+        "kind": "joint_trial_results_publication"
+      },
+      "source_url": "https://www.mas.gov.sg/news/media-releases/2026/boe-mas-and-bot-complete-trial-of-synchronised-fx-settlement-across-different-currencies-and-systems",
+      "source_document_url": "https://www.bankofengland.co.uk/payments/payments-innovation/wholesale-experiments-programme/project-meridian-fx-apac-executive-summary-and-introduction",
+      "source_locator": "新加坡金融管理局联合公告第2–5段；英格兰银行执行摘要的Overview及Technical workstream。",
+      "original_unit": "项（技术试验成果发布）",
+      "definition": "Project Meridian FX APAC 批发跨境外汇试验的公布，关注不同央行结算系统之间的同步付款对付款机制。",
+      "description": "新加坡金融管理局、英格兰银行和泰国央行在三个测试环境中验证了双边付款对付款与多边净额外汇同步结算。三方于11月13日公布结果。",
+      "source_notes": "验证限于受控测试环境。真实运营采用、实际结算量与成本变化尚待观测。",
+      "revision_relation": "initial_verified_record_of_joint_trial_results",
+      "follow_up_evidence_needed": [
+        "真实业务试点与商业采用",
+        "实际结算量、流动性占用及成本的可比结果"
+      ],
+      "model_impact": "none: controlled trial milestone only"
+    },
+    {
+      "tier": "A",
+      "reviewed_by": "official-primary-source-check",
+      "reviewed_at": "2026-11-14T01:46:37Z",
+      "status": "observed",
+      "effective_at": null,
+      "observed_at": "2026-11-10",
+      "region": "新加坡",
+      "id": "sg-mas-sovereign-gold-vaulting-launch-2026-11-10",
+      "label": "新加坡金融管理局启用央行黄金托管服务",
+      "published_at": "2026-11-10",
+      "published_at_precision": "day",
+      "period": "截至2026-11-10公告，央行黄金托管服务已启用；批发投资贵金属黄金GST框架预计自2027年4月生效",
+      "observation_period": {
+        "as_of": "2026-11-10",
+        "kind": "service_launch_announcement"
+      },
+      "source_url": "https://www.mas.gov.sg/news/media-releases/2026/mas-central-bank-gold-vaulting-services-enhanced-tax-framework-for-wholesale-gold-activities",
+      "service_reference_url": "https://www.mas.gov.sg/development/gold-custody-service",
+      "source_locator": "新加坡金融管理局11-10公告第2–5段及黄金托管服务说明。",
+      "original_unit": "吨（公告列示库容）；项（服务启用）",
+      "definition": "面向境外央行、国际金融机构及主权实体的中央银行黄金托管服务启用，以及同日公布的未来税制安排。",
+      "description": "MAS已开设黄金托管服务。国家货币库公布的容量上限为500吨。与财政部同日宣布扩展部分指定机构间批发投资贵金属黄金服务的GST豁免，预计自2027年4月实施，细节待预算案。",
+      "announced_vault_capacity_tonnes": 500,
+      "linked_tax_framework": {
+        "status": "announced",
+        "expected_start_month": "2027-04",
+        "effective_date_confirmed": false
+      },
+      "source_notes": "本轮补录11月10日公告，库容上限与实际托管量分列，税制按当时公告的预期时间记录。",
+      "revision_relation": "initial_verified_record_of_this_service_launch_and_linked_tax_announcement",
+      "follow_up_evidence_needed": [
+        "批发投资黄金服务适用范围与正式生效条款",
+        "实际托管量及使用情况"
+      ],
+      "model_impact": "none: service launch announcement only"
+    },
+    {
+      "tier": "A",
+      "reviewed_by": "official-primary-source-check",
+      "reviewed_at": "2026-11-14T01:46:37Z",
+      "status": "verified",
+      "effective_at": null,
+      "observed_at": null,
+      "region": "海南",
+      "id": "hn-provincial-soe-development-plan-15th-2026-11-12",
+      "label": "海南省国资委确认已印发省属国资国企“十五五”发展规划",
+      "published_at": "2026-11-12T20:32:00+08:00",
+      "published_at_precision": "minute",
+      "period": "2026-11-12发布会确认已印发，规划期为2026—2030年",
+      "observation_period": {
+        "as_of": "2026-11-12",
+        "kind": "official_briefing_confirming_plan_issuance"
+      },
+      "source_url": "https://hnxwfbt.hinews.cn/xinwen/show-3409.html",
+      "source_locator": "海南省新闻办公室第七十一场发布会实录，省国资委主任主发布。",
+      "original_unit": "万亿元（资产目标）；亿元（年度营收及利润目标）",
+      "definition": "海南省国资委在官方发布会上确认省属企业发展规划已印发，并对外披露2030年规划目标。",
+      "description": "海南省国资委11月12日确认，经省政府同意，已正式印发规划。到2030年力争省属企业资产总额突破1.5万亿元、年营业收入突破3000亿元、年利润总额突破100亿元。",
+      "announced_targets": {
+        "year": 2030,
+        "currency": "CNY",
+        "asset_total": {
+          "comparison": "greater_than",
+          "value": 1.5,
+          "original_unit": "万亿元"
+        },
+        "annual_operating_revenue": {
+          "comparison": "greater_than",
+          "value": 3000,
+          "original_unit": "亿元"
+        },
+        "annual_total_profit": {
+          "comparison": "greater_than",
+          "value": 100,
+          "original_unit": "亿元"
+        }
+      },
+      "source_notes": "已核验公开披露的规划和目标。实录称近期印发，未披露确切印发日期。2025年末资产存量独立记录。",
+      "revision_relation": "initial_verified_record_of_the_15th_five_year_plan_public_briefing",
+      "follow_up_evidence_needed": [
+        "规划正式文件及具体印发日",
+        "年度实际投资、资产及项目执行记录"
+      ],
+      "model_impact": "none: official plan and targets only"
+    },
+    {
+      "tier": "A",
+      "reviewed_by": "official-primary-source-check",
+      "reviewed_at": "2026-11-14T01:46:37Z",
+      "status": "effective",
+      "effective_at": "2026-11-01",
+      "observed_at": null,
+      "region": "海南",
+      "id": "hn-ftp-tcm-development-regulation-2026-114",
+      "label": "《海南自由贸易港中医药发展促进条例》自11月1日起施行",
+      "adopted_at": "2026-09-30",
+      "issued_at": "2026-09-30",
+      "published_at": "2026-10-12",
+      "published_at_precision": "day",
+      "publication_date_basis": "人大网站刊载正式全文与第114号公告公开版面均为10月12日，公告落款为9月30日。",
+      "effective_at_precision": "day",
+      "effective_at_basis": "省人大常委会第114号公告及条例第五十条明确规定。",
+      "period": "2026-09-30审议通过及公告落款，2026-10-12所引公告公开版面，2026-11-01施行",
+      "observation_period": {
+        "as_of": "2026-11-01",
+        "kind": "stated_statutory_commencement"
+      },
+      "source_url": "https://rd.sanya.gov.cn/rdsite/jgjs/202610/abc6e991368744248da826826aa4d6f3.shtml",
+      "official_briefing_url": "https://hnxwfbt.hinews.cn/xinwen/show-3394.html",
+      "source_locator": "海南省人大常委会第114号公告及条例第四十一、四十二、五十条；海南省新闻办11月5日官方发布会。",
+      "original_unit": "项（地方性法规）",
+      "definition": "海南自由贸易港中医药地方性法规施行及其开放合作条款，涉及符合条件机构面向境外人士开展服务和中医药服务贸易。",
+      "description": "条例明确支持符合条件的机构为境外人士提供中医医疗服务，并规定符合条件的中医药服务贸易企业按有关规定享受税收优惠。",
+      "source_notes": "本轮补录已施行的法规。企业需满足登记注册、实质性运营及主营业务目录条件；实际享惠和跨境服务量仍待观测。",
+      "revision_relation": "initial_verified_record_of_announcement_114_and_its_effective_date",
+      "follow_up_evidence_needed": [
+        "施行后配套措施",
+        "境外患者实际服务量、企业享惠及跨境医疗支付记录"
+      ],
+      "model_impact": "none: verified regulatory text and stated commencement only",
+      "source_notice_url": "https://news.hndaily.cn/html/2026-10/12/content_58468_19930810.htm"
     }
   ],
   "failures": [],
-  "previous_version": "20261113-lng-fsu"
+  "previous_version": "20261113-official-evidence"
 }

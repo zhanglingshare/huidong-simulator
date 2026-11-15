@@ -78,7 +78,7 @@ HTBridge.ready.then(function (HT) {
   if (D.meta.data_status !== 'real') {
     document.getElementById('demoBanner').style.display = 'flex';
     document.getElementById('demoText').innerHTML =
-      '<b>示例数据</b>：当前为待核实占位（' + D.meta.version + '），真实数据包替换后本横幅自动移除。';
+      '<b>' + (D.meta.data_status === 'partial_real' ? '部分真实' : '示例数据') + '</b>：' + D.meta.status_note + '（' + D.meta.version + '）';
   }
 
   /* 情景按钮 */

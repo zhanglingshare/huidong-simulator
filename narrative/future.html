@@ -61,7 +61,7 @@ HTBridge.ready.then(function (HT) {
   var D = HT.DATA, S = D.scenarios, list = S.list;
   if (D.meta.data_status !== 'real') {
     demoBanner.style.display = 'flex';
-    demoText.innerHTML = '<b>示例数据</b>：待核实占位（' + D.meta.version + '），真实包替换后本横幅移除。';
+    demoText.innerHTML = '<b>' + (D.meta.data_status === 'partial_real' ? '部分真实' : '示例数据') + '</b>：' + D.meta.status_note + '（' + D.meta.version + '）';
   }
 
   echarts.init(document.getElementById('rangeChart')).setOption({

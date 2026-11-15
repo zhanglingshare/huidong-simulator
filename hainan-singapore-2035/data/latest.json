@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
   "project_key": "two-islands-2035-20261030",
-  "version": "20261114-official-evidence",
-  "updated_at": "2026-11-14T01:46:37Z",
+  "version": "20261115-official-evidence",
+  "updated_at": "2026-11-15T01:12:16Z",
   "mode": "reviewed_official_reference_only",
   "documents": [],
   "indicators": [
@@ -905,6 +905,68 @@
       },
       "source_locator": "海南省新闻办公室2026-11-12实录，省国资委主任主发布中复盘“十四五”的段落。",
       "definition": "省国资委披露的海南省属企业“十四五”期间累计完成的固定资产投资金额。"
+    },
+    {
+      "tier": "A",
+      "reviewed_by": "official-primary-source-check",
+      "reviewed_at": "2026-11-15T01:12:16Z",
+      "published_at_precision": "day",
+      "region": "新加坡",
+      "status": "observed",
+      "model_impact": "none: reference evidence only; independent synthetic engine",
+      "id": "sg-marine-offshore-energy-value-added-2025",
+      "label": "新加坡海事与海工能源行业增加值（2025年）",
+      "value": 5.2,
+      "currency": "SGD",
+      "unit": "十亿新元",
+      "original_unit": "S$ billion",
+      "period": "2025年",
+      "observation_period": {
+        "start": "2025-01-01",
+        "end": "2025-12-31",
+        "kind": "calendar_year"
+      },
+      "published_at": "2026-11-13",
+      "source_url": "https://www.meti.gov.sg/newsroom/opening-remarks-by-mos-foo-cexiang-at-as-58th-anniversary-dinner/",
+      "source_locator": "新加坡能源、贸易与工业部刊载的政务部长演讲，第9–11段。",
+      "definition": "新加坡能源、贸易与工业部政务部长披露的海事与海工能源行业（Marine and Offshore Energy）全年增加值。",
+      "comparison_observation": {
+        "period": "2022年",
+        "value": 2.7,
+        "original_unit": "S$ billion",
+        "currency": "SGD"
+      },
+      "source_notes": "演讲按十亿新元披露2025年及2022年数值。详细行业分类和价格口径待统计表确认。",
+      "revision_relation": "initial_verified_record_for_this_measure_and_period"
+    },
+    {
+      "tier": "A",
+      "reviewed_by": "official-primary-source-check",
+      "reviewed_at": "2026-11-15T01:12:16Z",
+      "published_at_precision": "day",
+      "region": "新加坡",
+      "status": "observed",
+      "model_impact": "none: reference evidence only; independent synthetic engine",
+      "id": "sg-leading-maritime-cities-overall-rank-2026",
+      "label": "新加坡《全球领先海事城市》2026年版综合排名",
+      "value": 1,
+      "unit": "名",
+      "original_unit": "rank",
+      "period": "2026年版（第七版）",
+      "observation_period": {
+        "edition_year": 2026,
+        "edition_number": 7,
+        "kind": "report_edition"
+      },
+      "published_at": "2026-11-12",
+      "source_url": "https://www.dnv.com/news/2026/Singapore-tops-maritime-hub-ranking-as-asia-takes-three-of-top-five/",
+      "mpa_confirmation_url": "https://www.mpa.gov.sg/media-centre/details/singapore-retains-position-as-worlds-leading-maritime-city-in-2026",
+      "mpa_confirmation_published_at": "2026-11-13",
+      "report_url": "https://menon.no/en/projects/the-leading-maritime-cities-of-the-world-2026",
+      "source_locator": "联合编制方DNV的11月12日报告公告（名次及方法）；新加坡海事及港务管理局11月13日公告。",
+      "definition": "DNV与Menon Economics合编的2026年海事城市综合排名，涵盖航运、海事金融与法律、海事技术、港口与物流、吸引力与竞争力五项维度。",
+      "source_notes": "A 级核验对象为报告公布的名次。排名组合量化指标与专家判断，2026年版更新了部分指标。",
+      "revision_relation": "initial_verified_record_for_this_report_edition"
     }
   ],
   "events": [
@@ -1461,8 +1523,109 @@
       ],
       "model_impact": "none: verified regulatory text and stated commencement only",
       "source_notice_url": "https://news.hndaily.cn/html/2026-10/12/content_58468_19930810.htm"
+    },
+    {
+      "tier": "A",
+      "reviewed_by": "official-primary-source-check",
+      "reviewed_at": "2026-11-15T01:12:16Z",
+      "published_at_precision": "day",
+      "region": "新加坡",
+      "status": "verified",
+      "model_impact": "none: reference evidence only; independent synthetic engine",
+      "id": "sg-asean-defa-signing-2026-11-14",
+      "label": "东盟成员国签署《东盟数字经济框架协定》",
+      "stage": "signed",
+      "published_at": "2026-11-14",
+      "observed_at": "2026-11-14",
+      "effective_at": null,
+      "scheduled_effective_at": "2027-05-13",
+      "scheduled_effective_at_basis": "新加坡能源、贸易与工业部新闻稿附件A第5段载明签署后180天生效，以2026-11-14为起日推算；东盟秘书长同日说明预计于2027年5月生效，并提及批准程序。",
+      "period": "2026-11-14签署；按官方公布的签署后180天规则推算2027-05-13",
+      "observation_period": {
+        "as_of": "2026-11-14",
+        "kind": "agreement_signing"
+      },
+      "original_unit": "项（区域数字经济协定）",
+      "source_url": "https://www.meti.gov.sg/newsroom/asean-signs-landmark-asean-digital-economy-framework-agreement-14nov26/",
+      "official_release_pdf_url": "https://isomer-user-content.by.gov.sg/1004/1cbdec3b-bfd2-4b97-9e7a-c52ca527947b/METI%20Press%20Release%20on%20the%2028th%20ASEAN%20Economic%20Community%20Council%20Meeting_14%20November%202026.pdf",
+      "asean_signing_release_url": "https://asean.org/secretary-general-of-asean-attends-the-signing-ceremony-of-the-asean-digital-economic-framework-agreement-defa/",
+      "asean_secretary_general_remarks_url": "https://asean.org/wp-content/uploads/2026/11/SG-Dr-Kao-Remarks-for-ASEAN-Business-and-Investment-Summit-ABIS-2026-14-November-2026_As-Delivered.pdf",
+      "source_locator": "新加坡能源、贸易与工业部新闻稿第1–2段与附件A第2、3、5段；东盟秘书长同日演讲第9、15段。",
+      "definition": "东盟成员国在菲律宾马尼拉举行的第28届东盟经济共同体理事会会议期间签署区域数字经济协定。",
+      "description": "协定涵盖数字贸易、跨境电子商务、数据、数字身份和电子支付等议题。协定文本预计于2027年初公开，批准和实施进度需继续核验。",
+      "source_notes": "签署日期和生效规则分别采录。推算日期待正式条文及生效公告确认。",
+      "revision_relation": "initial_verified_record_of_agreement_signing",
+      "follow_up_evidence_needed": [
+        "正式协定文本与批准进度",
+        "生效公告及适用范围",
+        "实施安排与实际交易数据"
+      ]
+    },
+    {
+      "tier": "A",
+      "reviewed_by": "official-primary-source-check",
+      "reviewed_at": "2026-11-15T01:12:16Z",
+      "published_at_precision": "day",
+      "region": "新加坡",
+      "status": "observed",
+      "model_impact": "none: reference evidence only; independent synthetic engine",
+      "id": "sg-rwanda-first-article6-project-authorisation-2026-11-14",
+      "label": "新加坡对卢旺达安全供水项目发出首份碳信用项目授权函",
+      "stage": "singapore_letter_of_authorisation_issued",
+      "published_at": "2026-11-14",
+      "observed_at": null,
+      "effective_at": null,
+      "period": "截至2026-11-14公告，新加坡方面已发出授权函",
+      "observation_period": {
+        "as_of": "2026-11-14",
+        "kind": "authorisation_confirmed_in_official_announcement"
+      },
+      "original_unit": "份（碳信用项目授权函）",
+      "source_url": "https://www.nea.gov.sg/media/news/news/index/singapore-issues-first-carbon-credit-project-authorisation",
+      "source_locator": "新加坡国家环境局11月14日公告正文第1、3、6段及附件A。",
+      "definition": "在新加坡与卢旺达实施协定框架下，新加坡对卢旺达安全供水项目发出的首份《巴黎协定》第六条碳信用项目授权函。",
+      "description": "获新加坡方面授权的项目由Climate Bridge International Pte. Ltd.开发。这是新加坡已启动执行的六份双边实施协定中首项同类项目授权，属于项目流程的B阶段。",
+      "source_notes": "B阶段指授权流程阶段。本条A等级记录核验新加坡方的授权公告；后续信用签发、转让和实测减排需各自核验。",
+      "revision_relation": "initial_verified_record_of_singapore_first_article6_project_authorisation",
+      "follow_up_evidence_needed": [
+        "授权函全文及实际日期",
+        "卢旺达方面授权文件",
+        "信用签发、转让和经核证减排记录"
+      ]
+    },
+    {
+      "tier": "A",
+      "reviewed_by": "official-primary-source-check",
+      "reviewed_at": "2026-11-15T01:12:16Z",
+      "published_at_precision": "day",
+      "region": "新加坡",
+      "status": "verified",
+      "model_impact": "none: reference evidence only; independent synthetic engine",
+      "id": "sg-bangladesh-article6-carbon-mou-2026-11-14",
+      "label": "新加坡与孟加拉国签署《巴黎协定》第六条碳信用合作备忘录",
+      "stage": "signed_mou",
+      "published_at": "2026-11-14",
+      "observed_at": "2026-11-14",
+      "effective_at": null,
+      "period": "2026-11-14签署",
+      "observation_period": {
+        "as_of": "2026-11-14",
+        "kind": "memorandum_of_understanding_signing"
+      },
+      "original_unit": "份（合作备忘录）",
+      "source_url": "https://www.meti.gov.sg/newsroom/singapore-and-bangladesh-sign-memorandum-of-understanding-on-carbon-credits-collaboration-/",
+      "official_release_pdf_url": "https://isomer-user-content.by.gov.sg/1004/02f101c9-efbb-4098-8500-f045d21cee24/Press%20Release%20-%20Sg-Bangladesh%20carbon%20credits%20MOU%20v2.pdf",
+      "source_locator": "新加坡能源、贸易与工业部11月14日新闻稿第1–2段及附件A。",
+      "definition": "新加坡与孟加拉国在COP31期间签署的碳信用合作备忘录，旨在推进《巴黎协定》第6.2条实施协定。",
+      "description": "双方拟制定有法律约束力的实施协定，交流碳市场实践，并共同识别符合第六条的潜在项目。",
+      "source_notes": "本条采录备忘录签署。实施协定、生效、授权和实际信用转让分别待核验。",
+      "revision_relation": "initial_verified_record_of_memorandum_signing",
+      "follow_up_evidence_needed": [
+        "正式实施协定及生效条款",
+        "项目授权及信用转让数据"
+      ]
     }
   ],
   "failures": [],
-  "previous_version": "20261113-official-evidence"
+  "previous_version": "20261114-official-evidence"
 }

@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>五条路 · 惠东产业风洞</title>
+<link rel="stylesheet" href="../v2/assets/app.css">
+<style>
+.pcard{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px 18px;margin-bottom:12px;display:flex;gap:14px}
+.pcard .bar{width:5px;border-radius:3px;flex:none}
+.pcard h3{margin:0 0 4px;font-size:15px;color:#fff}
+.pcard .d{font-size:12px;color:var(--muted);line-height:1.75}
+.pcard .est{margin-top:9px;font-size:12.5px;color:var(--gold);font-weight:700}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <span class="brand">惠东产业风洞</span>
+  <a href="../portal.html">统一入口</a>
+  <a href="../index.html">公众叙事</a>
+  <a class="on" href="choices.html">五条路</a>
+  <a href="future.html">未来</a>
+  <a href="windtunnel.html">风洞</a>
+  <a href="../v2/models.html">研究版模型</a>
+</nav>
+
+<div class="wrap">
+
+  <div id="demoBanner" class="demo-banner" style="display:none"><span>●</span><span id="demoText"></span></div>
+
+  <div class="hero">
+    <div class="kick">FIVE PATHS · 证据而非假设</div>
+    <h1>惠东的<span class="accent">五条路</span>，各有区间</h1>
+    <p class="sub">每条路的贡献不再是写死的单点，而是已审核估计值与 95% 区间。<br>微观系数不直接折算 GDP；五条路看组合，不看简单相加。</p>
+  </div>
+
+  <div class="card" style="margin-bottom:14px">
+    <h2>五条路 · 估计区间</h2>
+    <div class="cap">横条为 95% 区间，金点为估计中位（单位：亿元增量贡献）</div>
+    <div id="ivChart" class="chart tall"></div>
+  </div>
+
+  <div id="cards"></div>
+
+  <div class="plain">
+    <span class="lab">同一数据 · 经济总量这把尺子</span>
+    比谁撑起的盘子大，清洁能源等大项目撑起骨架；就业与生态两把尺子的系数正在重新估计，前台不臆造。
+    五条路不是补短板，是把同一片海的文章做足——数字均带血统，非官方承诺。
+  </div>
+
+</div>
+
+<script src="../v2/lib/echarts.min.js"></script>
+<script src="../data-bridge.js"></script>
+<script>
+var DESC = {
+  '清洁能源': '太平岭核电、海上风电、LNG 一体化，稔平半岛南岸塔吊林立，建成后是稳定的绿色产值。',
+  '新材料': '新材料产业园与大科学装置协同，大岭一带园区更满、高技能岗位增多。',
+  '滨海旅游': '双月湾、巽寮湾从旺季爆满走向全季全时，民宿平日也有客。',
+  '女鞋时尚': '吉隆、黄埠从代工走量走向时尚品牌与电商，年轻人愿意留下来。',
+  '特色农渔': '赤岸蚝、冬种马铃薯、海洋牧场卖出品牌价，养殖户增收。'
+};
+HTBridge.ready.then(function (HT) {
+  var D = HT.DATA, E = D.models.estimates;
+  if (D.meta.data_status !== 'real') {
+    demoBanner.style.display = 'flex';
+    demoText.innerHTML = '<b>示例数据</b>：当前为待核实占位（' + D.meta.version + '），真实包替换后本横幅移除。';
+  }
+  var names = E.map(function (e) { return e.path === '女鞋' ? '女鞋时尚' : e.path; });
+
+  var iv = echarts.init(document.getElementById('ivChart'));
+  iv.setOption({
+    animation: false,
+    grid: { left: 76, right: 28, top: 16, bottom: 28 },
+    xAxis: { type: 'value', splitLine: { lineStyle: { color: '#16202f' } }, axisLabel: { color: '#64748b' } },
+    yAxis: { type: 'category', inverse: true, data: names,
+      axisLine: { lineStyle: { color: '#2a3a52' } }, axisLabel: { color: '#cdd9ea', fontSize: 12 } },
+    series: [
+      { type: 'bar', stack: 'r', barWidth: 13, silent: true, itemStyle: { color: 'transparent' },
+        data: E.map(function (e) { return e.lo; }) },
+      { type: 'bar', stack: 'r', barWidth: 13, itemStyle: { color: '#22d3ee', borderRadius: 4 },
+        data: E.map(function (e) { return +(e.hi - e.lo).toFixed(1); }) },
+      { type: 'scatter', symbolSize: 11, z: 5, itemStyle: { color: '#fbbf24' },
+        data: E.map(function (e) { return e.est; }) }
+    ]
+  });
+
+  var box = document.getElementById('cards');
+  E.forEach(function (e) {
+    var nm = e.path === '女鞋' ? '女鞋时尚' : e.path;
+    var color = { '清洁能源': '#0891b2', '新材料': '#8b5cf6', '滨海旅游': '#fbbf24', '女鞋时尚': '#ec4899', '特色农渔': '#34d399' }[nm];
+    var el = document.createElement('div'); el.className = 'pcard';
+    el.innerHTML = '<div class="bar" style="background:' + color + '"></div><div style="flex:1">'
+      + '<h3>' + nm + '</h3><div class="d">' + (DESC[nm] || '') + '</div>'
+      + '<div class="est">估计 ' + e.est + ' 亿 · 95% 区间 ' + e.lo + '–' + e.hi + '　<span class="tag C">血统 C</span></div>'
+      + '</div>';
+    box.appendChild(el);
+  });
+
+  window.addEventListener('resize', function () { iv.resize(); });
+});
+</script>
+</body>
+</html>

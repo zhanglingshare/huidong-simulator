@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>结语 · 惠东产业风洞</title>
+<link rel="stylesheet" href="../v2/assets/app.css">
+<style>
+.take{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px 18px;margin-bottom:12px}
+.take .id{font-size:11px;font-weight:800;color:var(--cyan);letter-spacing:1px}
+.take p{margin:7px 0 0;font-size:13px;color:#d6e0ec;line-height:1.85}
+.take .tp{float:right}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <span class="brand">惠东产业风洞</span>
+  <a href="../portal.html">统一入口</a>
+  <a href="../index.html">公众叙事</a>
+  <a href="report.html">报告</a>
+  <a class="on" href="ending.html">结语</a>
+  <a href="../v2/decision.html">研究版决策</a>
+</nav>
+
+<div class="wrap">
+
+  <div id="demoBanner" class="demo-banner" style="display:none"><span>●</span><span id="demoText"></span></div>
+
+  <div class="hero">
+    <div class="kick">THE LAST LEG · 最后一棒是人</div>
+    <h1>风洞给运动，<span class="accent">最后一棒交给人</span></h1>
+    <p class="sub">系统把条件、区间与观测指标摆清楚，<br>但承担价值取舍与拍板的，始终是人。</p>
+  </div>
+
+  <div class="section-title">可检验的落点</div>
+  <div id="takes"></div>
+
+  <div class="plain" style="margin-bottom:14px">
+    <span class="lab">接力哲学</span>
+    统计给骨架、问卷给血肉、风洞给运动，最后一棒是人。<br>
+    给不出概率权重时，输出情景边界与观测指标，而不是假装有把握的单点。
+  </div>
+
+  <div class="card" style="text-align:center">
+    <h2>回到入口，换个视角再走一遍</h2>
+    <div style="margin-top:12px">
+      <a href="../portal.html" style="display:inline-block;background:#0891b2;color:#fff;padding:10px 22px;border-radius:8px;text-decoration:none;font-weight:700;margin:5px">统一入口</a>
+      <a href="windtunnel.html" style="display:inline-block;background:#0c1320;border:1px solid #22304a;color:#cdd9ea;padding:10px 22px;border-radius:8px;text-decoration:none;font-weight:700;margin:5px">再进风洞</a>
+    </div>
+  </div>
+
+  <div class="foot" style="text-align:center;color:var(--faint);font-size:11.5px;margin-top:18px">
+    本页为研究前台，非预测、不替代官方决策；数据血统与口径见各页标签。
+  </div>
+
+</div>
+
+<script src="../data-bridge.js"></script>
+<script>
+HTBridge.ready.then(function (HT) {
+  var D = HT.DATA;
+  if (D.meta.data_status !== 'real') {
+    demoBanner.style.display = 'flex';
+    demoText.innerHTML = '<b>示例数据</b>：待核实占位（' + D.meta.version + '），真实包替换后本横幅移除。';
+  }
+  var box = document.getElementById('takes');
+  D.theory.hypotheses.forEach(function (h) {
+    var el = document.createElement('div'); el.className = 'take';
+    el.innerHTML = '<span class="tp tag ' + (h.type === '反常识' ? 'C' : 'B') + '">' + h.type + '</span>'
+      + '<span class="id">' + h.id + '</span><p>' + h.text + '</p>';
+    box.appendChild(el);
+  });
+});
+</script>
+</body>
+</html>

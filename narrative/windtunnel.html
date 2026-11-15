@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>风洞 · 惠东产业风洞</title>
+<link rel="stylesheet" href="../v2/assets/app.css">
+</head>
+<body>
+
+<nav class="nav">
+  <span class="brand">惠东产业风洞</span>
+  <a href="../portal.html">统一入口</a>
+  <a href="../index.html">公众叙事</a>
+  <a class="on" href="windtunnel.html">风洞</a>
+  <a href="../v2/scenarios.html">研究版情景</a>
+</nav>
+
+<div class="wrap">
+
+  <div id="demoBanner" class="demo-banner" style="display:none">
+    <span>●</span><span id="demoText"></span>
+  </div>
+
+  <div class="hero">
+    <div class="kick">WIND TUNNEL · 情景不是预测</div>
+    <h1>把未来放进风洞，<span class="accent">看它能扛多大</span></h1>
+    <p class="sub">滑块不替你拍板，只给条件、区间与观测指标。<br>选一个情景，看 2030 年盘子落在哪一段，而不是一个假装有把握的单点数字。</p>
+  </div>
+
+  <div class="card" style="margin-bottom:14px">
+    <h2>选择情景</h2>
+    <div class="cap">同一现实，不同条件；数字均来自已审核数据包，前台不做计算</div>
+    <div id="pills" style="display:flex;flex-wrap:wrap;gap:8px"></div>
+  </div>
+
+  <div class="grid grid-4" style="margin-bottom:14px">
+    <div class="kpi"><div class="lab">P10 下限</div><div class="val" id="k10">–</div><div class="delta">亿元</div></div>
+    <div class="kpi"><div class="lab">P50 中位</div><div class="val" id="k50">–</div><div class="delta">亿元</div></div>
+    <div class="kpi gold"><div class="lab">P90 上限</div><div class="val" id="k90">–</div><div class="delta">亿元</div></div>
+    <div class="kpi green"><div class="lab">达标率</div><div class="val" id="khit">–</div><div class="delta">≥1200 占比</div></div>
+  </div>
+
+  <div class="card" style="margin-bottom:14px">
+    <h2>四情景浮动区间</h2>
+    <div class="cap">竖线 P10–P90，金点 P50；虚线为参考目标 1200（非刚性）</div>
+    <div id="rangeChart" class="chart"></div>
+  </div>
+
+  <div class="section-title">台风「红霞」：脉冲，不是慢性噪声</div>
+  <div class="grid grid-4" style="margin-bottom:14px">
+    <div class="kpi pink"><div class="lab">净损失</div><div class="val" id="lossTotal">–</div><div class="delta">亿元</div></div>
+    <div class="kpi"><div class="lab">旅游停业</div><div class="val" id="lossTour">–</div><div class="delta">亿元</div></div>
+    <div class="kpi green"><div class="lab">渔业设施</div><div class="val" id="lossFish">–</div><div class="delta">亿元</div></div>
+    <div class="kpi"><div class="lab">能源</div><div class="val" id="lossEnergy">–</div><div class="delta">抗台·近乎无损</div></div>
+  </div>
+
+  <div class="card" style="margin-bottom:14px">
+    <h2>恢复曲线</h2>
+    <div class="cap">登陆后逐月恢复百分比，脉冲与日常波动分开计量</div>
+    <div id="recChart" class="chart"></div>
+  </div>
+
+  <div class="plain">
+    <span class="lab">同一阵风，两种分量</span>
+    对全县 GDP，这是约 <b id="pctGdp">–</b> 的小数字；对旺季民宿主和养殖户，却是一整年的指望。
+    保险与复产的意义，就在这个落差里——风洞给运动，最后一棒是人。
+  </div>
+
+</div>
+
+<script src="../v2/lib/echarts.min.js"></script>
+<script src="../data-bridge.js"></script>
+<script>
+HTBridge.ready.then(function (HT) {
+  var D = HT.DATA, list = D.scenarios.list, cur = 0;
+
+  if (D.meta.data_status !== 'real') {
+    document.getElementById('demoBanner').style.display = 'flex';
+    document.getElementById('demoText').innerHTML =
+      '<b>示例数据</b>：当前为待核实占位（' + D.meta.version + '），真实数据包替换后本横幅自动移除。';
+  }
+
+  /* 情景按钮 */
+  var pills = document.getElementById('pills');
+  list.forEach(function (s, i) {
+    var b = document.createElement('button');
+    b.textContent = s.name; b.dataset.i = i;
+    b.style.cssText = 'cursor:pointer;border:1px solid #22304a;background:#0c1320;color:#93a4bd;'
+      + 'padding:8px 18px;border-radius:18px;font:600 12.5px sans-serif';
+    b.onclick = function () { cur = i; update(); };
+    pills.appendChild(b);
+  });
+
+  function fmt(n) { return n.toLocaleString('zh-CN', { maximumFractionDigits: 0 }); }
+
+  function update() {
+    var s = list[cur];
+    k10.textContent = fmt(s.p10); k50.textContent = fmt(s.p50);
+    k90.textContent = fmt(s.p90); khit.textContent = s.hit + '%';
+    Array.prototype.forEach.call(pills.children, function (b, i) {
+      var on = i === cur;
+      b.style.background = on ? '#0891b2' : '#0c1320';
+      b.style.color = on ? '#fff' : '#93a4bd';
+      b.style.borderColor = on ? '#22d3ee' : '#22304a';
+    });
+  }
+
+  /* 浮动区间图 */
+  var rc = echarts.init(document.getElementById('rangeChart'));
+  rc.setOption({
+    animation: false,
+    grid: { left: 56, right: 24, top: 28, bottom: 32 },
+    xAxis: { type: 'category',
+      data: list.map(function (s) { return { '能源提速': '能源', '女鞋承压': '女鞋', '台风叠加': '台风' }[s.name] || s.name; }),
+      axisLine: { lineStyle: { color: '#2a3a52' } },
+      axisLabel: { color: '#93a4bd', interval: 0, fontSize: 11 } },
+    yAxis: { type: 'value', min: 1000, max: 1400,
+      splitLine: { lineStyle: { color: '#16202f' } }, axisLabel: { color: '#64748b' } },
+    series: [
+      { type: 'bar', stack: 'r', barWidth: 16, silent: true,
+        itemStyle: { color: 'transparent' }, data: list.map(function (s) { return s.p10; }) },
+      { type: 'bar', stack: 'r', barWidth: 16,
+        itemStyle: { color: '#22d3ee', borderRadius: 4 },
+        data: list.map(function (s) { return s.p90 - s.p10; }) },
+      { type: 'scatter', symbolSize: 12, z: 5, itemStyle: { color: '#fbbf24', borderColor: '#fff8e0', borderWidth: 1 },
+        data: list.map(function (s) { return s.p50; }),
+        markLine: { symbol: 'none', lineStyle: { color: '#f87171', type: 'dashed' },
+          data: [{ yAxis: D.scenarios.target }], label: { color: '#f87171', formatter: '目标 {c}' } } }
+    ]
+  });
+
+  /* 台风损失 */
+  var L = D.typhoon.loss;
+  lossTotal.textContent = L.total; lossTour.textContent = L.tourism;
+  lossFish.textContent = L.fishery; lossEnergy.textContent = L.energy;
+  pctGdp.textContent = (L.total / HT.BASE * 100).toFixed(1) + '%';
+
+  /* 恢复曲线 */
+  var ec2 = echarts.init(document.getElementById('recChart'));
+  ec2.setOption({
+    animation: false,
+    grid: { left: 48, right: 24, top: 28, bottom: 32 },
+    tooltip: { trigger: 'axis' },
+    xAxis: { type: 'category', name: '月', data: D.typhoon.recovery.months,
+      axisLine: { lineStyle: { color: '#2a3a52' } }, axisLabel: { color: '#93a4bd' } },
+    yAxis: { type: 'value', max: 100, name: '恢复%',
+      splitLine: { lineStyle: { color: '#16202f' } }, axisLabel: { color: '#64748b' } },
+    series: [{
+      type: 'line', smooth: true, data: D.typhoon.recovery.recover,
+      symbolSize: 7, lineStyle: { color: '#34d399', width: 3 },
+      itemStyle: { color: '#34d399' },
+      areaStyle: { color: 'rgba(52,211,153,.12)' }
+    }]
+  });
+
+  update();
+  window.addEventListener('resize', function () { rc.resize(); ec2.resize(); });
+});
+</script>
+</body>
+</html>

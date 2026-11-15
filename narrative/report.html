@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>报告 · 惠东产业风洞</title>
+<link rel="stylesheet" href="../v2/assets/app.css">
+<style>
+.ruler{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px 18px}
+.ruler .r{font-size:11px;letter-spacing:2px;color:var(--cyan)}
+.ruler .f{font-size:19px;font-weight:800;color:#fff;margin:6px 0 3px}
+.ruler .n{font-size:12px;color:var(--muted)}
+.watch{display:flex;justify-content:space-between;gap:12px;padding:11px 2px;border-bottom:1px solid #141d2c;font-size:12.5px}
+.watch:last-child{border-bottom:0}
+.watch .w{color:var(--muted)}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <span class="brand">惠东产业风洞</span>
+  <a href="../portal.html">统一入口</a>
+  <a href="../index.html">公众叙事</a>
+  <a href="future.html">未来</a>
+  <a class="on" href="report.html">报告</a>
+  <a href="ending.html">结语</a>
+  <a href="../v2/decision.html">研究版决策</a>
+</nav>
+
+<div class="wrap">
+
+  <div id="demoBanner" class="demo-banner" style="display:none"><span>●</span><span id="demoText"></span></div>
+
+  <div class="hero">
+    <div class="kick">DECISION REPORT · 三把尺子</div>
+    <h1>换把尺子，<span class="accent">问法不同、头名不同</span></h1>
+    <p class="sub">尺子没有对错，只是先护住什么。<br>以下结论全部来自已审核数据包，前台不做因果断言。</p>
+  </div>
+
+  <div class="section-title">三把尺子，各有第一</div>
+  <div class="grid grid-3" style="margin-bottom:14px" id="rulers"></div>
+
+  <div class="card" style="margin-bottom:14px">
+    <h2>需要持续盯的观测指标</h2>
+    <div class="cap">不预测单点，只给该盯什么、怎么算变化</div>
+    <div id="watch"></div>
+  </div>
+
+  <div class="card" style="margin-bottom:14px">
+    <h2>四情景一览</h2>
+    <div class="cap">P10–P90 区间与达标率，单位亿元</div>
+    <div class="grid grid-4" id="scen"></div>
+  </div>
+
+  <div class="plain">
+    <span class="lab">边界</span>
+    路径系数为模型内部关联，不代表现实因果，也不折算 GDP；本报告非预测、不构成投资建议，亦不替代官方决策。
+  </div>
+
+</div>
+
+<script src="../data-bridge.js"></script>
+<script>
+HTBridge.ready.then(function (HT) {
+  var D = HT.DATA;
+  if (D.meta.data_status !== 'real') {
+    demoBanner.style.display = 'flex';
+    demoText.innerHTML = '<b>示例数据</b>：待核实占位（' + D.meta.version + '），真实包替换后本横幅移除。';
+  }
+
+  var rb = document.getElementById('rulers');
+  D.decision.rulers.forEach(function (x) {
+    var el = document.createElement('div'); el.className = 'ruler';
+    el.innerHTML = '<div class="r">' + x.ruler + '</div><div class="f">' + x.first + '</div><div class="n">' + x.note + '</div>';
+    rb.appendChild(el);
+  });
+
+  var wb = document.getElementById('watch');
+  D.decision.indicators.forEach(function (x) {
+    var el = document.createElement('div'); el.className = 'watch';
+    el.innerHTML = '<span>' + x.name + '</span><span class="w">盯：' + x.watch + '</span>';
+    wb.appendChild(el);
+  });
+
+  var sb = document.getElementById('scen');
+  D.scenarios.list.forEach(function (s) {
+    var el = document.createElement('div'); el.className = 'kpi';
+    el.innerHTML = '<div class="lab">' + s.name + '</div><div class="val" style="font-size:22px">' + s.p50 + '</div>'
+      + '<div class="delta">' + s.p10 + '–' + s.p90 + ' · 达标 ' + s.hit + '%</div>';
+    sb.appendChild(el);
+  });
+});
+</script>
+</body>
+</html>

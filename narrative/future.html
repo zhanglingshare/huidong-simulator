@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>未来 · 惠东产业风洞</title>
+<link rel="stylesheet" href="../v2/assets/app.css">
+</head>
+<body>
+
+<nav class="nav">
+  <span class="brand">惠东产业风洞</span>
+  <a href="../portal.html">统一入口</a>
+  <a href="../index.html">公众叙事</a>
+  <a href="choices.html">五条路</a>
+  <a class="on" href="future.html">未来</a>
+  <a href="windtunnel.html">风洞</a>
+  <a href="../v2/scenarios.html">研究版情景</a>
+</nav>
+
+<div class="wrap">
+
+  <div id="demoBanner" class="demo-banner" style="display:none"><span>●</span><span id="demoText"></span></div>
+
+  <div class="hero">
+    <div class="kick">2030 · 未来是一段区间</div>
+    <h1>2030 长什么样，<span class="accent">看分布不看点</span></h1>
+    <p class="sub">所有分布与区间均由数据包算好，前台不模拟、不假装单点。<br>看钟形、看摆动、看目标线两侧各占多少。</p>
+  </div>
+
+  <div class="card" style="margin-bottom:14px">
+    <h2>四情景浮动区间</h2>
+    <div class="cap">青带 P10–P90，金点 P50，红虚线目标 1200</div>
+    <div id="rangeChart" class="chart"></div>
+  </div>
+
+  <div class="card" style="margin-bottom:14px">
+    <h2>结果分布</h2>
+    <div class="cap">横轴产值、纵轴频次；目标线右侧即过线</div>
+    <div id="histChart" class="chart"></div>
+  </div>
+
+  <div class="card" style="margin-bottom:14px">
+    <h2>五条路的摆动</h2>
+    <div class="cap">双向条越长，该路结果越说不准（参数情景，非实测）</div>
+    <div id="tornChart" class="chart"></div>
+  </div>
+
+  <div class="plain">
+    <span class="lab">区间不是概率承诺</span>
+    中位数约 1212、达标率约 56.8%，意思是「在当前已审核条件下，过线的情形刚过半」，不是惠东有多少把握成功。
+    真实数据替换后，区间会随证据收窄，横幅随之移除。
+  </div>
+
+</div>
+
+<script src="../v2/lib/echarts.min.js"></script>
+<script src="../data-bridge.js"></script>
+<script>
+HTBridge.ready.then(function (HT) {
+  var D = HT.DATA, S = D.scenarios, list = S.list;
+  if (D.meta.data_status !== 'real') {
+    demoBanner.style.display = 'flex';
+    demoText.innerHTML = '<b>示例数据</b>：待核实占位（' + D.meta.version + '），真实包替换后本横幅移除。';
+  }
+
+  echarts.init(document.getElementById('rangeChart')).setOption({
+    animation: false,
+    grid: { left: 56, right: 24, top: 28, bottom: 32 },
+    xAxis: { type: 'category', data: list.map(function (s) {
+      return { '能源提速': '能源', '女鞋承压': '女鞋', '台风叠加': '台风' }[s.name] || s.name; }),
+      axisLine: { lineStyle: { color: '#2a3a52' } }, axisLabel: { color: '#93a4bd', interval: 0 } },
+    yAxis: { type: 'value', min: 1000, max: 1400, splitLine: { lineStyle: { color: '#16202f' } },
+      axisLabel: { color: '#64748b' } },
+    series: [
+      { type: 'bar', stack: 'r', barWidth: 16, silent: true, itemStyle: { color: 'transparent' },
+        data: list.map(function (s) { return s.p10; }) },
+      { type: 'bar', stack: 'r', barWidth: 16, itemStyle: { color: '#22d3ee', borderRadius: 4 },
+        data: list.map(function (s) { return s.p90 - s.p10; }) },
+      { type: 'scatter', symbolSize: 11, z: 5, itemStyle: { color: '#fbbf24' },
+        data: list.map(function (s) { return s.p50; }),
+        markLine: { symbol: 'none', lineStyle: { color: '#f87171', type: 'dashed' },
+          data: [{ yAxis: S.target }], label: { color: '#f87171', formatter: '目标 {c}' } } }
+    ]
+  });
+
+  echarts.init(document.getElementById('histChart')).setOption({
+    animation: false,
+    grid: { left: 52, right: 24, top: 28, bottom: 36 },
+    tooltip: { trigger: 'axis' },
+    xAxis: { type: 'category', name: '亿元', data: S.histogram.bins,
+      axisLine: { lineStyle: { color: '#2a3a52' } },
+      axisLabel: { color: '#64748b', interval: 2, fontSize: 10 } },
+    yAxis: { type: 'value', splitLine: { lineStyle: { color: '#16202f' } }, axisLabel: { color: '#64748b' } },
+    series: [{ type: 'bar', barCategoryGap: '12%',
+      data: S.histogram.freq.map(function (v, i) {
+        return { value: v, itemStyle: { color: S.histogram.bins[i] >= S.target ? '#22d3ee' : '#3b82f6', opacity: .85 } };
+      }) }]
+  });
+
+  var t = S.tornado;
+  echarts.init(document.getElementById('tornChart')).setOption({
+    animation: false,
+    grid: { left: 128, right: 40, top: 20, bottom: 30 },
+    xAxis: { type: 'value', splitLine: { lineStyle: { color: '#16202f' } }, axisLabel: { color: '#64748b' } },
+    yAxis: { type: 'category', inverse: true, data: t.map(function (x) { return x.var; }),
+      axisLine: { lineStyle: { color: '#2a3a52' } }, axisLabel: { color: '#cdd9ea', fontSize: 11 } },
+    series: [
+      { type: 'bar', barWidth: 11, itemStyle: { color: '#f87171', opacity: .75 }, data: t.map(function (x) { return x.lo; }) },
+      { type: 'bar', barWidth: 11, itemStyle: { color: '#3b82f6', opacity: .75 }, data: t.map(function (x) { return x.hi; }) }
+    ]
+  });
+
+  window.addEventListener('resize', function () {
+    ['rangeChart', 'histChart', 'tornChart'].forEach(function (id) {
+      var inst = echarts.getInstanceByDom(document.getElementById(id)); if (inst) inst.resize();
+    });
+  });
+});
+</script>
+</body>
+</html>

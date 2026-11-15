@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>惠东产业风洞 · 情景推演</title>
+<link rel="stylesheet" href="assets/app.css">
+<script src="lib/echarts.min.js"></script>
+</head>
+<body>
+
+<div class="nav">
+  <span class="brand">惠东产业风洞</span>
+  <a href="index.html">总览</a>
+  <a href="history.html">历史诊断</a>
+  <a href="theory.html">理论框架</a>
+  <a href="network.html">网络结构</a>
+  <a href="models.html">多模型估计</a>
+  <a href="scenarios.html" class="on">情景推演</a>
+  <a href="decision.html">决策解释</a>
+</div>
+
+<div class="wrap">
+
+  <div class="demo-banner"><span>●</span>
+    <span><b>示例推演</b>：情景边界、龙卷风与分布为示例，待火山引擎真实模型输出后替换并移除本横幅；给不出概率权重时只给边界。</span></div>
+
+  <div class="hero">
+    <div class="kick">SCENARIO PROJECTION</div>
+    <h1>讲条件与机制，<span class="accent">不做单点预测</span></h1>
+    <p class="sub">每个情景给出 P10–P90 边界与过线率，而非一个确定数字。<br>脉冲冲击（台风）与慢性噪声分开。</p>
+  </div>
+
+  <div class="grid grid-4" id="kpis"></div>
+
+  <div class="card" style="margin-top:14px">
+    <h2>情景区间（P10–P90）与参考目标</h2>
+    <div class="cap">浮条：区间 ｜ 点：P50 ｜ 虚线：参考目标 1200 亿（非刚性指标）</div>
+    <div id="cRange" class="chart tall"></div>
+  </div>
+
+  <div class="section-title">敏感性与分布</div>
+  <div class="grid grid-2">
+    <div class="card"><h2>龙卷风敏感性</h2><div id="cTorn" class="chart"></div></div>
+    <div class="card"><h2>基准情景分布</h2><div id="cHist" class="chart"></div></div>
+  </div>
+
+  <div class="section-title">台风脉冲与恢复</div>
+  <div class="grid grid-2">
+    <div class="card"><h2>当年损失结构（亿元）</h2><div id="cLoss" class="chart"></div></div>
+    <div class="card"><h2>恢复曲线（%）</h2><div id="cRec" class="chart"></div></div>
+  </div>
+
+</div>
+
+<script src="data/payload.js"></script>
+<script>
+const AXIS={axisLabel:{color:'#93a4bd',fontSize:11},axisLine:{lineStyle:{color:'#22304a'}},splitLine:{lineStyle:{color:'#16202f'}}};
+function load(){fetch('data/payload.json').then(r=>r.json()).then(render).catch(()=>render(window.__EMBEDDED_PAYLOAD__));}
+function render(d){
+  const S=d.scenarios, T=d.typhoon;
+
+  document.getElementById('kpis').innerHTML = S.list.map(s=>
+    `<div class="kpi ${s.hit>=50?'':'gold'}"><div class="lab">${s.name}</div>
+     <div class="val" style="font-size:22px">${s.hit}<span class="unit">%</span></div>
+     <div class="delta">P50 ${s.p50}</div></div>`).join('');
+
+  // range floating bars
+  echarts.init(document.getElementById('cRange')).setOption({
+    animation:false,backgroundColor:'transparent',
+    tooltip:{trigger:'axis',backgroundColor:'#0e1523',borderColor:'#22304a',textStyle:{color:'#e6edf3'}},
+    grid:{left:50,right:26,top:34,bottom:30},
+    xAxis:{type:'category',data:S.list.map(s=>s.name),...AXIS,axisTick:{show:false}},
+    yAxis:{type:'value',...AXIS},
+    series:[
+      {type:'bar',stack:'r',barWidth:'34%',itemStyle:{color:'transparent'},data:S.list.map(s=>s.p10)},
+      {type:'bar',stack:'r',barWidth:'34%',
+        data:S.list.map(s=>({value:s.p90-s.p10,itemStyle:{color:'#0e7490',borderRadius:4}}))},
+      {type:'scatter',symbolSize:13,data:S.list.map(s=>s.p50),itemStyle:{color:'#fbbf24'},z:5},
+      {type:'line',markLine:{symbol:'none',lineStyle:{color:'#f87171',type:'dashed'},
+        data:[{yAxis:S.target,label:{formatter:'目标 '+S.target,color:'#f87171'}}]}}
+    ]
+  });
+
+  // tornado
+  const rows=[...S.tornado].reverse();
+  echarts.init(document.getElementById('cTorn')).setOption({
+    animation:false,backgroundColor:'transparent',
+    grid:{left:96,right:24,top:16,bottom:28},
+    xAxis:{type:'value',...AXIS},
+    yAxis:{type:'category',data:rows.map(r=>r.var),...AXIS,axisLabel:{color:'#93a4bd',fontSize:10}},
+    series:[
+      {type:'bar',stack:'t',data:rows.map(r=>r.lo),itemStyle:{color:'#0891b2',borderRadius:[4,0,0,4]}},
+      {type:'bar',stack:'t',data:rows.map(r=>r.hi),itemStyle:{color:'#fbbf24',borderRadius:[0,4,4,0]}}
+    ]
+  });
+
+  // histogram
+  echarts.init(document.getElementById('cHist')).setOption({
+    animation:false,backgroundColor:'transparent',
+    grid:{left:46,right:20,top:20,bottom:40},
+    xAxis:{type:'category',data:S.histogram.bins,...AXIS,axisLabel:{color:'#93a4bd',fontSize:9,rotate:30},axisTick:{show:false}},
+    yAxis:{type:'value',...AXIS},
+    series:[{type:'bar',data:S.histogram.freq,barWidth:'92%',
+      itemStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'#0e7490'},{offset:1,color:'#0891b2'}]),borderRadius:[3,3,0,0]}}]
+  });
+
+  // loss
+  echarts.init(document.getElementById('cLoss')).setOption({
+    animation:false,backgroundColor:'transparent',
+    grid:{left:80,right:30,top:16,bottom:28},
+    xAxis:{type:'value',...AXIS},
+    yAxis:{type:'category',data:['旅游停业','渔业牧场','能源设施'],...AXIS},
+    series:[{type:'bar',barWidth:'55%',
+      data:[{value:T.loss.tourism,itemStyle:{color:'#fbbf24'}},{value:T.loss.fishery,itemStyle:{color:'#f87171'}},{value:T.loss.energy,itemStyle:{color:'#0891b2'}}],
+      label:{show:true,position:'right',color:'#cbd5e1',fontSize:11},itemStyle:{borderRadius:[0,4,4,0]}}]
+  });
+
+  // recovery
+  echarts.init(document.getElementById('cRec')).setOption({
+    animation:false,backgroundColor:'transparent',
+    grid:{left:46,right:24,top:24,bottom:34},
+    tooltip:{trigger:'axis',backgroundColor:'#0e1523',borderColor:'#22304a',textStyle:{color:'#e6edf3'}},
+    xAxis:{type:'category',data:T.recovery.months,...AXIS,axisTick:{show:false},name:'月',nameTextStyle:{color:'#64748b'}},
+    yAxis:{type:'value',max:100,...AXIS,axisLabel:{color:'#93a4bd',fontSize:11,formatter:'{value}%'}},
+    series:[{type:'line',data:T.recovery.recover,smooth:true,lineStyle:{color:'#34d399',width:2.5},itemStyle:{color:'#34d399'},
+      areaStyle:{color:'rgba(52,211,153,.12)'}}]
+  });
+
+  window.addEventListener('resize',()=>document.querySelectorAll('.chart').forEach(el=>{const i=echarts.getInstanceByDom(el);if(i)i.resize();}));
+}
+load();
+</script>
+</body>
+</html>

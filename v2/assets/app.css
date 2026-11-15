@@ -1,0 +1,81 @@
+/* 惠东产业风洞 v2 · 共享设计系统 */
+:root{
+  --bg:#070a11; --bg2:#0a0f18; --surface:#0e1523; --surface2:#0c1320;
+  --border:#1c2739; --border2:#22304a;
+  --text:#e6edf3; --muted:#93a4bd; --faint:#64748b;
+  --cyan:#22d3ee; --cyan2:#0891b2; --gold:#fbbf24;
+  --green:#34d399; --blue:#3b82f6; --violet:#8b5cf6; --pink:#ec4899; --red:#f87171;
+  --radius:14px; --shadow:0 10px 30px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg); color:var(--text);
+  font:14px/1.65 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit}
+
+/* 顶部导航 */
+.nav{position:sticky;top:0;z-index:50;display:flex;gap:6px;align-items:center;
+  padding:10px 16px;background:rgba(7,10,17,.92);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);overflow-x:auto}
+.nav .brand{font-weight:800;color:#fff;margin-right:8px;white-space:nowrap;font-size:14px}
+.nav a{background:var(--surface);color:var(--muted);border:1px solid var(--border2);
+  padding:6px 13px;border-radius:20px;font-size:12.5px;text-decoration:none;white-space:nowrap}
+.nav a.on{background:var(--cyan2);border-color:var(--cyan2);color:#fff;font-weight:600}
+.nav .sp{margin-left:auto;font-size:11px;color:var(--faint);white-space:nowrap}
+
+.wrap{max-width:1240px;margin:0 auto;padding:20px 18px 40px}
+
+/* 示例数据持久徽标 */
+.demo-banner{display:flex;align-items:center;gap:10px;background:#1a1407;
+  border:1px solid #4a3a12;border-left:3px solid var(--gold);border-radius:10px;
+  padding:11px 15px;margin-bottom:16px;font-size:12.5px;color:#fcd34d}
+.demo-banner b{color:var(--gold)}
+
+/* Hero */
+.hero{position:relative;text-align:center;padding:46px 24px 40px;margin-bottom:18px;
+  border:1px solid var(--border);border-radius:18px;overflow:hidden;
+  background:radial-gradient(ellipse at 50% 130%,#0e3a4a 0%,#082630 42%,#0a0f1a 78%)}
+.hero .kick{font-size:11px;letter-spacing:4px;color:var(--cyan);margin-bottom:12px}
+.hero h1{font-size:27px;line-height:1.4;margin:0;color:#fff}
+.hero h1 .accent{color:var(--gold)}
+.hero .sub{font-size:13px;color:var(--muted);max-width:680px;margin:14px auto 0;line-height:1.85}
+
+/* 卡片 & 网格 */
+.grid{display:grid;gap:14px}
+.grid-4{grid-template-columns:repeat(4,1fr)}
+.grid-3{grid-template-columns:repeat(3,1fr)}
+.grid-2{grid-template-columns:repeat(2,1fr)}
+@media(max-width:900px){.grid-4{grid-template-columns:repeat(2,1fr)}.grid-3{grid-template-columns:1fr}}
+@media(max-width:640px){.grid-4,.grid-2{grid-template-columns:1fr}.wrap{padding:14px 12px 32px}}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:18px;box-shadow:var(--shadow)}
+.card h2{font-size:15px;margin:0 0 4px;color:#dbe4f0;display:flex;align-items:center;gap:8px}
+.card .cap{font-size:11.5px;color:var(--faint);margin-bottom:12px}
+.chart{width:100%;height:300px}
+.chart.tall{height:340px}
+
+/* KPI */
+.kpi{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:18px 16px;text-align:center}
+.kpi .lab{font-size:11.5px;color:var(--muted)}
+.kpi .val{font-size:27px;font-weight:800;color:var(--cyan);margin-top:6px;font-variant-numeric:tabular-nums}
+.kpi .unit{font-size:13px;color:var(--faint);font-weight:600;margin-left:2px}
+.kpi .delta{font-size:11px;margin-top:5px;color:var(--gold)}
+.kpi.gold .val{color:var(--gold)} .kpi.green .val{color:var(--green)}
+.kpi.pink .val{color:var(--pink)}
+
+/* 血统标签 */
+.tag{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:6px;vertical-align:middle}
+.tag.A{background:#14532d;color:#86efac}
+.tag.B{background:#1e3a5f;color:#93c5fd}
+.tag.C{background:#4a3a12;color:#fcd34d}
+
+/* 说明面板 */
+.plain{background:#082630;border:1px solid #134047;border-left:3px solid var(--cyan2);
+  border-radius:10px;padding:15px 17px;font-size:12.5px;line-height:1.9;color:#cff3f8}
+.plain .lab{display:block;font-size:10.5px;font-weight:800;color:var(--cyan);letter-spacing:1px;margin-bottom:6px}
+.section-title{font-size:16px;font-weight:700;color:#cbd5e1;margin:26px 4px 10px}
+.muted{color:var(--muted)}

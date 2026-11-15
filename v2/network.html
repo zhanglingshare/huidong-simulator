@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>惠东产业风洞 · 网络结构</title>
+<link rel="stylesheet" href="assets/app.css">
+<script src="lib/echarts.min.js"></script>
+</head>
+<body>
+
+<div class="nav">
+  <span class="brand">惠东产业风洞</span>
+  <a href="index.html">总览</a>
+  <a href="history.html">历史诊断</a>
+  <a href="theory.html">理论框架</a>
+  <a href="network.html" class="on">网络结构</a>
+  <a href="models.html">多模型估计</a>
+  <a href="scenarios.html">情景推演</a>
+  <a href="decision.html">决策解释</a>
+</div>
+
+<div class="wrap">
+
+  <div class="demo-banner"><span>●</span>
+    <span><b>示例网络</b>：观测边与构建边已区分，中心性为示例估计；待火山引擎用证据数据替换后移除本横幅。</span></div>
+
+  <div class="hero">
+    <div class="kick">NETWORK STRUCTURE</div>
+    <h1>主体网络，<span class="accent">怎么传导、怎么留值</span></h1>
+    <p class="sub">实线＝有证据的观测边，虚线＝构建边。<br>看谁在关键路径上，以及价值能否留在本地网络。</p>
+  </div>
+
+  <div class="card">
+    <h2>产业关系网络</h2>
+    <div class="cap">
+      <span style="color:#22d3ee">━━ 观测边</span> &nbsp;
+      <span style="color:#fbbf24">┅ 构建边</span> &nbsp; 节点颜色：产业/镇街/外部
+    </div>
+    <div id="graph" class="chart tall" style="height:520px"></div>
+  </div>
+
+  <div class="section-title">中心性与关键节点</div>
+  <div class="grid grid-2">
+    <div class="card"><h2>连接度 degree</h2><div id="cDeg" class="chart"></div></div>
+    <div class="card"><h2>必经度 betweenness</h2><div id="cBet" class="chart"></div></div>
+  </div>
+
+  <div class="section-title">网络演化</div>
+  <div class="card">
+    <h2>边数与密度（多年快照）</h2>
+    <div id="cEvo" class="chart"></div>
+  </div>
+
+  <div class="plain" style="margin-top:16px">
+    <span class="lab">价值留存</span>
+    中心性高的节点（滨海文旅、平海、港口）若与本地配套和服务网络相连，价值更易留存；
+    若仅对接外部主体，则存在产值过路。机制检验由后台在估计阶段完成。
+  </div>
+
+</div>
+
+<script src="data/payload.js"></script>
+<script>
+const AXIS={axisLabel:{color:'#93a4bd',fontSize:11},axisLine:{lineStyle:{color:'#22304a'}},splitLine:{lineStyle:{color:'#16202f'}}};
+const TYPE_COLOR={ind:'#0891b2',space:'#9aa6b8',ext:'#a78bfa'};
+function load(){fetch('data/payload.json').then(r=>r.json()).then(render).catch(()=>render(window.__EMBEDDED_PAYLOAD__));}
+function render(d){
+  const N=d.network;
+  const nodeMap={};N.nodes.forEach(n=>nodeMap[n.id]=n.name);
+
+  // graph
+  echarts.init(document.getElementById('graph')).setOption({
+    animation:false,backgroundColor:'transparent',
+    tooltip:{backgroundColor:'#0e1523',borderColor:'#22304a',textStyle:{color:'#e6edf3'}},
+    series:[{
+      type:'graph',layout:'force',roam:false,left:36,right:36,top:36,bottom:36,
+      force:{repulsion:320,edgeLength:[55,100],gravity:.22},
+      label:{show:true,color:'#e6edf3',fontSize:11},
+      edgeSymbol:['none','none'],
+      data:N.nodes.map(n=>({name:n.name,category:n.type,
+        symbolSize:n.type==='ind'?34:26,
+        itemStyle:{color:TYPE_COLOR[n.type],borderColor:TYPE_COLOR[n.type]}})),
+      links:N.edges.map(([a,b,t])=>({
+        source:nodeMap[a],target:nodeMap[b],
+        lineStyle:{color:t==='observed'?'#22d3ee':'#fbbf24',
+          width:t==='observed'?2:1.3,opacity:t==='observed'?.85:.55,
+          type:t==='observed'?'solid':'dashed'}
+      }))
+    }]
+  });
+
+  const rank=(key,color,el)=>{
+    const rows=[...N.centrality].sort((a,b)=>a[key]-b[key]);
+    echarts.init(document.getElementById(el)).setOption({
+      animation:false,backgroundColor:'transparent',
+      grid:{left:70,right:48,top:16,bottom:24},
+      xAxis:{type:'value',...AXIS},
+      yAxis:{type:'category',data:rows.map(r=>r.name),...AXIS},
+      series:[{type:'bar',data:rows.map(r=>r[key]),barWidth:'55%',
+        itemStyle:{color,borderRadius:[0,4,4,0]},label:{show:true,position:'right',color:'#cbd5e1',fontSize:11}}]
+    });
+  };
+  rank('degree','#0891b2','cDeg');
+  rank('between','#8b5cf6','cBet');
+
+  // evolution
+  echarts.init(document.getElementById('cEvo')).setOption({
+    animation:false,backgroundColor:'transparent',
+    grid:{left:48,right:48,top:46,bottom:30},
+    legend:{top:6,textStyle:{color:'#93a4bd',fontSize:11}},
+    tooltip:{trigger:'axis',backgroundColor:'#0e1523',borderColor:'#22304a',textStyle:{color:'#e6edf3'}},
+    xAxis:{type:'category',data:N.evolution.years,...AXIS,axisTick:{show:false}},
+    yAxis:[
+      {type:'value',name:'边数',nameTextStyle:{color:'#64748b'},...AXIS},
+      {type:'value',name:'密度%',nameTextStyle:{color:'#64748b'},...AXIS,splitLine:{show:false}}
+    ],
+    series:[
+      {name:'边数',type:'line',data:N.evolution.edges,smooth:true,lineStyle:{color:'#22d3ee',width:2.5},itemStyle:{color:'#22d3ee'}},
+      {name:'密度',type:'line',yAxisIndex:1,data:N.evolution.density,smooth:true,lineStyle:{color:'#fbbf24',width:2.5},itemStyle:{color:'#fbbf24'}}
+    ]
+  });
+
+  window.addEventListener('resize',()=>document.querySelectorAll('.chart').forEach(el=>{const i=echarts.getInstanceByDom(el);if(i)i.resize();}));
+}
+load();
+</script>
+</body>
+</html>

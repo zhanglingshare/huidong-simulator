@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>惠东产业风洞 · 历史结构诊断</title>
+<link rel="stylesheet" href="assets/app.css">
+<script src="lib/echarts.min.js"></script>
+</head>
+<body>
+
+<div class="nav">
+  <span class="brand">惠东产业风洞</span>
+  <a href="index.html">总览</a>
+  <a href="history.html" class="on">历史诊断</a>
+  <a href="theory.html">理论框架</a>
+  <a href="network.html">网络结构</a>
+  <a href="models.html">多模型估计</a>
+  <a href="scenarios.html">情景推演</a>
+  <a href="decision.html">决策解释</a>
+</div>
+
+<div class="wrap">
+
+  <div class="demo-banner">
+    <span>●</span>
+    <span><b>示例数据</b>：本页 2025 为真实公开锚点，2020–2024 为待火山引擎核实的占位序列（血统 C），仅用于搭建设计，待真实数据包替换后此横幅移除。</span>
+  </div>
+
+  <div class="hero">
+    <div class="kick">HISTORICAL STRUCTURE DIAGNOSIS</div>
+    <h1>惠东这些年，<span class="accent">是怎么长过来的</span></h1>
+    <p class="sub">先看真实历史，再谈未来推演。<br>总量、三产结构、关键产业与游客投资逐年展开——区分初步数与核实数，每个数字可追溯口径与来源。</p>
+  </div>
+
+  <div class="grid grid-4" id="kpis"></div>
+
+  <div class="section-title">总量与增速</div>
+  <div class="card">
+    <h2>GDP 总量与年度增速 <span class="tag A" id="tagAnchor"></span></h2>
+    <div class="cap">柱：GDP（亿元） ｜ 线：同比增速（%）</div>
+    <div id="cGdp" class="chart"></div>
+  </div>
+
+  <div class="section-title">三产结构</div>
+  <div class="grid grid-2">
+    <div class="card">
+      <h2>三次产业增加值</h2>
+      <div class="cap">堆叠柱（亿元）</div>
+      <div id="cPind" class="chart"></div>
+    </div>
+    <div class="card">
+      <h2>三产占比演化</h2>
+      <div class="cap">100% 堆叠（%）</div>
+      <div id="cPshare" class="chart"></div>
+    </div>
+  </div>
+
+  <div class="section-title">关键产业与需求</div>
+  <div class="grid grid-2">
+    <div class="card">
+      <h2>工业 vs 服务业</h2>
+      <div class="cap">第二、三产业增加值（亿元）</div>
+      <div id="cIndServ" class="chart"></div>
+    </div>
+    <div class="card">
+      <h2>关键产业产值</h2>
+      <div class="cap">能源 / 新材料 / 女鞋（亿元）</div>
+      <div id="cKeyInd" class="chart"></div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:14px">
+    <h2>游客与固定资产投资</h2>
+    <div class="cap">柱：接待游客（万人次） ｜ 线：固投（亿元）</div>
+    <div id="cTourInv" class="chart"></div>
+  </div>
+
+  <div class="plain" style="margin-top:18px">
+    <span class="lab">口径与血统</span>
+    血统 <span class="tag A">A 实测</span>来自统计公报/官方发布；<span class="tag C">C 示例</span>为待替换占位。
+    真实数据包到位后，初步数与核实数将分开标注并保留修订记录；路径系数只作机制假设，不直接折算为 GDP 相加。
+  </div>
+
+</div>
+
+<script src="data/payload.js"></script>
+<script>
+const AXIS = {
+  axisLabel:{color:'#93a4bd',fontSize:11},
+  axisLine:{lineStyle:{color:'#22304a'}},
+  splitLine:{lineStyle:{color:'#16202f'}}
+};
+const C = {p1:'#34d399', p2:'#0891b2', p3:'#fbbf24', energy:'#22d3ee', mat:'#8b5cf6', shoe:'#ec4899', tour:'#f59e0b', inv:'#64748b'};
+
+function load(){
+  fetch('data/payload.json').then(r=>r.json()).then(render).catch(()=>render(window.__EMBEDDED_PAYLOAD__));
+}
+function render(d){
+  const H = d.history, years = H.years;
+  const last = i => H[i].values[H[i].values.length-1];
+  document.getElementById('tagAnchor').textContent = '2025 锚点 · A';
+
+  // KPI
+  const p1=last('p1'),p2=last('p2'),p3=last('p3'),gdp=last('gdp');
+  const kpis=[
+    {lab:'2025 GDP',val:last('gdp'),unit:'亿',cls:''},
+    {lab:'同比增速',val:last('growth'),unit:'%',cls:'gold'},
+    {lab:'三产结构',val:((p1/gdp*100).toFixed(1)+'·'+(p2/gdp*100).toFixed(1)+'·'+(p3/gdp*100).toFixed(1)),unit:'',cls:'green'},
+    {lab:'接待游客',val:last('tourists'),unit:'万',cls:'pink'}
+  ];
+  document.getElementById('kpis').innerHTML = kpis.map(k=>
+    `<div class="kpi ${k.cls}"><div class="lab">${k.lab}</div><div class="val">${k.val}<span class="unit">${k.unit}</span></div></div>`).join('');
+
+  const baseGrid={left:52,right:24,top:40,bottom:34};
+  const catX={type:'category',data:years,...AXIS,axisTick:{show:false}};
+
+  // GDP + growth dual axis
+  echarts.init(document.getElementById('cGdp')).setOption({
+    backgroundColor:'transparent',animation:false,grid:{...baseGrid,right:48},
+    tooltip:{trigger:'axis',backgroundColor:'#0e1523',borderColor:'#22304a',textStyle:{color:'#e6edf3'}},
+    xAxis:catX,
+    yAxis:[
+      {type:'value',name:'亿元',nameTextStyle:{color:'#64748b'},...AXIS},
+      {type:'value',name:'%',nameTextStyle:{color:'#64748b'},...AXIS,splitLine:{show:false}}
+    ],
+    series:[
+      {name:'GDP',type:'bar',data:H.gdp.values,barWidth:'46%',
+        itemStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'#0e7490'},{offset:1,color:'#0891b2'}]),borderRadius:[5,5,0,0]}},
+      {name:'增速',type:'line',yAxisIndex:1,data:H.growth.values,smooth:true,symbolSize:7,
+        lineStyle:{color:'#fbbf24',width:2.5},itemStyle:{color:'#fbbf24'}}
+    ]
+  });
+
+  // three industries stacked
+  const pSeries=(keys,names,colors)=>keys.map((k,i)=>({
+    name:names[i],type:'bar',stack:'t',data:H[k].values,
+    itemStyle:{color:colors[i]},barWidth:'52%',emphasis:{focus:'series'}
+  }));
+  echarts.init(document.getElementById('cPind')).setOption({
+    backgroundColor:'transparent',animation:false,grid:baseGrid,
+    tooltip:{trigger:'axis',backgroundColor:'#0e1523',borderColor:'#22304a',textStyle:{color:'#e6edf3'}},
+    legend:{top:4,textStyle:{color:'#93a4bd',fontSize:11}},
+    xAxis:catX,
+    yAxis:{type:'value',...AXIS},
+    series:pSeries(['p1','p2','p3'],['一产','二产','三产'],[C.p1,C.p2,C.p3])
+  });
+
+  // shares 100%
+  const share = k => H[k].values.map((v,i)=>+(v/H.gdp.values[i]*100).toFixed(1));
+  echarts.init(document.getElementById('cPshare')).setOption({
+    backgroundColor:'transparent',animation:false,grid:baseGrid,
+    legend:{top:4,textStyle:{color:'#93a4bd',fontSize:11}},
+    xAxis:catX,
+    yAxis:{type:'value',max:100,...AXIS,axisLabel:{color:'#93a4bd',fontSize:11,formatter:'{value}%'}},
+    series:[
+      {name:'一产',type:'bar',stack:'s',data:share('p1'),itemStyle:{color:C.p1},barWidth:'52%'},
+      {name:'二产',type:'bar',stack:'s',data:share('p2'),itemStyle:{color:C.p2}},
+      {name:'三产',type:'bar',stack:'s',data:share('p3'),itemStyle:{color:C.p3}}
+    ]
+  });
+
+  // industry vs services lines
+  echarts.init(document.getElementById('cIndServ')).setOption({
+    backgroundColor:'transparent',animation:false,grid:baseGrid,
+    tooltip:{trigger:'axis',backgroundColor:'#0e1523',borderColor:'#22304a',textStyle:{color:'#e6edf3'}},
+    legend:{top:4,textStyle:{color:'#93a4bd',fontSize:11}},
+    xAxis:catX,
+    yAxis:{type:'value',...AXIS},
+    series:[
+      {name:'二产',type:'line',smooth:true,data:H.p2.values,lineStyle:{color:C.p2,width:2.5},itemStyle:{color:C.p2},areaStyle:{color:'rgba(8,145,178,.12)'}},
+      {name:'三产',type:'line',smooth:true,data:H.p3.values,lineStyle:{color:C.p3,width:2.5},itemStyle:{color:C.p3},areaStyle:{color:'rgba(251,191,36,.10)'}}
+    ]
+  });
+
+  // key industry lines
+  echarts.init(document.getElementById('cKeyInd')).setOption({
+    backgroundColor:'transparent',animation:false,grid:baseGrid,
+    tooltip:{trigger:'axis',backgroundColor:'#0e1523',borderColor:'#22304a',textStyle:{color:'#e6edf3'}},
+    legend:{top:4,textStyle:{color:'#93a4bd',fontSize:11}},
+    xAxis:catX,
+    yAxis:{type:'value',...AXIS},
+    series:[
+      {name:'能源',type:'line',smooth:true,data:H.energy.values,lineStyle:{color:C.energy,width:2.5},itemStyle:{color:C.energy}},
+      {name:'新材料',type:'line',smooth:true,data:H.new_material.values,lineStyle:{color:C.mat,width:2.5},itemStyle:{color:C.mat}},
+      {name:'女鞋',type:'line',smooth:true,data:H.shoes.values,lineStyle:{color:C.shoe,width:2.5},itemStyle:{color:C.shoe}}
+    ]
+  });
+
+  // tourists + investment
+  echarts.init(document.getElementById('cTourInv')).setOption({
+    backgroundColor:'transparent',animation:false,grid:{...baseGrid,right:48},
+    tooltip:{trigger:'axis',backgroundColor:'#0e1523',borderColor:'#22304a',textStyle:{color:'#e6edf3'}},
+    xAxis:catX,
+    yAxis:[
+      {type:'value',name:'万人次',nameTextStyle:{color:'#64748b'},...AXIS},
+      {type:'value',name:'亿元',nameTextStyle:{color:'#64748b'},...AXIS,splitLine:{show:false}}
+    ],
+    series:[
+      {name:'游客',type:'bar',data:H.tourists.values,barWidth:'46%',
+        itemStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'#b45309'},{offset:1,color:'#f59e0b'}]),borderRadius:[5,5,0,0]}},
+      {name:'固投',type:'line',yAxisIndex:1,data:H.fixed_invest.values,smooth:true,
+        lineStyle:{color:'#94a3b8',width:2.5},itemStyle:{color:'#94a3b8'}}
+    ]
+  });
+
+  window.addEventListener('resize',()=>{
+    document.querySelectorAll('.chart').forEach(el=>{const i=echarts.getInstanceByDom(el);if(i)i.resize();});
+  });
+}
+load();
+</script>
+</body>
+</html>

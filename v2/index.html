@@ -12,10 +12,10 @@
   <span class="brand">惠东产业风洞</span>
   <a href="index.html" class="on">总览</a>
   <a href="history.html">历史诊断</a>
-  <a href="theory.html">理论框架</a>
+  <a href="theory.html">机制框架</a>
   <a href="network.html">网络结构</a>
-  <a href="models.html">多模型估计</a>
-  <a href="measurement.html">测量模型</a>
+  <a href="models.html">路径研判</a>
+  <a href="measurement.html">调研佐证</a>
   <a href="scenarios.html">情景推演</a>
   <a href="decision.html">决策解释</a>
 </div>
@@ -24,33 +24,32 @@
 
   <div class="demo-banner">
     <span>●</span>
-    <span><b>部分真实数据</b>：历史 GDP 已由真实公开数据点亮（real-001，五经普修订口径）；路径估计、情景、网络等分区仍为待证据的假设示例，随后台数据包到位逐步点亮。</span>
+    <span><b>部分为已核实数据</b>：历年经济总量来自官方公开数据；其余分区为模拟示例，随证据到位逐步点亮，模拟内容仅供参考。</span>
   </div>
 
   <div class="hero">
     <div class="kick">HUIDONG INDUSTRIAL WIND TUNNEL · V2</div>
     <h1>证据驱动的<span class="accent">产业研究系统</span></h1>
-    <p class="sub">真实历史 → 理论框架 → 网络结构 → 多模型估计 → 可验证推演。<br>模型复杂度不超过证据支撑；证据不足时输出情景边界，而非精确概率。</p>
+    <p class="sub">先看真实家底，再看关系与可能的未来。<br>拿不准的地方给范围，不假装精确。</p>
   </div>
 
   <div class="grid grid-3" id="chain"></div>
 
   <div class="plain" style="margin-top:18px">
-    <span class="lab">分工与接口</span>
-    火山引擎产出已审核数据包（history / dictionary / network / models / scenarios / typhoon 六分区 + meta），
-    前台只消费带版本号与质量签名的快照，不直连数据源、不内嵌估计逻辑。
+    <span class="lab">数据说明</span>
+    图中数字区分“已核实”与“模拟”，每个数字都能追溯来源；模拟部分仅作参考，不代表真实结论。
   </div>
 
 </div>
 
 <script>
 const stages=[
-  {n:'01',t:'历史结构诊断',d:'2020–2025 真实序列 · 三产结构',status:'ready',href:'history.html'},
-  {n:'02',t:'理论与变量框架',d:'三层理论 · 变量字典 · 预注册假说',status:'pending'},
-  {n:'03',t:'网络结构分析',d:'观测/构建边 · 演化 · 价值留存',status:'pending'},
-  {n:'04',t:'多模型估计',d:'参数估计 · 回测 · 模型比较',status:'pending'},
-  {n:'05',t:'情景推演',d:'情景树 · 分位数 · 过线率',status:'pending'},
-  {n:'06',t:'决策解释',d:'三把尺子 · 不确定性 · 观测指标',status:'pending'}
+  {n:'01',t:'历史结构诊断',d:'2020–2025 历年家底 · 三产结构',status:'ready',href:'history.html'},
+  {n:'02',t:'机制与变量',d:'分层机制 · 变量说明 · 待验证判断',status:'pending'},
+  {n:'03',t:'网络结构分析',d:'关系连线 · 历年变化 · 价值留存',status:'pending'},
+  {n:'04',t:'路径研判',d:'各条路径的强弱对比',status:'pending'},
+  {n:'05',t:'情景推演',d:'不同条件下的可能范围',status:'pending'},
+  {n:'06',t:'决策解释',d:'三把尺子 · 参考范围 · 观察指标',status:'pending'}
 ];
 const badge = s => s==='ready'
   ? '<span class="tag A">已就绪</span>'

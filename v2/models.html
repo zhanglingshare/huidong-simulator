@@ -13,10 +13,10 @@
   <span class="brand">惠东产业风洞</span>
   <a href="index.html">总览</a>
   <a href="history.html">历史诊断</a>
-  <a href="theory.html">理论框架</a>
+  <a href="theory.html">机制框架</a>
   <a href="network.html">网络结构</a>
-  <a href="models.html" class="on">多模型估计</a>
-  <a href="measurement.html">测量模型</a>
+  <a href="models.html" class="on">路径研判</a>
+  <a href="measurement.html">调研佐证</a>
   <a href="scenarios.html">情景推演</a>
   <a href="decision.html">决策解释</a>
 </div>
@@ -24,35 +24,35 @@
 <div class="wrap">
 
   <div class="demo-banner"><span>●</span>
-    <span><b>示例估计</b>：参数区间、模型比较与回测为示例，待火山引擎用真实历史估计后替换并移除本横幅。</span></div>
+    <span><b>模拟示例</b>：本页数字与对比均为模拟，待真实数据到位后替换并移除本横幅。</span></div>
 
   <div class="hero">
-    <div class="kick">ESTIMATION & COMPARISON</div>
-    <h1>让参数<span class="accent">由数据估计</span>，而非硬编码</h1>
-    <p class="sub">用历史数据估计 μ 并给出区间，多模型并列、样本外回测。<br>证据不足处保留假设并显式标注，不做单点伪装。</p>
+    <div class="kick">ESTIMATION &amp; COMPARISON</div>
+    <h1>各条路径，<span class="accent">谁强谁弱</span></h1>
+    <p class="sub">把五条产业路径放在一起比较，给出可能的上下范围，<br>而不是一个孤零零的数字。</p>
   </div>
 
   <div class="card">
-    <h2>路径参数估计与 95% 区间</h2>
-    <div class="cap">点：原假设 μ ｜ 柱＋误差棒：估计值与区间（亿元）</div>
+    <h2>五条路径的强弱与浮动范围</h2>
+    <div class="cap">柱：参考水平 ｜ 误差线：上下浮动范围 ｜ 点：初始参考</div>
     <div id="cEst" class="chart tall"></div>
   </div>
 
-  <div class="section-title">模型比较（误差越低越好）</div>
+  <div class="section-title">几种口径对比</div>
   <div class="grid grid-2">
-    <div class="card"><h2>RMSE / MAE</h2><div id="cErr" class="chart"></div></div>
-    <div class="card"><h2>拟合优度 R²</h2><div id="cR2" class="chart"></div></div>
+    <div class="card"><h2>偏差大小（越低越好）</h2><div id="cErr" class="chart"></div></div>
+    <div class="card"><h2>说明力（越高越好）</h2><div id="cR2" class="chart"></div></div>
   </div>
 
-  <div class="section-title">样本外回测</div>
+  <div class="section-title">历年对照</div>
   <div class="card">
-    <h2>实际 vs 预测（亿元）</h2>
+    <h2>实际与参考（亿元）</h2>
     <div id="cBack" class="chart"></div>
   </div>
 
   <div class="plain" style="margin-top:16px">
-    <span class="lab">选择规则</span>
-    以样本外误差与稳健性为准，不选训练集拟合最好的模型；当多模型分歧大时，保留区间并输出情景边界，而非压成单一数字。
+    <span class="lab">怎么看</span>
+    以历年对照的可靠程度为准；几种口径分歧大时，保留范围，不压成一个数字。
   </div>
 
 </div>
@@ -63,6 +63,7 @@ const AXIS={axisLabel:{color:'#93a4bd',fontSize:11},axisLine:{lineStyle:{color:'
 function load(){fetch('data/payload.json').then(r=>r.json()).then(render).catch(()=>render(window.__EMBEDDED_PAYLOAD__));}
 function render(d){
   const M=d.models, names=M.estimates.map(e=>e.path);
+  const calib=['口径一','口径二','口径三'];
 
   // estimates with error bars
   echarts.init(document.getElementById('cEst')).setOption({
@@ -73,16 +74,16 @@ function render(d){
     xAxis:{type:'category',data:names,...AXIS,axisTick:{show:false}},
     yAxis:{type:'value',...AXIS},
     series:[
-      {name:'估计值',type:'bar',barWidth:'42%',data:M.estimates.map(e=>e.est),
+      {name:'参考水平',type:'bar',barWidth:'42%',data:M.estimates.map(e=>e.est),
         itemStyle:{color:'#0891b2',borderRadius:[5,5,0,0]}},
-      {name:'95%区间',type:'custom',
+      {name:'浮动范围',type:'custom',
         renderItem:(_,api)=>{const x=api.coord([api.value(0),api.value(1)]);const y=api.coord([api.value(0),api.value(2)]);
           return {type:'group',children:[
             {type:'line',shape:{x1:x[0],y1:x[1],x2:y[0],y2:y[1]},style:{stroke:'#fbbf24',lineWidth:2}},
             {type:'line',shape:{x1:x[0]-8,y1:x[1],x2:x[0]+8,y2:x[1]},style:{stroke:'#fbbf24',lineWidth:2}},
             {type:'line',shape:{x1:y[0]-8,y1:y[1],x2:y[0]+8,y2:y[1]},style:{stroke:'#fbbf24',lineWidth:2}}]};},
         data:M.estimates.map((e,i)=>[i,e.lo,e.hi])},
-      {name:'原假设',type:'scatter',symbolSize:11,data:M.estimates.map(e=>e.assumed),itemStyle:{color:'#f87171'}}
+      {name:'初始参考',type:'scatter',symbolSize:11,data:M.estimates.map(e=>e.assumed),itemStyle:{color:'#f87171'}}
     ]
   });
 
@@ -92,11 +93,11 @@ function render(d){
     tooltip:{trigger:'axis',backgroundColor:'#0e1523',borderColor:'#22304a',textStyle:{color:'#e6edf3'}},
     legend:{top:4,textStyle:{color:'#93a4bd',fontSize:11}},
     grid:{left:44,right:18,top:46,bottom:54},
-    xAxis:{type:'category',data:M.comparison.map(c=>c.model),...AXIS,axisLabel:{color:'#93a4bd',fontSize:10,interval:0,rotate:14},axisTick:{show:false}},
+    xAxis:{type:'category',data:calib,...AXIS,axisLabel:{color:'#93a4bd',fontSize:11,interval:0},axisTick:{show:false}},
     yAxis:{type:'value',...AXIS},
     series:[
-      {name:'RMSE',type:'bar',data:M.comparison.map(c=>c.rmse),itemStyle:{color:'#0891b2',borderRadius:[4,4,0,0]}},
-      {name:'MAE',type:'bar',data:M.comparison.map(c=>c.mae),itemStyle:{color:'#8b5cf6',borderRadius:[4,4,0,0]}}
+      {name:'偏差一',type:'bar',data:M.comparison.map(c=>c.rmse),itemStyle:{color:'#0891b2',borderRadius:[4,4,0,0]}},
+      {name:'偏差二',type:'bar',data:M.comparison.map(c=>c.mae),itemStyle:{color:'#8b5cf6',borderRadius:[4,4,0,0]}}
     ]
   });
 
@@ -104,7 +105,7 @@ function render(d){
   echarts.init(document.getElementById('cR2')).setOption({
     animation:false,backgroundColor:'transparent',
     grid:{left:44,right:18,top:30,bottom:54},
-    xAxis:{type:'category',data:M.comparison.map(c=>c.model),...AXIS,axisLabel:{color:'#93a4bd',fontSize:10,interval:0,rotate:14},axisTick:{show:false}},
+    xAxis:{type:'category',data:calib,...AXIS,axisLabel:{color:'#93a4bd',fontSize:11,interval:0},axisTick:{show:false}},
     yAxis:{type:'value',max:1,...AXIS},
     series:[{type:'bar',barWidth:'48%',data:M.comparison.map(c=>c.r2),
       itemStyle:{color:'#34d399',borderRadius:[4,4,0,0]},label:{show:true,position:'top',color:'#cbd5e1',fontSize:11}}]
@@ -120,7 +121,7 @@ function render(d){
     yAxis:{type:'value',...AXIS},
     series:[
       {name:'实际',type:'line',data:M.backtest.actual,smooth:true,lineStyle:{color:'#22d3ee',width:2.5},itemStyle:{color:'#22d3ee'}},
-      {name:'预测',type:'line',data:M.backtest.predicted,smooth:true,lineStyle:{color:'#fbbf24',width:2.5,type:'dashed'},itemStyle:{color:'#fbbf24'}}
+      {name:'参考',type:'line',data:M.backtest.predicted,smooth:true,lineStyle:{color:'#fbbf24',width:2.5,type:'dashed'},itemStyle:{color:'#fbbf24'}}
     ]
   });
 

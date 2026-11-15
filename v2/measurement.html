@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>惠东产业风洞 · 测量模型</title>
+<title>惠东产业风洞 · 调研佐证</title>
 <link rel="stylesheet" href="assets/app.css">
 <script src="lib/echarts.min.js"></script>
 </head>
@@ -13,10 +13,10 @@
   <span class="brand">惠东产业风洞</span>
   <a href="index.html">总览</a>
   <a href="history.html">历史诊断</a>
-  <a href="theory.html">理论框架</a>
+  <a href="theory.html">机制框架</a>
   <a href="network.html">网络结构</a>
-  <a href="models.html">多模型估计</a>
-  <a href="measurement.html" class="on">测量模型</a>
+  <a href="models.html">路径研判</a>
+  <a href="measurement.html" class="on">调研佐证</a>
   <a href="scenarios.html">情景推演</a>
   <a href="decision.html">决策解释</a>
 </div>
@@ -24,65 +24,57 @@
 <div class="wrap">
 
   <div class="demo-banner"><span>●</span>
-    <span><b>模拟问卷 · 血统 C</b>：本页由 N=800 合成问卷（seed=42，30 题/10 潜变量）驱动，仅用于跑通信度—载荷—结构方程管线，<b>非真实调研结果</b>；真实问卷到位后替换输入、分析代码不变。</span></div>
+    <span><b>模拟问卷 · 仅供参考</b>：本页由 800 份模拟问卷（30 道题）得出，<b>不是真实调研结果</b>；真实问卷到位后替换并移除本横幅。</span></div>
 
   <div class="hero">
-    <div class="kick">MEASUREMENT &amp; STRUCTURAL MODEL</div>
-    <h1>让潜变量<span class="accent">可测量、可检验</span></h1>
-    <p class="sub">量表信度 → 题项载荷 → 结构路径系数与置信区间。<br>测量模型先行，证据不足不夸大拟合，路径系数不折算 GDP。</p>
+    <div class="kick">SURVEY EVIDENCE</div>
+    <h1>让看不见的因素，<span class="accent">有凭据</span></h1>
+    <p class="sub">回答稳不稳、哪些因素更关键、影响有多大，<br>都用图说话。</p>
   </div>
 
   <div class="grid grid-4">
-    <div class="kpi"><div class="lab">样本量 N</div><div class="val">800</div><div class="delta">合成问卷</div></div>
-    <div class="kpi gold"><div class="lab">潜变量</div><div class="val">10</div><div class="delta">5 外驱 + 5 路径</div></div>
-    <div class="kpi green"><div class="lab">测量题项</div><div class="val">30</div><div class="delta">李克特 5 级</div></div>
-    <div class="kpi pink"><div class="lab">平均 Cronbach α</div><div class="val" id="kAlpha">–</div><div class="delta">信度</div></div>
+    <div class="kpi"><div class="lab">问卷份数</div><div class="val">800</div><div class="delta">模拟问卷</div></div>
+    <div class="kpi gold"><div class="lab">观察方面</div><div class="val">10</div><div class="delta">5 个外部条件 + 5 条路径</div></div>
+    <div class="kpi green"><div class="lab">题目数</div><div class="val">30</div><div class="delta">每题 5 个选项</div></div>
+    <div class="kpi pink"><div class="lab">平均稳定度</div><div class="val" id="kAlpha">–</div><div class="delta">回答稳不稳</div></div>
   </div>
 
-  <div class="section-title">信度与测量质量</div>
+  <div class="section-title">结果稳不稳</div>
   <div class="grid grid-2">
     <div class="card">
-      <h2>Cronbach α 信度</h2>
-      <div class="cap">横线为 0.70 经验门槛，全部构念达标</div>
+      <h2>回答稳定程度</h2>
+      <div class="cap">横线为参考线，全部达标</div>
       <div id="cAlpha" class="chart tall"></div>
     </div>
     <div class="card">
-      <h2>题项—总分相关（载荷）</h2>
-      <div class="cap">10 构念 × 3 题，相关越高测量越一致</div>
+      <h2>回答一致性</h2>
+      <div class="cap">各方面 × 3 题，颜色越亮越一致</div>
       <div id="cLoad" class="chart tall"></div>
     </div>
   </div>
 
-  <div class="section-title">结构路径（SEM）</div>
+  <div class="section-title">哪些因素在起作用</div>
   <div class="card">
-    <h2>标准化路径系数 β 热力图</h2>
-    <div class="cap">行：产业路径 ｜ 列：外驱潜变量；颜色越深驱动越强</div>
+    <h2>影响关系强弱</h2>
+    <div class="cap">行：产业路径 ｜ 列：外部条件；颜色越深影响越大</div>
     <div id="cHeat" class="chart tall"></div>
   </div>
   <div class="card" style="margin-top:14px">
-    <h2>路径系数森林图（β 与 95% 置信区间）</h2>
-    <div class="cap">点：估计 β ｜ 横线：95% CI；竖线为 0，区间不跨 0 即显著</div>
+    <h2>影响强弱与浮动范围</h2>
+    <div class="cap">点：参考值 ｜ 横线：上下浮动范围；竖线为 0</div>
     <div id="cForest" style="width:100%;height:660px"></div>
   </div>
 
-  <div class="section-title">拟合与参数回收</div>
-  <div class="grid grid-2">
-    <div class="card">
-      <h2>结构方程解释力 R²</h2>
-      <div class="cap">各产业路径被外驱变量解释的方差比例</div>
-      <div id="cR2" class="chart"></div>
-    </div>
-    <div class="card">
-      <h2>参数回收：真实 β vs 估计 β</h2>
-      <div class="cap">模拟专属，点越贴近对角线说明管线回收越准</div>
-      <div id="cRecover" class="chart"></div>
-    </div>
+  <div class="section-title">能说明多少</div>
+  <div class="card">
+    <h2>说明力</h2>
+    <div class="cap">各条路径被外部条件说明的程度，越高越能讲清楚</div>
+    <div id="cR2" class="chart"></div>
   </div>
 
   <div class="plain" style="margin-top:16px">
-    <span class="lab">方法与纪律</span>
-    信度用 Cronbach α，载荷用题项—总分相关，结构路径为标准化 OLS 估计并给 95% CI；5 级离散带来测量误差衰减，故部分区间覆盖率低于名义值，如实标注。
-    本页为合成数据（血统 C），路径系数仅刻画相对结构，<b>不折算 GDP、不输出情景概率权重</b>；真实问卷替换后重跑并移除模拟横幅。
+    <span class="lab">说明</span>
+    本页为模拟问卷结果，仅作参考，不代表真实结论，也不直接换算成经济总量；真实问卷到位后替换并移除模拟横幅。
   </div>
 
 </div>
@@ -109,7 +101,7 @@ function render(d){
     series:[{type:'bar',barWidth:'58%',data:allCodes.map(c=>R[c].alpha),
       itemStyle:{color:new echarts.graphic.LinearGradient(0,0,1,0,[{offset:0,color:'#0891b2'},{offset:1,color:'#22d3ee'}]),borderRadius:[0,5,5,0]},
       label:{show:true,position:'right',color:'#cbd5e1',fontSize:11},
-      markLine:{symbol:'none',data:[{xAxis:0.7}],lineStyle:{color:'#fbbf24',type:'dashed'},label:{formatter:'0.70',color:'#fbbf24',fontSize:10}}}]
+      markLine:{symbol:'none',data:[{xAxis:0.7}],lineStyle:{color:'#fbbf24',type:'dashed'},label:{formatter:'参考',color:'#fbbf24',fontSize:10}}}]
   });
 
   const loadData=[];
@@ -132,7 +124,7 @@ function render(d){
   echarts.init(document.getElementById('cHeat')).setOption({
     animation:false,backgroundColor:'transparent',
     tooltip:{backgroundColor:'#0e1523',borderColor:'#22304a',textStyle:{color:'#e6edf3'},
-      formatter:p=>nameOf(ENDO[p.data[1]])+' ← '+nameOf(EXO[p.data[0]])+'：β='+p.data[2]},
+      formatter:p=>nameOf(ENDO[p.data[1]])+' ← '+nameOf(EXO[p.data[0]])+'：'+p.data[2]},
     grid:{left:86,right:24,top:30,bottom:40},
     xAxis:{type:'category',data:EXO.map(nameOf),...AXIS,axisLabel:{color:'#93a4bd',fontSize:11,interval:0}},
     yAxis:{type:'category',data:ENDO.map(nameOf),inverse:true,...AXIS},
@@ -151,7 +143,7 @@ function render(d){
   echarts.init(document.getElementById('cForest')).setOption({
     animation:false,backgroundColor:'transparent',
     tooltip:{backgroundColor:'#0e1523',borderColor:'#22304a',textStyle:{color:'#e6edf3'},
-      formatter:p=>{const v=p.value;return rows[v[3]]+'<br>β='+v[1]+'（95% CI '+v[0]+' ~ '+v[2]+'）';}},
+      formatter:p=>{const v=p.value;return rows[v[3]]+'<br>参考 '+v[1]+'（范围 '+v[0]+' ~ '+v[2]+'）';}},
     grid:{left:132,right:30,top:14,bottom:28},
     xAxis:{type:'value',...AXIS},
     yAxis:{type:'value',min:-.5,max:k-.5,interval:1,inverse:true,...AXIS,
@@ -180,20 +172,6 @@ function render(d){
     yAxis:{type:'value',max:0.5,...AXIS},
     series:[{type:'bar',barWidth:'48%',data:ENDO.map(e=>s.fit[e].r2),
       itemStyle:{color:'#34d399',borderRadius:[5,5,0,0]},label:{show:true,position:'top',color:'#cbd5e1',fontSize:11}}]
-  });
-
-  const det=s.parameter_recovery.detail;
-  echarts.init(document.getElementById('cRecover')).setOption({
-    animation:false,backgroundColor:'transparent',
-    tooltip:{backgroundColor:'#0e1523',borderColor:'#22304a',textStyle:{color:'#e6edf3'},
-      formatter:p=>nameOf(p.data[2])+'·'+nameOf(p.data[3])+'<br>真实 '+p.data[0]+' / 估计 '+p.data[1]},
-    grid:{left:48,right:24,top:24,bottom:38},
-    xAxis:{type:'value',name:'真实 β',nameTextStyle:{color:'#93a4bd'},min:0,max:0.4,...AXIS},
-    yAxis:{type:'value',name:'估计 β',nameTextStyle:{color:'#93a4bd'},min:0,max:0.4,...AXIS},
-    series:[{type:'scatter',symbolSize:11,
-      data:det.map(d=>[d.true_beta,d.est_beta,d.path,d.driver,d.ci_covered_true]),
-      itemStyle:{color:p=>p.data[4]?'#22d3ee':'#f87171'},
-      markLine:{symbol:'none',data:[[{coord:[0,0]},{coord:[0.4,0.4]}]],lineStyle:{color:'#64748b',type:'dashed'},label:{show:false}}}]
   });
 
   window.addEventListener('resize',()=>document.querySelectorAll('.chart, #cForest').forEach(el=>{const i=echarts.getInstanceByDom(el);if(i)i.resize();}));

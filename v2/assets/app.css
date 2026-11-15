@@ -88,3 +88,10 @@ a{color:inherit}
   font-weight:600;color:var(--muted);text-decoration:none;transition:.15s}
 .crosslink:hover{border-color:var(--cyan2);color:var(--cyan);background:#0c2630}
 .crosslink .arrow{color:var(--gold);font-weight:800}
+
+/* 图表一句话解读 */
+.takeaway{display:flex;gap:9px;align-items:flex-start;margin-top:12px;padding:10px 14px;
+  background:rgba(251,191,36,.07);border:1px solid rgba(251,191,36,.22);border-radius:10px;
+  font-size:12.5px;line-height:1.75;color:#dbe4f0}
+.takeaway .mk{flex:none;color:var(--gold);font-weight:800;font-size:11px;letter-spacing:1px;
+  padding-top:1px;white-space:nowrap}

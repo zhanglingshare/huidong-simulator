@@ -1,16 +1,16 @@
 {
   "meta": {
-    "version": "real-003",
-    "generated_at": "2026-11-15",
+    "version": "real-004",
+    "generated_at": "2026-11-16",
     "data_status": "partial_real",
-    "status_note": "历史GDP/增速、三产分项、固投为真实公开数据(A/B)；测量模型与结构路径由【模拟问卷】驱动(血统C，N=800，仅跑通信效度与SEM管线，非真实调研)；五条路径水平估计与情景仍为假设，微观系数不折算GDP，待真实问卷替换",
+    "status_note": "历史GDP/增速、三产、固投为真实公开数据(A/B)；测量与结构路径由【开源情报驱动的模拟问卷】给出(血统C，N=800，群体倾向来自公开媒体/官方/社交/招聘信号，分群并带真实偏差，非真实调研)；五条路径水平与情景仍为假设，微观系数不折算GDP，待真实问卷替换并据残差校准",
     "caliber": "亿元（人民币），万人次，%",
     "blood_legend": {
       "A": "实测",
       "B": "推估/合作库修订口径",
       "C": "假设·示例"
     },
-    "quality_gate": "history_verified_simulated_measurement_models_pending",
+    "quality_gate": "history_verified_osint_grounded_simulated_measurement_real_survey_pending",
     "sources": [
       {
         "id": "S1",
@@ -58,9 +58,15 @@
         "blood": "C",
         "name": "模拟问卷测量与结构模型管线（build_survey.py，seed=42，N=800，合成数据）",
         "url": "internal://survey_responses_sim.csv"
+      },
+      {
+        "id": "S9",
+        "blood": "C",
+        "name": "开源情报信号篮子与情报驱动模拟问卷（build_basket.py + build_survey_osint.py，seed=42，N=800）",
+        "url": "internal://signal_basket.json"
       }
     ],
-    "sha256": "41d1a7220e380b8531ffd8338c1902143f2396346710092283efd6745620d0f0"
+    "sha256": "db69a1199339b72b910ee28e799b6d1f68f103a3d926140d8fa96f86e8ead763"
   },
   "history": {
     "years": [
@@ -628,8 +634,8 @@
         "est": 118,
         "lo": 96,
         "hi": 140,
-        "evidence": "simulated_survey",
-        "evidence_note": "结构关系由模拟问卷SEM给出（血统C），水平值仍为校准假设，微观系数不折算GDP"
+        "evidence": "osint_grounded_simulated_survey",
+        "evidence_note": "结构关系由开源情报驱动的模拟问卷给出（血统C），水平值仍为校准假设，微观系数不折算GDP"
       },
       {
         "path": "新材料",
@@ -637,8 +643,8 @@
         "est": 84,
         "lo": 62,
         "hi": 106,
-        "evidence": "simulated_survey",
-        "evidence_note": "结构关系由模拟问卷SEM给出（血统C），水平值仍为校准假设，微观系数不折算GDP"
+        "evidence": "osint_grounded_simulated_survey",
+        "evidence_note": "结构关系由开源情报驱动的模拟问卷给出（血统C），水平值仍为校准假设，微观系数不折算GDP"
       },
       {
         "path": "滨海旅游",
@@ -646,8 +652,8 @@
         "est": 73,
         "lo": 58,
         "hi": 88,
-        "evidence": "simulated_survey",
-        "evidence_note": "结构关系由模拟问卷SEM给出（血统C），水平值仍为校准假设，微观系数不折算GDP"
+        "evidence": "osint_grounded_simulated_survey",
+        "evidence_note": "结构关系由开源情报驱动的模拟问卷给出（血统C），水平值仍为校准假设，微观系数不折算GDP"
       },
       {
         "path": "女鞋",
@@ -655,8 +661,8 @@
         "est": 41,
         "lo": 30,
         "hi": 52,
-        "evidence": "simulated_survey",
-        "evidence_note": "结构关系由模拟问卷SEM给出（血统C），水平值仍为校准假设，微观系数不折算GDP"
+        "evidence": "osint_grounded_simulated_survey",
+        "evidence_note": "结构关系由开源情报驱动的模拟问卷给出（血统C），水平值仍为校准假设，微观系数不折算GDP"
       },
       {
         "path": "特色农渔",
@@ -664,8 +670,8 @@
         "est": 27,
         "lo": 21,
         "hi": 33,
-        "evidence": "simulated_survey",
-        "evidence_note": "结构关系由模拟问卷SEM给出（血统C），水平值仍为校准假设，微观系数不折算GDP"
+        "evidence": "osint_grounded_simulated_survey",
+        "evidence_note": "结构关系由开源情报驱动的模拟问卷给出（血统C），水平值仍为校准假设，微观系数不折算GDP"
       }
     ],
     "comparison": [
@@ -874,8 +880,9 @@
     "seed": 42,
     "n": 800,
     "likert_scale": 5,
-    "generated_at": "2026-11-15",
-    "description": "模拟问卷数据，仅用于跑通测量模型与结构方程管线，不代表真实调研结果，不得对外引用",
+    "generated_at": "2026-11-16",
+    "method": "osint_grounded",
+    "description": "结合公开媒体与社交平台信息合理模拟，仅作参考，不代表真实调研结论，也不直接换算经济总量；真实问卷到位后整体替换",
     "constructs": {
       "POL": "政策支持",
       "BUS": "营商环境",
@@ -888,47 +895,119 @@
       "SH": "女鞋",
       "AG": "特色农渔"
     },
+    "osint_basis": {
+      "POL": {
+        "name": "政策支持",
+        "prior": 4.2,
+        "half": 0.35,
+        "conf": "高",
+        "layer": "proxy"
+      },
+      "BUS": {
+        "name": "营商环境",
+        "prior": 3.7,
+        "half": 0.6,
+        "conf": "中",
+        "layer": "proxy"
+      },
+      "TAL": {
+        "name": "人才与创新",
+        "prior": 3.3,
+        "half": 0.7,
+        "conf": "中",
+        "layer": "proxy"
+      },
+      "INF": {
+        "name": "基础设施",
+        "prior": 4.1,
+        "half": 0.4,
+        "conf": "高",
+        "layer": "fact"
+      },
+      "MKT": {
+        "name": "市场需求",
+        "prior": 3.5,
+        "half": 0.65,
+        "conf": "中",
+        "layer": "proxy"
+      },
+      "CE": {
+        "name": "清洁能源",
+        "prior": 4.3,
+        "half": 0.35,
+        "conf": "高",
+        "layer": "fact"
+      },
+      "NM": {
+        "name": "新材料",
+        "prior": 3.6,
+        "half": 0.6,
+        "conf": "中",
+        "layer": "proxy"
+      },
+      "TR": {
+        "name": "滨海旅游",
+        "prior": 3.9,
+        "half": 0.55,
+        "conf": "中",
+        "layer": "proxy"
+      },
+      "SH": {
+        "name": "女鞋",
+        "prior": 3.0,
+        "half": 0.7,
+        "conf": "中",
+        "layer": "proxy"
+      },
+      "AG": {
+        "name": "特色农渔",
+        "prior": 3.4,
+        "half": 1.0,
+        "conf": "低",
+        "layer": "blindspot"
+      }
+    },
     "reliability": {
       "POL": {
         "name": "政策支持",
-        "alpha": 0.789,
+        "alpha": 0.836,
         "items": [
           {
             "code": "POL_1",
             "text": "政策扶持力度",
             "true_loading": 0.72,
-            "item_total_corr": 0.84
+            "item_total_corr": 0.85
           },
           {
             "code": "POL_2",
             "text": "审批便利度",
             "true_loading": 0.78,
-            "item_total_corr": 0.83
+            "item_total_corr": 0.86
           },
           {
             "code": "POL_3",
             "text": "专项资金到位",
             "true_loading": 0.83,
-            "item_total_corr": 0.85
+            "item_total_corr": 0.89
           }
         ],
         "n_items": 3
       },
       "BUS": {
         "name": "营商环境",
-        "alpha": 0.787,
+        "alpha": 0.811,
         "items": [
           {
             "code": "BUS_1",
             "text": "营商环境满意度",
             "true_loading": 0.72,
-            "item_total_corr": 0.81
+            "item_total_corr": 0.84
           },
           {
             "code": "BUS_2",
             "text": "要素获取便利",
             "true_loading": 0.78,
-            "item_total_corr": 0.84
+            "item_total_corr": 0.85
           },
           {
             "code": "BUS_3",
@@ -941,7 +1020,7 @@
       },
       "TAL": {
         "name": "人才与创新",
-        "alpha": 0.799,
+        "alpha": 0.802,
         "items": [
           {
             "code": "TAL_1",
@@ -953,107 +1032,107 @@
             "code": "TAL_2",
             "text": "技术创新能力",
             "true_loading": 0.78,
-            "item_total_corr": 0.84
+            "item_total_corr": 0.86
           },
           {
             "code": "TAL_3",
             "text": "研发投入强度",
             "true_loading": 0.83,
-            "item_total_corr": 0.85
+            "item_total_corr": 0.86
           }
         ],
         "n_items": 3
       },
       "INF": {
         "name": "基础设施",
-        "alpha": 0.738,
+        "alpha": 0.814,
         "items": [
           {
             "code": "INF_1",
             "text": "交通通达度",
             "true_loading": 0.72,
-            "item_total_corr": 0.8
+            "item_total_corr": 0.84
           },
           {
             "code": "INF_2",
             "text": "园区配套",
             "true_loading": 0.78,
-            "item_total_corr": 0.81
+            "item_total_corr": 0.86
           },
           {
             "code": "INF_3",
             "text": "信息网络条件",
             "true_loading": 0.83,
-            "item_total_corr": 0.82
+            "item_total_corr": 0.86
           }
         ],
         "n_items": 3
       },
       "MKT": {
         "name": "市场需求",
-        "alpha": 0.764,
+        "alpha": 0.83,
         "items": [
           {
             "code": "MKT_1",
             "text": "市场需求景气",
             "true_loading": 0.72,
-            "item_total_corr": 0.82
+            "item_total_corr": 0.86
           },
           {
             "code": "MKT_2",
             "text": "订单增长",
             "true_loading": 0.78,
-            "item_total_corr": 0.82
+            "item_total_corr": 0.87
           },
           {
             "code": "MKT_3",
             "text": "客户拓展",
             "true_loading": 0.83,
-            "item_total_corr": 0.83
+            "item_total_corr": 0.88
           }
         ],
         "n_items": 3
       },
       "CE": {
         "name": "清洁能源",
-        "alpha": 0.798,
+        "alpha": 0.847,
         "items": [
           {
             "code": "CE_1",
             "text": "清洁能源项目进展",
             "true_loading": 0.72,
-            "item_total_corr": 0.82
+            "item_total_corr": 0.87
           },
           {
             "code": "CE_2",
             "text": "装机/产能扩张",
             "true_loading": 0.78,
-            "item_total_corr": 0.84
+            "item_total_corr": 0.88
           },
           {
             "code": "CE_3",
             "text": "绿色投资意愿",
             "true_loading": 0.83,
-            "item_total_corr": 0.87
+            "item_total_corr": 0.88
           }
         ],
         "n_items": 3
       },
       "NM": {
         "name": "新材料",
-        "alpha": 0.812,
+        "alpha": 0.807,
         "items": [
           {
             "code": "NM_1",
             "text": "新材料研发进展",
             "true_loading": 0.72,
-            "item_total_corr": 0.83
+            "item_total_corr": 0.84
           },
           {
             "code": "NM_2",
             "text": "新材料订单",
             "true_loading": 0.78,
-            "item_total_corr": 0.87
+            "item_total_corr": 0.86
           },
           {
             "code": "NM_3",
@@ -1066,57 +1145,57 @@
       },
       "TR": {
         "name": "滨海旅游",
-        "alpha": 0.757,
+        "alpha": 0.808,
         "items": [
           {
             "code": "TR_1",
             "text": "游客增长",
             "true_loading": 0.72,
-            "item_total_corr": 0.8
+            "item_total_corr": 0.85
           },
           {
             "code": "TR_2",
             "text": "旅游收入",
             "true_loading": 0.78,
-            "item_total_corr": 0.82
+            "item_total_corr": 0.85
           },
           {
             "code": "TR_3",
             "text": "旅游项目投资",
             "true_loading": 0.83,
-            "item_total_corr": 0.84
+            "item_total_corr": 0.86
           }
         ],
         "n_items": 3
       },
       "SH": {
         "name": "女鞋",
-        "alpha": 0.797,
+        "alpha": 0.84,
         "items": [
           {
             "code": "SH_1",
             "text": "女鞋订单",
             "true_loading": 0.72,
-            "item_total_corr": 0.84
+            "item_total_corr": 0.86
           },
           {
             "code": "SH_2",
             "text": "品牌升级",
             "true_loading": 0.78,
-            "item_total_corr": 0.84
+            "item_total_corr": 0.87
           },
           {
             "code": "SH_3",
             "text": "渠道拓展",
             "true_loading": 0.83,
-            "item_total_corr": 0.85
+            "item_total_corr": 0.88
           }
         ],
         "n_items": 3
       },
       "AG": {
         "name": "特色农渔",
-        "alpha": 0.79,
+        "alpha": 0.797,
         "items": [
           {
             "code": "AG_1",
@@ -1128,13 +1207,13 @@
             "code": "AG_2",
             "text": "渔业转型",
             "true_loading": 0.78,
-            "item_total_corr": 0.84
+            "item_total_corr": 0.85
           },
           {
             "code": "AG_3",
             "text": "农产品品牌化",
             "true_loading": 0.83,
-            "item_total_corr": 0.86
+            "item_total_corr": 0.87
           }
         ],
         "n_items": 3
@@ -1144,116 +1223,116 @@
       "CE": {
         "name": "清洁能源",
         "beta": {
-          "POL": 0.325,
-          "BUS": 0.104,
-          "TAL": 0.21,
-          "INF": 0.22,
-          "MKT": 0.068
+          "POL": 0.316,
+          "BUS": 0.147,
+          "TAL": 0.205,
+          "INF": 0.235,
+          "MKT": 0.081
         },
         "ci95": {
           "POL": [
-            0.265,
-            0.385
+            0.257,
+            0.374
           ],
           "BUS": [
-            0.045,
-            0.164
+            0.09,
+            0.204
           ],
           "TAL": [
-            0.15,
-            0.27
+            0.148,
+            0.263
           ],
           "INF": [
-            0.161,
-            0.279
+            0.177,
+            0.293
           ],
           "MKT": [
-            0.009,
-            0.127
+            0.023,
+            0.139
           ]
         },
         "p": {
           "POL": 0.0,
-          "BUS": 0.0006,
+          "BUS": 0.0,
           "TAL": 0.0,
           "INF": 0.0,
-          "MKT": 0.0243
+          "MKT": 0.0059
         }
       },
       "NM": {
         "name": "新材料",
         "beta": {
-          "POL": 0.178,
-          "BUS": 0.178,
-          "TAL": 0.242,
-          "INF": 0.093,
-          "MKT": 0.172
+          "POL": 0.173,
+          "BUS": 0.233,
+          "TAL": 0.249,
+          "INF": 0.129,
+          "MKT": 0.11
         },
         "ci95": {
           "POL": [
-            0.115,
-            0.242
+            0.111,
+            0.236
           ],
           "BUS": [
-            0.116,
-            0.24
+            0.172,
+            0.294
           ],
           "TAL": [
-            0.179,
-            0.305
+            0.188,
+            0.311
           ],
           "INF": [
-            0.031,
-            0.155
+            0.067,
+            0.191
           ],
           "MKT": [
-            0.109,
-            0.234
+            0.049,
+            0.172
           ]
         },
         "p": {
           "POL": 0.0,
           "BUS": 0.0,
           "TAL": 0.0,
-          "INF": 0.0033,
-          "MKT": 0.0
+          "INF": 0.0,
+          "MKT": 0.0005
         }
       },
       "TR": {
         "name": "滨海旅游",
         "beta": {
-          "POL": 0.203,
-          "BUS": 0.141,
-          "TAL": 0.13,
-          "INF": 0.202,
-          "MKT": 0.27
+          "POL": 0.219,
+          "BUS": 0.135,
+          "TAL": 0.055,
+          "INF": 0.27,
+          "MKT": 0.238
         },
         "ci95": {
           "POL": [
-            0.142,
-            0.264
+            0.158,
+            0.28
           ],
           "BUS": [
-            0.08,
-            0.201
+            0.076,
+            0.195
           ],
           "TAL": [
-            0.07,
-            0.191
+            -0.005,
+            0.115
           ],
           "INF": [
-            0.142,
-            0.262
+            0.209,
+            0.33
           ],
           "MKT": [
-            0.21,
-            0.33
+            0.178,
+            0.298
           ]
         },
         "p": {
           "POL": 0.0,
           "BUS": 0.0,
-          "TAL": 0.0,
+          "TAL": 0.0714,
           "INF": 0.0,
           "MKT": 0.0
         }
@@ -1261,77 +1340,77 @@
       "SH": {
         "name": "女鞋",
         "beta": {
-          "POL": 0.169,
-          "BUS": 0.131,
-          "TAL": 0.148,
-          "INF": 0.154,
-          "MKT": 0.301
+          "POL": 0.023,
+          "BUS": 0.252,
+          "TAL": 0.131,
+          "INF": 0.041,
+          "MKT": 0.338
         },
         "ci95": {
           "POL": [
-            0.107,
-            0.231
+            -0.041,
+            0.087
           ],
           "BUS": [
-            0.07,
-            0.192
+            0.189,
+            0.314
           ],
           "TAL": [
-            0.087,
-            0.21
+            0.068,
+            0.194
           ],
           "INF": [
-            0.093,
-            0.215
+            -0.023,
+            0.104
           ],
           "MKT": [
-            0.24,
-            0.362
+            0.275,
+            0.401
           ]
         },
         "p": {
-          "POL": 0.0,
+          "POL": 0.4806,
           "BUS": 0.0,
           "TAL": 0.0,
-          "INF": 0.0,
+          "INF": 0.2086,
           "MKT": 0.0
         }
       },
       "AG": {
         "name": "特色农渔",
         "beta": {
-          "POL": 0.195,
-          "BUS": 0.142,
-          "TAL": 0.067,
-          "INF": 0.176,
-          "MKT": 0.163
+          "POL": 0.194,
+          "BUS": 0.033,
+          "TAL": 0.075,
+          "INF": 0.198,
+          "MKT": 0.212
         },
         "ci95": {
           "POL": [
-            0.129,
+            0.127,
             0.261
           ],
           "BUS": [
-            0.077,
-            0.207
+            -0.032,
+            0.098
           ],
           "TAL": [
-            0.002,
-            0.133
+            0.009,
+            0.141
           ],
           "INF": [
-            0.111,
-            0.242
+            0.132,
+            0.264
           ],
           "MKT": [
-            0.098,
-            0.228
+            0.146,
+            0.278
           ]
         },
         "p": {
           "POL": 0.0,
-          "BUS": 0.0,
-          "TAL": 0.0445,
+          "BUS": 0.3144,
+          "TAL": 0.0259,
           "INF": 0.0,
           "MKT": 0.0
         }
@@ -1339,211 +1418,212 @@
     },
     "fit": {
       "CE": {
-        "r2": 0.343,
-        "adj_r2": 0.338
+        "r2": 0.406,
+        "adj_r2": 0.402
       },
       "NM": {
-        "r2": 0.272,
-        "adj_r2": 0.267
+        "r2": 0.322,
+        "adj_r2": 0.318
       },
       "TR": {
-        "r2": 0.321,
-        "adj_r2": 0.317
+        "r2": 0.356,
+        "adj_r2": 0.352
       },
       "SH": {
-        "r2": 0.298,
-        "adj_r2": 0.294
+        "r2": 0.288,
+        "adj_r2": 0.284
       },
       "AG": {
-        "r2": 0.2,
-        "adj_r2": 0.195
+        "r2": 0.224,
+        "adj_r2": 0.219
       }
     },
     "parameter_recovery": {
       "summary": {
-        "beta_correlation_true_vs_est": 0.806,
-        "mean_abs_bias": 0.045,
-        "ci95_coverage": 0.72,
-        "note": "模拟数据下可对照真实生成参数，检验管线是否准确回收结构；真实问卷无此对照"
+        "beta_correlation_true_vs_est": 0.901,
+        "mean_abs_bias": 0.041,
+        "ci95_coverage": 0.76,
+        "note": "内部自检，不进前台；真实问卷无此对照"
       },
       "detail": [
         {
           "path": "CE",
           "driver": "POL",
           "true_beta": 0.3,
-          "est_beta": 0.325,
+          "est_beta": 0.316,
           "ci_covered_true": true
         },
         {
           "path": "CE",
           "driver": "BUS",
           "true_beta": 0.1,
-          "est_beta": 0.104,
+          "est_beta": 0.147,
           "ci_covered_true": true
         },
         {
           "path": "CE",
           "driver": "TAL",
           "true_beta": 0.25,
-          "est_beta": 0.21,
+          "est_beta": 0.205,
           "ci_covered_true": true
         },
         {
           "path": "CE",
           "driver": "INF",
           "true_beta": 0.3,
-          "est_beta": 0.22,
+          "est_beta": 0.235,
           "ci_covered_true": false
         },
         {
           "path": "CE",
           "driver": "MKT",
           "true_beta": 0.15,
-          "est_beta": 0.068,
+          "est_beta": 0.081,
           "ci_covered_true": false
         },
         {
           "path": "NM",
           "driver": "POL",
           "true_beta": 0.2,
-          "est_beta": 0.178,
+          "est_beta": 0.173,
           "ci_covered_true": true
         },
         {
           "path": "NM",
           "driver": "BUS",
           "true_beta": 0.2,
-          "est_beta": 0.178,
+          "est_beta": 0.233,
           "ci_covered_true": true
         },
         {
           "path": "NM",
           "driver": "TAL",
           "true_beta": 0.35,
-          "est_beta": 0.242,
+          "est_beta": 0.249,
           "ci_covered_true": false
         },
         {
           "path": "NM",
           "driver": "INF",
           "true_beta": 0.1,
-          "est_beta": 0.093,
+          "est_beta": 0.129,
           "ci_covered_true": true
         },
         {
           "path": "NM",
           "driver": "MKT",
           "true_beta": 0.15,
-          "est_beta": 0.172,
+          "est_beta": 0.11,
           "ci_covered_true": true
         },
         {
           "path": "TR",
           "driver": "POL",
           "true_beta": 0.2,
-          "est_beta": 0.203,
+          "est_beta": 0.219,
           "ci_covered_true": true
         },
         {
           "path": "TR",
           "driver": "BUS",
           "true_beta": 0.15,
-          "est_beta": 0.141,
+          "est_beta": 0.135,
           "ci_covered_true": true
         },
         {
           "path": "TR",
           "driver": "TAL",
           "true_beta": 0.1,
-          "est_beta": 0.13,
+          "est_beta": 0.055,
           "ci_covered_true": true
         },
         {
           "path": "TR",
           "driver": "INF",
-          "true_beta": 0.3,
-          "est_beta": 0.202,
-          "ci_covered_true": false
-        },
-        {
-          "path": "TR",
-          "driver": "MKT",
           "true_beta": 0.3,
           "est_beta": 0.27,
           "ci_covered_true": true
         },
         {
+          "path": "TR",
+          "driver": "MKT",
+          "true_beta": 0.3,
+          "est_beta": 0.238,
+          "ci_covered_true": false
+        },
+        {
           "path": "SH",
           "driver": "POL",
           "true_beta": 0.1,
-          "est_beta": 0.169,
+          "est_beta": 0.023,
           "ci_covered_true": false
         },
         {
           "path": "SH",
           "driver": "BUS",
           "true_beta": 0.25,
-          "est_beta": 0.131,
-          "ci_covered_true": false
+          "est_beta": 0.252,
+          "ci_covered_true": true
         },
         {
           "path": "SH",
           "driver": "TAL",
           "true_beta": 0.15,
-          "est_beta": 0.148,
+          "est_beta": 0.131,
           "ci_covered_true": true
         },
         {
           "path": "SH",
           "driver": "INF",
           "true_beta": 0.1,
-          "est_beta": 0.154,
+          "est_beta": 0.041,
           "ci_covered_true": true
         },
         {
           "path": "SH",
           "driver": "MKT",
           "true_beta": 0.35,
-          "est_beta": 0.301,
+          "est_beta": 0.338,
           "ci_covered_true": true
         },
         {
           "path": "AG",
           "driver": "POL",
           "true_beta": 0.25,
-          "est_beta": 0.195,
+          "est_beta": 0.194,
           "ci_covered_true": true
         },
         {
           "path": "AG",
           "driver": "BUS",
           "true_beta": 0.1,
-          "est_beta": 0.142,
-          "ci_covered_true": true
+          "est_beta": 0.033,
+          "ci_covered_true": false
         },
         {
           "path": "AG",
           "driver": "TAL",
           "true_beta": 0.1,
-          "est_beta": 0.067,
+          "est_beta": 0.075,
           "ci_covered_true": true
         },
         {
           "path": "AG",
           "driver": "INF",
           "true_beta": 0.25,
-          "est_beta": 0.176,
-          "ci_covered_true": false
+          "est_beta": 0.198,
+          "ci_covered_true": true
         },
         {
           "path": "AG",
           "driver": "MKT",
           "true_beta": 0.2,
-          "est_beta": 0.163,
+          "est_beta": 0.212,
           "ci_covered_true": true
         }
       ]
     },
     "raw_file": "survey_responses_sim.csv"
-  }
+  },
+  "signal_basket_ref": "signal_basket.json"
 }

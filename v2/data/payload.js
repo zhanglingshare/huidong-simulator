@@ -1,9 +1,9 @@
 window.__EMBEDDED_PAYLOAD__={
   "meta": {
-    "version": "real-001",
+    "version": "real-002",
     "generated_at": "2026-11-15",
     "data_status": "partial_real",
-    "status_note": "历史GDP与增速为已核实真实数据（五经普修订口径）；五条路径估计、情景分布与网络仍为假设示例(C)，待问卷/SEM证据，不得对外引用为预测",
+    "status_note": "历史GDP/增速、2024-2025三产分项、2023-2025固定资产投资为已核实真实数据；2023三产为修订前口径已标注；五条路径估计、情景分布与网络仍为假设示例(C)，待问卷/SEM，非预测",
     "caliber": "亿元（人民币），万人次，%",
     "blood_legend": {
       "A": "实测",
@@ -34,9 +34,27 @@ window.__EMBEDDED_PAYLOAD__={
         "id": "S4",
         "blood": "B",
         "name": "官方合作数据库·惠东县GDP（五经普修订口径，2020-2022）"
+      },
+      {
+        "id": "S5",
+        "blood": "A",
+        "name": "2025年1-12月惠东县主要经济指标完成情况表（县统计局）",
+        "url": "https://www.huidong.gov.cn/hzhdtjj/gkmlpt/content/5/5716/post_5716243.html"
+      },
+      {
+        "id": "S6",
+        "blood": "A",
+        "name": "2024年惠东县国民经济和社会发展统计公报",
+        "url": "https://www.huidong.gov.cn/attachment/0/306/306309/5511757.pdf"
+      },
+      {
+        "id": "S7",
+        "blood": "B",
+        "name": "2023年惠东县地区生产总值（修订前初步核算）",
+        "url": "https://www.huidong.gov.cn/hdxwz/zwgk/sjfb/sjs/content/post_5249385.html"
       }
     ],
-    "sha256": "f3928f1d0cde40168dc8e9cca995723cf0df32492f56cbe8bfb1eb07f33a1fe3"
+    "sha256": "2b135b02a9777f2233a76d076bab4a1f0a7b8b5b47864c2899d3f42819a557a3"
   },
   "history": {
     "years": [
@@ -91,18 +109,19 @@ window.__EMBEDDED_PAYLOAD__={
         "C",
         "C",
         "C",
-        "C",
-        "C",
+        "B",
+        "A",
         "A"
       ],
       "values": [
         78.0,
         82.0,
         85.0,
-        90.0,
-        94.0,
+        87.44,
+        98.27,
         99.0
-      ]
+      ],
+      "caliber_note": "2023为五经普修订前初步核算数（合计762.13），与修订后总量800.48口径不同；2024、2025为修订口径，与GDP总量自洽"
     },
     "p2": {
       "unit": "亿元",
@@ -110,18 +129,19 @@ window.__EMBEDDED_PAYLOAD__={
         "C",
         "C",
         "C",
-        "C",
-        "C",
+        "B",
+        "A",
         "A"
       ],
       "values": [
         215.0,
         240.0,
         252.0,
-        280.0,
-        292.0,
+        269.69,
+        290.57,
         305.39
-      ]
+      ],
+      "caliber_note": "2023为五经普修订前初步核算数（合计762.13），与修订后总量800.48口径不同；2024、2025为修订口径，与GDP总量自洽"
     },
     "p3": {
       "unit": "亿元",
@@ -129,18 +149,19 @@ window.__EMBEDDED_PAYLOAD__={
         "C",
         "C",
         "C",
-        "C",
-        "C",
+        "B",
+        "A",
         "A"
       ],
       "values": [
         315.0,
         356.5,
         381.9,
-        422.4,
-        442.6,
+        405.0,
+        439.68,
         456.86
-      ]
+      ],
+      "caliber_note": "2023为五经普修订前初步核算数（合计762.13），与修订后总量800.48口径不同；2024、2025为修订口径，与GDP总量自洽"
     },
     "tourists": {
       "unit": "万人次",
@@ -224,17 +245,17 @@ window.__EMBEDDED_PAYLOAD__={
         "C",
         "C",
         "C",
-        "C",
-        "C",
-        "C"
+        "A",
+        "A",
+        "A"
       ],
       "values": [
         230,
         268,
         300,
-        335,
-        360,
-        388
+        503.0,
+        459.73,
+        305.03
       ]
     }
   },

@@ -3,13 +3,14 @@
    全过 exit 0，任一失败 exit 1。供 GitHub Actions 与本地 `node tests/verify_all.js` 使用。 */
 const fs = require('fs');
 const path = require('path');
+const vm = require('node:vm');
 const root = path.join(__dirname, '..');
 let fails = 0;
 const ok = m => console.log('  ✓ ' + m);
 const bad = m => { fails++; console.log('  ✗ ' + m); };
 
 console.log('── 1) HTML 内联 script 语法 ──');
-const htmlFiles = ["index.html", "network.html", "who.html", "choices.html", "future.html", "windtunnel.html", "blindspot.html", "report.html", "ending.html", "town.html"];
+const htmlFiles = ["index.html", "portal.html", "network.html", "who.html", "choices.html", "future.html", "windtunnel.html", "blindspot.html", "report.html", "ending.html", "town.html"];
 for (const f of htmlFiles) {
   const fp = path.join(root, f);
   if (!fs.existsSync(fp)) { bad('缺少页面文件 ' + f); continue; }
@@ -70,6 +71,36 @@ for (const f of evFiles) {
     if (ev.status !== 'rejected' && ev.parameter_change != null && ev.requires_review !== true) bad(f + ' parameter_change 非空但未标 requires_review');
     ok(f + '（' + ev.event_id + ' · ' + ev.status + '）');
   } catch (e) { bad(f + ' 解析失败: ' + e.message); }
+}
+
+console.log('── 5) 风洞结果跨页传递 ──');
+const storage = () => {
+  const entries = new Map();
+  return {getItem: key => entries.get(key) ?? null, setItem: (key, value) => entries.set(key, value)};
+};
+const sessionStorage = storage();
+const localStorage = storage();
+let runCount = 0;
+const scenarioSource = fs.readFileSync(path.join(root, 'scenario.js'), 'utf8');
+const makeScenarioPage = () => {
+  const context = vm.createContext({
+    HT: {...HT, run(...args) { runCount++; return HT.run(...args); }},
+    URLSearchParams, sessionStorage, localStorage, window: {sessionStorage, localStorage}
+  });
+  return vm.runInContext(scenarioSource + '\nHDScenario;', context);
+};
+const wind = makeScenarioPage();
+const eightDays = wind.run({...wind.storm, days: 8});
+wind.remember(eightDays);
+const report = makeScenarioPage();
+const fromWind = report.run(report.reportConditions('?run=' + eightDays.token));
+const expected = HT.run(SEED, N, HT.DEFAULT_PATHS, {typhoon: {strength: 1, days: 8}});
+if (runCount !== 1 || JSON.stringify(fromWind) !== JSON.stringify(eightDays) ||
+    Object.entries(fromWind.summary).some(([key, value]) => value !== expected[key]) ||
+    fromWind.histogram.reduce((sum, [, count]) => sum + count, 0) !== N) {
+  bad('报告应读取同一次风洞结果与分布');
+} else {
+  ok('停业 8 天的结果与原模型一致，进入报告无需重算');
 }
 
 console.log(fails ? '\n✗ 共 ' + fails + ' 项失败' : '\n✓ 全部通过');

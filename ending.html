@@ -1,15 +1,12 @@
 <!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>让每一个涉海重大决策，先跑一遍 · 惠东产业风洞</title>
-<script src="model.js?v=20261023a"></script>
+<script src="model.js?v=20261116a"></script>
+<script src="scenario.js"></script>
 <script src="lib/echarts.min.js"></script>
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.7 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
-.nav{position:sticky;top:0;z-index:50;display:flex;gap:5px;align-items:center;padding:9px 14px;background:rgba(8,11,18,.95);border-bottom:1px solid #1b2434;overflow-x:auto}
-.nav span{font-weight:800;color:#fff;padding:6px 8px;white-space:nowrap}
-.nav a{background:#131c2b;color:#93a4bd;border:1px solid #22304a;padding:6px 12px;border-radius:20px;font-size:12.5px;text-decoration:none;white-space:nowrap;flex:none}
-.nav a.on{background:#0e7490;border-color:#0891b2;color:#fff;font-weight:600}
 .wrap{max-width:1200px;margin:auto;padding:18px}
 
 /* 电影式海夜景 hero */
@@ -92,12 +89,18 @@ details .body{padding:0 20px 20px}
 .closing .big b{color:#22d3ee}
 .sign{font-size:12.5px;color:#8fa3bf;margin-top:18px;line-height:1.9}
 .sign b{color:#fbbf24}
-</style></head><body>
+</style><link rel="stylesheet" href="huidong.css">
+</head><body>
 
-<div class="nav">
-  <span>惠东产业风洞</span>
-  <a href="index.html">① 今日话题</a><a href="town.html">🏘️ 各镇吃喝玩乐</a><a href="network.html">② 关系网</a><a href="who.html">③ 基本面</a><a href="choices.html">④ 五条路</a><a href="future.html">⑤ 未来</a><a href="windtunnel.html">⑥ 风洞</a><a href="blindspot.html">⑦ 被忽略</a><a href="report.html">⑧ 报告</a><a href="ending.html" class="on">⑨ 结语</a>
-</div>
+<header class="hd-header">
+  <div class="hd-header-inner">
+    <a class="hd-brand" href="portal.html">惠东产业风洞</a>
+    <nav aria-label="主导航">
+      <a href="portal.html#huidong">看惠东</a>
+      <a href="windtunnel.html">试情景</a>
+    </nav>
+  </div>
+</header>
 
 <div class="wrap">
 
@@ -250,21 +253,11 @@ details .body{padding:0 20px 20px}
 </div>
 
 <script>
-// 读取用户在风洞页/报告页设置的情景
-const params = new URLSearchParams(location.search);
-const opts = {};
-if (params.get('typhoon') === '1') opts.typhoon = {strength: 1, days: 7};
-if (params.get('nuclearDelay')) opts.nuclearDelay = parseInt(params.get('nuclearDelay'));
-if (params.get('shoeFactor')) opts.shoeFactor = parseFloat(params.get('shoeFactor'));
-try {
-  const saved = JSON.parse(localStorage.getItem('hd_scenario') || '{}');
-  if (saved.typhoon) opts.typhoon = saved.typhoon;
-  if (saved.nuclearDelay) opts.nuclearDelay = saved.nuclearDelay;
-  if (saved.shoeFactor) opts.shoeFactor = saved.shoeFactor;
-} catch(e){}
-
-const base = HT.run(42, 8000, HT.DEFAULT_PATHS);
-const cur = HT.run(42, 8000, HT.DEFAULT_PATHS, opts);
+// 沿用风洞选择的条件与结果
+const selectedRun = HDScenario.run(HDScenario.reportConditions());
+const cur = selectedRun.summary;
+const base = HDScenario.run(HDScenario.baseline).summary;
+const opts = HDScenario.toOptions(selectedRun.conditions);
 
 // 填充 A/B 卡
 document.getElementById('bHit').textContent = Math.round(base.hit) + '%';
@@ -276,7 +269,7 @@ document.getElementById('cP50').textContent = Math.round(cur.p50) + ' 亿';
 document.getElementById('cRange').textContent = Math.round(cur.p10) + '–' + Math.round(cur.p90) + ' 亿';
 
 // 情景名
-const sceneName = opts.typhoon ? '台风冲击' : opts.nuclearDelay ? '核电延迟' : opts.shoeFactor ? '女鞋品牌化' : '基准（未改条件）';
+const sceneName = opts.typhoon ? '台风冲击' : opts.nuclearDelay ? '核电延迟' : opts.shoeFactor ? '女鞋景气' : '基准（未改条件）';
 document.getElementById('curLab').textContent = '你的情景 · ' + sceneName;
 
 // 差异

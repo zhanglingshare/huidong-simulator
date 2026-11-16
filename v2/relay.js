@@ -6,7 +6,7 @@
     'theory.html':'../blindspot.html',
     'network.html':'../network.html',
     'models.html':'../choices.html',
-    'scenarios.html':'../future.html',
+    'scenarios.html':'../windtunnel.html',
     'decision.html':'../report.html'
   };
   var file=location.pathname.split('/').pop()||'index.html';

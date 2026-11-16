@@ -1,19 +1,17 @@
 <!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>惠东产业分析报告（Demo版）· 张凌</title>
-<script src="model.js?v=20261023a"></script>
+<title>这次情景结果 · 惠东产业风洞</title>
+<link rel="stylesheet" href="huidong.css">
+<script src="model.js?v=20261116a"></script>
+<script src="scenario.js"></script>
 <script src="lib/echarts.min.js"></script>
+<script defer src="scenario-ui.js"></script>
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.7 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
-.nav{position:sticky;top:0;z-index:50;display:flex;gap:5px;align-items:center;padding:9px 14px;background:rgba(8,11,18,.95);border-bottom:1px solid #1b2434;overflow-x:auto}
-.nav span{font-weight:800;color:#fff;padding:6px 8px;white-space:nowrap}
-.nav a{background:#131c2b;color:#93a4bd;border:1px solid #22304a;padding:6px 12px;border-radius:20px;font-size:12.5px;text-decoration:none;white-space:nowrap;flex:none}
-.nav a.on{background:#0e7490;border-color:#0891b2;color:#fff;font-weight:600}
-.wrap{max-width:1200px;margin:auto;padding:16px}
 .cover{text-align:center;padding:38px 20px;background:linear-gradient(160deg,#082630,#0a0f1a);border:1px solid #1c2739;border-radius:16px;margin-bottom:14px}
 .cover .kick{font-size:12px;letter-spacing:3px;color:#22d3ee;margin-bottom:12px}
-.cover h1{font-size:26px;line-height:1.4;margin:0 0 10px}
+.cover h2{font-size:26px;line-height:1.4;margin:0 0 10px}
 .cover .meta{font-size:12.5px;color:#9aa9bd;margin-top:16px}
 .card{background:#0e1523;border:1px solid #1c2739;border-radius:12px;padding:18px;margin-bottom:14px}
 .card h2{font-size:16px;margin:0 0 12px;padding-bottom:8px;border-bottom:1px solid #1c2739}
@@ -33,6 +31,7 @@ body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.7 -apple-system,"Ping
 .coast-chart{width:100%;height:320px;margin:8px 0}
 /* 双扇形 */
 .dual-result{display:grid;grid-template-columns:1.2fr 1fr;gap:14px;margin:12px 0}
+.dual-result > div{min-width:0}
 @media(max-width:800px){.dual-result{grid-template-columns:1fr}}
 .chartbox{width:100%;height:260px}
 /* 四情景卡 */
@@ -81,25 +80,57 @@ body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.7 -apple-system,"Ping
 .btn{background:#0e7490;color:#fff;border:0;padding:10px 22px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-block}
 .ol-find{margin:0;padding-left:20px}
 .ol-find li{margin-bottom:10px;line-height:1.75}
-</style></head><body>
+</style></head><body class="hd-page" data-hd-view="report">
 
-<div class="nav">
-  <span>惠东产业风洞</span>
-  <a href="index.html">① 今日话题</a><a href="town.html">🏘️ 各镇吃喝玩乐</a><a href="network.html">② 关系网</a><a href="who.html">③ 基本面</a><a href="choices.html">④ 五条路</a><a href="future.html">⑤ 未来</a><a href="windtunnel.html">⑥ 风洞</a><a href="blindspot.html">⑦ 被忽略</a><a href="report.html" class="on">⑧ 报告</a><a href="ending.html">⑨ 结语</a>
-</div>
+<header class="hd-header">
+  <div class="hd-header-inner">
+    <a class="hd-brand" href="portal.html">惠东产业风洞</a>
+    <nav aria-label="主导航">
+      <a href="portal.html#huidong">看惠东</a>
+      <a href="windtunnel.html">试情景</a>
+    </nav>
+  </div>
+</header>
 
-<div class="wrap">
+<main class="hd-shell">
+  <section class="hd-report-block" aria-labelledby="report-title">
+    <header class="hd-page-intro">
+      <p class="hd-eyebrow">惠东产业风洞 · 情景模拟</p>
+      <h1 id="report-title">这次情景结果</h1>
+    </header>
+    <p id="report-summary" class="hd-report-summary"></p>
+    <p id="report-conditions" class="hd-report-conditions"></p>
+    <div class="hd-report-stats" aria-label="2030 年全县模拟结果">
+      <div><span>2030 年全县 GDP 中位数</span><strong id="rP50" data-output="p50">—</strong></div>
+      <div><span>中央 80% 模拟区间</span><strong id="rRange" data-output="range">—</strong></div>
+      <div><span>越过 1,200 亿参考线的比例</span><strong id="rHit" data-output="hit">—</strong></div>
+    </div>
+    <figure class="hd-range-figure">
+      <figcaption>全县 GDP 模拟区间 · 圆点为中位数 · 虚线为 1,200 亿参考线</figcaption>
+      <div class="hd-range-track" id="report-range" role="img">
+        <span class="hd-range-band"></span><span class="hd-range-target"></span><span class="hd-range-dot"></span>
+      </div>
+      <div class="hd-range-axis" aria-hidden="true"><span id="report-axis-low"></span><span id="report-axis-high"></span></div>
+    </figure>
+    <div class="hd-link-row">
+      <a class="hd-text-link" id="adjust-run" href="windtunnel.html">返回这次情景</a>
+      <a class="hd-muted-link" data-evidence href="v2/scenarios.html#typhoon-recovery">查看依据</a>
+    </div>
+  </section>
+
+  <details class="hd-details hd-report-details" id="report-details">
+    <summary>展开完整分析和数据来源</summary>
 
   <div class="cover">
     <div class="kick">区域产业决策风洞 · 第四类样本</div>
-    <h1>惠东县产业决策<br>模拟推演分析报告</h1>
+    <h2>惠东县产业决策<br>模拟推演分析报告</h2>
     <div style="font-size:13px;color:#cbd5e1">——同一片海，财富与风险同源网络的一次压力测试（Demo版）</div>
     <div class="meta">作者：<b style="color:#fbbf24">张凌 博士</b> &nbsp;|&nbsp; 2026年10月 · 广东惠州</div>
   </div>
 
   <!-- ① 八项体检卡 -->
   <div class="card">
-    <h2>① 惠城经济CT · 八项体检指标 <span style="font-size:11px;color:#7c8b99;font-weight:400">官方实测 · 2025</span></h2>
+    <h2>① 惠东经济体检 · 八项指标 <span style="font-size:11px;color:#9aa9bd;font-weight:400">2025 数据与模型参考</span></h2>
     <p style="font-size:12.5px;color:#9aa9bd;margin:0 0 8px">从GDP到海岸线，八项指标一眼看清惠东现在的状态。绿=快跑、黄=承压、红=下滑。点击卡片看口径与来源。</p>
     <div class="scan">
       <div class="metric g"><div class="name">规上工业增加值</div><div class="val">+12.1%</div><div class="sub">总产值576亿<br>提速明显</div><canvas class="spark" data-spark="1,2,3,4,5,6"></canvas></div>
@@ -122,7 +153,7 @@ body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.7 -apple-system,"Ping
   </div>
 
   <div class="card">
-    <h2>③ 2030 · 两种命运 <span style="font-size:11px;color:#7c8b99;font-weight:400">平年 vs 台风年</span></h2>
+    <h2>③ 2030 · 基准与本次情景</h2>
     <div class="dual-result">
       <div>
         <h3 style="margin-top:0">模型分布（2030产值，亿元）</h3>
@@ -132,17 +163,17 @@ body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.7 -apple-system,"Ping
         <h3 style="margin-top:0">2030模拟结果</h3>
         <div class="mycon" style="margin-top:0">
           <div style="display:flex;justify-content:space-between;margin-bottom:6px">
-            <span>中位数（P50）</span><b id="rP50">—</b>
+            <span>中位数（P50）</span><b data-output="p50">—</b>
           </div>
           <div style="display:flex;justify-content:space-between;margin-bottom:6px">
-            <span>达标率（≥1200亿）</span><b id="rHit">—</b>
+            <span>越过参考线的模拟比例</span><b data-output="hit">—</b>
           </div>
           <div style="display:flex;justify-content:space-between;margin-bottom:6px">
-            <span>不确定区间（P10–P90）</span><b id="rRange">—</b>
+            <span>中央 80% 模拟区间</span><b data-output="range">—</b>
           </div>
           <div style="margin-top:10px;padding-top:10px;border-top:1px dashed #155e75;font-size:11.5px;color:#9aa9bd">
-            模型版本：种子42 · 8000次蒙特卡洛；BASE 861.25亿（2025实测）、TARGET 1200亿（外延参考）。<br>
-            此为压力测试叙事，<b>非预测</b>，不构成投资建议。
+            2025 年基准为 861.25 亿元，2030 年比较线为 1,200 亿元。<br>
+            分布与区间使用风洞的同一组试算结果。
           </div>
         </div>
       </div>
@@ -155,29 +186,16 @@ body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.7 -apple-system,"Ping
     <div class="scen-grid" id="scenGrid"></div>
   </div>
 
-  <!-- ⑤ 台风V型曲线 -->
+  <!-- ⑤ 滨海客流恢复 -->
   <div class="card">
-    <h2>⑤ 台风过境 · 一条GDP的V型曲线 <span style="font-size:11px;color:#7c8b99;font-weight:400">红霞复原</span></h2>
-    <p style="font-size:12.5px;color:#9aa9bd;margin:0 0 8px">台风"红霞"2026-07-26在平海登陆。当周客流损失率最高，随后逐周回升，部分改期客流在灾后1-2周回补。能源（核电/风电）按抗台标准建设，几乎无损。</p>
+    <h2>⑤ 台风过境 · 滨海客流恢复</h2>
+    <p id="report-flow-caption" style="font-size:12.5px;color:#9aa9bd;margin:0 0 8px"></p>
     <div id="typhoonCurve" class="chartbox" style="height:280px"></div>
-    <div class="plain"><span class="lab">读数</span>台风对全县GDP是"脉冲"（一年咬掉一块、再长回来），不是"慢性失血"。这是惠东和惠城（通勤/投产慢变量）最大的不同。</div>
-  </div>
-
-  <!-- ⑥ 我的实验结论 -->
-  <div class="card">
-    <h2>⑥ 📋 我的实验结论 <span style="font-size:11px;color:#7c8b99;font-weight:400">随情景实时更新</span></h2>
-    <div class="mycon" id="myCon">
-      当前为<b>基准情景</b>。去第⑥风洞页拨一下台风强度、核电延迟或女鞋品牌化，这里会自动更新你的实验结果。
-    </div>
-    <div style="text-align:center;margin-top:10px">
-      <a class="btn" href="windtunnel.html">🎛️ 去风洞页改条件</a>
-      <a class="btn" href="ending.html" style="background:#0e7490;margin-left:8px">🎲 看我的终章</a>
-    </div>
   </div>
 
   <!-- ⑦ 五条核心发现 -->
   <div class="card">
-    <h2>⑦ 五条核心发现（决策者可能没算进来的）</h2>
+    <h2>⑥ 五条核心发现（决策者可能没算进来的）</h2>
     <ol class="ol-find">
       <li><b>同一片海多种用法，岸线怎么商量着用。</b>214公里岸线上旅游要干净海域、核电风电LNG要岸线产能、海龟湾是生态红线、渔业要海湾、女鞋贴海布局；怎么各美其美，是惠东最值得长期算的一笔。</li>
       <li><b>海龟湾：大陆唯一海龟国家级保护区。</b>海龟对水质、沙滩安静极挑剔；这条红线看似不直接产GDP，却是"惠东的海足够干净"最硬的招牌，也是滨海旅游的底气。</li>
@@ -201,7 +219,7 @@ body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.7 -apple-system,"Ping
 
   <!-- 敏感性龙卷风 -->
   <div class="card">
-    <h2>⑧ 哪些因素最牵动结果 <span style="font-size:11px;color:#7c8b99;font-weight:400">参数微分 · 控制变量</span></h2>
+    <h2>⑦ 哪些因素最牵动结果 <span style="font-size:11px;color:#7c8b99;font-weight:400">参数微分 · 控制变量</span></h2>
     <p style="font-size:12.5px;color:#9aa9bd;margin:0 0 8px">把每条路径单独关掉、用同一颗种子重跑，看中位数掉多少。条越长越敏感。</p>
     <div id="tornado" class="chartbox" style="height:300px"></div>
     <div class="plain"><span class="lab">两本账别混</span>"参数微分"回答哪个参数和结果绑得紧；"事件注入"（台风、核电延迟）回答这件事发生会怎样。"敏感"≠"重要"，现实中先做哪件，还要看可控性、成本和见效速度。</div>
@@ -209,7 +227,7 @@ body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.7 -apple-system,"Ping
 
   <!-- 民生 -->
   <div class="card people">
-    <h2 style="border-color:#155e75">⑨ 这和普通老百姓有什么关系</h2>
+    <h2 style="border-color:#155e75">⑧ 这和普通老百姓有什么关系</h2>
     <div class="two">
       <div><div class="q">台风来了，对我影响大吗？</div><div class="a">对全县是小数字，可一户旺季民宿、一片渔排可能押着一年指望。有台风保险、复产预案，受灾后能快恢复。</div></div>
       <div><div class="q">核电、风电给我带来啥？</div><div class="a">清洁能源项目带来家门口的岗位、税收和配套，按抗台标准建设，风浪里几乎无损。</div></div>
@@ -220,7 +238,7 @@ body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.7 -apple-system,"Ping
 
   <!-- 行动建议 -->
   <div class="card">
-    <h2>⑩ 行动建议（按轻重缓急）</h2>
+    <h2>⑨ 行动建议（按轻重缓急）</h2>
     <div class="action"><div class="pri" style="background:#155e75">优先</div><div class="body"><b>统筹一片海的多种用法</b><p>做好岸线规划、护好海龟湾生态红线，让旅游、能源、渔业、生态各美其美。</p></div></div>
     <div class="action"><div class="pri" style="background:#155e75">优先</div><div class="body"><b>稳能源新材料投产达产</b><p>推进核电、海上风电、LNG、新材料与科学装置如期建设，稳住工业提速基本盘。</p></div></div>
     <div class="action"><div class="pri" style="background:#0e7490">重要</div><div class="body"><b>兜住台风民生底线</b><p>推广台风保险、完善复产预案，发展全季全时旅游，帮民宿养殖户平滑旺季与灾年。</p></div></div>
@@ -230,7 +248,7 @@ body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.7 -apple-system,"Ping
 
   <!-- 来源 -->
   <div class="card">
-    <h2>⑪ 数据来源与分级</h2>
+    <h2>⑩ 数据来源与分级</h2>
     <div class="src-list">
       <div><span class="grade" style="background:#155e75;color:#fff">A</span><b>实测</b>：2025统计公报、2026政府工作报告、文旅局公开数据</div>
       <div><span class="grade" style="background:#1e40af;color:#fff">B</span><b>推估</b>：台风"红霞"损失、客流恢复，按公开停业与复产报道测算</div>
@@ -240,7 +258,7 @@ body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.7 -apple-system,"Ping
 
   <!-- 免责 -->
   <div class="card">
-    <h2>⑫ 模型边界与免责声明</h2>
+    <h2>⑪ 模型边界与免责声明</h2>
     <div class="bound">
       1. <b>不是预测器</b>：只在公开数据与明确假设下给出叙事分布与结构提示。<br>
       2. <b>不做因果断言</b>：路径系数为模型内部关联强度，不代表现实因果。<br>
@@ -255,177 +273,151 @@ body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.7 -apple-system,"Ping
     <p class="disc" style="margin-top:14px">本报告为Demo版。台风"红霞"为2026年真实事件，损失为公开报道测算。模拟结果不代表对未来的精确预测。</p>
   </div>
 
-  <div style="text-align:center;margin:22px 0"><a class="btn" href="index.html">回到首页</a></div>
-</div>
+  <div class="hd-link-row">
+    <a class="hd-text-link" href="portal.html">回到首页</a>
+    <a class="hd-text-link" id="open-ending" href="ending.html">看惠东结语</a>
+  </div>
+  </details>
+</main>
 
 <script>
-// 读取用户在风洞页设置的情景
-const params = new URLSearchParams(location.search);
-const opts = {};
-if (params.get('typhoon') === '1') opts.typhoon = {strength: 1, days: 7};
-if (params.get('nuclearDelay')) opts.nuclearDelay = parseInt(params.get('nuclearDelay'));
-if (params.get('shoeFactor')) opts.shoeFactor = parseFloat(params.get('shoeFactor'));
-// 也读localStorage（从windtunnel页带过来）
-try {
-  const saved = JSON.parse(localStorage.getItem('hd_scenario') || '{}');
-  if (saved.typhoon) opts.typhoon = saved.typhoon;
-  if (saved.nuclearDelay) opts.nuclearDelay = saved.nuclearDelay;
-  if (saved.shoeFactor) opts.shoeFactor = saved.shoeFactor;
-} catch(e){}
-
-const base = HT.run(42, 8000, HT.DEFAULT_PATHS);
-const cur = HT.run(42, 8000, HT.DEFAULT_PATHS, opts);
-
-// 更新结果面板
-document.getElementById('rP50').textContent = Math.round(cur.p50) + '亿';
-document.getElementById('rHit').textContent = Math.round(cur.hit) + '%';
-document.getElementById('rRange').textContent = Math.round(cur.p10) + '–' + Math.round(cur.p90) + '亿';
-
-// 我的实验结论
-const sceneName = opts.typhoon ? '台风冲击' : opts.nuclearDelay ? '核电延迟' : opts.shoeFactor ? '女鞋品牌化' : '基准情景';
-const diffHit = Math.round(cur.hit - base.hit);
-const diffP50 = Math.round(cur.p50 - base.p50);
-document.getElementById('myCon').innerHTML =
-  '当前情景：<b>' + sceneName + '</b>；2030达标率 <b>' + Math.round(cur.hit) + '%</b>（基准 ' + Math.round(base.hit) + '%，' + (diffHit>=0?'+':'') + diffHit + ' 个百分点），' +
-  '中位产值 <b>' + Math.round(cur.p50) + '亿</b>（基准 ' + Math.round(base.p50) + '亿，' + (diffP50>=0?'+':'') + diffP50 + '亿）。<br>' +
-  '不确定区间 ' + Math.round(cur.p10) + '–' + Math.round(cur.p90) + '亿。' +
-  (opts.typhoon ? ' 台风为脉冲冲击，灾后1-2年恢复。' : '');
-
-// 四情景对比
-const scenDefs = [
-  {name: '基准', opts: {}, color: 'g'},
-  {name: '台风脉冲', opts: {typhoon: {strength: 1, days: 7}}, color: 'r'},
-  {name: '核电延迟1年', opts: {nuclearDelay: 1}, color: 'y'},
-  {name: '台风+核电叠加', opts: {typhoon: {strength: 1, days: 7}, nuclearDelay: 1}, color: 'r'}
-];
-const sg = document.getElementById('scenGrid');
-scenDefs.forEach(s => {
-  const r = HT.run(42, 8000, HT.DEFAULT_PATHS, s.opts);
-  const card = document.createElement('div');
-  card.className = 'scen-card ' + s.color;
-  const isCur = JSON.stringify(Object.keys(s.opts).sort()) === JSON.stringify(Object.keys(opts).sort()) &&
-    JSON.stringify(s.opts) === JSON.stringify(opts.typhoon || opts.nuclearDelay ? JSON.parse(localStorage.getItem('hd_scenario')||'{}') : s.opts);
-  card.innerHTML =
-    '<div class="name">' + s.name + (isCur ? ' ·你的选择' : '') + '</div>' +
-    '<div class="hit">' + Math.round(r.hit) + '%</div>' +
-    '<div class="p50">中位 ' + Math.round(r.p50) + '亿</div>' +
-    '<div class="rng">' + Math.round(r.p10) + '–' + Math.round(r.p90) + '</div>';
-  sg.appendChild(card);
+const details = document.getElementById('report-details');
+details.addEventListener('toggle', function prepareDetails() {
+  if (!details.open) return;
+  details.removeEventListener('toggle', prepareDetails);
+  renderReportDetails(HDScenario.run(HDScenario.reportConditions()));
 });
 
-// 岸线博弈图
-const coastData = [
-  {name: '白盆珠/安墩\n山区', value: 3, itemStyle: {color: '#64748b'}},
-  {name: '稔山\n马铃薯/高铁', value: 6, itemStyle: {color: '#a3e635'}},
-  {name: '巽寮湾\n390万游客', value: 15, itemStyle: {color: '#fbbf24'}},
-  {name: '海龟湾\n生态红线', value: 8, itemStyle: {color: '#34d399'}},
-  {name: '双月湾\n春节34万', value: 14, itemStyle: {color: '#fbbf24'}},
-  {name: '太平岭核电\n1200亿投资', value: 18, itemStyle: {color: '#0891b2'}},
-  {name: 'LNG接收站\n400万吨/年', value: 10, itemStyle: {color: '#0e7490'}},
-  {name: '海上风电\n113亿', value: 9, itemStyle: {color: '#22d3ee'}},
-  {name: '赤岸蚝\n5000亩', value: 5, itemStyle: {color: '#fb923c'}},
-  {name: '黄埠/吉隆\n女鞋122亿', value: 12, itemStyle: {color: '#ec4899'}}
-];
-echarts.init(document.getElementById('coast')).setOption({
-  backgroundColor: 'transparent',
-  grid: {left: 80, right: 40, top: 30, bottom: 60},
-  xAxis: {type: 'category', data: coastData.map(d => d.name), axisLabel: {color: '#cbd5e1', fontSize: 10, interval: 0, rotate: 0}, axisLine: {lineStyle: {color: '#1c2739'}}},
-  yAxis: {type: 'value', name: '岸线压力/贡献', axisLabel: {color: '#7c8b99'}, splitLine: {lineStyle: {color: '#102a33'}}},
-  series: [{
-    type: 'bar', barWidth: '55%',
-    data: coastData,
-    label: {show: true, position: 'top', color: '#e2e8f0', fontSize: 9}
-  }],
-  tooltip: {trigger: 'axis'}
-});
+function renderReportDetails(current) {
+  const base = HDScenario.run(HDScenario.baseline);
 
-// 双分布曲线（平年 vs 台风年）
-function hist(data, bins) {
-  const min = Math.min(...data), max = Math.max(...data);
-  const step = (max - min) / bins;
-  const counts = new Array(bins).fill(0);
-  data.forEach(v => {
-    const i = Math.min(bins - 1, Math.floor((v - min) / step));
-    counts[i]++;
+  // 四情景对比
+  const scenDefs = [
+    {name: '基准', conditions: HDScenario.baseline, color: 'g'},
+    {name: '台风停业 7 天', conditions: HDScenario.storm, color: 'r'},
+    {name: '核电延迟 1 年', conditions: {...HDScenario.baseline, delay: 1}, color: 'y'},
+    {name: '台风与核电延期叠加', conditions: {...HDScenario.storm, delay: 1}, color: 'r'}
+  ];
+  const sg = document.getElementById('scenGrid');
+  scenDefs.forEach(s => {
+    const run = HDScenario.run(s.conditions);
+    const r = run.summary;
+    const isCur = run.token === current.token;
+    const card = document.createElement('div');
+    card.className = 'scen-card ' + s.color + (isCur ? ' cur' : '');
+    card.innerHTML =
+      '<div class="name">' + s.name + (isCur ? ' ·你的选择' : '') + '</div>' +
+      '<div class="hit">' + Math.round(r.hit) + '%</div>' +
+      '<div class="p50">中位 ' + Math.round(r.p50) + '亿</div>' +
+      '<div class="rng">' + Math.round(r.p10) + '–' + Math.round(r.p90) + '</div>';
+    sg.appendChild(card);
   });
-  return counts.map((c, i) => [(min + i * step + step/2).toFixed(0), c]);
-}
-const baseHist = hist(base.rawResults, 40);
-const typhoonHist = hist(cur.rawResults, 40);
-echarts.init(document.getElementById('dualDist')).setOption({
-  backgroundColor: 'transparent',
-  grid: {left: 50, right: 20, top: 30, bottom: 40},
-  xAxis: {type: 'value', name: '亿元', axisLabel: {color: '#7c8b99'}, splitLine: {lineStyle: {color: '#102a33'}}},
-  yAxis: {type: 'value', name: '频次', axisLabel: {color: '#7c8b99'}, splitLine: {lineStyle: {color: '#102a33'}}},
-  series: [
-    {name: '平年（基准）', type: 'line', smooth: true, showSymbol: false, data: baseHist, lineStyle: {color: '#22d3ee', width: 2}, areaStyle: {color: 'rgba(34,211,238,.2)'}},
-    {name: sceneName, type: 'line', smooth: true, showSymbol: false, data: typhoonHist, lineStyle: {color: '#ef4444', width: 2}, areaStyle: {color: 'rgba(239,68,68,.2)'}}
-  ],
-  legend: {textStyle: {color: '#9aa9bd', fontSize: 11}, top: 0},
-  tooltip: {trigger: 'axis'}
-});
 
-// 台风V型曲线
-const tc = HT.typhoonCurve(1, 7);
-echarts.init(document.getElementById('typhoonCurve')).setOption({
-  backgroundColor: 'transparent',
-  grid: {left: 50, right: 20, top: 30, bottom: 40},
-  xAxis: {type: 'category', data: tc.weeks, axisLabel: {color: '#7c8b99'}},
-  yAxis: {type: 'value', name: '客流损失率(%)', axisLabel: {color: '#7c8b99'}, splitLine: {lineStyle: {color: '#102a33'}}},
-  series: [{
-    type: 'line', smooth: true, data: tc.loss,
-    lineStyle: {color: '#f87171', width: 3},
-    areaStyle: {color: 'rgba(248,113,113,.25)'},
-    markLine: {data: [{yAxis: 0, lineStyle: {color: '#22d3ee', type: 'dashed'}}], label: {formatter: '正常'}}
-  }],
-  tooltip: {trigger: 'axis'}
-});
-
-// 敏感性龙卷风
-function p50off(idx) {
-  const paths = HT.DEFAULT_PATHS.map((p, j) => j === idx ? Object.assign({}, p, {mu: 0}) : p);
-  return HT.run(42, 8000, paths).p50;
-}
-const drivers = [
-  ['清洁能源落空', p50off(0)],
-  ['新材料落空', p50off(1)],
-  ['滨海旅游落空', p50off(2)],
-  ['女鞋落空', p50off(3)],
-  ['农渔落空', p50off(4)]
-];
-const rows = drivers.map(([l, p]) => ({l, d: Math.round(base.p50 - p)})).sort((a, b) => a.d - b.d);
-echarts.init(document.getElementById('tornado')).setOption({
-  backgroundColor: 'transparent',
-  grid: {left: 110, right: 50, top: 20, bottom: 30},
-  xAxis: {type: 'value', name: '中位数少多少(亿)', nameTextStyle: {color: '#7c8b99'}, axisLabel: {color: '#7c8b99'}, splitLine: {lineStyle: {color: '#102a33'}}},
-  yAxis: {type: 'category', data: rows.map(r => r.l), axisLabel: {color: '#cbd5e1', fontSize: 11}},
-  series: [{
-    type: 'bar', barWidth: 14, data: rows.map(r => r.d),
-    itemStyle: {color: new echarts.graphic.LinearGradient(0,0,1,0,[{offset:0,color:'#0e7490'},{offset:1,color:'#22d3ee'}])},
-    label: {show: true, position: 'right', formatter: '{c}亿', color: '#cbd5e1', fontSize: 10}
-  }],
-  tooltip: {trigger: 'axis'}
-});
-
-// 就业密度对比
-const vt = HT.valueTable();
-echarts.init(document.getElementById('valueJobs')).setOption({
-  backgroundColor: 'transparent',
-  grid: {left: 50, right: 20, top: 30, bottom: 60},
-  xAxis: {type: 'category', data: vt.jobs.map(x => x.name), axisLabel: {color: '#cbd5e1', fontSize: 10, interval: 0, rotate: 20}},
-  yAxis: {type: 'value', name: '人/亿', axisLabel: {color: '#7c8b99'}, splitLine: {lineStyle: {color: '#102a33'}}},
-  series: [{
-    type: 'bar', barWidth: '50%',
-    data: vt.jobs.map(x => ({value: x.val, itemStyle: {color: x.color}})),
-    label: {show: true, position: 'top', color: '#e2e8f0', fontSize: 10}
-  }]
-});
-
-window.addEventListener('resize', () => {
-  ['coast','dualDist','typhoonCurve','tornado','valueJobs'].forEach(id => {
-    const inst = echarts.getInstanceByDom(document.getElementById(id));
-    if (inst) inst.resize();
+  // 岸线博弈图
+  const coastData = [
+    {name: '白盆珠/安墩\n山区', value: 3, itemStyle: {color: '#64748b'}},
+    {name: '稔山\n马铃薯/高铁', value: 6, itemStyle: {color: '#a3e635'}},
+    {name: '巽寮湾\n390万游客', value: 15, itemStyle: {color: '#fbbf24'}},
+    {name: '海龟湾\n生态红线', value: 8, itemStyle: {color: '#34d399'}},
+    {name: '双月湾\n春节34万', value: 14, itemStyle: {color: '#fbbf24'}},
+    {name: '太平岭核电\n1200亿投资', value: 18, itemStyle: {color: '#0891b2'}},
+    {name: 'LNG接收站\n400万吨/年', value: 10, itemStyle: {color: '#0e7490'}},
+    {name: '海上风电\n113亿', value: 9, itemStyle: {color: '#22d3ee'}},
+    {name: '赤岸蚝\n5000亩', value: 5, itemStyle: {color: '#fb923c'}},
+    {name: '黄埠/吉隆\n女鞋122亿', value: 12, itemStyle: {color: '#ec4899'}}
+  ];
+  echarts.init(document.getElementById('coast')).setOption({
+    backgroundColor: 'transparent',
+    grid: {left: 80, right: 40, top: 30, bottom: 60},
+    xAxis: {type: 'category', data: coastData.map(d => d.name), axisLabel: {color: '#cbd5e1', fontSize: 10, interval: 0, rotate: 0}, axisLine: {lineStyle: {color: '#1c2739'}}},
+    yAxis: {type: 'value', name: '岸线压力/贡献', axisLabel: {color: '#7c8b99'}, splitLine: {lineStyle: {color: '#102a33'}}},
+    series: [{
+      type: 'bar', barWidth: '55%',
+      data: coastData,
+      label: {show: true, position: 'top', color: '#e2e8f0', fontSize: 9}
+    }],
+    tooltip: {trigger: 'axis'}
   });
-});
+
+  // 同一分组宽度比较基准与本次情景
+  echarts.init(document.getElementById('dualDist')).setOption({
+    backgroundColor: 'transparent',
+    grid: {left: 50, right: 20, top: 30, bottom: 40},
+    xAxis: {type: 'value', name: '亿元', axisLabel: {color: '#7c8b99'}, splitLine: {lineStyle: {color: '#102a33'}}},
+    yAxis: {type: 'value', name: '频次', axisLabel: {color: '#7c8b99'}, splitLine: {lineStyle: {color: '#102a33'}}},
+    series: [
+      {name: '基准', type: 'line', showSymbol: false, data: base.histogram, lineStyle: {color: '#22d3ee', width: 2}, areaStyle: {color: 'rgba(34,211,238,.2)'}},
+      {name: '本次情景', type: 'line', showSymbol: false, data: current.histogram, lineStyle: {color: '#ffac88', width: 2}, areaStyle: {color: 'rgba(255,172,136,.2)'}}
+    ],
+    legend: {textStyle: {color: '#9aa9bd', fontSize: 11}, top: 0},
+    tooltip: {trigger: 'axis'}
+  });
+
+  // 滨海客流恢复曲线
+  const flowConditions = current.conditions.strength ? current.conditions : HDScenario.storm;
+  const {flow} = HDScenario.stormEffects(flowConditions);
+  document.getElementById('report-flow-caption').textContent =
+    (current.conditions.strength ? '本次台风情景' : '台风示例') + ' · 停业 ' + flowConditions.days + ' 天 · 正常客流为 100%';
+  echarts.init(document.getElementById('typhoonCurve')).setOption({
+    backgroundColor: 'transparent',
+    grid: {left: 50, right: 20, top: 30, bottom: 40},
+    xAxis: {type: 'category', data: flow.map((_, week) => '第 ' + week + ' 周'), axisLabel: {color: '#7c8b99'}},
+    yAxis: {type: 'value', name: '滨海客流（%）', axisLabel: {color: '#7c8b99'}, splitLine: {lineStyle: {color: '#102a33'}}},
+    series: [{
+      type: 'line', data: flow,
+      lineStyle: {color: '#f87171', width: 3},
+      areaStyle: {color: 'rgba(248,113,113,.25)'},
+      markLine: {data: [{yAxis: 100, lineStyle: {color: '#22d3ee', type: 'dashed'}}], label: {formatter: '正常'}}
+    }],
+    tooltip: {trigger: 'axis'}
+  });
+
+  // 敏感性龙卷风
+  function p50off(idx) {
+    const paths = HT.DEFAULT_PATHS.map((p, j) => j === idx ? Object.assign({}, p, {mu: 0}) : p);
+    return HT.run(42, 10000, paths).p50;
+  }
+  const drivers = [
+    ['清洁能源落空', p50off(0)],
+    ['新材料落空', p50off(1)],
+    ['滨海旅游落空', p50off(2)],
+    ['女鞋落空', p50off(3)],
+    ['农渔落空', p50off(4)]
+  ];
+  const rows = drivers.map(([l, p]) => ({l, d: Math.round(base.summary.p50 - p)})).sort((a, b) => a.d - b.d);
+  echarts.init(document.getElementById('tornado')).setOption({
+    backgroundColor: 'transparent',
+    grid: {left: 110, right: 50, top: 20, bottom: 30},
+    xAxis: {type: 'value', name: '中位数少多少(亿)', nameTextStyle: {color: '#7c8b99'}, axisLabel: {color: '#7c8b99'}, splitLine: {lineStyle: {color: '#102a33'}}},
+    yAxis: {type: 'category', data: rows.map(r => r.l), axisLabel: {color: '#cbd5e1', fontSize: 11}},
+    series: [{
+      type: 'bar', barWidth: 14, data: rows.map(r => r.d),
+      itemStyle: {color: new echarts.graphic.LinearGradient(0,0,1,0,[{offset:0,color:'#0e7490'},{offset:1,color:'#22d3ee'}])},
+      label: {show: true, position: 'right', formatter: '{c}亿', color: '#cbd5e1', fontSize: 10}
+    }],
+    tooltip: {trigger: 'axis'}
+  });
+
+  // 就业密度对比
+  const vt = HT.valueTable();
+  echarts.init(document.getElementById('valueJobs')).setOption({
+    backgroundColor: 'transparent',
+    grid: {left: 50, right: 20, top: 30, bottom: 60},
+    xAxis: {type: 'category', data: vt.jobs.map(x => x.name), axisLabel: {color: '#cbd5e1', fontSize: 10, interval: 0, rotate: 20}},
+    yAxis: {type: 'value', name: '人/亿', axisLabel: {color: '#7c8b99'}, splitLine: {lineStyle: {color: '#102a33'}}},
+    series: [{
+      type: 'bar', barWidth: '50%',
+      data: vt.jobs.map(x => ({value: x.val, itemStyle: {color: x.color}})),
+      label: {show: true, position: 'top', color: '#e2e8f0', fontSize: 10}
+    }]
+  });
+
+  window.addEventListener('resize', () => {
+    ['coast','dualDist','typhoonCurve','tornado','valueJobs'].forEach(id => {
+      const inst = echarts.getInstanceByDom(document.getElementById(id));
+      if (inst) inst.resize();
+    });
+  });
+}
 </script>
-<script src="relay.js"></script></body></html>
+</body></html>

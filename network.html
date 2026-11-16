@@ -4,10 +4,6 @@
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.65 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
-.nav{position:sticky;top:0;z-index:50;display:flex;gap:5px;align-items:center;padding:9px 14px;background:rgba(8,11,18,.95);border-bottom:1px solid #1b2434;overflow-x:auto}
-.nav b{font-size:14px;margin-right:6px;flex:none;color:#fff}
-.nav a{background:#131c2b;color:#93a4bd;border:1px solid #22304a;padding:6px 12px;border-radius:20px;font-size:12.5px;text-decoration:none;white-space:nowrap;flex:none}
-.nav a.on{background:#0e7490;border-color:#0891b2;color:#fff;font-weight:600}
 .wrap{max-width:1200px;margin:auto;padding:18px}
 
 /* hero */
@@ -61,21 +57,18 @@ svg{display:block;width:100%;height:auto}
 .next{text-align:center;margin:20px 0}
 .next a{background:#0e7490;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block}
 #after{display:none}
-</style></head><body>
+</style><link rel="stylesheet" href="huidong.css">
+</head><body>
 
-<div class="nav">
-  <b>惠东产业风洞</b>
-  <a href="index.html">① 今日话题</a>
-  <a href="town.html">🏘️ 各镇吃喝玩乐</a>
-  <a href="network.html" class="on">② 关系网</a>
-  <a href="who.html">③ 基本面</a>
-  <a href="choices.html">④ 五条路</a>
-  <a href="future.html">⑤ 未来</a>
-  <a href="windtunnel.html">⑥ 风洞</a>
-  <a href="blindspot.html">⑦ 被忽略</a>
-  <a href="report.html">⑧ 报告</a>
-  <a href="ending.html">⑨ 结语</a>
-</div>
+<header class="hd-header">
+  <div class="hd-header-inner">
+    <a class="hd-brand" href="portal.html">惠东产业风洞</a>
+    <nav aria-label="主导航">
+      <a href="portal.html#huidong">看惠东</a>
+      <a href="windtunnel.html">试情景</a>
+    </nav>
+  </div>
+</header>
 
 <div class="wrap">
 

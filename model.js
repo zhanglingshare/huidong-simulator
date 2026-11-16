@@ -169,6 +169,7 @@ const HT = {
       p90: this.quantile(sorted, 0.90),
       hit: sorted.filter(x => x >= target).length / N * 100,
       coefs: contribs.map(c => Math.abs(this.corr(c, raw))),
+      pathMeans: Object.fromEntries(P.map(path => [path.name, path.mu])),
       results: sorted,
       rawResults: raw,
       typhoon

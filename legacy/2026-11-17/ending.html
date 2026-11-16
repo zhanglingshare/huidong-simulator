@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="先按直觉投一票，再从惠东的公开数据看游客、就业和工业为什么走出了不同的结果。">
+<title>结语 · 惠东产业风洞</title>
+<link rel="stylesheet" href="huidong-stage.css">
+<style>
+.question-page { --aqua: var(--mint); --amber: var(--ember); }
+.next-stage { font-size: 13px; }
+.reading { --value-ink: var(--aqua); --fill: var(--rise-fill); --origin: left }
+.reading.down { --value-ink: var(--amber); --fill: var(--fall-fill); --origin: right }
+.value { color: var(--value-ink); font-variant-numeric: tabular-nums }
+.track {
+  position: relative; display: block; height: 25px; border-radius: 3px;
+  background: repeating-linear-gradient(to right, #7dd3fc19 0 1px, transparent 1px 25%);
+  border-right: 1px solid #7dd3fc19;
+}
+.track .bar {
+  position: absolute; left: 0; top: 50%; width: var(--length); height: min(60%, 15px);
+  margin-top: calc(-1 * min(30%, 7.5px)); border-radius: 3px; background: var(--fill); transform-origin: var(--origin);
+  animation: grow-x .55s cubic-bezier(.17,.66,.21,1) both;
+}
+.chart {
+  min-width: 0; margin: 12px 0 0; padding: clamp(13px, 1.6vw, 20px);
+  border: 1px solid var(--line); border-radius: 13px;
+  background: linear-gradient(155deg, #0d2530, #0a1a24 85%);
+}
+.chart-caption { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 2px 9px }
+.chart-caption h3 { margin: 0; font-size: clamp(16px, 1.55vw, 22px); line-height: 1.23; letter-spacing: -.02em }
+.scope { color: var(--muted); font-size: 11.5px }
+.metric-row {
+  display: grid; grid-template-columns: minmax(94px, 1.26fr) minmax(63px, 3fr) 76px;
+  align-items: center; gap: 9px; width: 100%; min-height: 45px; padding-inline: 4px;
+  border: 1px solid transparent; border-radius: 8px; background: transparent; text-align: left;
+}
+.metric-row + .metric-row { margin-top: 4px }
+.metric-row:hover { background: #7dd3fc10 }
+.metric-row .metric-name { font-weight: 680; font-size: clamp(12px, 1.03vw, 15px); line-height: 1.2 }
+.metric-row .value { font-size: clamp(16px, 2vw, 24px); text-align: right; letter-spacing: -.055em; white-space: nowrap }
+.chart-note, .chart-hint { margin: 9px 0 0; color: var(--muted); font-size: 11.5px }
+.amount-scale { display: flex; justify-content: space-between; margin: 7px 0 4px; color: var(--muted); font-size: 10.5px; font-variant-numeric: tabular-nums }
+.scenario {
+  display: grid; grid-template-columns: 1.23fr 1fr; gap: 16px; margin-top: 14px;
+  padding: clamp(13px, 1.8vw, 23px); border: 1px solid var(--line); border-radius: 13px;
+  background: linear-gradient(155deg, #0d2530, #0a1a24 78%);
+}
+.scenario h3 { margin: 0; font-size: clamp(17px, 1.5vw, 22px) }
+.scenario-setup, .scenario-summary, .scenario-goal { margin: 4px 0 8px; color: var(--muted); font-size: 13px }
+.case-buttons { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 9px }
+.case-buttons button {
+  min-height: 44px; padding: 7px 12px; border: 1px solid #3a5a66; border-radius: 7px;
+  background: #0c1c26; color: var(--ink); font-size: 13px; font-weight: 730;
+}
+.case-buttons button:hover, .case-buttons button[aria-pressed="true"] { border-color: var(--aqua); background: #0e3a4a }
+.path { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 13px; padding: 0; list-style: none; margin: 0 }
+.path li {
+  position: relative; display: grid; place-items: center; min-height: 48px; padding: 5px 4px;
+  border: 1px solid #2a4a56; border-radius: 6px; background: #0a141f; text-align: center; font-size: 13px; font-weight: 700;
+}
+.path li:last-child { background: #0e3a4a; border-color: #5eead4 }
+.path[data-current="1"] li:last-child { background: #78350f; border-color: var(--amber) }
+.path li + li::before { position: absolute; left: -12px; content: "›"; color: var(--aqua); font-size: 17px }
+.investigate { align-self: stretch; padding: 11px 12px; border-left: 3px solid var(--aqua); border-radius: 0 8px 8px 0; background: #0a1a24 }
+.investigate-label { margin: 0; color: var(--aqua); font-size: 12px; font-weight: 750 }
+.investigate h4 { margin: 4px 0 0; font-size: clamp(16px, 1.5vw, 22px); line-height: 1.38 }
+.investigate details p { margin: 0 0 7px; color: var(--muted); font-size: 13px }
+summary { width: fit-content; min-height: 42px; padding: 10px 3px 8px 0; color: var(--muted); cursor: pointer; font-size: 13px }
+.sources { margin-top: 4px }
+.sources ul { margin: 0; padding-left: 22px; font-size: 13px }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0 }
+@keyframes grow-x { from { transform: scaleX(0) } to { transform: scaleX(1) } }
+@media (max-width: 825px) {
+  .scenario { grid-template-columns: 1fr }
+}
+@media (max-width: 620px) {
+  .chart { border-radius: 9px }
+  .metric-row { grid-template-columns: minmax(70px, 1.24fr) minmax(55px, 2.3fr) 58px; gap: 6px; padding-inline: 2px }
+  .path li { font-size: 12px }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important }
+}
+</style>
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="惠东的游客、就业、工厂订单，哪一道你会猜中？">
+<meta property="og:description" content="打开选一次，和朋友对答案。">
+<meta property="og:image" content="https://zhanglingshare.github.io/huidong-simulator/legacy/2026-11-17/huidong-stage.jpg">
+<link rel="stylesheet" href="huidong-duel.css?v=1">
+<script type="module" src="huidong-duel.js?v=1"></script>
+</head>
+<body data-duel-page="ending">
+<div class="nav">
+  <b>惠东产业风洞</b>
+  <a href="index.html">① 今日话题</a>
+  <a href="town.html">🏘️ 各镇吃喝玩乐</a>
+  <a href="network.html">② 关系网</a>
+  <a href="who.html">③ 基本面</a>
+  <a href="choices.html">④ 五条路</a>
+  <a href="future.html">⑤ 未来</a>
+  <a href="windtunnel.html">⑥ 风洞</a>
+  <a href="blindspot.html">⑦ 被忽略</a>
+  <a href="report.html">⑧ 报告</a>
+  <a href="ending.html" class="on" aria-current="page">⑨ 结语</a>
+</div>
+<main class="wrap question-page">
+  <header class="page-head">
+    <h1>结语</h1>
+    <div class="subject-switch" id="subject-switch" role="group" aria-label="选择一个追问">
+      <button type="button" data-question="tourists" aria-pressed="true">游客的钱</button>
+      <button type="button" data-question="jobs" aria-pressed="false">就业的饭碗</button>
+      <button type="button" data-question="orders" aria-pressed="false">工厂的订单</button>
+    </div>
+  </header>
+
+  <section class="arena" id="guess-stage" data-open="false" aria-labelledby="trial-title">
+    <div class="story-prompt">
+      <p class="prompt-scope" id="trial-scope">2025 年 · 惠东</p>
+      <h2 class="stage-question" id="trial-title">游客破 1800 万，<br><em>过夜能过半吗？</em></h2>
+      <p class="stage-instruction">先凭直觉选一次。选完揭开数据。</p>
+      <div class="vote-buttons" id="vote-buttons" role="group" aria-label="选你的判断">
+        <button type="button" data-vote="0" aria-controls="trial-reveal" aria-pressed="false">能过半</button>
+        <button type="button" data-vote="1" aria-controls="trial-reveal" aria-pressed="false">没过半</button>
+      </div>
+      <p class="vote-outcome" id="vote-outcome" role="status"></p>
+      <button class="retake" id="retake" type="button" hidden>收起答案，再猜一遍</button>
+      <section id="friend-duel" class="friend-duel duel-native" aria-label="邀请朋友一起选" hidden></section>
+    </div>
+    <div class="scene-card">
+      <div class="shutter" id="trial-shutter" aria-hidden="true"><span class="shutter-mark">?</span></div>
+      <div class="reveal-pane" id="trial-reveal" hidden>
+        <p class="scene-note" id="trial-note">2025 年惠东 · 公开口径</p>
+        <div class="impact-pair" id="impact-pair"></div>
+        <p class="real-insight" id="trial-insight"></p>
+      </div>
+    </div>
+    <span class="arena-image-note">情景配图 · AI 生成</span>
+  </section>
+
+  <article id="question-detail" class="question-detail after-play" aria-labelledby="question-title" hidden>
+    <h2 class="sr-only" id="question-title"></h2>
+    <section class="scenario" aria-labelledby="scenario-title">
+      <div class="scenario-main">
+        <h3 id="scenario-title">换个情景，你会追问什么？</h3>
+        <p class="scenario-setup" id="scenario-setup"></p>
+        <div class="case-buttons" id="case-buttons" role="group" aria-label="选择一种可能情况"></div>
+        <ol class="path" id="case-path" aria-label="沿着这件事往下看">
+          <li><span></span></li><li><span></span></li><li><span></span></li>
+        </ol>
+        <p class="scenario-summary" id="case-summary" role="status"></p>
+      </div>
+      <div class="investigate">
+        <p class="investigate-label">接着追问</p>
+        <h4 id="follow-question"></h4>
+        <details id="case-evidence">
+          <summary>要核对哪些记录</summary>
+          <p id="case-record"></p>
+          <p><a href="network.html">回看产业关系图 →</a></p>
+        </details>
+      </div>
+    </section>
+
+    <div id="lead-chart"></div>
+    <details class="sources" id="sources">
+      <summary>数据出处</summary>
+      <ul id="source-list"></ul>
+    </details>
+    <p class="next-stage"><a href="report.html">去《分析报告》试试五年能不能走到 1200 亿 →</a></p>
+  </article>
+
+  <noscript><p>惠东 2025 年游客人次 1,803 万、过夜 809 万；规上工业增加值增长 12.1%。启用 JavaScript 后可选择观点并查看明细图。</p></noscript>
+  <p class="sign">惠东产业风洞 · 张凌 博士 · MIT</p>
+</main>
+<script type="application/json" id="question-data">
+{
+  "sources": {
+    "report": { "label": "分析报告 · 2025 统计公报口径", "url": "report.html" },
+    "who": { "label": "基本面 · 三次产业与人口", "url": "who.html" },
+    "choices": { "label": "五条路 · 就业密度模型估算", "url": "choices.html" },
+    "windtunnel": { "label": "风洞 · 台风冲击与恢复", "url": "windtunnel.html" }
+  },
+  "topics": {
+    "tourists": {
+      "label": "游客的钱",
+      "scope": "2025 年 · 惠东",
+      "headline": ["游客破 1800 万，", "过夜能过半吗？"],
+      "featured": [
+        { "label": "游客人次", "value": "1803 万", "sign": "+2.7%", "color": "#2dd4bf" },
+        { "label": "过夜游客", "value": "809 万", "sign": "44.9%", "color": "#7dd3fc" }
+      ],
+      "guess": {
+        "title": ["游客破 1800 万，", "过夜能过半吗？"],
+        "choices": ["能过半", "没过半"],
+        "correct": 1,
+        "insight": "过夜游客约 809 万、占四成多，当天往返的多数只留下白天的消费。接着要看住宿一晚和当天来回，分别把钱留在哪一环。"
+      },
+      "chart": {
+        "title": "人来了，钱和过夜跟上了吗？",
+        "scope": "2025 年 · 惠东",
+        "max": 2000,
+        "rows": [
+          { "label": "接待游客", "value": "1803 万", "amount": 1803, "down": false },
+          { "label": "过夜游客", "value": "809 万", "amount": 809, "down": false },
+          { "label": "旅游综合收入", "value": "135 亿", "amount": 135, "down": false }
+        ],
+        "note": "游客人次与旅游收入为 2025 年全县口径；过夜游客约 809 万人次，占接待量的四成多。"
+      },
+      "setup": "假如你周末到双月湾，选一种走法。",
+      "scenarios": [
+        {
+          "label": "当天来回",
+          "steps": ["游客来了", "当天返程", "看白天的消费"],
+          "summary": "当天来回的人也可能在这里吃饭、买东西。可以先问附近小店，来客多的周末，实收有没有一起增加？",
+          "question": "同一片区，同类周末，客流增加时，附近餐馆和小店的收入变了多少？",
+          "record": "对照同一片区的到访人次与餐饮、零售商户的实收样本。按节假日和普通周末分别比较。"
+        },
+        {
+          "label": "多住一晚",
+          "steps": ["游客来了", "住一晚上", "看住宿和晚间消费"],
+          "summary": "住一晚多了住宿和晚餐的消费机会。要看游客在哪里住、在哪里吃，以及是哪家店收到这笔钱。",
+          "question": "在这片区住一晚的游客，比当天往返的人多在哪里花钱？",
+          "record": "对同一片区的游客按是否在当地留宿分组，分别查看住宿、餐饮和购物开支，以及收款商户所在镇街。"
+        }
+      ],
+      "sourceKeys": ["report", "who"]
+    },
+    "jobs": {
+      "label": "就业的饭碗",
+      "scope": "五条路 · 模型估算",
+      "headline": ["同样投一亿元，", "哪个产业带回的饭碗多？"],
+      "featured": [
+        { "label": "清洁能源", "value": "350 人/亿", "sign": "大项目", "color": "#0891b2" },
+        { "label": "特色农渔", "value": "3000 人/亿", "sign": "小而密", "color": "#34d399" }
+      ],
+      "guess": {
+        "title": ["同样投一亿元，", "哪个产业带回的饭碗多？"],
+        "choices": ["大项目（能源）最多", "小而密的产业最多"],
+        "correct": 1,
+        "insight": "特色农渔、女鞋、滨海旅游每亿元带回的饭碗，约是清洁能源等大项目的 6–9 倍。就业密度为模型估算，非官方统计。"
+      },
+      "chart": {
+        "title": "每亿元带多少饭碗？",
+        "scope": "五条路就业密度 · 人/亿元 · 模型估算",
+        "max": 3200,
+        "rows": [
+          { "label": "清洁能源", "value": "350", "amount": 350, "down": false },
+          { "label": "新材料", "value": "600", "amount": 600, "down": false },
+          { "label": "滨海旅游", "value": "1600", "amount": 1600, "down": false },
+          { "label": "女鞋时尚", "value": "2400", "amount": 2400, "down": false },
+          { "label": "特色农渔", "value": "3000", "amount": 3000, "down": false }
+        ],
+        "note": "就业密度是模型内对各路径单位产出带就业的粗估，用于比较“大项目”与“小而密”产业的结构差异，非官方就业统计。"
+      },
+      "setup": "假如家附近有项目要开工，选一步往下看。",
+      "scenarios": [
+        {
+          "label": "看大项目",
+          "steps": ["大项目落地", "看带动岗位", "查谁去上班"],
+          "summary": "核电、海上风电带动的直接岗位偏少，但建设期和配套链的带动不一样。要看岗位给谁、班次几点。",
+          "question": "大项目带动的直接岗位，本地人卡在报名、技能还是通勤？",
+          "record": "按镇街和工种对照岗位数、报名数和录用数，对核电建设、风电运维岗位单独核对技能门槛与通勤可达性。"
+        },
+        {
+          "label": "看千家万户",
+          "steps": ["小店和渔排", "看旺季现金流", "查保险与复产"],
+          "summary": "旅游、农渔的饭碗多而散，旺季一阵风来、一阵风走。要看台风过后，保险和复产能不能接住这一批人。",
+          "question": "台风“红霞”过后，民宿主和养殖户的复产，实际用了多少天？",
+          "record": "对台风影响区的民宿、海鲜档、渔排做样本回访，对照停业天数、保险赔付与复产时间。"
+        }
+      ],
+      "sourceKeys": ["choices", "windtunnel"]
+    },
+    "orders": {
+      "label": "工厂的订单",
+      "scope": "2025 年 · 口径见注",
+      "headline": ["工业在提速，", "投资却在调整？"],
+      "featured": [
+        { "label": "规上工业增加值", "value": "+12.1%", "sign": "产出", "color": "#2dd4bf" },
+        { "label": "工业投资", "value": "−36.8%", "sign": "投入", "color": "#fbbf24" }
+      ],
+      "guess": {
+        "title": ["工业在提速，", "投资也在涨？"],
+        "choices": ["产出涨，投资也涨", "产出涨，投资却跌"],
+        "correct": 1,
+        "insight": "规上工业增加值 +12.1%，但工业投资 −36.8%、固定资产投资 −34.0%——产出在涨、新增投入在收，这是存量发力、增量观望的换挡。接着查新产能何时能按时出货。"
+      },
+      "chart": {
+        "title": "产出在涨，新投入在变什么？",
+        "scope": "2025 年 · %（口径见注）",
+        "max": 40,
+        "rows": [
+          { "label": "规上工业增加值", "value": "+12.1%", "amount": 12.1, "down": false },
+          { "label": "规上工业总产值", "value": "+13.6%", "amount": 13.6, "down": false },
+          { "label": "工业投资", "value": "−36.8%", "amount": 36.8, "down": true },
+          { "label": "固定资产投资", "value": "−34.0%", "amount": 34.0, "down": true }
+        ],
+        "note": "均为 2025 年全年口径（惠东县统计公报）。增加值是产出增量、投资是资本形成，概念不同，须分开看，不可直接相减。"
+      },
+      "setup": "假如一家惠东大厂接到新单，选它去哪找配套。",
+      "scenarios": [
+        {
+          "label": "在本地找配套",
+          "steps": ["大厂接到新单", "本地配套供货", "查本地收到多少"],
+          "summary": "配套厂能接到这一单，接下来要问的是谁供了货，最后有多少货款到了本地企业手里。",
+          "question": "大厂多出来的采购里，有多少实际付给了在惠东生产的配套企业？",
+          "record": "同一批企业按同一季度核对已付款的新增采购，按供货生产地拆分本地与外地，再看两者占比。"
+        },
+        {
+          "label": "向外地找配套",
+          "steps": ["大厂接到新单", "外地配套供货", "查本地缺哪一环"],
+          "summary": "如果这批配套来自外地，可以问当地有没有企业能做，以及差的是工艺、交期还是采购准入。",
+          "question": "同一种配件，本地企业差在哪一步，导致它没有接到单？",
+          "record": "选采购额较大的配件，对照供方的工艺要求、交付记录和本地企业的达标情况，再确定哪一环有缺口。"
+        }
+      ],
+      "sourceKeys": ["report", "who"]
+    }
+  }
+}
+</script>
+<script>
+(() => {
+  'use strict';
+
+  const { topics, sources } = JSON.parse(document.getElementById('question-data').textContent);
+  const wall = document.getElementById('subject-switch');
+  const detail = document.getElementById('question-detail');
+  const questionTitle = document.getElementById('question-title');
+  const leadChart = document.getElementById('lead-chart');
+  const cases = document.getElementById('case-buttons');
+  const path = document.getElementById('case-path');
+  const pathSteps = Array.from(path.querySelectorAll('li span'));
+  const evidence = document.getElementById('case-evidence');
+  const sourceDetails = document.getElementById('sources');
+  const stage = document.getElementById('guess-stage');
+  const shutter = document.getElementById('trial-shutter');
+  const reveal = document.getElementById('trial-reveal');
+  const ballot = document.getElementById('vote-buttons');
+  const verdict = document.getElementById('vote-outcome');
+  const retake = document.getElementById('retake');
+  const selectedCases = new Map();
+  const votes = new Map();
+  const openTopics = new Set();
+  let currentTopic;
+
+  function track(amount, max) {
+    const length = Math.max(0, Math.min(100, amount / max * 100));
+    return `<span class="track" aria-hidden="true" style="--length:${length}%"><i class="bar"></i></span>`;
+  }
+
+  function renderBallot(topic) {
+    const { title, choices } = topic.guess;
+    document.getElementById('trial-title').innerHTML = `${title[0]}<br><em>${title[1]}</em>`;
+    document.getElementById('trial-scope').textContent = topic.scope;
+    ballot.innerHTML = choices.map((choice, index) => `<button type="button" data-vote="${index}" aria-controls="trial-reveal" aria-pressed="false">${choice}</button>`).join('');
+  }
+
+  function showReveal(visible) {
+    const topic = topics[currentTopic];
+    const picked = votes.get(currentTopic);
+    const hasVote = picked !== undefined;
+    stage.dataset.open = String(visible);
+    detail.hidden = !visible;
+    reveal.hidden = !visible;
+    shutter.hidden = visible;
+    retake.hidden = !visible;
+    verdict.textContent = visible && hasVote
+      ? (picked === topic.guess.correct ? '你的判断与这一年的数据对上了。' : '这一年的数据给出了另一边的答案。')
+      : '';
+    verdict.dataset.right = String(hasVote && picked === topic.guess.correct);
+    for (const button of ballot.querySelectorAll('[data-vote]')) {
+      button.setAttribute('aria-pressed', String(visible && Number(button.dataset.vote) === picked));
+    }
+    if (!visible) return;
+    document.getElementById('impact-pair').innerHTML = topic.featured.map(metric => `
+      <div class="impact-stat" style="--stat-ink:${metric.color}">
+        <strong>${metric.value}</strong><span>${metric.label}</span>
+      </div>`
+    ).join('');
+    document.getElementById('trial-insight').textContent = topic.guess.insight;
+  }
+
+  function renderChart(topic) {
+    const chart = topic.chart;
+    const rows = chart.rows.map(row => `
+      <div class="metric-row reading ${row.down ? 'down' : ''}">
+        <span class="metric-name">${row.label}</span>
+        ${track(row.amount, chart.max)}
+        <strong class="value">${row.value}</strong>
+      </div>`
+    ).join('');
+    leadChart.innerHTML = `<figure class="chart">
+      <figcaption class="chart-caption"><h3>${chart.title}</h3><span class="scope">${chart.scope}</span></figcaption>
+      <div class="amount-scale" aria-hidden="true"><span>0</span><span>${chart.max}</span></div>
+      ${rows}
+      ${chart.note ? `<p class="chart-note">${chart.note}</p>` : ''}
+    </figure>`;
+  }
+
+  function renderTopic(key) {
+    const topic = topics[key];
+    currentTopic = key;
+    detail.dataset.topic = key;
+    renderBallot(topic);
+    questionTitle.innerHTML = `${topic.headline[0]}<wbr><span>${topic.headline[1]}</span>`;
+    for (const button of wall.querySelectorAll('[data-question]')) {
+      button.setAttribute('aria-pressed', String(button.dataset.question === key));
+    }
+    renderChart(topic);
+    document.getElementById('scenario-setup').textContent = topic.setup;
+    cases.innerHTML = topic.scenarios.map((scenario, index) =>
+      `<button type="button" data-case="${index}" aria-pressed="false" aria-controls="case-path follow-question">${scenario.label}</button>`
+    ).join('');
+    evidence.open = false;
+    sourceDetails.open = false;
+    document.getElementById('source-list').innerHTML = topic.sourceKeys.map(id => {
+      const { label, url } = sources[id];
+      return `<li><a href="${url}">${label}</a></li>`;
+    }).join('');
+    showCase(key, selectedCases.get(key) ?? 0);
+  }
+
+  function showCase(key, choice) {
+    const topic = topics[key];
+    selectedCases.set(key, choice);
+    const view = topic.scenarios[choice];
+    for (const button of cases.querySelectorAll('[data-case]')) {
+      button.setAttribute('aria-pressed', String(Number(button.dataset.case) === choice));
+    }
+    path.dataset.current = String(choice);
+    pathSteps.forEach((step, index) => { step.textContent = view.steps[index]; });
+    document.getElementById('case-summary').textContent = view.summary;
+    document.getElementById('follow-question').textContent = view.question;
+    document.getElementById('case-record').textContent = view.record;
+  }
+
+  function syncQuestion() {
+    const [key, choice] = location.hash.slice(1).split('/');
+    if (!Object.hasOwn(topics, key)) {
+      renderTopic('tourists');
+      showReveal(false);
+      return;
+    }
+    const visible = choice === '0' || choice === '1';
+    renderTopic(key);
+    if (visible) openTopics.add(key);
+    showCase(key, choice === '1' ? 1 : 0);
+    showReveal(visible);
+  }
+
+  function setAddress(fragment) {
+    if (location.hash !== fragment) history.pushState(null, '', fragment);
+  }
+
+  wall.addEventListener('click', event => {
+    const button = event.target.closest('[data-question]');
+    if (!button) return;
+    const key = button.dataset.question;
+    const choice = selectedCases.get(key) ?? 0;
+    const open = openTopics.has(key);
+    setAddress(open ? `#${key}/${choice}` : `#${key}`);
+    renderTopic(key);
+    showCase(key, choice);
+    showReveal(open);
+  });
+  ballot.addEventListener('click', event => {
+    const button = event.target.closest('[data-vote]');
+    if (!button) return;
+    votes.set(currentTopic, Number(button.dataset.vote));
+    openTopics.add(currentTopic);
+    setAddress(`#${currentTopic}/${selectedCases.get(currentTopic)}`);
+    showReveal(true);
+  });
+  retake.addEventListener('click', () => {
+    votes.delete(currentTopic);
+    openTopics.delete(currentTopic);
+    history.replaceState(null, '', `#${currentTopic}`);
+    showReveal(false);
+    ballot.querySelector('button').focus();
+  });
+  cases.addEventListener('click', event => {
+    const button = event.target.closest('[data-case]');
+    if (!button) return;
+    const choice = Number(button.dataset.case);
+    setAddress(`#${currentTopic}/${choice}`);
+    showCase(currentTopic, choice);
+    showReveal(true);
+  });
+  window.addEventListener('popstate', syncQuestion);
+  window.addEventListener('hashchange', syncQuestion);
+  syncQuestion();
+})();
+</script>
+<div class="likebar">
+  <button type="button" onclick="likePage()">👍 <span id="pcount">0</span></button>
+  <button type="button" data-duel-footer>发这题给朋友</button>
+</div>
+<style>
+.likebar{display:flex;justify-content:center;align-items:center;margin:24px 0 8px;background:rgba(10,20,31,.96);border:1px solid #0891b2;border-radius:24px;padding:9px 20px;gap:22px}
+.likebar button{background:none;border:none;color:#e6edf3;font-size:14px;cursor:pointer}
+.likebar button:active{transform:scale(1.15)}
+</style>
+<script>
+(function(){var k="like_"+location.pathname;var n=parseInt(localStorage.getItem(k)||"0");document.getElementById("pcount").textContent=n;window.likePage=function(){n++;localStorage.setItem(k,n);document.getElementById("pcount").textContent=n;};})();
+</script>
+</body></html>

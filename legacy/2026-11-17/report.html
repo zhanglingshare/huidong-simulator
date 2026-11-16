@@ -1,0 +1,548 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="先猜惠东五年能否到1200亿，再亲手改变条件，看两种发展节奏会带来什么差别。">
+<title>分析报告 · 惠东产业风洞</title>
+<link rel="stylesheet" href="huidong-stage.css">
+<style>
+.report-answer .impact-stat strong { font-size: clamp(38px, 5.2vw, 71px) }
+.report-answer .target-gap { --stat-ink: var(--ember) }
+.report-answer[data-over="true"] .target-gap { --stat-ink: var(--mint) }
+.run-track {
+  position: relative;
+  height: 36px;
+  margin: 29px 0 7px;
+  border: 1px solid #7d8462;
+  border-radius: 3px;
+  background: repeating-linear-gradient(90deg, #bfc5961b 0 1px, transparent 1px 12.5%), #0b120b;
+}
+.run-fill, .run-gap-fill {
+  position: absolute;
+  inset: 6px auto 6px 0;
+  width: 0;
+  border-radius: 2px;
+  transition: width .37s cubic-bezier(.15,.75,.18,1), left .37s cubic-bezier(.15,.75,.18,1);
+}
+.run-fill { background: linear-gradient(90deg,#577e42,#a2f4ba); box-shadow: 0 0 14px #93f4bd56 }
+.reveal-pane.enter .run-fill { transform-origin: left; animation: meter-enter .75s cubic-bezier(.19,.7,.16,1) both }
+@keyframes meter-enter { from { transform: scaleX(0) } to { transform: scaleX(1) } }
+.run-gap-fill { background: repeating-linear-gradient(135deg,#d47a4b82 0 4px,#5c352980 4px 8px) }
+.finish-line {
+  position: absolute;
+  top: -5px;
+  bottom: -5px;
+  width: 0;
+  border-left: 2px solid var(--light);
+  filter: drop-shadow(0 0 5px #f0ee647f);
+}
+.finish-line b {
+  position: absolute;
+  bottom: calc(100% + 2px);
+  left: 0;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  color: var(--light);
+  font-size: 11px;
+}
+.run-marker {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  transform: translateX(-50%);
+  background: #fcffe4;
+  box-shadow: 0 0 10px #c0f9b4;
+  transition: left .37s cubic-bezier(.15,.75,.18,1);
+}
+.pace-control { display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; margin-top: 12px; align-items: center }
+.pace-control label { color: var(--ink); font-size: 13px; font-weight: 760 }
+.pace-control output { color: var(--light); font-weight: 820; font-variant-numeric: tabular-nums }
+.pace-control input { grid-column: 1/-1; width: 100%; height: 30px; margin: 0; accent-color: var(--light); cursor: ew-resize }
+.report-small { margin: 6px 0 0; color: var(--muted); font-size: 12px }
+.report-play { display: grid; gap: 12px }
+.report-box, .report-drawer {
+  min-width: 0;
+  padding: clamp(13px, 2.3vw, 29px);
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: linear-gradient(155deg,#222a1d,#171b14 78%);
+}
+.box-heading { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 9px 16px }
+.box-heading h2 {
+  margin: 0;
+  font-size: clamp(24px, 3vw, 43px);
+  font-weight: 830;
+  line-height: 1.1;
+  letter-spacing: -.055em;
+}
+.box-heading .prompt-scope { margin-bottom: 5px }
+.box-heading > a { font-size: 12px }
+.stress-controls { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 13px }
+.stress-controls button {
+  min-height: 44px;
+  border: 1px solid #746d50;
+  border-radius: 7px;
+  background: #24251a;
+  padding: 5px 11px;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 750;
+}
+.stress-controls button:hover:not(:disabled) { border-color: var(--light) }
+.stress-controls button[aria-pressed="true"] { background: #5b382a; border-color: var(--ember); color: #fff1d4 }
+.stress-controls button:disabled { cursor: default; opacity: .52 }
+.reset-stress { margin-left: auto }
+.chance-pair { display: grid; grid-template-columns: 1fr 1fr .82fr; gap: 9px; margin-top: 12px }
+.chance-cell, .scenario-takeaway { min-width: 0; padding: clamp(9px, 1.5vw, 17px); border: 1px solid #59694c; border-radius: 8px; background: #132117 }
+.chance-cell.current { background: #241c16; border-color: #a8684f }
+.chance-title { display: block; color: var(--ink); font-size: 13px; font-weight: 720 }
+.chance-number {
+  display: block;
+  color: var(--mint);
+  font-size: clamp(34px, 5vw, 65px);
+  line-height: 1.06;
+  font-weight: 860;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -.072em;
+}
+.chance-cell.current[data-hit="false"] .chance-number { color: var(--ember) }
+.chance-grid { display: grid; grid-template-columns: repeat(20, minmax(0, 1fr)); gap: 3px; margin: 7px 0 0 }
+.chance-grid i { aspect-ratio: 1; border-radius: 2px; background: #405047; transition: background .24s, box-shadow .24s }
+.chance-grid .hit { background: var(--mint); box-shadow: 0 0 7px #95f1b68b }
+.chance-grid .lost { background: #6d422f; border: 1px solid #d5886380 }
+.scenario-takeaway { display: flex; flex-direction: column; justify-content: center; gap: 6px; background: #241f16; border-color: #746541 }
+.scenario-impact { color: var(--light); font-size: clamp(19px, 3vw, 37px); font-weight: 820; letter-spacing: -.04em; line-height: 1.1 }
+.scenario-impact small { font-size: .45em; letter-spacing: 0; white-space: nowrap }
+.scenario-takeaway p { margin: 0; color: var(--muted); font-size: 12px }
+.sector-readings { display: grid; gap: 8px; margin: 15px 0 3px }
+.sector-row { display: grid; grid-template-columns: minmax(55px,.62fr) minmax(0,3fr) 62px; align-items: center; gap: 8px; min-height: 35px }
+.sector-row .sector-label { font-size: 13px; font-weight: 730 }
+.sector-line { position: relative; display: flex; align-items: center; height: 22px; overflow: hidden; border-left: 1px solid #a9b08e; background: repeating-linear-gradient(90deg,#d5e1b915 0 1px,transparent 1px 20%) }
+.sector-bar { display: block; width: 0; height: 15px; border-radius: 0 4px 4px 0; background: var(--sector-color); transition: width .5s cubic-bezier(.15,.75,.2,1) }
+.sector-value { text-align: right; color: var(--sector-color); font-size: 19px; font-weight: 820; font-variant-numeric: tabular-nums }
+.sector-explanation { min-height: 26px }
+.report-drawer { padding-block: 0 5px }
+.report-drawer p, .report-drawer ul { margin-top: 0; color: var(--muted); font-size: 13px }
+.report-drawer li + li { margin-top: 5px }
+
+@media (max-width: 840px) {
+  .report-answer .impact-stat strong { font-size: clamp(37px, 9.7vw, 64px) }
+  .chance-pair { grid-template-columns: 1fr 1fr }
+  .scenario-takeaway { grid-column: 1/-1 }
+}
+@media (max-width: 480px) {
+  .report-play { gap: 9px }
+  .stress-controls button { padding-inline: 8px; font-size: 11.5px }
+  .stress-controls .reset-stress { margin-left: 0 }
+  .chance-pair { gap: 6px }
+  .chance-title { font-size: 11.5px }
+  .chance-grid { grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 3px }
+  .sector-controls { width: fit-content }
+}
+@media (prefers-reduced-motion: reduce) {
+  .run-fill, .run-gap-fill, .run-marker, .sector-bar, .chance-grid i { transition: none }
+}
+</style>
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="惠东按 4.0% 连续增长五年，能到 1200 亿吗？">
+<meta property="og:description" content="打开选一次，和朋友对答案。">
+<meta property="og:image" content="https://zhanglingshare.github.io/huidong-simulator/legacy/2026-11-17/huidong-stage.jpg">
+<link rel="stylesheet" href="huidong-duel.css?v=1">
+<script type="module" src="huidong-duel.js?v=1"></script>
+</head>
+<body data-duel-page="report">
+<nav class="nav" aria-label="惠东产业风洞导航">
+  <b>惠东产业风洞</b>
+  <a href="index.html">① 今日话题</a>
+  <a href="town.html">🏘️ 各镇吃喝玩乐</a>
+  <a href="network.html">② 关系网</a>
+  <a href="who.html">③ 基本面</a>
+  <a href="choices.html">④ 五条路</a>
+  <a href="future.html">⑤ 未来</a>
+  <a href="windtunnel.html">⑥ 风洞</a>
+  <a href="blindspot.html">⑦ 被忽略</a>
+  <a href="report.html" class="on" aria-current="page">⑧ 报告</a>
+  <a href="ending.html">⑨ 结语</a>
+</nav>
+<main class="wrap report-page">
+  <header class="page-head"><h1>分析报告</h1></header>
+
+  <section class="arena" id="report-stage" data-open="false" aria-labelledby="report-question">
+    <div class="story-prompt">
+      <p class="prompt-scope">惠东 2025 → 2030</p>
+      <h2 class="stage-question" id="report-question">已经过了 800 亿，<br><em>1200 亿还远吗？</em></h2>
+      <p class="stage-instruction">假如往后每年都按 4.0% 增长，五年够不够？</p>
+      <div class="vote-buttons" id="report-vote" role="group" aria-label="你认为五年够不够">
+        <button type="button" data-vote="reach" aria-controls="run-reveal" aria-pressed="false">够，能追上</button>
+        <button type="button" data-vote="short" aria-controls="run-reveal" aria-pressed="false">还会差一截</button>
+      </div>
+      <p class="vote-outcome" id="report-verdict" role="status"></p>
+      <button class="retake" id="report-retake" type="button" hidden>收起答案，再猜一遍</button>
+      <section id="friend-duel" class="friend-duel duel-native" aria-label="邀请朋友一起选" hidden></section>
+    </div>
+    <div class="scene-card">
+      <div class="shutter" id="report-shutter" aria-hidden="true"><span class="shutter-mark">?</span></div>
+      <div class="reveal-pane report-answer" id="run-reveal" hidden>
+        <p class="scene-note">2030 年 · 按固定增速试算</p>
+        <div class="impact-pair">
+          <div class="impact-stat"><strong id="run-value"></strong><span>按当前设置推算</span></div>
+          <div class="impact-stat target-gap"><strong id="run-gap"></strong><span id="gap-caption">距 1,200 亿参考线</span></div>
+        </div>
+        <div class="run-track" id="run-track" aria-hidden="true">
+          <span class="run-fill" id="run-fill"></span>
+          <span class="run-gap-fill" id="run-gap-fill"></span>
+          <span class="finish-line" id="finish-line"><b>1200 亿线</b></span>
+          <span class="run-marker" id="run-marker"></span>
+        </div>
+        <div class="rail-labels"><span>2025 起点 861.25 亿</span><span>1,500 亿</span></div>
+        <div class="pace-control">
+          <label for="pace">把每年增速调一调</label><output id="pace-value" for="pace">4.0%</output>
+          <input id="pace" type="range" min="3" max="11" step=".1" value="4.0" />
+        </div>
+        <p class="report-small" id="run-explanation"></p>
+      </div>
+    </div>
+    <span class="arena-image-note">情景配图 · AI 生成</span>
+  </section>
+
+  <div class="after-play report-play" id="report-play" hidden>
+    <section class="report-box" aria-labelledby="stress-title">
+      <div class="box-heading">
+        <div><p class="prompt-scope">2030 年 · 风洞场景模拟</p><h2 id="stress-title">一项慢，和两项一起慢，差多远？</h2></div>
+        <a href="windtunnel.html">打开完整风洞 →</a>
+      </div>
+      <div class="stress-controls" id="stress-controls" role="group" aria-label="改变模拟条件">
+        <button type="button" data-shock="1" aria-pressed="false" aria-controls="stress-result">清洁能源贡献少两成</button>
+        <button type="button" data-shock="2" aria-pressed="false" aria-controls="stress-result">滨海旅游贡献少两成</button>
+        <button class="reset-stress" id="stress-reset" type="button" disabled>恢复基准</button>
+      </div>
+      <div id="stress-result">
+        <div class="chance-pair">
+          <div class="chance-cell">
+            <span class="chance-title">基准 · 过线率</span>
+            <strong class="chance-number" id="baseline-rate"></strong>
+            <div class="chance-grid" id="baseline-dots" aria-hidden="true"></div>
+          </div>
+          <div class="chance-cell current" id="current-chance">
+            <span class="chance-title" id="active-scenario"></span>
+            <strong class="chance-number" id="scenario-rate"></strong>
+            <div class="chance-grid" id="scenario-dots" aria-hidden="true"></div>
+          </div>
+          <div class="scenario-takeaway" role="status">
+            <div class="scenario-impact" id="scenario-impact"></div>
+            <p id="stress-question"></p>
+          </div>
+        </div>
+        <p class="report-small" id="stress-caption">亮格表示过了 1200 亿线，每格约代表百分之一。同一批 10,000 次模拟，切换时只改变你选中的路径贡献。</p>
+        <p class="report-small" id="stress-range"></p>
+      </div>
+    </section>
+
+    <section class="report-box" aria-labelledby="sector-title">
+      <div class="box-heading">
+        <div><p class="prompt-scope">2025 年 · 统计公报</p><h2 id="sector-title">涨得最快，撑起的盘子也最大？</h2></div>
+        <div class="subject-switch sector-controls" id="sector-controls" role="group" aria-label="切换三次产业的比较指标">
+          <button type="button" data-sector="growth" aria-pressed="true">比增速</button>
+          <button type="button" data-sector="share" aria-pressed="false">比总量占比</button>
+        </div>
+      </div>
+      <div class="sector-readings" id="sector-readings"></div>
+      <p class="report-small" id="sector-explanation" role="status"></p>
+    </section>
+
+    <details class="report-drawer">
+      <summary class="stage-summary">行动前，手上有哪些账可以核对？</summary>
+      <ul>
+        <li><strong>核电</strong>　把太平岭核电的投产日期、装机释放与并网节点排到一张表。</li>
+        <li><strong>滨海旅游</strong>　查过夜率与旺季入住，看 1803 万游客里有多少留下消费。</li>
+        <li><strong>农渔与女鞋</strong>　查赤岸蚝、冬种马铃薯的收购价，和女鞋出口订单的实际付款。</li>
+        <li><strong>通勤与用工</strong>　查园区班次和车程，再对照同批入职者三个月后的留岗人数。</li>
+      </ul>
+      <p><a href="ending.html">去《追问》继续对照游客、岗位和订单 →</a></p>
+    </details>
+    <details class="report-drawer">
+      <summary class="stage-summary">基本盘、数据出处与口径</summary>
+      <p>2025 年惠东 GDP 为 861.25 亿元，增长 4.0%；规上工业增加值增长 12.1%，规上工业总产值 576 亿元、增长 13.6%；固定资产投资下降 34.0%，工业投资下降 36.8%。</p>
+      <p>公报的 4.0% 是按不变价格算的 2025 年增速。页面把它当作一把固定的算术尺，套在 2025 年现价总量上演示五年复利。1200 亿元取自惠东“十五五”外延参考，非官方刚性目标。试算与下方的情景模拟各有自己的假设。</p>
+      <p>三次产业增速来自 2025 年统计公报：一产 4.1%、二产 6.1%、三产 2.6%；占比 11.5% / 35.5% / 53.0%。风洞对照来自站内同一批模拟。路径贡献来自情景设定，过线率和区间随设定变化。投资跌幅是实际观测，页面的压力开关调整的是对未来新增产出的假设。</p>
+      <ul>
+        <li><a href="https://www.huidong.gov.cn/attachment/0/346/346580/5769408.pdf">2025 年惠东县国民经济和社会发展统计公报</a></li>
+        <li><a href="https://www.huidong.gov.cn/hzhdtjj/gkmlpt/content/5/5716/mpost_5716236.html">惠东县 2025 年 1-12 月经济运行简析</a></li>
+        <li><a href="future.html">未来页 · 模拟区间与路径比较</a></li>
+      </ul>
+    </details>
+  </div>
+
+  <noscript><p>这页需要 JavaScript 来切换算术试算和风洞条件。<a href="future.html">查看未来页 →</a></p></noscript>
+  <p class="sign">惠东产业风洞 · 张凌 博士 · MIT</p>
+</main>
+<script type="application/json" id="report-data">
+{
+  "baselineYear": 2025,
+  "horizonYear": 2030,
+  "base": 861.25,
+  "target": 1200,
+  "comparisonCeiling": 1500,
+  "benchmark": 4.0,
+  "stress": {
+    "seed": 42,
+    "runs": 10000,
+    "reduction": 0.2,
+    "switches": [
+      {
+        "mask": 1,
+        "path": "清洁能源",
+        "label": "清洁能源贡献减少"
+      },
+      {
+        "mask": 2,
+        "path": "滨海旅游",
+        "label": "滨海旅游贡献减少"
+      }
+    ],
+    "questions": [
+      "先挑一个条件，看看基准结果有多依赖它。",
+      "先核对太平岭核电的投产节点和产能释放节奏。",
+      "先核对滨海旅游的过夜率与旺季入住，看客流有多少留下消费。",
+      "把核电投产日期和旅游过夜率放在一起看，哪一环先落空？"
+    ]
+  },
+  "sectors": [
+    {
+      "label": "第一产业",
+      "plain": "农、林、牧、渔业",
+      "share": 11.5,
+      "growth": 4.1,
+      "color": "#84cc16"
+    },
+    {
+      "label": "第二产业",
+      "plain": "工业和建筑业",
+      "share": 35.5,
+      "growth": 6.1,
+      "color": "#0891b2"
+    },
+    {
+      "label": "第三产业",
+      "plain": "服务业",
+      "share": 53.0,
+      "growth": 2.6,
+      "color": "#3b82f6"
+    }
+  ]
+}
+</script>
+<script src="model.js"></script>
+<script>
+(() => {
+  'use strict';
+
+  const data = JSON.parse(document.getElementById('report-data').textContent);
+  const el = id => document.getElementById(id);
+  const stage = el('report-stage');
+  const reveal = el('run-reveal');
+  const ballot = el('report-vote');
+  const slider = el('pace');
+  const stressControls = el('stress-controls');
+  const stressCache = new Map();
+  const years = data.horizonYear - data.baselineYear;
+  const thresholdRate = ((data.target / data.base) ** (1 / years) - 1) * 100;
+  const plotX = amount => (amount - data.base) / (data.comparisonCeiling - data.base) * 100;
+  let shockMask = 0;
+  let dotsReady = false;
+
+  function format(value, digits = 0) {
+    return value.toLocaleString('en-US', {minimumFractionDigits: digits, maximumFractionDigits: digits});
+  }
+
+  function projected(rate) {
+    return data.base * (1 + rate / 100) ** years;
+  }
+
+  function renderPace() {
+    const rate = slider.valueAsNumber;
+    const value = projected(rate);
+    const gap = data.target - value;
+    const position = plotX(value);
+    const finish = plotX(data.target);
+    reveal.dataset.over = String(gap <= 0);
+    el('pace-value').textContent = format(rate, 1) + '%';
+    el('run-value').innerHTML = `${format(value)}<small>亿</small>`;
+    el('run-gap').innerHTML = `${format(Math.abs(gap))}<small>亿</small>`;
+    el('gap-caption').textContent = gap > 0 ? '还差多少' : '超过参考线';
+    el('run-fill').style.width = position + '%';
+    el('run-gap-fill').style.left = Math.min(position, finish) + '%';
+    el('run-gap-fill').style.width = gap > 0 ? (finish - position) + '%' : '0%';
+    el('run-marker').style.left = position + '%';
+    el('finish-line').style.left = finish + '%';
+    el('run-explanation').textContent = `到 1200 亿，连续五年每年需要约 ${format(thresholdRate, 2)}%。`;
+  }
+
+  function modelReadings(mask) {
+    if (!stressCache.has(mask)) {
+      const paths = HT.DEFAULT_PATHS.map(path => {
+        const selected = data.stress.switches.some(item => (mask & item.mask) && path.name === item.path);
+        return { ...path, mu: path.mu * (selected ? 1 - data.stress.reduction : 1) };
+      });
+      const {hit, p10, p90} = HT.run(data.stress.seed, data.stress.runs, paths, {base:data.base, target:data.target});
+      stressCache.set(mask, {hit, p10, p90});
+    }
+    return stressCache.get(mask);
+  }
+
+  function colorDots(grid, hit, reference) {
+    const lit = Math.round(hit);
+    const formerlyLit = Math.round(reference);
+    for (let index = 0; index < grid.children.length; index++) {
+      grid.children[index].classList.toggle('hit', index < lit);
+      grid.children[index].classList.toggle('lost', index >= lit && index < formerlyLit);
+    }
+  }
+
+  function renderStress() {
+    const compatible = typeof HT !== 'undefined'
+      && data.stress.switches.every(item => HT.DEFAULT_PATHS.some(path => path.name === item.path));
+    if (!compatible) {
+      for (const button of stressControls.querySelectorAll('button')) button.disabled = true;
+      el('stress-result').innerHTML = '<p class="report-small">情景暂时未能加载。<a href="windtunnel.html">可以到完整风洞查看 →</a></p>';
+      return;
+    }
+    if (!dotsReady) {
+      const dots = '<i></i>'.repeat(100);
+      el('baseline-dots').innerHTML = dots;
+      el('scenario-dots').innerHTML = dots;
+      dotsReady = true;
+    }
+    const baseline = modelReadings(0);
+    const current = modelReadings(shockMask);
+    for (const button of stressControls.querySelectorAll('[data-shock]')) {
+      button.setAttribute('aria-pressed', String(Boolean(shockMask & Number(button.dataset.shock))));
+    }
+    el('stress-reset').disabled = shockMask === 0;
+    el('current-chance').dataset.hit = String(shockMask === 0);
+    el('baseline-rate').textContent = format(baseline.hit, 1) + '%';
+    el('scenario-rate').textContent = format(current.hit, 1) + '%';
+    const active = data.stress.switches.filter(item => shockMask & item.mask);
+    el('active-scenario').textContent = active.length === 2 ? '两项同时变慢 · 过线率'
+      : active.length === 1 ? active[0].label + ' · 过线率' : '当前与基准相同';
+    colorDots(el('baseline-dots'), baseline.hit, baseline.hit);
+    colorDots(el('scenario-dots'), current.hit, baseline.hit);
+    el('scenario-impact').innerHTML = shockMask
+      ? `−${format(baseline.hit - current.hit, 1)}<small> 个百分点</small>`
+      : '拨一个开关';
+    el('stress-question').textContent = data.stress.questions[shockMask];
+    el('stress-range').textContent = `这一情景中，中间 80% 的模拟总量落在 ${format(current.p10)}—${format(current.p90)} 亿元。`;
+  }
+
+  function renderSectors(mode) {
+    const byGrowth = mode === 'growth';
+    const high = byGrowth ? 10 : 100;
+    for (const button of el('sector-controls').querySelectorAll('[data-sector]')) {
+      button.setAttribute('aria-pressed', String(button.dataset.sector === mode));
+    }
+    data.sectors.forEach((sector, index) => {
+      const figure = sector[mode];
+      el('sector-bar-' + index).style.width = (figure / high * 100) + '%';
+      el('sector-value-' + index).textContent = format(figure, 1) + '%';
+    });
+    el('sector-explanation').textContent = byGrowth
+      ? '看到的是各产业比上一年跑快了多少。切到占比，看看哪一块体量最大。'
+      : '看到的是 2025 年 GDP 每 100 元来自哪里。第三产业占了 53.0 元。';
+  }
+
+  function openAnswer(picked) {
+    const reaches = projected(data.benchmark) >= data.target;
+    const matched = reaches === (picked === 'reach');
+    const firstReveal = reveal.hidden;
+    if (firstReveal) {
+      shockMask = 0;
+      renderStress();
+      renderSectors('growth');
+    }
+    slider.value = String(data.benchmark);
+    stage.dataset.open = 'true';
+    reveal.hidden = false;
+    el('report-shutter').hidden = true;
+    el('report-retake').hidden = false;
+    el('report-play').hidden = false;
+    reveal.classList.toggle('enter', firstReveal);
+    for (const button of ballot.querySelectorAll('[data-vote]')) {
+      button.setAttribute('aria-pressed', String(button.dataset.vote === picked));
+    }
+    el('report-verdict').dataset.right = String(matched);
+    el('report-verdict').textContent = matched ? '按 4.0% 连跑五年，你判断对了。' : '按 4.0% 连跑五年，终点前还留着一截。';
+    renderPace();
+  }
+
+  ballot.addEventListener('click', event => {
+    const button = event.target.closest('[data-vote]');
+    if (button) openAnswer(button.dataset.vote);
+  });
+  el('report-retake').addEventListener('click', () => {
+    stage.dataset.open = 'false';
+    reveal.hidden = true;
+    el('report-play').hidden = true;
+    el('report-shutter').hidden = false;
+    el('report-retake').hidden = true;
+    el('report-verdict').textContent = '';
+    for (const button of ballot.querySelectorAll('[data-vote]')) button.setAttribute('aria-pressed', 'false');
+    ballot.querySelector('button').focus();
+  });
+  slider.addEventListener('input', renderPace);
+  stressControls.addEventListener('click', event => {
+    const button = event.target.closest('[data-shock]');
+    if (button) {
+      shockMask ^= Number(button.dataset.shock);
+      renderStress();
+    }
+  });
+  el('stress-reset').addEventListener('click', () => {
+    shockMask = 0;
+    renderStress();
+  });
+  el('sector-controls').addEventListener('click', event => {
+    const button = event.target.closest('[data-sector]');
+    if (button) renderSectors(button.dataset.sector);
+  });
+
+  el('sector-readings').innerHTML = data.sectors.map(({label, plain, color}, index) => `
+    <div class="sector-row" style="--sector-color:${color}">
+      <span class="sector-label" title="${plain}">${label}</span>
+      <span class="sector-line" aria-hidden="true"><i class="sector-bar" id="sector-bar-${index}"></i></span>
+      <strong class="sector-value" id="sector-value-${index}"></strong>
+    </div>`
+  ).join('');
+})();
+</script>
+<div class="likebar">
+  <button onclick="likePage()">👍 <span id="pcount">0</span></button>
+  <button type="button" data-duel-footer>发这题给朋友</button>
+</div>
+<style>
+.likebar{position:relative;bottom:auto;left:auto;transform:none;display:flex;justify-content:center;margin:20px 0;background:rgba(15,23,42,.96);border:1px solid #3b82f6;border-radius:24px;padding:9px 20px;display:flex;gap:22px;z-index:999;box-shadow:0 6px 24px rgba(0,0,0,.6)}
+.likebar button{background:none;border:none;color:#e2e8f0;font-size:14px;cursor:pointer}
+.likebar button:active{transform:scale(1.15)}
+</style>
+<script>
+(function(){
+  var k="like_"+location.pathname;
+  var n=parseInt(localStorage.getItem(k)||"0");
+  document.getElementById("pcount").textContent=n;
+  window.likePage=function(){n++;localStorage.setItem(k,n);document.getElementById("pcount").textContent=n;};
+})();
+</script>
+<!-- 百度统计：去 mtj.baidu.com 注册后替换 YOUR_ID -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?YOUR_ID";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</body></html>

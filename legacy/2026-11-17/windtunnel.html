@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>惠东产业风洞 · 风洞</title>
+<script src="lib/echarts.min.js"></script>
+<script src="model.js?v=20261023a"></script>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.65 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.nav{position:sticky;top:0;z-index:50;display:flex;gap:5px;align-items:center;padding:9px 14px;background:rgba(8,11,18,.95);border-bottom:1px solid #1b2434;overflow-x:auto}
+.nav b{font-size:14px;margin-right:6px;flex:none;color:#fff}
+.nav a{background:#131c2b;color:#93a4bd;border:1px solid #22304a;padding:6px 12px;border-radius:20px;font-size:12.5px;text-decoration:none;white-space:nowrap;flex:none}
+.nav a.on{background:#0e7490;border-color:#0891b2;color:#fff;font-weight:600}
+.wrap{max-width:1200px;margin:auto;padding:18px}
+
+/* hero */
+.hero{position:relative;text-align:center;padding:44px 22px 38px;background:
+   radial-gradient(ellipse at 50% 130%, #0e3a4a 0%, #082630 40%, #0a0f1a 78%);
+  border:1px solid #1c2739;border-radius:16px;margin-bottom:16px;overflow:hidden}
+.hero .kick{font-size:11px;letter-spacing:4px;color:#67e8f9;margin-bottom:10px}
+.hero h1{font-size:26px;line-height:1.4;margin:0;color:#fff}
+.hero h1 .sea{color:#fbbf24}
+.hero .sub{font-size:13px;color:#a9b6c9;margin:12px auto 0;max-width:640px;line-height:1.8}
+
+.card{background:#0e1523;border:1px solid #1c2739;border-radius:14px;padding:20px;margin-bottom:14px}
+.card h2{font-size:16px;margin:0 0 14px;color:#cbd5e1;display:flex;align-items:center;gap:8px}
+.card h2 .step{background:#0e7490;color:#fff;font-size:11px;width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;flex:none}
+
+.slider-row{margin-bottom:16px}
+.slider-row label{font-size:13px;color:#cbd5e1;display:block;margin-bottom:6px}
+.slider-row input{width:100%;accent-color:#0891b2}
+.slider-row span{color:#fbbf24;font-weight:700;font-size:13px}
+
+.real{background:#0a141f;border:1px solid #155e75;border-radius:14px;padding:18px;margin-bottom:14px}
+.real .tag{font-size:11px;color:#67e8f9;font-weight:700;margin-bottom:12px;letter-spacing:1px}
+.kpi{display:inline-block;text-align:center;width:32%;padding:12px 0;background:#0a0f1a;border-radius:12px;margin:0.5%}
+.kpi .v{font-size:24px;font-weight:800;color:#fbbf24}
+.kpi .l{font-size:11px;color:#94a3b8;margin-top:4px}
+.lossline{font-size:13px;color:#bae6fd;line-height:1.9;margin-top:12px;background:#0a0f1a;border-radius:10px;padding:12px 14px}
+
+.chart{width:100%;height:280px;margin-top:10px}
+.chart-tall{height:330px}
+.deep{font-size:13.5px;line-height:2;color:#c8d3e0;margin-top:12px}
+.note{border-left:3px solid #22d3ee;background:#0a141f;border-radius:0 10px 10px 0;padding:12px 14px;margin-top:12px;font-size:12.5px;color:#bae6fd;line-height:1.85}
+.plain{background:#0a141f;border-left:3px solid #0891b2;border-radius:0 10px 10px 0;padding:12px 14px;font-size:12.5px;line-height:1.9;color:#bae6fd;margin-top:10px}
+.plain .lab{display:block;font-size:10.5px;font-weight:800;color:#67e8f9;letter-spacing:1px;margin-bottom:4px}
+.plain.warn{background:#1a1206;border-left-color:#fbbf24;color:#fde68a}
+.plain.warn .lab{color:#fbbf24}
+
+.scenario-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:700px){.scenario-grid{grid-template-columns:1fr}}
+.scenario{background:#0a0f1a;border:1px solid #1c2739;border-radius:10px;padding:13px;cursor:pointer;transition:.2s}
+.scenario:hover{border-color:#0891b2;transform:translateY(-1px)}
+.scenario.active{border-color:#0891b2;background:#0f1f2b}
+.scenario .t{font-size:13px;font-weight:700;margin-bottom:4px}
+.scenario .d{font-size:11.5px;color:#8fa3bf;line-height:1.6}
+.tag{display:inline-block;font-size:9.5px;padding:2px 7px;border-radius:4px;margin-bottom:6px;font-weight:700}
+.tag-pos{background:#14532d;color:#86efac}
+.tag-mid{background:#4a3a12;color:#fcd34d}
+.tag-neg{background:#7f1d1d;color:#fca5a5}
+.bridge{border-radius:12px;padding:16px 18px;margin:14px 0;font-size:13px;line-height:1.9}
+.b-orange{background:#1a1206;border:1px solid #f59e0b55;color:#fde68a}
+</style><meta property="og:type" content="website">
+<meta property="og:title" content="同一场风洞，朋友会先改哪一项？">
+<meta property="og:description" content="打开试一组设置，和朋友比一比。">
+<meta property="og:image" content="https://zhanglingshare.github.io/huidong-simulator/legacy/2026-11-17/huidong-stage.jpg">
+<link rel="stylesheet" href="huidong-duel.css?v=1">
+<script type="module" src="huidong-duel.js?v=1"></script>
+</head><body data-duel-page="windtunnel">
+
+<div class="nav">
+  <b>惠东产业风洞</b>
+  <a href="index.html">① 今日话题</a>
+  <a href="town.html">🏘️ 各镇吃喝玩乐</a>
+  <a href="network.html">② 关系网</a>
+  <a href="who.html">③ 基本面</a>
+  <a href="choices.html">④ 五条路</a>
+  <a href="future.html">⑤ 未来</a>
+  <a href="windtunnel.html" class="on">⑥ 风洞</a>
+  <a href="blindspot.html">⑦ 被忽略</a>
+  <a href="report.html">⑧ 报告</a>
+  <a href="ending.html">⑨ 结语</a>
+</div>
+
+<div class="wrap">
+  <section id="friend-duel" class="friend-duel" aria-labelledby="duel-title" hidden></section>
+
+  <div class="hero">
+    <div class="kick">HUIDONG · WIND TUNNEL</div>
+    <h1>风洞：台风压一压，<span class="sea">模型真的重算</span></h1>
+    <p class="sub">四个滑块都接进统一模型——台风强度、停业天数、核电延迟、女鞋景气一动，<br>下面每条线和每个数字都随参数真实重跑，不是只改文字。<br>默认就是今年真实登陆的强台风"红霞"。</p>
+  </div>
+
+  <!-- 1 控制台 -->
+  <div class="card">
+    <h2><span class="step">1</span>🎛️ 控制台：四个可以拨动的变量</h2>
+    <div class="slider-row">
+      <label>台风强度（相对"红霞"，0＝无台风） <span id="strengthV">红霞级（14级）</span></label>
+      <input type="range" id="strength" min="0" max="150" value="100">
+    </div>
+    <div class="slider-row">
+      <label>涉海停业天数（浴场关闭、渔船回港、五停） <span id="daysV">7天</span></label>
+      <input type="range" id="days" min="0" max="14" value="7">
+    </div>
+    <div class="slider-row">
+      <label>太平岭核电投产延迟 <span id="delayV">0年</span></label>
+      <input type="range" id="delay" min="0" max="2" value="0">
+    </div>
+    <div class="slider-row">
+      <label>女鞋行业景气 <span id="shoeV">100%</span></label>
+      <input type="range" id="shoe" min="70" max="120" value="100">
+    </div>
+  </div>
+
+  <div class="real">
+    <div class="tag">📐 统一模型真实输出（每次拖动都跑一万遍）</div>
+    <div class="kpi"><div class="v" id="oP50">—</div><div class="l">2030 GDP中位数</div></div>
+    <div class="kpi"><div class="v" id="oHit">—</div><div class="l">过约1200亿比例</div></div>
+    <div class="kpi"><div class="v" id="oRange">—</div><div class="l">80%区间（P10-P90）</div></div>
+    <div class="lossline" id="lossLine"></div>
+  </div>
+
+  <!-- 2 三条增长轨道 -->
+  <div class="card">
+    <h2><span class="step">2</span>📈 三条增长轨道：你现在在哪条路上？</h2>
+    <div id="trackChart" class="chart"></div>
+    <div class="plain"><span class="lab">这张图怎么看</span>
+      <b>黄色虚线</b>是到 1200 亿的参考轨道（五年年均要跑约 6.85%）；<b>灰色线</b>是按 2025 年 4.0% 自然走的基准；<b>青色线</b>是你当前设置下模型给出的中位轨迹。把台风拖猛、核电拖迟、女鞋拖冷，青线就往下掉——能直观看到"多停几天、晚投产一年"把惠东拉到了哪条轨道上。
+    </div>
+  </div>
+
+  <!-- 3 台风冲击与恢复 -->
+  <div class="card">
+    <h2><span class="step">3</span>📉 台风冲击与恢复（滨海客流）</div>
+    <div id="recChart" class="chart"></div>
+    <div class="plain" id="recText"></div>
+    <div class="note">恢复曲线与计入 GDP 的旅游净损失同源（同一组停业天数与改期回补比例）；上方 GDP 数字是统一模型对 2030 全年的计算。保守地不假设长期口碑损失。</div>
+  </div>
+
+  <!-- 4 四变量拖动幅度 -->
+  <div class="card">
+    <h2><span class="step">4</span>🎚️ 四个滑块各拨动多少：谁在拖后腿</h2>
+    <div id="contribChart" class="chart"></div>
+    <div class="plain"><span class="lab">这张图怎么看</span>
+      把每个滑块从基准拨到当前值，2030 GDP 会变动多少亿（相对"风平浪静的基准"）。往右的青色条=这个滑块在给 GDP 加分，往左的琥珀条=在拖后腿。台风季一来，停业天数与强度是最先在拖后腿的；核电延迟和女鞋景气是慢变量，拨动幅度没台风那么急，但会改变长期底盘。
+    </div>
+  </div>
+
+  <!-- 5 场景切换 -->
+  <div class="card">
+    <h2><span class="step">5</span>🎬 一键切换四个场景</h2>
+    <div class="scenario-grid">
+      <div class="scenario active" data-n="1">
+        <span class="tag tag-mid">基准</span>
+        <div class="t">今年这场"红霞"</div>
+        <div class="d">强度 100%、停业 7 天、核电按期、女鞋平稳——2025 的真实情形</div>
+      </div>
+      <div class="scenario" data-n="2">
+        <span class="tag tag-pos">乐观</span>
+        <div class="t">风平浪静的一年</div>
+        <div class="d">无台风，旺季客流完整——看惠东"没有黑天鹅"时的底子上限</div>
+      </div>
+      <div class="scenario" data-n="3">
+        <span class="tag tag-neg">承压</span>
+        <div class="t">台风叠加核电延迟</div>
+        <div class="d">强度 120%、停业 10 天，同时核电晚投产 2 年——双重夹击</div>
+      </div>
+      <div class="scenario" data-n="4">
+        <span class="tag tag-pos">乐观</span>
+        <div class="t">女鞋升级、品牌回暖</div>
+        <div class="d">在红霞级台风下，女鞋景气升到 120%——看一镇产业升级能抵消多少台风损失</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6 五维对比 -->
+  <div class="card">
+    <h2><span class="step">6</span>🕸️ 五维对比：哪条路让惠东更稳</h2>
+    <div id="radarChart" class="chart chart-tall"></div>
+    <div class="plain"><span class="lab">这张图怎么看</span>
+      五个角由模型输出折算（10 分制）：<b>增长后劲</b>＝2030 中位距 1200 亿的进度、<b>过线把握</b>＝过线比例、<b>抗台韧性</b>＝台风当年损失反向、<b>能源基本盘</b>＝核电延迟折减、<b>女鞋景气</b>＝行业景气系数。面积越大＝这一情景下综合状态越稳。"风平浪静"面积最大，"台风叠加核电延迟"在抗台韧性与能源基本盘两个角同时塌陷。
+    </div>
+  </div>
+
+  <!-- 7 敏感性排序 -->
+  <div class="card">
+    <h2><span class="step">7</span>🌪️ 敏感性排序：拨哪个变量，结果抖得最厉害</h2>
+    <div id="tornadoChart" class="chart"></div>
+    <div class="plain warn"><span class="lab">核心发现</span>
+      条形图从上到下按"拨动后 2030 GDP 的变化幅度"排序（由模型对每个变量的最低档、最高档各跑一万遍算出）。<b>台风</b>排在最前：强度从 0 到 150%、停业从 0 到 14 天，对当年与次年 GDP 的摆动最大。<b>核电延迟</b>次之——它不吵不闹，晚一年就少一截清洁能源底盘。<b>女鞋景气</b>单看摆动最小，但它是"一镇一业的饭碗"，对黄埠、吉隆的意义远大于对全县 GDP 的意义。
+    </div>
+  </div>
+
+  <!-- 8 惠东的反转 -->
+  <div class="card">
+    <h2><span class="step">8</span>🔁 惠东的反转：和博罗、惠城不一样</h2>
+    <div class="deep">
+      博罗最敏感的是"新投产项目的节奏"——投资一旦慢下来，增长接续会断档。<br><br>
+      惠东的结构不同：<b style="color:#67e8f9">它最敏感的是"台风"</b>，一个"突然来、慢慢恢复"的外部冲击。台风当年净损失约占全县 GDP 不到 1%，是个小数字；但对旺季民宿、渔排养殖户，可能是一整年的指望——<b style="color:#fbbf24">同一个台风，在全县账本上是一行，在一户人家账本上是一页</b>。<br><br>
+      真正的结构性资产不是"没台风"，是<b style="color:#34d399">多元的海洋产业布局</b>：按抗台标准建设的核电、海上风电几乎不停摆，旅游、渔业、能源彼此对冲——这就是惠东的韧性来源。惠东要斗的不是"消灭台风"，而是"台风来了，人安全、家业稳、恢复快"。
+    </div>
+    <div class="plain" style="margin-top:14px"><span class="lab">边界声明</span>
+      以上全部是假设场景下的结构模拟，不是预测，更不是投资建议。滑块背后的参数（台风对旅游/渔业的折减系数、核电延迟折减、女鞋传导系数）都是作者设定的假设值，已在页面公开；模型每次拖动都重跑一万遍蒙特卡洛，数字随参数真实变化。
+    </div>
+  </div>
+
+  <!-- 9 县长 -->
+  <div class="card" style="border-color:#0891b2">
+    <h2>🎲 如果你是惠东县长</h2>
+    <div class="deep">
+      跑完上面所有滑块，答案已经出来了：先把<b style="color:#f87171">台风季的复产链条</b>接住——渔业保险、灾后救助、补网投苗、民宿退订改期，是把"小 GDP、大民生"托住的杠杆。<br><br>
+      再盯着<b style="color:#fbbf24">核电与清洁能源的投产节奏</b>——每延迟一年，清洁能源路径约折减 18 亿，它是惠东长期的底盘。<br><br>
+      别忘了<b style="color:#ec4899">女鞋这一镇一业的饭碗</b>——品牌化、电商化、智能化，决定黄埠、吉隆的年轻人是留下还是外流。<br>
+      <span style="color:#6b7280">你呢？你觉得惠东县长最该先保哪件事？</span>
+    </div>
+  </div>
+
+  <div class="bridge b-orange">🔍 <b>风洞压一压，决策者该追问什么？</b><br>台风是"突然来、慢慢恢复"，考验预警转移、保险覆盖和复产速度；核电、女鞋是"慢变量"，考验投产节奏与品牌升级。两类风险性质不同，预案也该不同。压测不是为了吓谁，而是让"万一"再来时，人安全、家业稳、恢复快。</div>
+
+  <div class="next" style="text-align:center;margin:24px 0">
+    <a href="report.html" style="background:#0e7490;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block">📊 带着你的参数去看报告 →</a>
+  </div>
+</div>
+
+<script>
+const $=(id)=>document.getElementById(id);
+const strengthS=$('strength'),daysS=$('days'),delayS=$('delay'),shoeS=$('shoe');
+const charts={};
+['trackChart','recChart','contribChart','radarChart','tornadoChart'].forEach(id=>{
+  charts[id]=echarts.init($(id));
+});
+
+const BASE=HT.BASE||861.25, TARGET=HT.TARGET||1200;
+const YEARS=['2025','2026','2027','2028','2029','2030'];
+const DEF={ST:1.0,D:7,ND:0,SF:1.0};   // 今年红霞级基准
+
+function optsOf(ST,D,ND,SF){
+  const o={};
+  if(ST>0) o.typhoon={strength:ST,days:D};
+  if(ND>0) o.nuclearDelay=ND;
+  if(Math.abs(SF-1)>0.001) o.shoeFactor=SF;
+  return o;
+}
+function run(ST,D,ND,SF){ return HT.run(42,10000,HT.DEFAULT_PATHS,optsOf(ST,D,ND,SF)); }
+function pathTo(end){
+  const g=Math.pow(end/BASE,1/5)-1; const p=[BASE]; let v=BASE;
+  for(let i=0;i<5;i++){v*=(1+g);p.push(Math.round(v));}
+  return p;
+}
+function fmt(n){return Math.round(n).toLocaleString('en-US');}
+
+function saveScenario(opts){ try{localStorage.setItem('hd_scenario',JSON.stringify(opts));}catch(e){} }
+
+/* 静态：龙卷风 + 雷达（与当前滑块无关，只算一次） */
+function renderTornado(){
+  const rows=[
+    {name:'台风强度',lo:run(0,DEF.D,0,1).p50,hi:run(1.5,DEF.D,0,1).p50},
+    {name:'停业天数',lo:run(DEF.ST,0,0,1).p50,hi:run(DEF.ST,14,0,1).p50},
+    {name:'核电延迟',lo:run(DEF.ST,DEF.D,0,1).p50,hi:run(DEF.ST,DEF.D,2,1).p50},
+    {name:'女鞋景气',lo:run(DEF.ST,DEF.D,0,.7).p50,hi:run(DEF.ST,DEF.D,0,1.2).p50}
+  ].map(r=>({...r,spread:Math.abs(r.hi-r.lo)})).sort((a,b)=>b.spread-a.spread);
+  charts.tornadoChart.setOption({
+    backgroundColor:'transparent',
+    tooltip:{trigger:'axis',backgroundColor:'#16203a',borderColor:'#2b3a55',textStyle:{color:'#e6edf3'},
+      formatter:ps=>{const r=rows[ps[0].dataIndex];return `${r.name}<br/>最低档：${fmt(Math.min(r.lo,r.hi))}亿<br/>最高档：${fmt(Math.max(r.lo,r.hi))}亿<br/>摆动幅度：${fmt(r.spread)}亿`}},
+    grid:{left:90,right:60,top:15,bottom:30},
+    xAxis:{type:'value',min:800,max:1400,axisLabel:{color:'#93a4bd'},splitLine:{lineStyle:{color:'#1c2739'}}},
+    yAxis:{type:'category',data:rows.map(r=>r.name),axisLabel:{color:'#cbd5e1',fontSize:12}},
+    series:[
+      {type:'bar',stack:'t',data:rows.map(r=>Math.min(r.lo,r.hi)),itemStyle:{color:'#fbbf24',opacity:.6},barWidth:22,name:'低档'},
+      {type:'bar',stack:'t',data:rows.map(r=>r.spread),itemStyle:{color:'#0891b2',opacity:.75},barWidth:22,name:'高档',
+        label:{show:true,position:'right',color:'#cbd5e1',fontSize:10.5,formatter:p=>'±'+fmt(rows[p.dataIndex].spread/2)+'亿'}}
+    ]
+  });
+}
+function renderRadar(){
+  const scenes=[
+    {name:'今年红霞',ST:1.0,D:7,ND:0,SF:1.0,color:'#67e8f9'},
+    {name:'风平浪静',ST:0,D:0,ND:0,SF:1.0,color:'#34d399'},
+    {name:'台风+核电延迟',ST:1.2,D:10,ND:2,SF:1.0,color:'#f87171'},
+    {name:'女鞋升级',ST:1.0,D:7,ND:0,SF:1.2,color:'#ec4899'}
+  ].map(s=>{
+    const r=run(s.ST,s.D,s.ND,s.SF);
+    const loss=s.ST>0?HT.typhoonLoss(s.ST,s.D):{total:0};
+    const progress=Math.max(0,Math.min(1,(r.p50-BASE)/(TARGET-BASE)))*10;
+    const hit=Math.max(0,Math.min(10,r.hit/10));
+    const resil=Math.max(0,Math.min(10,(1-loss.total/20)*10));
+    const energy=Math.max(0,Math.min(10,(1-s.ND*0.4)*10));
+    const shoe=Math.max(0,Math.min(10,((s.SF-0.7)/0.5)*10));
+    return {...s,value:[progress,hit,resil,energy,shoe].map(v=>+v.toFixed(1))};
+  });
+  charts.radarChart.setOption({
+    backgroundColor:'transparent',
+    tooltip:{backgroundColor:'#16203a',borderColor:'#2b3a55',textStyle:{color:'#e6edf3'}},
+    legend:{top:0,textStyle:{color:'#93a4bd',fontSize:11}},
+    radar:{center:['50%','58%'],radius:'62%',
+      indicator:[
+        {name:'增长后劲',max:10},{name:'过线把握',max:10},{name:'抗台韧性',max:10},
+        {name:'能源基本盘',max:10},{name:'女鞋景气',max:10}
+      ],
+      axisName:{color:'#cbd5e1',fontSize:11.5},
+      splitLine:{lineStyle:{color:'#1c2739'}},
+      splitArea:{areaStyle:{color:['rgba(255,255,255,.01)','rgba(255,255,255,.03)']}},
+      axisLine:{lineStyle:{color:'#1c2739'}}
+    },
+    series:[{type:'radar',data:scenes.map(s=>({
+      name:s.name,value:s.value,
+      lineStyle:{color:s.color,width:2},itemStyle:{color:s.color},areaStyle:{color:s.color,opacity:.12}
+    }))}]
+  });
+}
+
+/* 动态：每次滑块变动重算 */
+function draw(){
+  const ST=+strengthS.value/100, D=+daysS.value, ND=+delayS.value, SF=+shoeS.value/100;
+  $('strengthV').textContent = ST===0?'无台风':(Math.abs(ST-1)<0.005?'红霞级（14级）':Math.round(ST*100)+'% 红霞级');
+  $('daysV').textContent=D+'天';$('delayV').textContent=ND+'年';$('shoeV').textContent=Math.round(SF*100)+'%';
+
+  saveScenario(optsOf(ST,D,ND,SF));
+
+  const r=run(ST,D,ND,SF);
+  $('oP50').textContent=fmt(r.p50)+'亿';
+  $('oHit').textContent=Math.round(r.hit)+'%';
+  $('oRange').textContent=fmt(r.p10)+'-'+fmt(r.p90);
+
+  /* 台风损失 */
+  const loss = ST>0 ? HT.typhoonLoss(ST,D) : {tourism:0,fishery:0,energy:0,total:0};
+  $('lossLine').innerHTML = ST>0
+    ? `🌀 台风当年净损失约 <b style="color:#fbbf24">${loss.total.toFixed(1)}亿</b>：旅游停业约${loss.tourism.toFixed(1)}亿（已扣${Math.round(HT.TYPHOON.rebook*100)}%改期回补）、渔业与海洋牧场约${loss.fishery.toFixed(1)}亿；核电、海上风电按抗台标准建设，几乎无损。`
+    : '🌀 无台风情景：旅游、渔业保持旺季正常。';
+
+  /* 轨道 */
+  const target=pathTo(TARGET);
+  const natural=[BASE];let v=BASE;for(let i=0;i<5;i++){v*=1.04;natural.push(Math.round(v));}
+  const mine=pathTo(r.p50);
+  charts.trackChart.setOption({
+    backgroundColor:'transparent',
+    tooltip:{trigger:'axis',backgroundColor:'#16203a',borderColor:'#2b3a55',textStyle:{color:'#e6edf3'}},
+    legend:{top:0,textStyle:{color:'#93a4bd',fontSize:11}},
+    grid:{left:55,right:25,top:35,bottom:30},
+    xAxis:{type:'category',data:YEARS,axisLabel:{color:'#93a4bd'}},
+    yAxis:{type:'value',min:800,axisLabel:{color:'#93a4bd'},splitLine:{lineStyle:{color:'#1c2739'}}},
+    series:[
+      {name:'参考轨道1200亿',type:'line',data:target,lineStyle:{color:'#fbbf24',width:2,type:'dashed'},itemStyle:{color:'#fbbf24'},symbol:'diamond',symbolSize:8},
+      {name:'自然增长4.0%',type:'line',data:natural,lineStyle:{color:'#6b7280',width:2},itemStyle:{color:'#6b7280'},symbol:'circle',symbolSize:6},
+      {name:'你的设置',type:'line',data:mine,lineStyle:{color:'#0891b2',width:3.5},itemStyle:{color:'#0891b2'},areaStyle:{color:'rgba(8,145,178,.15)'},symbol:'circle',symbolSize:8,
+        markLine:{silent:true,symbol:'none',data:[{yAxis:TARGET,lineStyle:{color:'#fbbf24',type:'dotted',opacity:.5},label:{color:'#fbbf24',formatter:TARGET+'亿参考线'}}]}}
+    ]
+  });
+
+  /* 四变量拖动幅度：每个滑块单独拨到当前值，相对基准的 GDP 差 */
+  const ref=run(DEF.ST,DEF.D,DEF.ND,DEF.SF).p50;
+  const bars=[
+    {name:'台风强度',v:run(ST,DEF.D,0,1).p50-ref},
+    {name:'停业天数',v:run(DEF.ST,D,0,1).p50-ref},
+    {name:'核电延迟',v:run(DEF.ST,DEF.D,ND,1).p50-ref},
+    {name:'女鞋景气',v:run(DEF.ST,DEF.D,0,SF).p50-ref}
+  ];
+  const entries=bars.map(b=>({name:b.name,v:+b.v.toFixed(1)}));
+  charts.contribChart.setOption({
+    backgroundColor:'transparent',
+    tooltip:{trigger:'axis',backgroundColor:'#16203a',borderColor:'#2b3a55',textStyle:{color:'#e6edf3'},
+      formatter:ps=>{const p=ps[0];return `${p.name}<br/>对2030 GDP 的影响：${p.value>0?'+':''}${p.value}亿`}},
+    grid:{left:90,right:60,top:15,bottom:30},
+    xAxis:{type:'value',axisLabel:{color:'#93a4bd',formatter:'{value}亿'},splitLine:{lineStyle:{color:'#1c2739'}}},
+    yAxis:{type:'category',data:entries.map(e=>e.name),axisLabel:{color:'#cbd5e1',fontSize:12}},
+    series:[{type:'bar',data:entries.map(e=>({
+      value:e.v,
+      itemStyle:{color:e.v>=0?'#0891b2':'#fbbf24',borderRadius:e.v>=0?[0,4,4,0]:[4,0,0,4]}
+    })),barWidth:24,label:{show:true,position:p=>p.value>=0?'right':'left',color:'#cbd5e1',fontSize:11,
+      formatter:p=>(p.value>0?'+':'')+p.value+'亿'}}]
+  });
+
+  /* 恢复曲线 */
+  const curve = ST>0 ? HT.typhoonCurve(ST,D) : {weeks:Array.from({length:11},(_,i)=>'第'+i+'周'),loss:Array(11).fill(0)};
+  const flow = curve.loss.map(L=>+(100-L).toFixed(1));
+  charts.recChart.setOption({
+    backgroundColor:'transparent',
+    grid:{left:45,right:20,top:20,bottom:30},
+    xAxis:{type:'category',data:curve.weeks,axisLabel:{color:'#64748b',fontSize:10}},
+    yAxis:{type:'value',min:0,max:140,axisLabel:{color:'#64748b',formatter:'{value}%'}},
+    series:[{type:'line',data:flow,smooth:true,itemStyle:{color:'#22d3ee'},areaStyle:{color:'#22d3ee22'},
+      markLine:{data:[{yAxis:100,label:{formatter:'正常',color:'#64748b'}}],lineStyle:{color:'#475569',type:'dashed'}}}]
+  });
+  $('recText').innerHTML = ST===0
+    ? '无台风，滨海客流保持旺季正常。'
+    : `登陆当周滨海客流几近停摆（谷底约<b style="color:#f87171">${Math.round(Math.min(...flow))}%</b>）；浴场重开后客流逐周回升，改期出行的人在随后两三周集中回流、客流短暂高于正常，约5–7周回到趋势。这条曲线换算成金额，正是上面计入的旅游停业净损失，两笔账对得上。对全县 GDP，这是约${(loss.total/HT.BASE*100).toFixed(1)}%的小数字；对旺季民宿主和养殖户，却可能是一整年的指望——保险与复产的意义，就在这个落差里。`;
+}
+
+/* 场景切换 */
+document.querySelectorAll('.scenario').forEach(s=>s.onclick=()=>{
+  document.querySelectorAll('.scenario').forEach(x=>x.classList.toggle('active',x===s));
+  const n=+s.dataset.n;
+  if(n===1){strengthS.value=100;daysS.value=7;delayS.value=0;shoeS.value=100}
+  if(n===2){strengthS.value=0;daysS.value=0;delayS.value=0;shoeS.value=100}
+  if(n===3){strengthS.value=120;daysS.value=10;delayS.value=2;shoeS.value=100}
+  if(n===4){strengthS.value=100;daysS.value=7;delayS.value=0;shoeS.value=120}
+  draw();
+});
+[strengthS,daysS,delayS,shoeS].forEach(s=>s.oninput=draw);
+window.addEventListener('resize',()=>Object.values(charts).forEach(c=>c.resize()));
+
+renderTornado();renderRadar();draw();
+</script>
+
+<div class="likebar">
+  <button type="button" onclick="likePage()">👍 <span id="pcount">0</span></button>
+  <button type="button" data-duel-footer>和朋友试同一组</button>
+</div>
+<style>
+.likebar{display:flex;justify-content:center;align-items:center;margin:24px 0 8px;background:rgba(10,20,31,.96);border:1px solid #0891b2;border-radius:24px;padding:9px 20px;gap:22px}
+.likebar button{background:none;border:none;color:#e6edf3;font-size:14px;cursor:pointer}
+.likebar button:active{transform:scale(1.15)}
+</style>
+<script>(function(){var k="like_"+location.pathname;var n=parseInt(localStorage.getItem(k)||"0");document.getElementById("pcount").textContent=n;window.likePage=function(){n++;localStorage.setItem(k,n);document.getElementById("pcount").textContent=n;};})();</script>
+</body></html>

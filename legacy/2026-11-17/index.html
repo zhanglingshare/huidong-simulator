@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>惠东产业风洞 · 今日话题</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.nav{position:sticky;top:0;z-index:50;display:flex;gap:5px;align-items:center;padding:9px 14px;background:rgba(8,11,18,.95);border-bottom:1px solid #1b2434;backdrop-filter:blur(8px);overflow-x:auto}
+.nav b{font-size:14px;margin-right:6px;letter-spacing:.5px;flex:none;color:#fff}
+.nav a{background:#131c2b;color:#93a4bd;border:1px solid #22304a;padding:6px 12px;border-radius:20px;font-size:12.5px;text-decoration:none;white-space:nowrap;flex:none}
+.nav a.on{background:#0e7490;border-color:#0891b2;color:#fff;font-weight:600}
+.wrap{max-width:1200px;margin:auto;padding:18px}
+
+/* 海夜景 hero */
+.hero{position:relative;text-align:center;padding:50px 22px 44px;background:
+   radial-gradient(ellipse at 50% 130%, #0e3a4a 0%, #082630 40%, #0a0f1a 78%);
+  border:1px solid #1c2739;border-radius:16px;margin-bottom:16px;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;
+  background:
+   radial-gradient(circle at 18% 82%, rgba(251,191,36,.18) 0%, transparent 7%),
+   radial-gradient(circle at 32% 88%, rgba(251,191,36,.12) 0%, transparent 5%),
+   radial-gradient(circle at 62% 76%, rgba(34,211,238,.15) 0%, transparent 9%),
+   radial-gradient(circle at 78% 84%, rgba(251,191,36,.14) 0%, transparent 6%),
+   radial-gradient(circle at 50% 100%, rgba(34,211,238,.1) 0%, transparent 15%);
+  pointer-events:none}
+.hero .kick{font-size:11px;letter-spacing:4px;color:#67e8f9;margin-bottom:12px;position:relative}
+.hero h1{font-size:28px;line-height:1.4;margin:0;position:relative;color:#fff}
+.hero h1 .sea{color:#fbbf24}
+.hero .sub{font-size:13px;color:#a9b6c9;margin:14px auto 0;max-width:640px;line-height:1.9;position:relative}
+
+/* 雷达扫描 */
+.scan-row{display:flex;align-items:center;gap:18px;margin-bottom:16px;background:#0e1523;border:1px solid #1c2739;border-radius:14px;padding:16px 20px}
+.radar{width:72px;height:72px;flex:none;position:relative}
+.scan-info{font-size:11.5px;color:#7c8b99;margin-top:4px;line-height:1.7}
+.refresh{background:#f59e0b;color:#1a1206;border:0;padding:8px 18px;border-radius:18px;font-size:12.5px;font-weight:700;cursor:pointer;flex:none}
+.refresh:active{transform:scale(.96)}
+
+/* 14镇街选择 */
+.town-panel{background:linear-gradient(135deg,#0c2630,#0f172a);border:1px solid #0891b2;border-radius:14px;padding:16px 18px;margin-bottom:14px}
+.town-panel .t{font-size:15px;font-weight:800;color:#fff;margin-bottom:4px}
+.town-panel .d{font-size:12.5px;color:#94a3b8;margin-bottom:10px}
+.town-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+@media(max-width:700px){.town-grid{grid-template-columns:repeat(4,1fr)}}
+.town-grid button{background:#0891b222;border:1px solid #0891b244;color:#a5f3fc;border-radius:8px;padding:8px 4px;cursor:pointer;font-size:12px;font-weight:700;transition:.2s}
+.town-grid button:hover{background:#0891b244;transform:translateY(-1px)}
+.town-out{margin-top:10px;font-size:12.5px;color:#cbd5e1;line-height:1.7}
+
+/* 惠东骄傲 */
+.proud-panel{background:linear-gradient(135deg,#10222b,#0f172a);border:1px solid #fbbf24;border-radius:14px;padding:16px 18px;margin-bottom:14px}
+.proud-panel .t{font-size:15px;font-weight:800;color:#fff;margin-bottom:4px}
+.proud-panel .d{font-size:12.5px;color:#94a3b8;margin-bottom:10px}
+.proud-row{display:flex;gap:8px;flex-wrap:wrap}
+.proud-row button{flex:1;min-width:90px;border-radius:10px;padding:10px 6px;cursor:pointer;font-size:12px;font-weight:700;border:1px solid}
+.proud-out{margin-top:10px;font-size:12.5px;color:#cbd5e1;line-height:1.7}
+
+/* 分类筛选 */
+.toolbar{display:flex;gap:8px;align-items:center;margin-bottom:10px;flex-wrap:wrap}
+.cat{background:#131c2b;color:#93a4bd;border:1px solid #22304a;padding:6px 16px;border-radius:16px;font-size:12.5px;cursor:pointer;transition:.2s}
+.cat.on{background:#0e7490;border-color:#0891b2;color:#fff;font-weight:600}
+
+/* 话题卡 */
+.topic-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:700px){.topic-grid{grid-template-columns:1fr}}
+.tcard{border-radius:14px;padding:16px;cursor:pointer;transition:.25s;border:1px solid transparent}
+.tcard:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.4)}
+.tcard .meta{font-size:11px;color:#94a3b8}
+.tcard .title{font-size:16px;font-weight:800;color:#fff;margin:8px 0 8px;line-height:1.45}
+.tcard .row{display:flex;align-items:center;justify-content:space-between}
+.tier{font-size:11px;font-weight:800;border-radius:8px;padding:3px 10px}
+.like-btn{font-size:12px;color:#94a3b8;cursor:pointer}
+.detail{font-size:12px;color:#cbd5e1;margin-top:10px;display:none;line-height:1.75}
+.detail a{color:#7dd3fc;text-decoration:underline}
+
+.next{text-align:center;margin:24px 0}
+.next a{background:#0e7490;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block}
+.disc{margin-top:14px;font-size:11px;color:#5b6b82;text-align:center;line-height:1.8}
+
+@keyframes fd{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes spin{to{transform:rotate(360deg)}}
+.scanline{transform-origin:center;animation:spin 3s linear infinite}
+.scanline.fast{animation-duration:.8s}
+@keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
+.pulse{animation:pulse 1.5s ease-in-out infinite}
+</style><meta property="og:type" content="website">
+<meta property="og:title" content="向外地朋友介绍惠东，你会先讲哪一样？">
+<meta property="og:description" content="打开选一次，和朋友对答案。">
+<meta property="og:image" content="https://zhanglingshare.github.io/huidong-simulator/legacy/2026-11-17/huidong-stage.jpg">
+<link rel="stylesheet" href="huidong-duel.css?v=1">
+<script type="module" src="huidong-duel.js?v=1"></script>
+</head><body data-duel-page="index">
+
+<div class="nav">
+  <b>惠东产业风洞</b>
+  <a href="index.html" class="on">① 今日话题</a>
+  <a href="town.html">🏘️ 各镇吃喝玩乐</a>
+  <a href="network.html">② 关系网</a>
+  <a href="who.html">③ 基本面</a>
+  <a href="choices.html">④ 五条路</a>
+  <a href="future.html">⑤ 未来</a>
+  <a href="windtunnel.html">⑥ 风洞</a>
+  <a href="blindspot.html">⑦ 被忽略</a>
+  <a href="report.html">⑧ 报告</a>
+  <a href="ending.html">⑨ 结语</a>
+</div>
+
+<div class="wrap">
+  <section id="friend-duel" class="friend-duel" aria-labelledby="duel-title" hidden></section>
+
+
+  <!-- 海夜景 hero -->
+  <div class="hero">
+    <div class="kick">HUIDONG WIND TUNNEL · TODAY</div>
+    <h1>今日<span class="sea">惠东</span>，一片海的动静</h1>
+    <p class="sub">扫一遍公开渠道，按关注程度排。<br>
+    数据来源：政府公报、各镇公开信息、南方+/惠州日报、微博/抖音/头条热榜。<br>
+    <span style="font-size:11px;color:#5b6b82">本页不展示平台后台真实阅读/转发/点赞，改用关注档（高/较高/中）标注。</span></p>
+  </div>
+
+  <!-- 雷达扫描 -->
+  <div class="scan-row">
+    <svg class="radar" viewBox="0 0 80 80">
+      <circle cx="40" cy="40" r="36" fill="none" stroke="#1c2739" stroke-width="1"/>
+      <circle cx="40" cy="40" r="24" fill="none" stroke="#1c2739" stroke-width="1"/>
+      <circle cx="40" cy="40" r="12" fill="none" stroke="#1c2739" stroke-width="1"/>
+      <line x1="40" y1="4" x2="40" y2="76" stroke="#1c2739" stroke-width="1"/>
+      <line x1="4" y1="40" x2="76" y2="40" stroke="#1c2739" stroke-width="1"/>
+      <g class="scanline" id="scanline">
+        <line x1="40" y1="40" x2="40" y2="6" stroke="#0891b2" stroke-width="1.5" opacity="0.8"/>
+        <circle cx="40" cy="6" r="2" fill="#0891b2"/>
+      </g>
+    </svg>
+    <div style="flex:1">
+      <div style="font-size:14px;font-weight:700;color:#e6edf3">当日话题扫描</div>
+      <div class="scan-info" id="scanInfo">正在读取当日话题…</div>
+    </div>
+    <button class="refresh" id="btnScan">🔄 重新扫描</button>
+  </div>
+
+  <!-- 你是哪个镇的 -->
+  <div class="town-panel">
+    <div class="t">🏘️ 你是惠东哪个镇的？</div>
+    <div class="d">2 个街道、12 个镇，滨海与山区各有各的饭碗。</div>
+    <div class="town-grid" id="townGrid"></div>
+    <div class="town-out" id="townOut"></div>
+  </div>
+
+  <!-- 惠东骄傲 -->
+  <div class="proud-panel">
+    <div class="t">🏆 向外人介绍惠东，你最先说哪样？</div>
+    <div class="d">双月湾、海龟湾、赤岸蚝、女鞋、太平岭核电——这是我们的家底。</div>
+    <div class="proud-row" id="proudGrid"></div>
+    <div class="proud-out" id="proudOut"></div>
+  </div>
+
+  <!-- 分类筛选 -->
+  <div class="toolbar">
+    <button class="cat on" data-c="all">全部</button>
+    <button class="cat" data-c="ind">🔵 产业</button>
+    <button class="cat" data-c="life">🟠 民生</button>
+    <button class="cat" data-c="city">⚪ 城市</button>
+    <button class="cat" data-c="agri">🌾 农渔</button>
+    <button class="cat" data-c="fun">🏖️ 文旅</button>
+  </div>
+
+  <div class="topic-grid" id="topicList"></div>
+
+  <div class="next"><a href="network.html">下一步：看惠东怎么长出来 →</a></div>
+  <div class="disc">话题均来自公开渠道、每日自动刷新；关注档为公开热度估算，非平台后台统计。</div>
+</div>
+
+<script>
+let curCat="all";
+let allData=[];
+let hotMeta={};
+
+const catMap={industry:"ind",livelihood:"life",city:"city",agriculture:"agri",tourism:"fun",food:"fun",gossip:"city"};
+
+async function loadHot(){
+  let j;
+  for(let a=0;a<3;a++){
+    try{
+      const r=await fetch("hot.json?ts="+Date.now());
+      if(!r.ok) throw new Error("http "+r.status);
+      j=await r.json(); break;
+    }catch(e){ if(a===2) throw e; await new Promise(s=>setTimeout(s,500)); }
+  }
+  hotMeta=j;
+  allData=j.items.map(it=>({
+    t:it.title, c:catMap[it.cat]||"city",
+    src:it.source, srcLevel:it.srcLevel, url:it.url, d:it.summary,
+    live:it.live, tier:it.tier
+  }));
+}
+
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+
+function render(){
+  let list=curCat==="all"?allData:allData.filter(x=>x.c===curCat);
+  const grads={
+    ind:"linear-gradient(135deg,#1e3a8a,#0f1a2e)",
+    life:"linear-gradient(135deg,#7c2d12,#1a0f0f)",
+    city:"linear-gradient(135deg,#374151,#0f1a2e)",
+    agri:"linear-gradient(135deg,#1a2f0e,#0f1a2e)",
+    fun:"linear-gradient(135deg,#155e63,#0f1a2e)"
+  };
+  const catName={ind:"产业",life:"民生",city:"城市",agri:"农渔",fun:"文旅"};
+  const tierColor={"高":"#f87171","较高":"#fbbf24","中":"#34d399"};
+  const el=document.getElementById("topicList");
+  el.innerHTML=list.map((x)=>{
+    const liveBadge=x.live?'<span style="background:#dc2626;color:#fff;font-size:9px;padding:1px 5px;border-radius:3px;margin-left:5px">实时</span>':'';
+    const tc=tierColor[x.tier]||"#34d399";
+    return `<div class="tcard" data-t="${esc(x.t)}" style="background:${grads[x.c]||grads.city}">
+      <div class="meta">${catName[x.c]||"城市"}${liveBadge} · ${esc(x.srcLevel||"")} · ${esc(x.src||"")}</div>
+      <div class="title">${esc(x.t)}</div>
+      <div class="row">
+        <span class="tier" style="color:${tc};border:1px solid ${tc}">关注 · ${esc(x.tier||"")}</span>
+        <span class="like-btn" onclick="event.stopPropagation();like(this,'${esc(x.t)}')">👍 <b class="ln">0</b></span>
+      </div>
+      <div class="detail">${esc(x.d||"")}${x.url?'<div style="margin-top:8px"><a href="'+esc(x.url)+'" target="_blank" rel="noopener nofollow" onclick="event.stopPropagation()">查看原始报道 ↗</a></div>':''}</div>
+    </div>`;
+  }).join("")||'<div style="grid-column:1/-1;color:#5b6b82;text-align:center;padding:26px 0">今日话题快照暂不可用，可点「重新扫描」重试。</div>';
+  document.querySelectorAll("#topicList .tcard").forEach(c=>{
+    c.onclick=()=>{const d=c.querySelector(".detail");d.style.display=d.style.display==="none"?"block":"none";};
+  });
+}
+
+function like(el,t){
+  let n=parseInt(el.querySelector(".ln").textContent)+1;
+  el.querySelector(".ln").textContent=n;
+  localStorage.setItem("like_"+t,n);
+  el.style.transform="scale(1.2)";setTimeout(()=>el.style.transform="",200);
+}
+
+document.querySelectorAll(".cat").forEach(b=>{
+  b.onclick=()=>{
+    document.querySelectorAll(".cat").forEach(x=>x.classList.remove("on"));
+    b.classList.add("on");
+    curCat=b.dataset.c;
+    render();
+  };
+});
+
+function scanText(){
+  return `数据每日自动刷新 · 上次更新 ${hotMeta.updated||"—"} · 共${allData.length}个话题 · 关注档排序`;
+}
+
+document.getElementById("btnScan").onclick=async function(){
+  this.innerHTML='<span class="pulse">⏳</span> 扫描中…';
+  document.getElementById("scanInfo").textContent="雷达旋转中，正在读取当日话题快照…";
+  document.getElementById("scanline").classList.add("fast");
+  try{
+    await loadHot();
+    this.innerHTML="🔄 重新扫描";
+    document.getElementById("scanline").classList.remove("fast");
+    document.getElementById("scanInfo").textContent=scanText();
+  }catch(e){
+    this.innerHTML="🔄 重新扫描";
+    document.getElementById("scanline").classList.remove("fast");
+    document.getElementById("scanInfo").textContent="扫描失败：快照暂不可用；页面其余内容不受影响。";
+  }
+  render();
+};
+
+(async()=>{
+  let hotOk=true;
+  try{ await loadHot(); }
+  catch(e){ hotOk=false; hotMeta={}; allData=[]; }
+  document.getElementById("scanInfo").textContent=hotOk?scanText():"今日话题快照暂不可用，可点「重新扫描」重试。";
+  render();
+})();
+
+// 14镇街
+(function(){
+  const TOWNS=[
+    {n:"平山",tag:"县城中心",say:"县政府在平山，惠东的门面与商圈。"},
+    {n:"大岭",tag:"产业新城",say:"工业园区连片，先进制造配套。"},
+    {n:"平海",tag:"双月湾·古城",say:"600年卫城，国庆流量担当。"},
+    {n:"港口",tag:"海龟湾",say:"大陆唯一海龟保护区，亲子科普。"},
+    {n:"巽寮",tag:"滨海度假区",say:"年迎约390万，嘉年华打铁花。"},
+    {n:"铁涌",tag:"赤岸蚝乡",say:"10月蚝正肥，丰收节主场。"},
+    {n:"稔山",tag:"高铁门户",say:"高铁直达、滨海第一站，马铃薯主产区。"},
+    {n:"黄埠",tag:"能源·女鞋",say:"太平岭核电在这，盐洲岛原生态。"},
+    {n:"吉隆",tag:"女鞋名镇",say:"中国女鞋基地核心，鞋文化节。"},
+    {n:"白花",tag:"近郊工业镇",say:"县城邻近，制造业配套集聚。"},
+    {n:"白盆珠",tag:"水库生态",say:"大湾区水源地，生态康养。"},
+    {n:"安墩",tag:"温泉·蜜乡",say:"温泉康养，春蜜冬药。"},
+    {n:"多祝",tag:"山区大镇",say:"山区农林，皇思扬古围村。"},
+    {n:"高潭",tag:"红色老区",say:"革命老区，红色+绿色旅游。"}
+  ];
+  document.getElementById("townGrid").innerHTML=TOWNS.map(t=>
+    `<button onclick="pickTown('${t.n}')">${t.n}</button>`
+  ).join("");
+  window.pickTown=function(n){
+    const t=TOWNS.find(x=>x.n===n);if(!t)return;
+    document.getElementById("townOut").innerHTML=`你是<b style="color:#22d3ee">${t.n}人</b>——${t.tag}。<br>${t.say}<br><span style="color:#6b7280">这个镇在惠东这盘棋里，占的是${t.tag}这个位置。</span>`;
+  };
+})();
+
+// 惠东骄傲
+(function(){
+  const KEY="huidong_proud_v1";
+  const opts=[
+    {k:"bay",label:"🌊 双月湾",c:"#22d3ee",say:"双湾抱月，滨海度假顶流。"},
+    {k:"turtle",label:"🐢 海龟湾",c:"#34d399",say:"大陆唯一海龟国家级保护区。"},
+    {k:"oyster",label:"🦪 赤岸生蚝",c:"#94a3b8",say:"秋冬蚝肥，铁涌赤岸招牌。"},
+    {k:"shoe",label:"👠 惠东女鞋",c:"#ec4899",say:"中国女鞋生产基地，时尚名县。"},
+    {k:"nuclear",label:"⚛️ 太平岭核电",c:"#fbbf24",say:"华龙一号落地，清洁能源基地。"}
+  ];
+  let d=JSON.parse(localStorage.getItem(KEY)||'{}');
+  opts.forEach(o=>{if(typeof d[o.k]!=="number")d[o.k]=0;});
+  document.getElementById("proudGrid").innerHTML=opts.map(o=>
+    `<button onclick="pickProud('${o.k}')" style="background:${o.c}22;border-color:${o.c};color:${o.c}">${o.label}</button>`
+  ).join("");
+  window.pickProud=function(k){
+    if(localStorage.getItem(KEY+"_done"))return;
+    d[k]++;localStorage.setItem(KEY,JSON.stringify(d));localStorage.setItem(KEY+"_done","1");
+    const my=opts.find(o=>o.k===k);
+    document.getElementById("proudOut").innerHTML=`你选了<b style="color:${my.c}">${my.label}</b>。<br>这是你本机的记录——${my.say}<br>惠东是惠东，这就是我们的家底。`;
+  };
+})();
+</script>
+
+<div class="likebar">
+  <button type="button" onclick="likePage()">👍 <span id="pcount">0</span></button>
+  <button type="button" data-duel-footer>发这题给朋友</button>
+</div>
+<style>
+.likebar{display:flex;justify-content:center;align-items:center;margin:24px 0 8px;background:rgba(10,20,31,.96);border:1px solid #0891b2;border-radius:24px;padding:9px 20px;gap:22px}
+.likebar button{background:none;border:none;color:#e6edf3;font-size:14px;cursor:pointer}
+.likebar button:active{transform:scale(1.15)}
+</style>
+<script>(function(){var k="like_"+location.pathname;var n=parseInt(localStorage.getItem(k)||"0");document.getElementById("pcount").textContent=n;window.likePage=function(){n++;localStorage.setItem(k,n);document.getElementById("pcount").textContent=n;};})();</script>
+</body></html>

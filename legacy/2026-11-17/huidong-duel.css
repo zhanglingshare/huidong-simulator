@@ -1,0 +1,112 @@
+.friend-duel {
+  --duel-ink: #eaf6f8;
+  --duel-soft: #9db6c0;
+  --duel-mint: #2dd4bf;
+  --duel-yellow: #67e8f9;
+  --duel-line: #2a4a56;
+  position: relative;
+  min-width: 0;
+  margin: 12px 0 15px;
+  padding: clamp(13px, 2vw, 22px);
+  scroll-margin-top: 64px;
+  border: 1px solid var(--duel-line);
+  border-left: 3px solid var(--duel-yellow);
+  border-radius: 10px;
+  background: radial-gradient(ellipse 80% 140% at 0 0, #0e3a4a, transparent), #0c1a24;
+  color: var(--duel-ink);
+  box-shadow: 0 9px 22px #01060b35;
+}
+.friend-duel [hidden] { display: none !important }
+.friend-duel.duel-landing {
+  display: grid;
+  min-height: calc(100vh - 54px);
+  min-height: calc(100svh - 54px);
+  align-content: center;
+  background: linear-gradient(90deg,#0a141ff7,#0a141fbe), url("huidong-stage.jpg") center 55% / cover;
+}
+.friend-duel a { color: var(--duel-mint); text-decoration: underline; text-underline-offset: 3px }
+.duel-kicker { margin: 0 0 4px; color: var(--duel-yellow); font-size: 12px; font-weight: 760 }
+.duel-title {
+  margin: 0 0 8px;
+  color: var(--duel-ink);
+  letter-spacing: -.035em;
+  font-size: clamp(18px, 2.35vw, 29px);
+  line-height: 1.25;
+  text-wrap: balance;
+}
+.duel-hint { margin: 0 0 9px; color: var(--duel-soft); font-size: 12px }
+.duel-hint:empty { display: none }
+.duel-options, .duel-actions { display: flex; flex-wrap: wrap; gap: 6px }
+.duel-options button, .duel-actions button {
+  min-height: 44px;
+  border: 1px solid #3a5a66;
+  border-radius: 7px;
+  background: #0e2230;
+  color: var(--duel-ink);
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 720;
+  padding: 4px 11px;
+}
+.duel-options button { flex: 1 1 100px; transition: background .14s }
+.duel-options button:hover, .duel-actions button:hover { border-color: var(--duel-yellow) }
+.duel-options button[aria-pressed="true"] { border-color: var(--duel-yellow); background: var(--duel-yellow); color: #05222b }
+.duel-options button:focus-visible, .duel-actions button:focus-visible, .duel-copy textarea:focus-visible { outline: 2px solid var(--duel-yellow); outline-offset: 3px }
+.duel-result { margin: 11px 0 0; padding: 10px 12px; border: 1px solid #26454f; border-radius: 7px; background: #0c1a24 }
+.duel-result.reveal-duel { animation: duel-reveal .32s ease-out both }
+.duel-answer { margin: 0; color: var(--duel-mint); font-size: clamp(17px, 2.1vw, 27px); line-height: 1.2; font-weight: 820; letter-spacing: -.035em }
+.duel-detail { margin: 6px 0 0; color: var(--duel-soft); font-size: 13px }
+.duel-evidence { display: flex; flex-wrap: wrap; gap: 5px 12px; margin: 6px 0 0; font-size: 12px }
+.duel-facts { display: grid; gap: 5px; margin: 8px 0 2px }
+.duel-fact { display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: 2px 6px; font-size: 12px }
+.duel-fact strong { color: var(--duel-mint); font-size: 17px; font-variant-numeric: tabular-nums }
+.duel-meter { grid-column: 1/-1; height: 5px; background: #0e3a4a }
+.duel-meter span { display: block; width: var(--duel-amount); height: 100%; background: var(--duel-mint); transform-origin: left }
+.reveal-duel .duel-meter span { animation: duel-draw .45s ease-out both }
+.duel-fact:nth-child(2) strong { color: #fcd34d }
+.duel-fact:nth-child(2) .duel-meter span { background: #fcd34d }
+.duel-pair { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 7px; margin: 8px 0 0 }
+.duel-pair:has(> div:only-child) { grid-template-columns: 1fr }
+.duel-pair div { min-width: 0; padding: 6px 8px; border: 1px solid #2a4a56; border-radius: 6px; background: #0d202b }
+.duel-pair div:nth-child(2) { background: #1a2a30; border-color: #3e7d8c }
+.duel-pair span, .duel-pair strong { display: block; overflow-wrap: anywhere }
+.duel-pair span { color: var(--duel-soft); font-size: 11px }
+.duel-pair strong { margin-top: 2px; font-size: 13px; color: var(--duel-ink); font-weight: 780 }
+.duel-pair strong.duel-number { color: var(--duel-mint); font-variant-numeric: tabular-nums; font-size: clamp(18px, 3vw, 32px); letter-spacing: -.05em; line-height: 1.17 }
+.duel-pair p { margin: 4px 0 0; color: var(--duel-soft); font-size: 11px; overflow-wrap: anywhere }
+.duel-actions { align-items: center; margin-top: 9px; color: var(--duel-soft) }
+.duel-actions .duel-share { border-color: var(--duel-mint); background: #0e3a4a; color: #cffafe }
+.duel-actions .duel-copy-button { border-color: #26454f; background: transparent }
+.duel-status { margin: 4px 0 0; color: var(--duel-mint); font-size: 12px }
+.duel-status:empty { margin: 0 }
+.duel-invite-link { display: inline-flex; min-height: 36px; align-items: center; margin-top: 3px; font-size: 12px }
+.duel-copy label { display: block; margin: 6px 0 3px; color: var(--duel-soft); font-size: 12px }
+.duel-copy textarea {
+  width: 100%;
+  min-height: 83px;
+  padding: 7px;
+  border: 1px solid #3a5a66;
+  border-radius: 6px;
+  background: #0c1a24;
+  color: var(--duel-ink);
+  font: inherit;
+  font-size: 12px;
+  resize: vertical;
+}
+.friend-duel.duel-native { padding: 8px 0 0; margin: 5px 0 0; border: 0; border-top: 1px solid #4a7d8c4d; border-radius: 0; background: none; box-shadow: none }
+.duel-native .duel-kicker:empty { display: none }
+.duel-native .duel-actions { margin-top: 0 }
+.duel-native .duel-pair { margin-bottom: 6px }
+.duel-delta { margin: 6px 0 0; color: var(--duel-yellow); font-size: 13px; font-weight: 760 }
+@keyframes duel-reveal { from { opacity: .5; transform: translateY(5px) } to { opacity: 1; transform: translateY(0) } }
+@keyframes duel-draw { from { transform: scaleX(0) } to { transform: scaleX(1) } }
+@media (max-width: 440px) {
+  .duel-options button { padding-inline: 6px; min-width: 0; flex-basis: 90px; font-size: 12px }
+  .duel-actions button { padding-inline: 8px; font-size: 12px }
+  .duel-native .duel-actions button { min-height: 40px }
+}
+@media (prefers-reduced-motion: reduce) {
+  .duel-result.reveal-duel, .reveal-duel .duel-meter span { animation: none }
+  .duel-options button { transition: none }
+}

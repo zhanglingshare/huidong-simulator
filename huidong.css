@@ -388,6 +388,7 @@
 }
 
 /* Content pages */
+.hd-content { min-height: 100vh; }
 .hd-content .wrap { max-width: 1264px; padding: 28px clamp(16px, 4vw, 42px) 48px; }
 .hd-content .hero {
   margin: 0 0 20px;

@@ -220,7 +220,7 @@ const views = {
   shore: {
     title: "海边的生意和能源连在哪里？",
     note: "巽寮、平海和港口连着滨海文旅。图上的虚线表示旅游、渔业和核电可能共用部分岸线的情景假设。",
-    positions: {xl:[66,56], ph:[198,56], gk:[334,56], wind:[493,56], tour:[137,160], fish:[308,160], np:[474,160]}
+    positions: {xl:[66,56], ph:[198,56], gk:[334,56], wind:[493,56], tour:[137,145], fish:[318,180], np:[474,148]}
   },
   tour: {
     title: "外地客流怎样连到惠东？",
@@ -259,12 +259,24 @@ function renderNetwork(key, replay = false) {
   const nodeGroup = document.getElementById("nodes");
   lineGroup.replaceChildren();
   nodeGroup.replaceChildren();
+  const drawnPairs = new Set();
   for (const [i, [from, to, weight, evidence]] of edges.entries()) {
     const [x1, y1] = point(from), [x2, y2] = point(to);
-    const line = document.createElementNS(SVGNS, "line");
-    const style = {x1, y1, x2, y2, stroke: BLOOD_COLORS[evidence], "stroke-width": weight,
+    const pair = [from, to].sort().join("/");
+    const sharedEndpoints = drawnPairs.has(pair);
+    drawnPairs.add(pair);
+    const line = document.createElementNS(SVGNS, sharedEndpoints ? "path" : "line");
+    const style = {stroke: BLOOD_COLORS[evidence], "stroke-width": weight,
       "stroke-opacity": focus ? .7 : .46, "stroke-linecap": "round"};
     for (const [name, value] of Object.entries(style)) line.setAttribute(name, value);
+    if (sharedEndpoints) {
+      const controlX = (x1 + x2) / 2;
+      const controlY = (y1 + y2) / 2 - (focus ? 38 : 22);
+      line.setAttribute("d", `M ${x1} ${y1} Q ${controlX} ${controlY} ${x2} ${y2}`);
+      line.setAttribute("fill", "none");
+    } else {
+      for (const [name, value] of Object.entries({x1, y1, x2, y2})) line.setAttribute(name, value);
+    }
     if (evidence === "C") line.setAttribute("stroke-dasharray", "5 5");
     const title = document.createElementNS(SVGNS, "title");
     title.textContent = nodeById(from).name + " · " + nodeById(to).name + " · " +

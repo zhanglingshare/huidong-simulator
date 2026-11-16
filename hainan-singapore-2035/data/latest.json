@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
   "project_key": "two-islands-2035-20261030",
-  "version": "20261115-official-evidence",
-  "updated_at": "2026-11-15T01:12:16Z",
+  "version": "20261116-official-evidence",
+  "updated_at": "2026-11-16T01:52:49Z",
   "mode": "reviewed_official_reference_only",
   "documents": [],
   "indicators": [
@@ -967,6 +967,147 @@
       "definition": "DNV与Menon Economics合编的2026年海事城市综合排名，涵盖航运、海事金融与法律、海事技术、港口与物流、吸引力与竞争力五项维度。",
       "source_notes": "A 级核验对象为报告公布的名次。排名组合量化指标与专家判断，2026年版更新了部分指标。",
       "revision_relation": "initial_verified_record_for_this_report_edition"
+    },
+    {
+      "tier": "A",
+      "status": "observed",
+      "reviewed_by": "official-primary-source-check",
+      "reviewed_at": "2026-11-16T01:52:49Z",
+      "model_impact": "none: reference evidence only; independent synthetic engine",
+      "region": "海南",
+      "published_at": "2026-11-05T18:30:00+08:00",
+      "published_at_precision": "minute",
+      "source_url": "https://www.ccdi.gov.cn/yaowenn/202611/t20261105_520707.html",
+      "official_text_reprint_url": "https://news.hndaily.cn/html/2026-11/06/content_58465_20001822.htm",
+      "source_locator": "中共海南省委正式通报中“（四）推进‘三区一中心’建设方面”第一项。",
+      "period": "2026年上半年（1—6月累计）",
+      "observation_period": {
+        "start": "2026-01-01",
+        "end": "2026-06-30",
+        "kind": "year_to_date_cumulative"
+      },
+      "revision_relation": "initial_verified_record_for_this_measure_and_period",
+      "id": "hn-yangpu-port-teu-2026h1",
+      "label": "洋浦港集装箱吞吐量（2026年上半年）",
+      "value": 194.3,
+      "unit": "万TEU",
+      "original_unit": "万标箱",
+      "definition": "海南省委通报所列洋浦港2026年1—6月累计集装箱吞吐量，按20英尺标准箱当量计。",
+      "geographic_scope": "洋浦港",
+      "source_notes": "按通报披露精度采录。本条采用洋浦港上半年累计口径；交通运输部全省主要沿海港口汇总采用另列的观测期和统计范围。"
+    },
+    {
+      "tier": "A",
+      "status": "observed",
+      "reviewed_by": "official-primary-source-check",
+      "reviewed_at": "2026-11-16T01:52:49Z",
+      "model_impact": "none: reference evidence only; independent synthetic engine",
+      "region": "海南",
+      "published_at": "2026-11-05T18:30:00+08:00",
+      "published_at_precision": "minute",
+      "source_url": "https://www.ccdi.gov.cn/yaowenn/202611/t20261105_520707.html",
+      "official_text_reprint_url": "https://news.hndaily.cn/html/2026-11/06/content_58465_20001822.htm",
+      "source_locator": "中共海南省委正式通报中“（四）推进‘三区一中心’建设方面”第一项。",
+      "period": "2026年上半年（1—6月累计）",
+      "observation_period": {
+        "start": "2026-01-01",
+        "end": "2026-06-30",
+        "kind": "year_to_date_cumulative"
+      },
+      "revision_relation": "initial_verified_record_for_this_measure_and_period",
+      "id": "hn-yangpu-port-teu-yoy-2026h1",
+      "label": "洋浦港集装箱吞吐量累计同比（2026年上半年）",
+      "value": 49.9,
+      "unit": "%",
+      "original_unit": "%",
+      "definition": "海南省委通报所列洋浦港2026年1—6月累计集装箱吞吐量较2025年同期的增幅。",
+      "geographic_scope": "洋浦港",
+      "reference_observation_id": "hn-yangpu-port-teu-2026h1",
+      "source_notes": "采用通报直接披露的累计同比精度。"
+    },
+    {
+      "tier": "A",
+      "status": "observed",
+      "reviewed_by": "official-primary-source-check",
+      "reviewed_at": "2026-11-16T01:52:49Z",
+      "model_impact": "none: reference evidence only; independent synthetic engine",
+      "region": "海南",
+      "published_at": "2026-11-05T18:30:00+08:00",
+      "published_at_precision": "minute",
+      "source_url": "https://www.ccdi.gov.cn/yaowenn/202611/t20261105_520707.html",
+      "official_text_reprint_url": "https://news.hndaily.cn/html/2026-11/06/content_58465_20001822.htm",
+      "source_locator": "中共海南省委正式通报中“（四）推进‘三区一中心’建设方面”第一项。",
+      "period": "2026年上半年（1—6月累计）",
+      "observation_period": {
+        "start": "2026-01-01",
+        "end": "2026-06-30",
+        "kind": "year_to_date_cumulative"
+      },
+      "revision_relation": "initial_verified_record_for_this_measure_and_period",
+      "id": "hn-new-foreign-invested-enterprises-yoy-2026h1",
+      "label": "海南新增外资企业累计同比（2026年上半年）",
+      "value": 38.6,
+      "unit": "%",
+      "original_unit": "%",
+      "definition": "海南省委通报所列2026年1—6月海南省新增外资企业户数较上年同期的增幅。",
+      "reference_observation_id": "hn-new-foreign-invested-enterprises-2026h1",
+      "source_notes": "同一观测期的绝对数为1303户，前期已按省市场监管局发布会实录采录。本条补录通报直接披露的累计同比。"
+    },
+    {
+      "tier": "A",
+      "status": "observed",
+      "reviewed_by": "official-primary-source-check",
+      "reviewed_at": "2026-11-16T01:52:49Z",
+      "model_impact": "none: reference evidence only; independent synthetic engine",
+      "region": "新加坡",
+      "published_at": "2026-10-14",
+      "published_at_precision": "day",
+      "publication_date_basis": "data.gov.sg 标注的2026年列所在官方数据集更新日。",
+      "source_url": "https://data.gov.sg/datasets/d_94fd56bdb981f0f966cb487d8247bf1a/view",
+      "official_table_url": "https://tablebuilder.singstat.gov.sg/table/TS/M810791",
+      "population_release_url": "https://www.population.gov.sg/media-centre/population-in-brief-2026/",
+      "period": "2026年6月底",
+      "observation_period": {
+        "as_of": "2026-06-30",
+        "kind": "annual_midyear_population_share"
+      },
+      "unit": "%",
+      "original_unit": "%",
+      "source_notes": "政府数据集由新加坡统计局与人力部供数，按整数百分比公布；分母为6月底非居民人口。人力部另发布绝对人数，但该人数表并非本指标的分母。",
+      "revision_relation": "initial_verified_record_for_this_measure_and_period",
+      "id": "sg-ep-share-non-resident-population-2026-06",
+      "label": "新加坡非居民人口中就业准证（EP）持有人占比（2026年6月底）",
+      "value": 10,
+      "source_locator": "表 M810791 对应政府数据平台 2026 列，Employment Pass Holders 行。",
+      "definition": "新加坡2026年6月底就业准证（Employment Pass）持有人占当期非居民人口的百分比。"
+    },
+    {
+      "tier": "A",
+      "status": "observed",
+      "reviewed_by": "official-primary-source-check",
+      "reviewed_at": "2026-11-16T01:52:49Z",
+      "model_impact": "none: reference evidence only; independent synthetic engine",
+      "region": "新加坡",
+      "published_at": "2026-10-14",
+      "published_at_precision": "day",
+      "publication_date_basis": "data.gov.sg 标注的2026年列所在官方数据集更新日。",
+      "source_url": "https://data.gov.sg/datasets/d_94fd56bdb981f0f966cb487d8247bf1a/view",
+      "official_table_url": "https://tablebuilder.singstat.gov.sg/table/TS/M810791",
+      "population_release_url": "https://www.population.gov.sg/media-centre/population-in-brief-2026/",
+      "period": "2026年6月底",
+      "observation_period": {
+        "as_of": "2026-06-30",
+        "kind": "annual_midyear_population_share"
+      },
+      "unit": "%",
+      "original_unit": "%",
+      "source_notes": "政府数据集由新加坡统计局与人力部供数，按整数百分比公布；分母为6月底非居民人口。人力部另发布绝对人数，但该人数表并非本指标的分母。",
+      "revision_relation": "initial_verified_record_for_this_measure_and_period",
+      "id": "sg-s-pass-share-non-resident-population-2026-06",
+      "label": "新加坡非居民人口中S准证持有人占比（2026年6月底）",
+      "value": 9,
+      "source_locator": "表 M810791 对应政府数据平台 2026 列，S Pass Holders 行。",
+      "definition": "新加坡2026年6月底S准证持有人占当期非居民人口的百分比。"
     }
   ],
   "events": [
@@ -1624,8 +1765,39 @@
         "正式实施协定及生效条款",
         "项目授权及信用转让数据"
       ]
+    },
+    {
+      "tier": "A",
+      "status": "observed",
+      "reviewed_by": "official-primary-source-check",
+      "reviewed_at": "2026-11-16T01:52:49Z",
+      "model_impact": "none: reference evidence only; independent synthetic engine",
+      "region": "新加坡",
+      "id": "sg-mas-future-of-finance-institute-operating-2026-11-03",
+      "label": "新加坡金管局确认未来金融研究院已开始运营",
+      "stage": "operations_confirmed",
+      "published_at": "2026-11-03",
+      "published_at_precision": "day",
+      "effective_at": null,
+      "observed_at": null,
+      "period": "截至2026-11-03公告，研究院已开始运营",
+      "observation_period": {
+        "as_of": "2026-11-03",
+        "kind": "operations_confirmed_in_official_announcement"
+      },
+      "original_unit": "项（机构运营公告）",
+      "source_url": "https://www.mas.gov.sg/news/media-releases/2026/future-of-finance-institute-commences-operations-starting-with-ai-in-finance",
+      "source_locator": "新加坡金融管理局11月3日公告开头、第2–3段及研究院说明。",
+      "definition": "新加坡金融管理局确认公私合作平台未来金融研究院（Future of Finance Institute）已开始运营。",
+      "description": "研究院初期重点包括金融人工智能和代币化，并公布筹建知识平台及推动金融机构与技术机构开展验证的安排。",
+      "source_notes": "11月3日为确认公告日期，具体开始运营日期未披露。知识平台及各项目的实施效果需以各自披露为准。",
+      "revision_relation": "initial_verified_record_for_institute_operations; follows_establishment_announcement",
+      "follow_up_evidence_needed": [
+        "具体开始运营日期及项目实施里程碑",
+        "参与机构、试点和实际采取情况"
+      ]
     }
   ],
   "failures": [],
-  "previous_version": "20261114-official-evidence"
+  "previous_version": "20261115-official-evidence"
 }

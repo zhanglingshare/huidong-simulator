@@ -56,8 +56,8 @@ body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.65 -apple-system,"Pin
 .disc{font-size:11px;color:#5b6b82;margin-top:16px;line-height:1.8;padding:12px;background:#0a0f1a;border-radius:8px}
 .next{text-align:center;margin:20px 0}
 .next a{background:#0e7490;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block}
-</style><link rel="stylesheet" href="huidong.css">
-</head><body>
+</style><link rel="stylesheet" href="huidong.css?v=20261116b">
+</head><body class="hd-page hd-content">
 
 <header class="hd-header">
   <div class="hd-header-inner">
@@ -71,94 +71,102 @@ body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.65 -apple-system,"Pin
 
 <div class="wrap">
 
-  <div class="hero">
-    <div class="kick">HUIDONG · 14 TOWNS</div>
-    <h1>惠东各镇，一口<span class="sea">海味</span>、一片山海</h1>
-    <p class="sub">2 个街道、12 个镇与滨海度假区，滨海与山区各有烟火气。<br>点"换一换"，今天先去哪三个？</p>
-  </div>
+  <header class="hero">
+    <h1>在惠东，<span class="sea">按镇去看</span></h1>
+    <p class="sub">点一个镇街，直接看当地的吃法和去处。</p>
+  </header>
 
-  <div class="scan-bar">
-    <svg class="radar" viewBox="0 0 64 64">
-      <circle cx="32" cy="32" r="28" fill="none" stroke="#1c2739" stroke-width="1"/>
-      <circle cx="32" cy="32" r="18" fill="none" stroke="#1c2739" stroke-width="1"/>
-      <circle cx="32" cy="32" r="8" fill="none" stroke="#1c2739" stroke-width="1"/>
-      <g class="scanline" id="scanline" style="transform-origin:32px 32px"><line x1="32" y1="32" x2="32" y2="4" stroke="#0891b2" stroke-width="1.5"/></g>
-      <circle cx="32" cy="32" r="2.5" fill="#0891b2"/>
-    </svg>
-    <div style="flex:1">
-      <div style="font-size:14px;font-weight:700;color:#e6edf3">各镇今日扫描</div>
-      <div class="scan-info" id="scanInfo">雷达待命…</div>
+  <section class="hd-front" aria-label="选择惠东镇街">
+    <div class="hd-town-tools">
+      <label for="town-select">镇街
+        <select id="town-select" disabled><option value="suggested">推荐镇街</option><option value="all">全部镇街</option></select>
+      </label>
+      <button class="hd-secondary" type="button" id="btnScan" disabled>换一组推荐</button>
     </div>
-    <button class="refresh" id="btnScan">🔄 换一换</button>
-  </div>
-
-  <div class="livebar" id="livebar">正在读今日惠东各镇…</div>
-
-  <div class="veg">
-    <div class="veg-title" id="vegTitle">🦪 惠东当季海味·农品 · 此刻正上市（悬停暂停）</div>
-    <div class="veg-track"><div class="veg-inner" id="vegInner"></div></div>
-  </div>
+    <p class="scan-info" id="scanInfo" role="status">正在读取镇街资料</p>
+  </section>
 
   <div class="grid" id="grid"></div>
 
-  <div class="disc">
-    📌 数据说明：镇街与海味农品来自各镇政府公开介绍、南方+/惠州日报，以及点评/小红书/抖音近期公开打卡热度（高/较高/中三档，非平台后台真实人数）。当季海味按当月真实时令，不反季。
-  </div>
+  <details class="hd-details hd-reading">
+    <summary>展开当季农海产品和资料来源</summary>
+    <div class="veg">
+      <div class="veg-title" id="vegTitle">惠东当季海味和农品</div>
+      <div class="veg-track"><div class="veg-inner" id="vegInner"></div></div>
+    </div>
+    <p class="livebar" id="livebar"></p>
+    <p class="disc" id="town-source"></p>
+  </details>
 
   <div class="next"><a href="network.html">下一步：看惠东在大湾区里的位置 →</a></div>
 </div>
 
 <script>
-let TOWNS=[],VEG=[],PULSE=[],UPDATED='',SRC='';
-let picks=[];
+let towns = [];
+let suggestions = [];
+const grid = document.getElementById("grid");
+const townSelect = document.getElementById("town-select");
+const refresh = document.getElementById("btnScan");
 
-function renderVeg(){
-  const levelColor={"高":"#f87171","较高":"#fbbf24","中":"#34d399"};
-  const cards=(VEG.length?VEG:[{n:"—",p:"",d:"",level:"中"}]).map(v=>{
-    const lc=levelColor[v.level]||"#34d399";
-    return `<div class="vegcard"><div class="vn">${v.n}</div><div class="vp">${v.p}</div><div class="vd">${v.d}</div><div class="lv" style="color:${lc};border-color:${lc}">人气 · ${v.level}</div></div>`;
-  }).join("");
-  document.getElementById("vegInner").innerHTML=cards+cards;
-}
-function pickThree(){
-  const arr=[...TOWNS];
-  for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}
-  picks=arr.slice(0,3).map(t=>t.n);
+function safe(text) {
+  return String(text ?? "").replace(/[&<>"']/g, char => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[char]);
 }
 
-function render(){
-  const levelColor={"高":"#f87171","较高":"#fbbf24","中":"#34d399"};
-  const g=document.getElementById("grid");
-  g.innerHTML=TOWNS.map(t=>{
-    const isPick=picks.includes(t.n);
-    const lc=levelColor[t.level]||"#34d399";
-    return `<div class="town${isPick?' pick':''}">
-      ${isPick?'<span class="pick-tag">✨ 今日推荐</span>':''}
-      <div class="head"><span class="n">${t.n}</span><span class="tag">${t.tag}</span></div>
-      <div class="row"><span class="k">🍜 吃</span>${t.foods.join("、")}</div>
-      <div class="row"><span class="k">🏔️ 玩</span>${t.plays.join("、")}</div>
-      <div class="why">→ ${t.why}</div>
-      <div class="lv" style="color:${lc};border-color:${lc}">人气 · ${t.level}</div>
-      <div class="src">📎 ${SRC} · 打卡热度分档，非人数</div>
-    </div>`;
-  }).join("");
+function renderTowns() {
+  const selection = townSelect.value;
+  const shown = selection === "all" ? towns :
+    towns.filter(town => selection === "suggested" ? suggestions.includes(town.n) : town.n === selection);
+  grid.innerHTML = shown.map(town => `
+    <article class="town">
+      <div class="head"><h2 class="n">${safe(town.n)}</h2><span class="tag">${safe(town.tag)}</span></div>
+      <div class="row"><span class="k">吃</span>${safe((town.foods ?? []).join("、"))}</div>
+      <div class="row"><span class="k">去处</span>${safe((town.plays ?? []).join("、"))}</div>
+      <div class="why">${safe(town.why)}</div>
+      <div class="lv">公开打卡热度 · ${safe(town.level)}</div>
+    </article>`).join("");
 }
 
-async function loadLife(){
-  try{
-    const r=await fetch("life.json?ts="+Date.now());const d=await r.json();
-    TOWNS=d.towns||[];VEG=d.veg||[];PULSE=d.pulse||[];UPDATED=d.updated||"";SRC=d.sourceLabel||"";
-    if(d.season)document.getElementById("vegTitle").textContent=`🦪 惠东${d.season}季当季海味·农品 · 按当月真实时令（悬停暂停）`;
-  }catch(e){}
-  renderVeg();pickThree();render();
-  document.getElementById("scanInfo").textContent=`数据每日自动刷新 · 上次更新 ${UPDATED} · 共${TOWNS.length}个镇街`;
-  document.getElementById("livebar").innerHTML=PULSE.length
-    ?"📡 最近大家在聊（公开渠道）："+PULSE.join("　｜　")
-    :"📡 惠东的海味山海，不用上热搜也值得去。";
+function recommend() {
+  const shuffled = [...towns];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  const next = shuffled.slice(0, 3).map(town => town.n);
+  if (towns.length > 3 && next.every(name => suggestions.includes(name))) next[0] = shuffled[3].n;
+  suggestions = next;
+  townSelect.value = "suggested";
+  renderTowns();
 }
 
-function refresh(){pickThree();render();}
+async function loadLife() {
+  const status = document.getElementById("scanInfo");
+  try {
+    const response = await fetch("life.json", {cache:"no-cache"});
+    if (!response.ok) throw new Error("Town data unavailable");
+    const data = await response.json();
+    towns = Array.isArray(data.towns) ? data.towns : [];
+    if (!towns.length) throw new Error("Town data is empty");
+    towns.forEach(town => townSelect.add(new Option(town.n, town.n)));
+    const season = data.season ? data.season + "季" : "当季";
+    document.getElementById("vegTitle").textContent = "惠东" + season + "海味和农品";
+    document.getElementById("vegInner").innerHTML = (data.veg ?? []).map(item =>
+      `<div class="vegcard"><div class="vn">${safe(item.n)}</div><div class="vp">${safe(item.p)}</div><div class="vd">${safe(item.d)}</div></div>`).join("");
+    document.getElementById("livebar").textContent = (data.pulse ?? []).join(" ｜ ");
+    document.getElementById("town-source").textContent = (data.sourceLabel ?? "公开资料") +
+      "。镇街人气按公开打卡热度分档。";
+    status.textContent = "资料更新于 " + (data.updated ?? "日期未标注") + " · " + towns.length + " 条镇街资料";
+    townSelect.disabled = false;
+    refresh.disabled = false;
+    recommend();
+  } catch {
+    status.textContent = "暂时无法读取镇街资料";
+    grid.innerHTML = '<p class="town-empty">可刷新页面重试，或先看<a href="who.html">惠东基本面</a>。</p>';
+  }
+}
+
+townSelect.addEventListener("change", renderTowns);
+refresh.addEventListener("click", recommend);
 loadLife();
-document.getElementById("btnScan").onclick=refresh;
 </script>
-<script src="relay.js"></script></body></html>
+</body></html>

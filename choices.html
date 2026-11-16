@@ -46,8 +46,8 @@ body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.6 -apple-system,"Ping
 .plain .lab{display:block;font-size:10.5px;font-weight:800;color:#22d3ee;letter-spacing:1px;margin-bottom:4px}
 .next{text-align:center;margin:24px 0}
 .next a{background:#0e7490;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block}
-</style><link rel="stylesheet" href="huidong.css">
-</head><body>
+</style><link rel="stylesheet" href="huidong.css?v=20261116b">
+</head><body class="hd-page hd-content">
 
 <header class="hd-header">
   <div class="hd-header-inner">
@@ -61,97 +61,102 @@ body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.6 -apple-system,"Ping
 
 <div class="wrap">
 
-  <div class="hero">
-    <div class="kick">HUIDONG · FIVE PATHS</div>
-    <h1>惠东的<span class="sea">五条路</span></h1>
-    <p class="sub">从约 861 亿到参考目标约 1200 亿。<br>点开关，同一套模型会立刻重算 2030 年的中位数与达标可能。<br>这是假设下的测算，不是把五条路简单相加，也不是完成率。</p>
+  <header class="hero">
+    <h1>惠东五条路，<span class="sea">换个标准谁排第一？</span></h1>
+    <p class="sub">比较产值、岗位和岸线，再选择几条路径试算。</p>
+  </header>
+
+  <section class="hd-front" aria-labelledby="ruler-heading">
+    <h2 id="ruler-heading">五条产业路径对照</h2>
+    <div class="hd-selector rbtns" role="group" aria-label="路径比较指标">
+      <button type="button" class="rbtn" data-k="gdp" aria-pressed="true">比产值</button>
+      <button type="button" class="rbtn" data-k="jobs" aria-pressed="false">比岗位</button>
+      <button type="button" class="rbtn" data-k="eco" aria-pressed="false">比岸线</button>
+    </div>
+    <div id="rulerChart" role="img" style="width:100%;height:250px"></div>
+    <p id="rulerText" class="hd-current-share" aria-live="polite"></p>
+    <p>这些比较来自模型设定。 <a class="hd-muted-link" href="v2/models.html#path-assessment">查看路径研究</a></p>
+  </section>
+
+  <section class="hd-path-cards" aria-labelledby="combo-heading">
+    <h2 id="combo-heading" style="margin-bottom:10px">自己搭配几条路</h2>
+  <div class="gap" role="status">
+    <div style="font-size:12px;color:#6b7280;margin-bottom:10px">按下方选中的路径试算</div>
+    <div class="row">
+      <div class="item"><div class="lab">2030 中位数</div><div class="big" id="curP50" style="font-size:24px;margin:0">—</div></div>
+      <div class="item"><div class="lab">越过参考线的模拟比例</div><div class="big" id="curHit" style="font-size:24px;color:#22d3ee;margin:0">—</div></div>
+    </div>
+    <div class="big" id="gapNum" style="font-size:20px;margin:0">—</div>
   </div>
 
   <div class="path on" data-i="0">
     <div class="icon">⚛️</div>
     <div class="body">
       <div class="t">清洁能源（太平岭核电·海上风电·LNG）</div>
-      <div class="d">太平岭核电6台百万千瓦、总投资1200多亿，1、2号2026年相继投产；港口海上风电是大湾区首个百万千瓦级；LNG接收站一期投产。"风光核气储"一体化，能源年产值超80亿、2026年目标120亿。<br><span style="color:#67e8f9">→ 走通了你会感到：稔平半岛南岸塔吊林立，建成后是稳定的绿色GDP</span></div>
+      <details class="hd-details hd-reading"><summary>这条路径的说明和来源</summary><div class="d">太平岭核电6台百万千瓦、总投资1200多亿，1、2号2026年相继投产；港口海上风电是大湾区首个百万千瓦级；LNG接收站一期投产。"风光核气储"一体化，能源年产值超80亿、2026年目标120亿。<br><span style="color:#67e8f9">→ 走通了你会感到：稔平半岛南岸塔吊林立，建成后是稳定的绿色GDP</span></div>
       <div class="src">来源：惠州市政府网、惠东县政府公开信息</div>
+      </details>
       <div class="num">…</div>
     </div>
-    <div class="switch"></div>
+    <button type="button" class="hd-secondary path-toggle" aria-pressed="true">已纳入</button>
   </div>
 
   <div class="path on" data-i="1">
     <div class="icon">🧪</div>
     <div class="body">
       <div class="t">新材料与大科学装置（惠州新材料产业园）</div>
-      <div class="d">惠州新材料产业园年产值超50亿，县里提出建设"千亿级新材料集群"；两大科学装置HIAF、CiADS落地，加速器科技与新材料协同。<br><span style="color:#67e8f9">→ 走通了你会感到：大岭一带园区更满、高技能岗位增多</span></div>
+      <details class="hd-details hd-reading"><summary>这条路径的说明和来源</summary><div class="d">惠州新材料产业园年产值超50亿，县里提出建设"千亿级新材料集群"；两大科学装置HIAF、CiADS落地，加速器科技与新材料协同。<br><span style="color:#67e8f9">→ 走通了你会感到：大岭一带园区更满、高技能岗位增多</span></div>
       <div class="src">来源：惠东县政府、南方+</div>
+      </details>
       <div class="num">…</div>
     </div>
-    <div class="switch"></div>
+    <button type="button" class="hd-secondary path-toggle" aria-pressed="true">已纳入</button>
   </div>
 
   <div class="path on" data-i="2">
     <div class="icon">🏖️</div>
     <div class="body">
       <div class="t">滨海旅游升级（双月湾·巽寮湾）</div>
-      <div class="d">年游客近1800万，2026国庆76.4万人次、登顶同程全国热门县域目的地榜首；海上打铁花、滨海嘉年华、巨型黄鸭接连上新。从"旺季爆满、平日偏淡"走向"全季全时"。<br><span style="color:#67e8f9">→ 走通了你会感到：民宿平日也有客、周边海鲜档人气稳</span></div>
+      <details class="hd-details hd-reading"><summary>这条路径的说明和来源</summary><div class="d">年游客近1800万，2026国庆76.4万人次、登顶同程全国热门县域目的地榜首；海上打铁花、滨海嘉年华、巨型黄鸭接连上新。从"旺季爆满、平日偏淡"走向"全季全时"。<br><span style="color:#67e8f9">→ 走通了你会感到：民宿平日也有客、周边海鲜档人气稳</span></div>
       <div class="src">来源：南方+、官方文旅推介</div>
+      </details>
       <div class="num">…</div>
     </div>
-    <div class="switch"></div>
+    <button type="button" class="hd-secondary path-toggle" aria-pressed="true">已纳入</button>
   </div>
 
   <div class="path on" data-i="3">
     <div class="icon">👠</div>
     <div class="body">
       <div class="t">女鞋时尚（吉隆·黄埠）</div>
-      <div class="d">"中国女鞋生产基地"，2026年产值目标500亿；沙滩女鞋时尚文化嘉年华、鞋文化节、稔平半岛女鞋展示展销中心。从"代工走量"走向"时尚品牌+电商"。<br><span style="color:#67e8f9">→ 走通了你会感到：鞋厂有了自己的牌子，年轻人愿意留下来</span></div>
+      <details class="hd-details hd-reading"><summary>这条路径的说明和来源</summary><div class="d">"中国女鞋生产基地"，2026年产值目标500亿；沙滩女鞋时尚文化嘉年华、鞋文化节、稔平半岛女鞋展示展销中心。从"代工走量"走向"时尚品牌+电商"。<br><span style="color:#67e8f9">→ 走通了你会感到：鞋厂有了自己的牌子，年轻人愿意留下来</span></div>
       <div class="src">来源：惠东县政府、南方+</div>
+      </details>
       <div class="num">…</div>
     </div>
-    <div class="switch"></div>
+    <button type="button" class="hd-secondary path-toggle" aria-pressed="true">已纳入</button>
   </div>
 
   <div class="path on" data-i="4">
     <div class="icon">🦪</div>
     <div class="body">
       <div class="t">特色农渔（赤岸蚝·冬种马铃薯·海洋牧场）</div>
-      <div class="d">铁涌赤岸生蚝秋冬正肥，冬种马铃薯是国家地理标志、冬种春收反季节，海洋牧场与渔港经济稳步发展；一产增加值99亿。<br><span style="color:#67e8f9">→ 走通了你会感到：蚝、马铃薯卖出品牌价，养殖户增收</span></div>
+      <details class="hd-details hd-reading"><summary>这条路径的说明和来源</summary><div class="d">铁涌赤岸生蚝秋冬正肥，冬种马铃薯是国家地理标志、冬种春收反季节，海洋牧场与渔港经济稳步发展；一产增加值99亿。<br><span style="color:#67e8f9">→ 走通了你会感到：蚝、马铃薯卖出品牌价，养殖户增收</span></div>
       <div class="src">来源：农业农村部门公开信息、丰收节报道</div>
+      </details>
       <div class="num">…</div>
     </div>
-    <div class="switch"></div>
+    <button type="button" class="hd-secondary path-toggle" aria-pressed="true">已纳入</button>
   </div>
 
-  <div class="gap">
-    <div style="font-size:12px;color:#6b7280;margin-bottom:10px">同一套模型、固定随机种子，按当前开关实时算（不是把五个数字直接相加）</div>
-    <div class="row">
-      <div class="item"><div class="lab">2030 中位数</div><div class="big" id="curP50" style="font-size:24px;margin:0">—</div></div>
-      <div class="item"><div class="lab">达标可能</div><div class="big" id="curHit" style="font-size:24px;color:#22d3ee;margin:0">—</div></div>
-    </div>
-    <div class="big" id="gapNum" style="font-size:20px;margin:0">—</div>
-  </div>
+  </section>
 
-  <div class="ruler-title">🔍 换把尺子，再看五条路</div>
-  <div class="ruler-desc">同一片海，问法不同，头名就不同：比"谁撑起的盘子大"，和比"谁稳饭碗、守岸线"，根本不是同一道题。</div>
-  <div class="rbtns">
-    <button class="rbtn on" data-k="gdp">📈 经济总量</button>
-    <button class="rbtn" data-k="jobs">👥 就业饭碗</button>
-    <button class="rbtn" data-k="eco">🌿 生态岸线</button>
-  </div>
-  <div id="rulerChart" style="width:100%;height:280px"></div>
-  <div id="rulerText" class="plain" style="margin-top:12px"></div>
-
-  <div class="plain">
-    <span class="lab">人话</span>
-    惠东和博罗不一样。博罗在算"怎么承接东莞、深圳"，惠东在算"同一片海，怎么既养旅游、又出能源、还护好海龟湾"。五条路不是补短板——是把海的文章做足：清洁能源、新材料、滨海旅游、女鞋、农渔。数字是粗估，不是官方承诺。
-  </div>
-
-  <div class="next"><a href="future.html">下一步：跑一万次未来 →</a></div>
+  <div class="next"><a href="future.html">看 2030 年的分布</a></div>
 </div>
 
 <script src="model.js?v=20261023a"></script>
 <script>
-const SEED=42,N=4000,P=HT.DEFAULT_PATHS;
+const SEED=42,N=10000,P=HT.DEFAULT_PATHS;
 const full=HT.run(SEED,N,P);
 const margin=P.map((p,j)=>{
   const off=P.filter((_,k)=>k!==j);
@@ -159,8 +164,15 @@ const margin=P.map((p,j)=>{
 });
 document.querySelectorAll(".path").forEach(card=>{
   const i=+card.dataset.i;
-  card.querySelector(".num").textContent="单独带来 中位数约 +"+Math.round(margin[i])+"亿（同种子对照）";
-  card.onclick=()=>{card.classList.toggle("on");recalc();};
+  card.querySelector(".num").textContent = "拿掉这条路径后，全开的模拟中位数约少 " + Math.round(margin[i]) + " 亿";
+  const toggle = card.querySelector(".path-toggle");
+  toggle.setAttribute("aria-label", "纳入" + P[i].name);
+  toggle.addEventListener("click", () => {
+    const active = card.classList.toggle("on");
+    toggle.setAttribute("aria-pressed", String(active));
+    toggle.textContent = active ? "已纳入" : "未纳入";
+    recalc();
+  });
 });
 function activePaths(){
   return [...document.querySelectorAll(".path")]
@@ -177,46 +189,38 @@ function recalc(){
   document.getElementById("curP50").textContent="约"+Math.round(p50)+"亿";
   document.getElementById("curHit").textContent="约"+Math.round(hit)+"%";
   const gn=document.getElementById("gapNum");
-  gn.textContent=gap>0?("距参考目标 约"+Math.round(gap)+"亿"):"已到参考目标";
+  gn.textContent=gap>0?("距 1,200 亿参考线约 "+Math.round(gap)+"亿"):"模拟中位数达到参考线";
   gn.style.color=gap<=0?"#34d399":gap<100?"#fbbf24":"#f87171";
 }
 recalc();
 
 // 价值实验三档尺子
 const VT = HT.valueTable();
-const RMETA = {
-  gdp:  {q: "谁撑起的经济盘子最大？", note: "清洁能源这样的大项目撑起惠东经济的骨架，盘子要做大，首先靠它们。"},
-  jobs: {q: "每多投一亿元，谁带回的饭碗最多？", note: "女鞋、农渔、滨海旅游每亿元带动的岗位是能源大项目的好几倍，它们守着海边千家万户的日子。"},
-  eco:  {q: "谁对岸线与海洋更友好？", note: "特色农渔、滨海旅游的生态友好度最高，守护着岸线、海龟湾和这片海的底色。守住绿水青山，才有长久的发展。"}
-};
 const rulerChart = echarts.init(document.getElementById("rulerChart"));
 const rbtns = document.querySelectorAll(".rbtn");
-function drawRuler(k) {
-  const sorted = VT[k], top = sorted[0];
+function drawRuler(key) {
+  const sorted = VT[key];
+  const first = sorted[0];
+  const label = key === "gdp" ? "模拟贡献" : key === "jobs" ? "每亿元增量带动岗位" : "岸线生态友好度";
   rulerChart.setOption({
-    backgroundColor: "transparent",
-    grid: {left: 46, right: 16, top: 34, bottom: 60},
-    xAxis: {type: "category", data: sorted.map(x => x.name),
-      axisLabel: {color: "#cbd5e1", fontSize: 10, interval: 0, rotate: 20},
-      axisTick: {show: false}, axisLine: {lineStyle: {color: "#22304a"}}},
-    yAxis: {type: "value", axisLabel: {color: "#64748b", fontSize: 10},
-      splitLine: {lineStyle: {color: "#1b2434"}}},
-    series: [{type: "bar", barWidth: "48%",
+    animationDuration: 430,
+    grid: {left: 80, right: 78, top: 13, bottom: 15},
+    tooltip: {trigger: "axis", axisPointer: {type: "shadow"}},
+    xAxis: {type: "value", show: false, min: 0},
+    yAxis: {type: "category", inverse: true, data: sorted.map(x => x.name),
+      axisLine: {show: false}, axisTick: {show: false}, axisLabel: {color: "#d3e5e7", fontSize: 11}},
+    series: [{type: "bar", barWidth: 17,
       data: sorted.map(x => ({value: x.val,
-        itemStyle: {color: (x.name === top.name ? x.color : x.color + "55"), borderRadius: [4, 4, 0, 0]}})),
-      label: {show: true, position: "top", color: "#e2e8f0", fontSize: 10,
-        formatter: p => p.value + sorted[p.dataIndex].unit}}]
+        itemStyle: {color: x === first ? "#91e8cb" : "#487781", borderRadius:[0,5,5,0]}})),
+      label: {show: true, position:"right", color:"#e8f2ef", fontSize:11, formatter: p => p.value + sorted[p.dataIndex].unit}}]
   }, true);
-  document.getElementById("rulerText").innerHTML =
-    '<span class="lab">' + RMETA[k].q + '</span>这把尺子下，排在第一的是 <b style="color:#22d3ee">' + top.name + '</b>。' + RMETA[k].note +
-    '<br>尺子没有对错，只是想先护住什么；成熟的布局，是让五条路各归其位，组合成最稳的那一手。';
-  rbtns.forEach(b => {
-    const on = b.dataset.k === k;
-    b.classList.toggle("on", on);
-  });
+  const copy = label + "排在第一的是" + first.name + "，" + first.val + " " + first.unit + "。";
+  document.getElementById("rulerText").textContent = copy;
+  document.getElementById("rulerChart").setAttribute("aria-label", copy);
+  rbtns.forEach(button => button.setAttribute("aria-pressed", String(button.dataset.k === key)));
 }
 rbtns.forEach(b => b.onclick = () => drawRuler(b.dataset.k));
 drawRuler("gdp");
 window.addEventListener("resize", () => rulerChart.resize());
 </script>
-<script src="relay.js"></script></body></html>
+</body></html>

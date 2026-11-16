@@ -10,7 +10,7 @@ const ok = m => console.log('  ✓ ' + m);
 const bad = m => { fails++; console.log('  ✗ ' + m); };
 
 console.log('── 1) HTML 内联 script 语法 ──');
-const htmlFiles = ["index.html", "portal.html", "network.html", "who.html", "choices.html", "future.html", "windtunnel.html", "blindspot.html", "report.html", "ending.html", "town.html"];
+const htmlFiles = ["index.html", "portal.html", "network.html", "who.html", "choices.html", "future.html", "windtunnel.html", "blindspot.html", "report.html", "ending.html", "town.html", "role.html"];
 for (const f of htmlFiles) {
   const fp = path.join(root, f);
   if (!fs.existsSync(fp)) { bad('缺少页面文件 ' + f); continue; }

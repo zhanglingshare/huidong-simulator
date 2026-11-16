@@ -55,8 +55,8 @@ table.sens td{padding:6px 8px;text-align:right;border-bottom:1px solid #152033;c
 .next{text-align:center;margin:24px 0}
 .next a{background:#0e7490;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block}
 #out{display:none}
-</style><link rel="stylesheet" href="huidong.css">
-</head><body>
+</style><link rel="stylesheet" href="huidong.css?v=20261116b">
+</head><body class="hd-page hd-content">
 
 <header class="hd-header">
   <div class="hd-header-inner">
@@ -70,77 +70,47 @@ table.sens td{padding:6px 8px;text-align:right;border-bottom:1px solid #152033;c
 
 <div class="wrap">
 
-  <div class="hero">
-    <div class="kick">HUIDONG · 2030</div>
-    <h1>2030 年惠东长什么样：<span class="sea">把未来反复跑</span></h1>
-    <p class="sub">选模式、定种子、点按钮。<br>同样的种子必定跑出同样的结果——这是可以复现的。</p>
-  </div>
+  <header class="hero">
+    <h1>2030 年惠东，<span class="sea">哪些结果最常出现？</span></h1>
+    <p class="sub">点一个区间，看看这组假设下有多少次结果落在里面。</p>
+  </header>
 
-  <!-- 先猜后揭 -->
-  <div style="margin:0 0 16px;padding:18px;background:linear-gradient(135deg,#0c2630,#0f172a);border:1px solid #fbbf24;border-radius:14px">
-    <div style="font-size:15px;font-weight:800;color:#fff;margin-bottom:4px">🎯 先别往下看——你觉得 2030 年惠东最可能落到多少？</div>
-    <div style="font-size:12.5px;color:#94a3b8;margin-bottom:12px">凭直觉选一个，再看模型跑出来的分布。</div>
-    <div style="display:flex;gap:10px">
-      <button onclick="guess(1)" style="flex:1;background:#f8717122;border:1px solid #f87171;color:#f87171;border-radius:10px;padding:12px 6px;cursor:pointer;font-size:13px;font-weight:700">1100亿以下</button>
-      <button onclick="guess(2)" style="flex:1;background:#fbbf2422;border:1px solid #fbbf24;color:#fbbf24;border-radius:10px;padding:12px 6px;cursor:pointer;font-size:13px;font-weight:700">1100-1200亿</button>
-      <button onclick="guess(3)" style="flex:1;background:#34d39922;border:1px solid #34d399;color:#34d399;border-radius:10px;padding:12px 6px;cursor:pointer;font-size:13px;font-weight:700">1200亿以上</button>
+  <section class="hd-front" aria-labelledby="hist-heading">
+    <h2 id="hist-heading">2030 年 GDP 模拟分布</h2>
+    <div class="hd-selector" role="group" aria-label="查看模拟结果区间">
+      <button type="button" data-interval="0" aria-pressed="false">低于 1,100 亿</button>
+      <button type="button" data-interval="1" aria-pressed="false">1,100 至 1,200 亿</button>
+      <button type="button" data-interval="2" aria-pressed="false">达到 1,200 亿</button>
     </div>
-    <div id="guessOut" style="margin-top:12px;font-size:12.5px;color:#cbd5e1"></div>
-  </div>
+    <p id="guessOut" class="hd-current-share" role="status">虚线标示 1,200 亿参考线</p>
+    <div id="chHist" class="hd-histogram" role="img" aria-label="2030 年全县 GDP 模拟频数"></div>
+    <div class="hd-future-metrics">
+      <div><span>较低位置（第 10 百分位）</span><strong id="p10">—</strong></div>
+      <div><span>模拟中位数</span><strong id="p50">—</strong></div>
+      <div><span>较高位置（第 90 百分位）</span><strong id="p90">—</strong></div>
+      <div><span>达到参考线的比例</span><strong id="prob">—</strong></div>
+    </div>
+  </section>
 
+  <details class="hd-details hd-reading" id="future-details">
+    <summary>展开路径分解与试算设置</summary>
   <!-- 控制 -->
   <div class="card">
-    <h2>🎛️ 控制台</h2>
+    <h2>试算设置</h2>
     <div class="ctrl">
-      <select id="selN">
+      <select id="selN" aria-label="试算次数">
         <option value="1000">快速模式 · 1000次</option>
         <option value="10000" selected>完整模式 · 10000次</option>
       </select>
-      <span style="font-size:12px;color:#93a4bd">随机种子</span>
+      <label for="seed">随机种子</label>
       <input type="number" class="seed-in" id="seed" value="42">
-      <button class="btn" id="bRun">🎲 开始模拟</button>
+      <button class="btn" id="bRun">重跑</button>
     </div>
   </div>
 
-  <div id="out">
     <div class="card">
-      <h2>📋 这次模拟用了什么参数（全部公开，可复现）</h2>
+      <h2>本次试算条件</h2>
       <div class="param-panel" id="paramPanel"></div>
-    </div>
-
-    <div class="card" style="text-align:center">
-      <div style="font-size:13px;color:#8fa3bf">达到约 1200 亿参考线的模拟比例</div>
-      <div class="prob" id="prob">—</div>
-      <div style="font-size:11.5px;color:#6b7d96">这不是"惠东有多少概率成功"，是"在当前假设下，一万次里有多少次过线"</div>
-    </div>
-
-    <div class="card">
-      <h2>📊 三档结果：把一万次从小到大排队</h2>
-      <div class="gauges">
-        <div class="gauge" style="border-color:#7f1d1d">
-          <div class="l">第10百分位</div>
-          <div class="v" id="p10" style="color:#f87171">—</div>
-          <div class="d">只有10%比这更低</div>
-        </div>
-        <div class="gauge" style="border-color:#713f12">
-          <div class="l">中位数 P50</div>
-          <div class="v" id="p50" style="color:#fbbf24">—</div>
-          <div class="d">一半在这上面，一半在下面</div>
-        </div>
-        <div class="gauge" style="border-color:#14532d">
-          <div class="l">第90百分位</div>
-          <div class="v" id="p90" style="color:#34d399">—</div>
-          <div class="d">只有10%比这更高</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card">
-      <h2>🏔️ 一万次结果堆成一座"山"</h2>
-      <div id="chHist" class="chart"></div>
-      <div class="note"><span class="h">这张图怎么看</span>
-        <b>横轴</b>是2030年GDP的可能值，<b>柱子高低</b>是一万次里落在这个区间的次数。柱子堆成钟形——中间高、两边低。<b>紫色竖线</b>是约1200亿参考线：线右边的柱子（青色）=过线，左边（蓝色）=没过。
-      </div>
     </div>
 
     <div class="card">
@@ -188,27 +158,46 @@ table.sens td{padding:6px 8px;text-align:right;border-bottom:1px solid #152033;c
     <div class="card">
       <h2>🎯 三个情景对应什么局面</h2>
       <div class="scen3">
-        <div class="s" style="border-color:#7f1d1d"><div class="l">较差 · 什么同时不顺</div><div class="v" id="sBad" style="color:#f87171">—</div></div>
-        <div class="s" style="border-color:#713f12"><div class="l">中位 · 正常走</div><div class="v" id="sMid" style="color:#fbbf24">—</div></div>
-        <div class="s" style="border-color:#14532d"><div class="l">较好 · 超预期</div><div class="v" id="sGood" style="color:#34d399">—</div></div>
+        <div class="s" style="border-color:#7f1d1d"><div class="l">较低 · 第 10 百分位</div><div class="v" id="sBad" style="color:#f87171">—</div></div>
+        <div class="s" style="border-color:#713f12"><div class="l">中位 · 第 50 百分位</div><div class="v" id="sMid" style="color:#fbbf24">—</div></div>
+        <div class="s" style="border-color:#14532d"><div class="l">较高 · 第 90 百分位</div><div class="v" id="sGood" style="color:#34d399">—</div></div>
       </div>
       <div class="note" style="margin-top:12px">
-        较差对应"核电延期+旅游偏淡"一起发生；中位对应"按节奏走"；较好对应"能源、新材料超预期+旅游走向全季"。
+        三个数字是这组试算结果的不同位置。具体事件可以在风洞另设条件后比较。
       </div>
     </div>
 
     <div class="conclusion" id="conclusion"></div>
-  </div>
+  </details>
 
-  <div class="next"><a href="windtunnel.html">下一步：风洞测试 →</a></div>
+  <div class="next hd-link-row"><a href="windtunnel.html">去风洞改条件</a><a class="hd-muted-link" href="v2/scenarios.html">查看研究示例</a></div>
 </div>
 
 <script>
 const BASE=HT.BASE, TARGET=HT.TARGET, GLOBAL_SD=HT.NOISE_SD;
 const PATHS=HT.DEFAULT_PATHS;
 const charts={};
+const intervalButtons = [...document.querySelectorAll("[data-interval]")];
+const ranges = [
+  {label: "低于 1,100 亿", includes: value => value < 1100},
+  {label: "达到 1,100 亿，低于 1,200 亿", includes: value => value >= 1100 && value < 1200},
+  {label: "达到 1,200 亿", includes: value => value >= 1200}
+];
+let latest;
+let histogram;
+let selectedRange = null;
 function initC(id){const c=echarts.init(document.getElementById(id));charts[id]=c;return c}
-initC('chHist');initC('chStack');initC('chTorn');initC('chCoef');initC('chSens');
+initC('chHist');
+const pendingCharts = new Map();
+
+function drawWhenVisible(id, options) {
+  pendingCharts.set(id, options);
+  const element = document.getElementById(id);
+  if (element.clientWidth && element.clientHeight) {
+    (charts[id] ?? initC(id)).setOption(options);
+    pendingCharts.delete(id);
+  }
+}
 
 function simulateRaw(seed,N,paths){
   const m=HT.run(seed,N,paths);
@@ -228,6 +217,7 @@ function run(){
   const m=HT.run(seed,N,PATHS);
   const s={p10:m.p10,p50:m.p50,p90:m.p90,hit:m.hit,sorted:m.results};
   const coefs=m.coefs;
+  latest = s;
 
   document.getElementById('paramPanel').innerHTML=`
     <div class="row"><span class="k">随机种子</span><span class="v2">${seed}</span><span style="color:#5b6b82">（同种子必同结果）</span></div>
@@ -240,7 +230,8 @@ function run(){
   `;
 
   const probColor=s.hit>50?'#34d399':s.hit>20?'#fbbf24':'#f87171';
-  document.getElementById('prob').innerHTML=`<span style="color:${probColor}">${s.hit.toFixed(1)}%</span>`;
+  document.getElementById('prob').textContent = s.hit.toFixed(1) + '%';
+  document.getElementById('prob').style.color = probColor;
   document.getElementById('p10').textContent=Math.round(s.p10)+'亿';
   document.getElementById('p50').textContent=Math.round(s.p50)+'亿';
   document.getElementById('p90').textContent=Math.round(s.p90)+'亿';
@@ -248,22 +239,28 @@ function run(){
   document.getElementById('sMid').textContent=Math.round(s.p50)+'亿';
   document.getElementById('sGood').textContent=Math.round(s.p90)+'亿';
 
-  const bins=42,min=Math.floor(s.p10*.92),max=Math.ceil(s.p90*1.06),step=(max-min)/bins;
-  const tbi=Math.max(0,Math.min(bins-1,Math.round((TARGET-min)/step-.5)));
-  const labels=[],data=[];
-  for(let b=0;b<bins;b++){labels.push(Math.round(min+step*(b+.5)));data.push(0)}
-  s.sorted.forEach(r=>{const bi=Math.min(bins-1,Math.max(0,Math.floor((r-min)/step)));data[bi]++});
+  const step = 10;
+  const min = Math.floor(Math.min(s.sorted[0], 1100) / step) * step;
+  const max = Math.floor(Math.max(s.sorted.at(-1), TARGET) / step) * step;
+  const bins = (max - min) / step + 1;
+  const tbi = (TARGET - min) / step;
+  const labels = Array.from({length:bins}, (_, i) => min + step * i);
+  const data = Array(bins).fill(0);
+  for (const value of s.sorted) data[Math.floor((value - min) / step)]++;
+  histogram = {labels, data};
   charts.chHist.setOption({
     backgroundColor:'transparent',
-    tooltip:{trigger:'axis',backgroundColor:'#16203a',borderColor:'#2b3a55',textStyle:{color:'#e6edf3'},formatter:ps=>`约${ps[0].name}亿<br/>出现${ps[0].value}次`},
-    grid:{left:55,right:25,top:25,bottom:40},
+    tooltip:{trigger:'axis',backgroundColor:'#16203a',borderColor:'#2b3a55',textStyle:{color:'#e6edf3'},formatter:ps=>`${ps[0].name} 至未满 ${Number(ps[0].name) + step} 亿<br/>出现 ${ps[0].value} 次`},
+    grid:{left:38,right:14,top:22,bottom:32},
     xAxis:{type:'category',data:labels,axisLabel:{color:'#6b7d96',interval:Math.floor(bins/8)},axisLine:{lineStyle:{color:'#2b3a55'}}},
     yAxis:{type:'value',axisLabel:{color:'#6b7d96'},splitLine:{lineStyle:{color:'#1c2739'}}},
-    series:[{type:'bar',data:data.map((v,i)=>({value:v,itemStyle:{color:labels[i]>=TARGET?'#22d3ee':'#3b82f6',opacity:.82}})),barCategoryGap:'15%',
+    series:[{type:'bar',data:histogramColors(),barCategoryGap:'15%',
       markLine:{silent:true,symbol:'none',data:[{xAxis:tbi,lineStyle:{color:'#a78bfa',width:2,type:'dashed'},label:{color:'#a78bfa',formatter:'约1200亿',position:'start'}}]}}]
   });
 
-  charts.chStack.setOption({
+  if (selectedRange !== null) showRange();
+
+  drawWhenVisible('chStack', {
     backgroundColor:'transparent',
     tooltip:{trigger:'axis',backgroundColor:'#16203a',borderColor:'#2b3a55',textStyle:{color:'#e6edf3'},axisPointer:{type:'shadow'}},
     legend:{top:0,textStyle:{color:'#93a4bd',fontSize:10.5},type:'scroll'},
@@ -277,7 +274,7 @@ function run(){
   });
 
   const tSorted=[...PATHS].sort((a,b)=>b.sd-a.sd);
-  charts.chTorn.setOption({
+  drawWhenVisible('chTorn', {
     backgroundColor:'transparent',
     tooltip:{trigger:'axis',backgroundColor:'#16203a',borderColor:'#2b3a55',textStyle:{color:'#e6edf3'},formatter:ps=>{const p=tSorted[ps[0].dataIndex];return `${p.name}<br/>摆动±${p.sd}亿`}},
     legend:{top:0,textStyle:{color:'#93a4bd',fontSize:10.5},data:['向下摆','向上摆']},
@@ -291,7 +288,7 @@ function run(){
   });
 
   const cOrder=coefs.map((v,i)=>({v,p:PATHS[i]})).sort((a,b)=>b.v-a.v);
-  charts.chCoef.setOption({
+  drawWhenVisible('chCoef', {
     backgroundColor:'transparent',
     tooltip:{trigger:'axis',backgroundColor:'#16203a',borderColor:'#2b3a55',textStyle:{color:'#e6edf3'},formatter:ps=>`${cOrder[ps[0].dataIndex].p.name}<br/>关联强度 ${ps[0].toFixed(3)}`},
     grid:{left:120,right:50,top:15,bottom:30},
@@ -303,12 +300,10 @@ function run(){
 
   const topCoef=cOrder[0];
   document.getElementById('conclusion').innerHTML=`
-    中位数落在 <b style="color:#fbbf24">${Math.round(s.p50)}亿</b>，${s.hit>50?'一万次里过半数过了约1200亿参考线':'一万次里过半数没过线'}（比例${s.hit.toFixed(1)}%）。
+    中位数落在 <b style="color:#fbbf24">${Math.round(s.p50)}亿</b>，达到 1,200 亿参考线的比例为 ${s.hit.toFixed(1)}%。
     在模型内部，和最终结果同步性最强的是 <b style="color:${topCoef.p.color}">${topCoef.p.name}</b>（关联强度${topCoef.v.toFixed(3)}）。
     再次说明：这是模型内部的关联，不代表现实因果大小。全部参数公开，换种子、改预期，结果会相应变化——你可以自己复跑。
   `;
-  document.getElementById('out').style.display='block';
-  window.sensBase={seed,s};
 }
 
 function runSensitivity(){
@@ -328,7 +323,8 @@ function runSensitivity(){
         p50P:rP.p50-base.p50,p50M:rM.p50-base.p50});
     });
     rows.sort((a,b)=>(Math.abs(b.plusProb)+Math.abs(b.minusProb))-(Math.abs(a.plusProb)+Math.abs(a.minusProb)));
-    charts.chSens.setOption({
+    document.getElementById('sensOut').style.display='block';
+    drawWhenVisible('chSens', {
       backgroundColor:'transparent',
       tooltip:{trigger:'axis',backgroundColor:'#16203a',borderColor:'#2b3a55',textStyle:{color:'#e6edf3'},formatter:ps=>{const r=rows[ps[0].dataIndex];const d=ps[0].seriesName==='+20%'?r.plusProb:r.minusProb;return `${r.name}<br/>${ps[0].seriesName}：达标率${d>=0?'+':''}${d.toFixed(1)}%`}},
       legend:{top:0,textStyle:{color:'#93a4bd',fontSize:11},data:['+20%','-20%']},
@@ -349,7 +345,6 @@ function runSensitivity(){
         <td>±${Math.round((Math.abs(r.p50P)+Math.abs(r.p50M))/2)}</td></tr>`).join('')}
     `;
     document.getElementById('sensStatus').textContent=`完成（基准达标率${base.hit.toFixed(1)}%）`;
-    document.getElementById('sensOut').style.display='block';
   },50);
 }
 
@@ -358,13 +353,34 @@ document.getElementById('bSens').onclick=runSensitivity;
 window.addEventListener('resize',()=>Object.values(charts).forEach(c=>c.resize()));
 run();
 
-function guess(n){
-  const msgs={
-    1:"你偏谨慎。模型跑出来中位数约1210亿——比你猜的要乐观。",
-    2:"你猜在中间偏下。模型中位数约1210亿，比这个区间的上沿略高一点。",
-    3:"你偏乐观。模型只有约56%的比例过1200亿——刚过半，没那么稳。"
-  };
-  document.getElementById("guessOut").innerHTML="揭晓："+msgs[n]+"<br>下面这张分布，就是它跑了一万遍的结果。";
+function histogramColors() {
+  const active = ranges[selectedRange];
+  return histogram.data.map((value, index) => {
+    const bin = histogram.labels[index];
+    const color = active ? (active.includes(bin) ? "#91e8cb" : "#345763") : bin >= TARGET ? "#91e8cb" : "#477c9d";
+    return {value, itemStyle:{color, borderRadius:[2,2,0,0]}};
+  });
 }
+
+function showRange() {
+  const active = ranges[selectedRange];
+  const count = latest.sorted.filter(active.includes).length;
+  const share = (count / latest.sorted.length * 100).toFixed(1);
+  const label = active.label + "的结果占 " + share + "%（" + count.toLocaleString("zh-CN") + " 次）。";
+  document.getElementById("guessOut").textContent = label;
+  document.getElementById("chHist").setAttribute("aria-label", "2030 年 GDP 模拟分布。" + label);
+  charts.chHist.setOption({series:[{data:histogramColors()}]});
+  intervalButtons.forEach((button, i) => button.setAttribute("aria-pressed", String(i === selectedRange)));
+}
+
+intervalButtons.forEach((button, i) => button.addEventListener("click", () => {
+  selectedRange = i;
+  showRange();
+}));
+document.getElementById("future-details").addEventListener("toggle", event => {
+  if (!event.currentTarget.open) return;
+  for (const [id, options] of pendingCharts) drawWhenVisible(id, options);
+  Object.values(charts).forEach(chart => chart.resize());
+});
 </script>
-<script src="relay.js"></script></body></html>
+</body></html>

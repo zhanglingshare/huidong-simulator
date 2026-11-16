@@ -31,8 +31,8 @@ h2{font-size:16px;margin:0 0 10px;color:#cbd5e1}
 .vote button{flex:1;min-width:100px;border-radius:10px;padding:12px 8px;cursor:pointer;font-size:12px;font-weight:700;margin:4px}
 .vote-out{margin-top:12px;font-size:13px;color:#cbd5e1}
 .src{font-size:11px;color:#5b6b82;line-height:1.8;margin-top:8px}
-</style><link rel="stylesheet" href="huidong.css">
-</head><body>
+</style><link rel="stylesheet" href="huidong.css?v=20261116b">
+</head><body class="hd-page hd-content">
 
 <header class="hd-header">
   <div class="hd-header-inner">
@@ -46,91 +46,116 @@ h2{font-size:16px;margin:0 0 10px;color:#cbd5e1}
 
 <div class="wrap">
 
-  <div class="hero">
-    <div class="kick">HUIDONG · BLIND SPOTS</div>
-    <h1>惠东可能被忽略的<span class="sea">五件事</span></h1>
-    <p class="sub">不是短板，是还没被算进来的牌——<br>而且大多同那片海有关。</p>
-  </div>
+  <header class="hero">
+    <h1>哪些影响<span class="sea">容易漏算？</span></h1>
+    <p class="sub">点开一件事，看它会牵动谁。</p>
+  </header>
 
-  <div class="card">
-    <div class="finding">
-      <div class="num">发现 1</div>
-      <div class="t">🌊 同一片海，多种用法，岸线怎么商量着用</div>
+  <div class="hd-selector" role="group" aria-label="选择关注议题">
+    <button type="button" data-topic="shore" aria-pressed="false" aria-controls="topic-shore">岸线共用</button>
+    <button type="button" data-topic="turtle" aria-pressed="false" aria-controls="topic-turtle">海龟湾</button>
+    <button type="button" data-topic="recover" aria-pressed="true" aria-controls="topic-recover">台风复产</button>
+    <button type="button" data-topic="shoe" aria-pressed="false" aria-controls="topic-shoe">女鞋品牌</button>
+    <button type="button" data-topic="farm" aria-pressed="false" aria-controls="topic-farm">当季农渔</button>
+  </div>
+  <div class="hd-front">
+    <section id="topic-shore" aria-labelledby="title-shore" hidden>
+      <h2 id="title-shore">一段岸线，几种需求</h2>
+      <p style="margin:6px 0 10px">旅游、渔排和能源项目都用到岸线。先看哪几处可能彼此牵动。</p>
+
+      <div class="hd-link-row"><a class="hd-text-link" href="network.html">看岸线关系</a></div>
+      <details class="hd-details hd-reading">
+        <summary>这件事的详细说明</summary>
       <div class="d">214公里海岸线上，双月湾、巽寮湾要干净海域做旅游，太平岭核电、LNG、海上风电要岸线与产能，港口海龟湾是大陆唯一海龟国家级保护区，渔排渔业要海湾，女鞋厂贴海布局。同一片海多种用法，怎么各美其美、商量着用，是惠东最值得长期算的一笔。</div>
       <div class="means">👉 <b>对你我意味着：</b>海是惠东所有人的共同家底。搞旅游的、养鱼的、做能源的把岸线商量好，这片海才能一直既好看、又生财、还护得住海龟。</div>
-    </div>
-    <div class="finding">
-      <div class="num">发现 2</div>
-      <div class="t">🐢 海龟湾：大陆唯一的海龟国家级保护区</div>
+      </details>
+    </section>
+    <section id="topic-turtle" aria-labelledby="title-turtle" hidden>
+      <h2 id="title-turtle">海龟湾也关系到滨海生意</h2>
+      <p style="margin:6px 0 10px">保护区、水质和安静的沙滩，看似离产业很远，却影响滨海体验。</p>
+
+      <div class="hd-link-row"><a class="hd-text-link" href="network.html">看海龟湾的关系</a></div>
+      <details class="hd-details hd-reading">
+        <summary>这件事的详细说明</summary>
       <div class="d">港口海龟湾是大陆唯一的海龟国家级自然保护区，海龟对海域水质、沙滩安静极为挑剔。这条生态红线看似"不直接产GDP"，却是惠东海洋生态最硬的招牌，也是滨海旅游最珍贵的底气。</div>
       <div class="means">👉 <b>对你我意味着：</b>守护海龟，就是守护"惠东的海足够干净"这块金字招牌——生态好了，旅游、养殖、居住才都有长久的底气。</div>
-    </div>
-    <div class="finding">
-      <div class="num">发现 3</div>
-      <div class="t">🌀 台风天：对全县是小数字，对一户人家是大事情</div>
+      </details>
+    </section>
+    <section id="topic-recover" aria-labelledby="title-recover">
+      <h2 id="title-recover">台风停业，哪一行损失更重？</h2>
+      <p style="margin:6px 0 10px">参考风力下停业 7 天的模型估算。谁需要更长的恢复时间，还要结合复产和现金流资料。</p>
+      <div id="tyChart" class="chart" role="img" aria-label="停业七天模型中的旅游、渔业和能源损失"></div>
+      <div class="hd-link-row"><a class="hd-text-link" href="windtunnel.html">试一次台风情景</a></div>
+      <details class="hd-details hd-reading">
+        <summary>这件事的详细说明</summary>
       <div class="d">今年强台风"红霞"登陆，模型测算当年净损失约6.3亿（旅游停业约2.3、渔业与海洋牧场约4.0），占全县GDP不到1%；按抗台标准建设的核电、风电几乎无损。对全县是小数字，对一户旺季民宿、一片渔排，可能是一整年的指望。</div>
-      <div id="tyChart" class="chart"></div>
       <div class="means">👉 <b>对你我意味着：</b>灾后的保险赔付、救助和补网投苗速度，直接决定一户人家多久能缓过来——把这些提前备足，比灾后干着急更管用。</div>
-    </div>
-    <div class="finding">
-      <div class="num">发现 4</div>
-      <div class="t">👠 女鞋贴海布局：从代工走量到时尚品牌</div>
+      </details>
+    </section>
+    <section id="topic-shoe" aria-labelledby="title-shoe" hidden>
+      <h2 id="title-shoe">有订单之后，价值留在哪里？</h2>
+      <p style="margin:6px 0 10px">吉隆、黄埠的女鞋产业可以追问品牌、设计和销售环节留在本地的程度。</p>
+
+      <div class="hd-link-row"><a class="hd-text-link" href="choices.html">看女鞋路径</a></div>
+      <details class="hd-details hd-reading">
+        <summary>这件事的详细说明</summary>
       <div class="d">吉隆、黄埠是"中国女鞋生产基地"，2026年产值目标500亿；沙滩女鞋时尚文化嘉年华、鞋文化节、稔平半岛女鞋展示展销中心接连上新。贴海布局的鞋厂，正从"代工走量"走向"时尚品牌+电商"。</div>
       <div class="means">👉 <b>对你我意味着：</b>鞋厂有了自己的牌子和线上销路，利润留在家门口，年轻的设计、电商人才才愿意回吉隆、黄埠，不必都往外跑。</div>
-    </div>
-    <div class="finding">
-      <div class="num">发现 5</div>
-      <div class="t">🥔 冬种马铃薯、赤岸蚝：把"时差"变成品牌</div>
+      </details>
+    </section>
+    <section id="topic-farm" aria-labelledby="title-farm" hidden>
+      <h2 id="title-farm">同样的农海产品，为何有上市窗口？</h2>
+      <p style="margin:6px 0 10px">冬种马铃薯和赤岸蚝看上市时点、供货节奏和销售去向。</p>
+
+      <div class="hd-link-row"><a class="hd-text-link" href="town.html">看各镇的当季资料</a></div>
+      <details class="hd-details hd-reading">
+        <summary>这件事的详细说明</summary>
       <div class="d">惠东是"中国冬种马铃薯之乡"、国家地理标志，冬种春收、错峰供应大湾区；铁涌赤岸生蚝秋冬正肥。把气候与海域的"时差"变成品牌溢价，是农渔增收的巧劲。</div>
       <div class="means">👉 <b>对你我意味着：</b>冬天北方缺菜、惠东有薯，秋天蚝正肥——把这些"人无我有"的东西做成牌子，农户、养殖户就能卖出好价钱。</div>
-    </div>
-  </div>
-
-  <div class="card" style="border-color:#fbbf24">
-    <h2>🗳️ 你觉得惠东最该先补哪一课？</h2>
-    <div class="vote" id="voteGrid" style="display:flex;flex-wrap:wrap"></div>
-    <div class="vote-out" id="voteOut"></div>
+      </details>
+    </section>
   </div>
 
   <div class="src">数据来源：惠东县统计公报、政府工作报告、文旅与农业农村公开数据、南方+/惠州日报。模型为作者假设，非官方预测。</div>
 </div>
 
 <script>
-echarts.init(document.getElementById('tyChart')).setOption({
-  backgroundColor:'transparent',
-  grid:{left:110,right:50,top:20,bottom:30},
-  xAxis:{type:'value',axisLabel:{color:'#64748b'},splitLine:{lineStyle:{color:'#1c2739'}}},
-  yAxis:{type:'category',data:['海上风电','核电','旅游停业','渔业/海洋牧场'],axisLabel:{color:'#cbd5e1',fontSize:12}},
-  series:[{type:'bar',barWidth:20,
-    data:[
-      {value:0,itemStyle:{color:'#0891b2'}},
-      {value:0,itemStyle:{color:'#0891b2'}},
-      {value:2.3,itemStyle:{color:'#fbbf24'}},
-      {value:4.0,itemStyle:{color:'#f87171'}}],
-    label:{show:true,position:'right',color:'#94a3b8',formatter:'{c} 亿'}}]
-});
+const topicButtons = [...document.querySelectorAll("[data-topic]")];
+const chartElement = document.getElementById("tyChart");
+let typhoonChart;
 
-(function(){
-  const KEY="huidong_vote_v1";
-  const opts=[
-    {k:"shore",label:"岸线商量着用",c:"#0891b2"},
-    {k:"turtle",label:"守护海龟湾",c:"#34d399"},
-    {k:"recover",label:"保险与复产",c:"#f59e0b"},
-    {k:"shoe",label:"女鞋创品牌",c:"#ec4899"},
-    {k:"farm",label:"农渔做品牌",c:"#22d3ee"}
+function showLossChart() {
+  if (typhoonChart) {
+    typhoonChart.resize();
+    return;
+  }
+  const loss = HT.typhoonLoss(1, 7);
+  const lossRows = [
+    {name: "渔业与海洋牧场", value: loss.fishery, itemStyle: {color:"#91e8cb"}},
+    {name: "旅游停业", value: loss.tourism.toFixed(1), itemStyle: {color:"#ffac88"}},
+    {name: "能源设施", value: loss.energy, itemStyle: {color:"#49717b"}}
   ];
-  let d=JSON.parse(localStorage.getItem(KEY)||'{}');
-  opts.forEach(o=>{if(typeof d[o.k]!=="number")d[o.k]=0;});
-  document.getElementById('voteGrid').innerHTML=opts.map(o=>
-    `<button style="background:${o.c}22;border:1px solid ${o.c};color:${o.c}" onclick="pick('${o.k}')">${o.label}</button>`).join("");
-  window.pick=function(k){
-    const cur=opts.find(o=>o.k===k);
-    if(localStorage.getItem(KEY+"_done")){
-      document.getElementById('voteOut').innerHTML=`你这一票投给了 <b style="color:${cur.c}">${cur.label}</b>。`;return;
-    }
-    d[k]++;localStorage.setItem(KEY,JSON.stringify(d));localStorage.setItem(KEY+"_done","1");
-    document.getElementById('voteOut').innerHTML=`你这一票投给了 <b style="color:${cur.c}">${cur.label}</b>。<span style="color:#64748b">（本机选择，不同人的投票暂不汇总，不代表全体）</span>`;
-  };
-})();
+  typhoonChart = echarts.init(chartElement);
+  typhoonChart.setOption({
+    grid:{left:112,right:48,top:14,bottom:20},
+    xAxis:{type:"value",show:false,min:0},
+    yAxis:{type:"category",inverse:true,data:lossRows.map(row=>row.name),axisTick:{show:false},axisLine:{show:false},axisLabel:{color:"#c6dce1",fontSize:11}},
+    series:[{type:"bar",data:lossRows,barWidth:17,label:{show:true,position:"right",color:"#e8f2ef",formatter:point=>Number(point.value).toFixed(1)+" 亿"}}]
+  });
+}
+
+function showTopic(key) {
+  topicButtons.forEach(button => {
+    const active = button.dataset.topic === key;
+    button.setAttribute("aria-pressed", String(active));
+    document.getElementById(button.getAttribute("aria-controls")).hidden = !active;
+  });
+  if (key === "recover") showLossChart();
+}
+topicButtons.forEach(button => button.addEventListener("click", () => showTopic(button.dataset.topic)));
+window.addEventListener("resize", () => {
+  if (typhoonChart && chartElement.clientWidth) typhoonChart.resize();
+});
+showTopic("recover");
 </script>
-<script src="relay.js"></script></body></html>
+</body></html>

@@ -89,8 +89,8 @@ details .body{padding:0 20px 20px}
 .closing .big b{color:#22d3ee}
 .sign{font-size:12.5px;color:#8fa3bf;margin-top:18px;line-height:1.9}
 .sign b{color:#fbbf24}
-</style><link rel="stylesheet" href="huidong.css">
-</head><body>
+</style><link rel="stylesheet" href="huidong.css?v=20261116b">
+</head><body class="hd-page hd-content">
 
 <header class="hd-header">
   <div class="hd-header-inner">
@@ -104,21 +104,21 @@ details .body{padding:0 20px 20px}
 
 <div class="wrap">
 
-  <!-- 电影式 hero -->
-  <div class="hero">
-    <div class="kick">REGIONAL DECISION WIND TUNNEL · HUIDONG</div>
-    <h1>让惠东的每一个涉海重大决策<br>先在风洞里跑一遍</h1>
-    <p>不是预测未来，是把假设摆到台面上，看系统怎么响应。<br>
-    让同一片海，<span class="gold">既养旅游、又出能源，还护得住海龟</span>。</p>
-  </div>
+  <header class="hero">
+    <h1>这次试算，<span class="sea">改了什么？</span></h1>
+    <p id="ending-conditions" class="sub"></p>
+  </header>
 
+  <section class="hd-front" aria-labelledby="closing-compare">
+    <h2 id="closing-compare">基准与这次情景</h2>
+    <p class="ab-meta">大数字表示达到 1,200 亿参考线的模拟比例。</p>
   <!-- 你的实验结果 A/B 卡 -->
   <div class="ab-card">
     <div class="ab-side base">
-      <div class="lab">基准情景 · 按当前规划</div>
+      <div class="lab">模型基准</div>
       <div class="hit" id="bHit">—</div>
       <div class="p50">中位产值 <b id="bP50">—</b></div>
-      <div class="rng">P10–P90：<span id="bRange">—</span></div>
+      <div class="rng">中央 80% 区间 <span id="bRange">—</span></div>
     </div>
     <div class="ab-mid">
       <div class="arr">→</div>
@@ -129,14 +129,17 @@ details .body{padding:0 20px 20px}
       <div class="lab" id="curLab">你的情景</div>
       <div class="hit" id="cHit">—</div>
       <div class="p50">中位产值 <b id="cP50">—</b></div>
-      <div class="rng">P10–P90：<span id="cRange">—</span></div>
+      <div class="rng">中央 80% 区间 <span id="cRange">—</span></div>
     </div>
   </div>
-  <div class="ab-meta">
-    模型版本 v1.0 · 种子 42 · 8000 次蒙特卡洛 · BASE 861.25 亿（2025 实测）· TARGET 1200 亿<br>
-    本结果为压力测试叙事，<b style="color:#fbbf24">非预测，不构成投资建议</b>
+  <div class="actions hd-link-row">
+    <a class="hd-primary" id="ending-wind" href="windtunnel.html">返回这次情景</a>
+    <a class="hd-text-link" id="ending-report" href="report.html">看本次报告</a>
   </div>
+  </section>
 
+  <details class="hd-details hd-reading">
+    <summary>展开四个生活场景</summary>
   <!-- 四个生活场景 -->
   <div class="scenes">
     <div class="scene"><div class="ic">🌉</div><div class="t">桥与道路</div><div class="d">台风过境、临时封路<br>通勤与物流临时中断</div></div>
@@ -145,10 +148,7 @@ details .body{padding:0 20px 20px}
     <div class="scene"><div class="ic">🏘️</div><div class="t">社区与家庭</div><div class="d">渔排损毁、补网投苗<br>台风保险兜底最普通的人</div></div>
   </div>
 
-  <div class="actions">
-    <a class="btn ghost" href="windtunnel.html">🎛️ 回到风洞改条件</a>
-    <a class="btn" href="report.html">📊 看完整报告</a>
-  </div>
+  </details>
 
   <!-- 深度阅读：全部折叠 -->
   <details>
@@ -268,9 +268,19 @@ document.getElementById('cHit').textContent = Math.round(cur.hit) + '%';
 document.getElementById('cP50').textContent = Math.round(cur.p50) + ' 亿';
 document.getElementById('cRange').textContent = Math.round(cur.p10) + '–' + Math.round(cur.p90) + ' 亿';
 
-// 情景名
-const sceneName = opts.typhoon ? '台风冲击' : opts.nuclearDelay ? '核电延迟' : opts.shoeFactor ? '女鞋景气' : '基准（未改条件）';
-document.getElementById('curLab').textContent = '你的情景 · ' + sceneName;
+const {strength, days, delay, shoe} = selectedRun.conditions;
+const selectedScene = new URLSearchParams(location.search).get("scene");
+const scene = ["storm","shoe","energy"].includes(selectedScene) ? selectedScene :
+  opts.typhoon ? "storm" : opts.shoeFactor ? "shoe" : opts.nuclearDelay ? "energy" : "storm";
+const conditionParts = [
+  strength ? "参考风力的 " + strength + "% · 停业 " + days + " 天" : "无台风冲击",
+  delay ? "太平岭晚 " + delay + " 年" : "太平岭按期投产",
+  "女鞋景气 " + shoe + "%"
+];
+document.getElementById("ending-conditions").textContent = conditionParts.join(" · ");
+const query = new URLSearchParams({run:selectedRun.token, scene});
+document.getElementById("ending-wind").href = "windtunnel.html?" + query;
+document.getElementById("ending-report").href = "report.html?" + query;
 
 // 差异
 const dHit = Math.round(cur.hit - base.hit);
@@ -323,5 +333,7 @@ echarts.init(document.getElementById('chRadar')).setOption({
       {value: [92, 90, 90, 90, 92], name: '正式版努力方向', lineStyle: {color: '#fb923c'}, itemStyle: {color: '#fb923c'}, areaStyle: {color: 'rgba(251,146,60,.12)'}}
     ]}]
 });
-</script>
-<script src="relay.js"></script></body></html>
+document.querySelectorAll("details").forEach(details => details.addEventListener("toggle", () => {
+  if (details.open) details.querySelectorAll(".chart").forEach(node => echarts.getInstanceByDom(node)?.resize());
+}));
+</script></body></html>

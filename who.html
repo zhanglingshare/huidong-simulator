@@ -2,6 +2,7 @@
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>惠东产业风洞 · 基本面</title>
 <script src="lib/echarts.min.js"></script>
+<script src="model.js?v=20261116a"></script>
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
@@ -34,8 +35,8 @@ body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.6 -apple-system,"Ping
 .plain .lab{display:block;font-size:10.5px;font-weight:800;color:#22d3ee;letter-spacing:1px;margin-bottom:4px}
 .next{text-align:center;margin:24px 0}
 .next a{background:#0e7490;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block}
-</style><link rel="stylesheet" href="huidong.css">
-</head><body>
+</style><link rel="stylesheet" href="huidong.css?v=20261116b">
+</head><body class="hd-page hd-content">
 
 <header class="hd-header">
   <div class="hd-header-inner">
@@ -49,29 +50,44 @@ body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.6 -apple-system,"Ping
 
 <div class="wrap">
 
-  <div class="hero">
-    <div class="kick">HUIDONG · FUNDAMENTALS</div>
-    <h1>惠东现在<span class="sea">长什么样</span></h1>
-    <p class="sub">数据来自 2025 统计公报与县情公开资料。<br>临大亚湾、红海湾的海洋大县，到底是什么结构？</p>
-  </div>
+  <header class="hero">
+    <h1>惠东的家底，<span class="sea">靠什么撑起来？</span></h1>
+    <p class="sub">2025 年公开统计。服务业占比最大，规上工业增加值增速更快。</p>
+  </header>
+
+  <section class="hd-front hd-fundamentals" aria-label="惠东经济基本面">
+    <div>
+      <p class="hd-eyebrow">2025 年地区生产总值</p>
+      <div class="hd-observed-value">861.25 亿</div>
+      <div class="hd-growth-comparison" aria-label="2025 年同比增速">
+        <div><span>全县 GDP 增速</span><strong>+4.0%</strong></div>
+        <div><span>规上工业增加值增速</span><strong>+12.1%</strong></div>
+      </div>
+    </div>
+    <div>
+      <h2>每 100 元 GDP 由什么组成</h2>
+      <div class="hd-share-bar" id="industry-bar" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="hd-share-list" role="group" aria-label="查看三次产业">
+        <button type="button" data-industry="p1" aria-pressed="false">第一产业<strong></strong></button>
+        <button type="button" data-industry="p2" aria-pressed="false">第二产业<strong></strong></button>
+        <button type="button" data-industry="p3" aria-pressed="true">第三产业<strong></strong></button>
+      </div>
+      <p id="structure-note" role="status"></p>
+    </div>
+  </section>
 
   <div class="kpis">
-    <div class="kpi"><div class="v">861.25亿</div><div class="l">GDP</div><div class="d">+4.0%</div></div>
-    <div class="kpi"><div class="v">+12.1%</div><div class="l">规上工业增加值</div><div class="d">总产值576亿 +13.6%</div></div>
-    <div class="kpi"><div class="v">103.3万</div><div class="l">常住人口</div><div class="d">城镇化63.8%</div></div>
-    <div class="kpi"><div class="v">近1800万</div><div class="l">年游客</div><div class="d">滨海旅游大县</div></div>
+    <div class="kpi"><div class="v">103.3 万</div><div class="l">常住人口</div><div class="d">城镇化率 63.8%</div></div>
+    <div class="kpi"><div class="v">近 1,800 万</div><div class="l">年游客人次</div><div class="d">文旅资料</div></div>
+    <div class="kpi"><div class="v">576 亿</div><div class="l">规上工业总产值</div><div class="d">同比 +13.6%</div></div>
+    <div class="kpi"><div class="v">约 214 公里</div><div class="l">海岸线</div><div class="d">66 个岛屿</div></div>
   </div>
 
-  <div class="grid2">
+  <div class="grid2 hd-history">
     <div class="card">
       <h2>📈 GDP怎么涨上来的</h2>
       <div id="c1" class="chart"></div>
-      <div class="plain"><span class="lab">人话</span>惠东2021年跨过700亿、2023年跨过800亿，2025年861亿。线稳步往上，最近这一段靠工业提速。</div>
-    </div>
-    <div class="card">
-      <h2>🥧 三次产业结构</h2>
-      <div id="c2" class="chart"></div>
-      <div class="plain"><span class="lab">人话</span>三产占53%、二产35.5%、一产11.5%。惠东是"三产打头、工业提速、农渔不小"——和博罗（工业占一半多）不一样。</div>
+      <details class="hd-details hd-reading"><summary>看图说明</summary><p>惠东2021年跨过700亿、2023年跨过800亿，2025年861亿。线稳步往上，最近这一段靠工业提速。</p></details>
     </div>
   </div>
 
@@ -79,12 +95,17 @@ body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.6 -apple-system,"Ping
     <div class="card">
       <h2>🏭 工业里什么在涨</h2>
       <div id="c3" class="chart"></div>
-      <div class="plain"><span class="lab">人话</span>规上工业总产值+13.6%、增加值+12.1%，比GDP的4%快得多——工业是惠东的提速器；一季度工业投资+36.6%，新产能在落子。</div>
+      <details class="hd-details hd-reading"><summary>看图说明</summary><p>规上工业总产值+13.6%、增加值+12.1%，比GDP的4%快得多——工业是惠东的提速器；一季度工业投资+36.6%，新产能在落子。</p></details>
     </div>
     <div class="card">
       <h2>🌊 海洋家底有多少</h2>
-      <div id="c4" class="chart"></div>
-      <div class="plain"><span class="lab">人话</span>214公里海岸线、66个岛、18个海湾、6个天然渔港。海域约3200平方公里，和陆地（约3529）差不多——惠东的家底在海上。</div>
+      <dl class="hd-coast-facts">
+        <div><dt>海域面积</dt><dd>约 3,200 平方公里</dd></div>
+        <div><dt>岛屿</dt><dd>66 个</dd></div>
+        <div><dt>大小海湾</dt><dd>18 个</dd></div>
+        <div><dt>天然渔港</dt><dd>6 个</dd></div>
+      </dl>
+      <details class="hd-details hd-reading"><summary>看图说明</summary><p>214公里海岸线、66个岛、18个海湾、6个天然渔港。海域约3200平方公里，和陆地（约3529）差不多——惠东的家底在海上。</p></details>
     </div>
   </div>
 
@@ -92,25 +113,49 @@ body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.6 -apple-system,"Ping
     <div class="card">
       <h2>✂️ 工业在提速，投资有冷有热</h2>
       <div id="c5" class="chart"></div>
-      <div class="plain"><span class="lab">人话</span>规上工业增加值+12.1%、一季度工业投资+36.6%，热的是先进制造与能源；固定资产投资这几年在调整（十四五年均约-1.8%），冷的是地产相关。</div>
+      <details class="hd-details hd-reading"><summary>看图说明</summary><p>规上工业增加值+12.1%、一季度工业投资+36.6%，热的是先进制造与能源；固定资产投资这几年在调整（十四五年均约-1.8%），冷的是地产相关。</p></details>
     </div>
     <div class="card">
       <h2>👥 人在哪</h2>
       <div id="c6" class="chart"></div>
-      <div class="plain"><span class="lab">人话</span>常住103.3万，城镇约66万、农村约37万。惠东是"滨海城区+大片山区"，山区镇还连着农渔人口。</div>
+      <details class="hd-details hd-reading"><summary>看图说明</summary><p>常住103.3万，城镇约66万、农村约37万。惠东是"滨海城区+大片山区"，山区镇还连着农渔人口。</p></details>
     </div>
   </div>
 
   <div class="card" style="margin-bottom:14px">
     <h2>🎯 从861亿到约1200亿，差多少</h2>
     <div id="c7" class="chart" style="height:260px"></div>
-    <div class="plain"><span class="lab">人话</span>2025年861亿，模型用2030年约1200亿作外延参考（不是官方刚性目标）。五年要涨约39%、年均约6.9%，比2025年实际4.0%快。这中间的差距，靠清洁能源、新材料、滨海旅游几条路填。</div>
+    <details class="hd-details hd-reading"><summary>看图说明</summary><p>2025年861亿，模型用2030年约1200亿作外延参考（不是官方刚性目标）。五年要涨约39%、年均约6.9%，比2025年实际4.0%快。这中间的差距，靠清洁能源、新材料、滨海旅游几条路填。</p></details>
   </div>
 
-  <div class="next"><a href="choices.html">下一步：五条路 →</a></div>
+  <div class="next hd-link-row"><a href="choices.html">比较五条产业路径</a><a class="hd-muted-link" href="v2/history.html">查看历年资料</a></div>
 </div>
 
 <script>
+const industryValues = HT.FACTS.ind;
+const industryNames = {p1:'第一产业', p2:'第二产业', p3:'第三产业'};
+const industryButtons = [...document.querySelectorAll('[data-industry]')];
+const industrySegments = [...document.querySelectorAll('#industry-bar i')];
+
+function showIndustry(selected) {
+  const value = industryValues[selected];
+  const share = (value / HT.FACTS.gdp * 100).toFixed(1);
+  document.getElementById('structure-note').textContent =
+    industryNames[selected] + '增加值 ' + value.toLocaleString('zh-CN', {minimumFractionDigits:2}) + ' 亿元，占全县 GDP 的 ' + share + '%。';
+  industryButtons.forEach((button, i) => {
+    const active = button.dataset.industry === selected;
+    button.setAttribute('aria-pressed', String(active));
+    industrySegments[i].style.opacity = active ? 1 : .64;
+  });
+}
+industryButtons.forEach((button, i) => {
+  const share = industryValues[button.dataset.industry] / HT.FACTS.gdp * 100;
+  button.querySelector('strong').textContent = share.toFixed(1) + '%';
+  industrySegments[i].style.width = share + '%';
+  button.addEventListener('click', () => showIndustry(button.dataset.industry));
+});
+showIndustry('p3');
+
 const dark={text:'#93a4bd',axis:'#2b3a55'};
 const baseGrid={left:50,right:20,top:30,bottom:30};
 
@@ -121,16 +166,6 @@ echarts.init(document.getElementById('c1')).setOption({
   xAxis:{type:'category',data:['2020','2021','2022','2023','2024','2025'],axisLine:{lineStyle:{color:dark.axis}},axisLabel:{color:dark.text}},
   yAxis:{type:'value',axisLine:{lineStyle:{color:dark.axis}},axisLabel:{color:dark.text},splitLine:{lineStyle:{color:'#1c2739'}}},
   series:[{type:'line',data:[607.6,703.4,752.1,806.8,828.3,861.25],smooth:true,lineStyle:{color:'#22d3ee',width:3},areaStyle:{color:{type:'linear',x:0,y:0,x2:0,y2:1,colorStops:[{offset:0,color:'rgba(34,211,238,.3)'},{offset:1,color:'rgba(34,211,238,0)'}]}},itemStyle:{color:'#22d3ee'},label:{show:true,color:'#67e8f9',fontSize:10}}]
-});
-
-echarts.init(document.getElementById('c2')).setOption({
-  backgroundColor:'transparent',
-  tooltip:{trigger:'item',backgroundColor:'#16203a',borderColor:'#2b3a55',textStyle:{color:'#e6edf3'}},
-  legend:{bottom:0,textStyle:{color:dark.text,fontSize:11}},
-  series:[{type:'pie',radius:['40%','70%'],center:['50%','45%'],
-    data:[{value:99.00,name:'一产 11.5%',itemStyle:{color:'#84cc16'}},{value:305.39,name:'二产 35.5%',itemStyle:{color:'#0891b2'}},{value:456.86,name:'三产 53.0%',itemStyle:{color:'#3b82f6'}}],
-    label:{color:'#cbd5e1',fontSize:11,formatter:'{b}'}
-  }]
 });
 
 echarts.init(document.getElementById('c3')).setOption({
@@ -146,20 +181,6 @@ echarts.init(document.getElementById('c3')).setOption({
     {value:13.6,itemStyle:{color:'#22d3ee'}},
     {value:36.6,itemStyle:{color:'#3b82f6'}}
   ],barWidth:16,label:{show:true,position:'right',color:'#67e8f9',fontSize:11,formatter:'{c}%'}}]
-});
-
-echarts.init(document.getElementById('c4')).setOption({
-  backgroundColor:'transparent',
-  tooltip:{trigger:'axis',backgroundColor:'#16203a',borderColor:'#2b3a55',textStyle:{color:'#e6edf3'}},
-  grid:{left:100,right:30,top:20,bottom:30},
-  xAxis:{type:'value',axisLine:{lineStyle:{color:dark.axis}},axisLabel:{color:dark.text},splitLine:{lineStyle:{color:'#1c2739'}}},
-  yAxis:{type:'category',data:['天然渔港(个)','大小海湾(个)','岛屿(个)','海岸线(公里)'],axisLine:{lineStyle:{color:dark.axis}},axisLabel:{color:dark.text}},
-  series:[{type:'bar',data:[
-    {value:6,itemStyle:{color:'#155e75'}},
-    {value:18,itemStyle:{color:'#0e7490'}},
-    {value:66,itemStyle:{color:'#0891b2'}},
-    {value:214,itemStyle:{color:'#22d3ee'}}
-  ],barWidth:18,label:{show:true,position:'right',color:'#67e8f9',fontSize:11}}]
 });
 
 echarts.init(document.getElementById('c5')).setOption({
@@ -198,5 +219,8 @@ echarts.init(document.getElementById('c7')).setOption({
     {name:'当前速度外推(4.0%)',type:'line',data:[861.25,895.7,931.5,968.8,1007.5,1047.8],lineStyle:{color:'#f87171',width:2,type:'dotted'},itemStyle:{color:'#f87171'}}
   ]
 });
+window.addEventListener('resize', () => {
+  document.querySelectorAll('.chart').forEach(element => echarts.getInstanceByDom(element)?.resize());
+});
 </script>
-<script src="relay.js"></script></body></html>
+</body></html>

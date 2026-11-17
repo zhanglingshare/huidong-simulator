@@ -81,11 +81,13 @@ body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.6 -apple-system,"Ping
 @keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
 .pulse{animation:pulse 1.5s ease-in-out infinite}
 </style><meta property="og:type" content="website">
-<meta property="og:title" content="向外地朋友介绍惠东，你会先讲哪一样？">
-<meta property="og:description" content="打开选一次，和朋友对答案。">
+<meta property="og:title" content="风停了，民宿要多排一人吗？">
+<meta property="og:description" content="回到惠东红霞复业现场。先作判断，再用订单算这笔账。">
 <meta property="og:image" content="https://zhanglingshare.github.io/huidong-simulator/legacy/2026-11-17/huidong-stage.jpg">
 <link rel="stylesheet" href="huidong-duel.css?v=1">
+<link rel="stylesheet" href="huidong-shift.css">
 <script type="module" src="huidong-duel.js?v=1"></script>
+<script defer src="huidong-shift.js"></script>
 </head><body data-duel-page="index">
 
 <div class="nav">
@@ -103,6 +105,25 @@ body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.6 -apple-system,"Ping
 </div>
 
 <div class="wrap">
+  <section class="shift shift-hero" data-shift-entry aria-labelledby="shift-title">
+    <div>
+      <p class="shift-date">今日惠东 · 2026 年 7 月「红霞」事件回看</p>
+      <h1 id="shift-title">风停了，<br>民宿要多排一人吗？</h1>
+      <p class="shift-hero-copy">假设你在巽寮开民宿。景区有了复业安排，临时多排一班要花钱。今晚多接的订单，够付这笔工钱吗？</p>
+    </div>
+    <div class="shift-first">
+      <h2 data-shift-heading>你第一反应怎么排？</h2>
+      <div class="shift-first-actions" data-shift-choices>
+        <a class="shift-button" href="town.html?start=keep#shift-case">先按原班</a>
+        <a class="shift-button" href="town.html?start=add#shift-case">多排一人</a>
+      </div>
+      <p class="shift-note" data-shift-summary>下一页查开复业时间，再用房间和班费试一笔账。</p>
+      <a class="shift-resume" href="town.html#shift-case" data-shift-resume hidden>打开这笔排班记录 →</a>
+    </div>
+  </section>
+
+  <details class="shift-archive" data-shift-archive>
+    <summary>惠东话题快照与旧题目</summary>
   <section id="friend-duel" class="friend-duel" aria-labelledby="duel-title" hidden></section>
 
 
@@ -129,8 +150,8 @@ body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.6 -apple-system,"Ping
       </g>
     </svg>
     <div style="flex:1">
-      <div style="font-size:14px;font-weight:700;color:#e6edf3">当日话题扫描</div>
-      <div class="scan-info" id="scanInfo">正在读取当日话题…</div>
+      <div style="font-size:14px;font-weight:700;color:#e6edf3">公开话题快照</div>
+      <div class="scan-info" id="scanInfo">正在读取话题…</div>
     </div>
     <button class="refresh" id="btnScan">🔄 重新扫描</button>
   </div>
@@ -164,7 +185,8 @@ body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.6 -apple-system,"Ping
   <div class="topic-grid" id="topicList"></div>
 
   <div class="next"><a href="network.html">下一步：看惠东怎么长出来 →</a></div>
-  <div class="disc">话题均来自公开渠道、每日自动刷新；关注档为公开热度估算，非平台后台统计。</div>
+  <div class="disc">话题来自公开渠道，时间以快照为准。关注档为编辑分档。</div>
+  </details>
 </div>
 
 <script>
@@ -211,23 +233,13 @@ function render(){
     return `<div class="tcard" data-t="${esc(x.t)}" style="background:${grads[x.c]||grads.city}">
       <div class="meta">${catName[x.c]||"城市"}${liveBadge} · ${esc(x.srcLevel||"")} · ${esc(x.src||"")}</div>
       <div class="title">${esc(x.t)}</div>
-      <div class="row">
-        <span class="tier" style="color:${tc};border:1px solid ${tc}">关注 · ${esc(x.tier||"")}</span>
-        <span class="like-btn" onclick="event.stopPropagation();like(this,'${esc(x.t)}')">👍 <b class="ln">0</b></span>
-      </div>
+      <div class="row"><span class="tier" style="color:${tc};border:1px solid ${tc}">关注 · ${esc(x.tier||"")}</span></div>
       <div class="detail">${esc(x.d||"")}${x.url?'<div style="margin-top:8px"><a href="'+esc(x.url)+'" target="_blank" rel="noopener nofollow" onclick="event.stopPropagation()">查看原始报道 ↗</a></div>':''}</div>
     </div>`;
   }).join("")||'<div style="grid-column:1/-1;color:#5b6b82;text-align:center;padding:26px 0">今日话题快照暂不可用，可点「重新扫描」重试。</div>';
   document.querySelectorAll("#topicList .tcard").forEach(c=>{
     c.onclick=()=>{const d=c.querySelector(".detail");d.style.display=d.style.display==="none"?"block":"none";};
   });
-}
-
-function like(el,t){
-  let n=parseInt(el.querySelector(".ln").textContent)+1;
-  el.querySelector(".ln").textContent=n;
-  localStorage.setItem("like_"+t,n);
-  el.style.transform="scale(1.2)";setTimeout(()=>el.style.transform="",200);
 }
 
 document.querySelectorAll(".cat").forEach(b=>{
@@ -240,7 +252,7 @@ document.querySelectorAll(".cat").forEach(b=>{
 });
 
 function scanText(){
-  return `数据每日自动刷新 · 上次更新 ${hotMeta.updated||"—"} · 共${allData.length}个话题 · 关注档排序`;
+  return `话题快照 · 上次更新 ${hotMeta.updated||"—"} · 共${allData.length}个话题`;
 }
 
 document.getElementById("btnScan").onclick=async function(){
@@ -320,7 +332,6 @@ document.getElementById("btnScan").onclick=async function(){
 </script>
 
 <div class="likebar">
-  <button type="button" onclick="likePage()">👍 <span id="pcount">0</span></button>
   <button type="button" data-duel-footer>发这题给朋友</button>
 </div>
 <style>
@@ -328,5 +339,4 @@ document.getElementById("btnScan").onclick=async function(){
 .likebar button{background:none;border:none;color:#e6edf3;font-size:14px;cursor:pointer}
 .likebar button:active{transform:scale(1.15)}
 </style>
-<script>(function(){var k="like_"+location.pathname;var n=parseInt(localStorage.getItem(k)||"0");document.getElementById("pcount").textContent=n;window.likePage=function(){n++;localStorage.setItem(k,n);document.getElementById("pcount").textContent=n;};})();</script>
 </body></html>

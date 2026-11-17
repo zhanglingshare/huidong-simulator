@@ -61,11 +61,13 @@ body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.65 -apple-system,"Pin
 .next{text-align:center;margin:20px 0}
 .next a{background:#0e7490;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block}
 </style><meta property="og:type" content="website">
-<meta property="og:title" content="只有半天，你想和朋友去哪边？">
-<meta property="og:description" content="打开选一次，和朋友对答案。">
+<meta property="og:title" content="巽寮民宿，加这一班划算吗？">
+<meta property="og:description" content="对照复业通告、加班成本和同一晚的订单。">
 <meta property="og:image" content="https://zhanglingshare.github.io/huidong-simulator/legacy/2026-11-17/huidong-stage.jpg">
 <link rel="stylesheet" href="huidong-duel.css?v=1">
+<link rel="stylesheet" href="huidong-shift.css">
 <script type="module" src="huidong-duel.js?v=1"></script>
+<script defer src="huidong-shift.js"></script>
 </head><body data-duel-page="town">
 
 <div class="nav">
@@ -83,13 +85,136 @@ body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.65 -apple-system,"Pin
 </div>
 
 <div class="wrap">
+  <section class="shift" id="shift-case" aria-labelledby="shift-title">
+    <header class="shift-heading">
+      <p class="shift-judgment">各镇现场 · 巽寮</p>
+      <h1 id="shift-title">要多接几间房，<br>才付得起这一班？</h1>
+    </header>
+
+    <section class="shift-panel" aria-labelledby="shift-facts">
+      <h2 id="shift-facts">先对三件事</h2>
+      <p class="shift-note">2026 年 7 月「红霞」事件回看</p>
+      <div class="shift-facts">
+        <article>
+          <strong>7 月 24 日 · 15:00</strong>
+          <p>巽寮滨海旅游度假区等惠东滨海景区及海滨浴场暂停开放。</p>
+          <a href="https://static.nfnews.com/content/202607/24/c12655621.html">查当时的关停报道 ↗</a>
+        </article>
+        <article>
+          <strong>7 月 26 日 · 16:00 → 17:00</strong>
+          <p>惠州市通告安排交通有序恢复。一小时后，餐饮、旅游景区等有序复业，复业前须排查隐患。</p>
+          <a href="https://static.nfnews.com/content/202607/25/c12659313.html">查惠州市复业通告 ↗</a>
+        </article>
+        <article>
+          <strong>店里能多接几间？</strong>
+          <p>复业时间在通告里。要知道加人能多接几间房，得查同一晚的订房记录。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="shift-panel" aria-labelledby="shift-calc">
+      <h2 id="shift-calc">算两种排班</h2>
+      <div data-shift-start>
+        <p class="shift-note">你第一反应怎么排？</p>
+        <div class="shift-actions">
+          <a class="shift-button" href="?start=keep#shift-case">先按原班</a>
+          <a class="shift-button" href="?start=add#shift-case">多排一人</a>
+        </div>
+      </div>
+      <p class="shift-note shift-judgment" data-shift-first hidden></p>
+      <form id="shift-forecast" hidden>
+        <p class="shift-note">只算原班接不下、加一人确实能接下的房间。</p>
+        <div class="shift-fields">
+          <label>多排一班要花多少元
+            <input name="cost" type="number" min="0.01" max="1000000" step="0.01" inputmode="decimal" required>
+          </label>
+          <label>每间房扣掉新增开销后剩多少元
+            <input name="margin" type="number" min="0.01" max="1000000" step="0.01" inputmode="decimal" required>
+          </label>
+          <label>你估计能多接几间
+            <input name="expected" type="number" min="0" max="10000" step="1" inputmode="numeric" required>
+          </label>
+          <label>对照哪一晚
+            <input name="night" type="date" required>
+          </label>
+        </div>
+        <div class="shift-actions" data-shift-forecast-actions>
+          <button type="button" data-shift-demo>试一组演示数</button>
+          <button type="button" data-shift-own hidden>填写我店的数</button>
+        </div>
+        <p class="shift-note" data-shift-mode></p>
+        <div data-shift-preview hidden>
+          <div class="shift-options">
+            <div><span>照原班 · 新增收支</span><strong>0 元</strong></div>
+            <div><span>多排一人 · 新增收支</span><strong data-shift-estimate></strong></div>
+          </div>
+          <p class="shift-threshold" data-shift-threshold></p>
+        </div>
+        <div class="shift-actions">
+          <button class="shift-primary" type="submit" data-shift-lock>保存这份预估</button>
+        </div>
+        <p class="shift-status" role="status" data-shift-calc-status></p>
+      </form>
+    </section>
+
+    <section class="shift-panel" id="shift-review" aria-labelledby="shift-check" hidden>
+      <h2 id="shift-check">同一晚，订单怎么说？</h2>
+      <p class="shift-note" data-shift-review-lead></p>
+      <form id="shift-observation" hidden>
+        <div class="shift-fields" data-shift-observation-fields>
+          <label>记录里能多接几间
+            <input name="rooms" type="number" min="0" max="10000" step="1" inputmode="numeric" required>
+          </label>
+          <label>看的哪种记录
+            <select name="source" required>
+              <option value="">请选择</option>
+              <option value="bookings">实际接下的额外订单</option>
+              <option value="inquiries">加人后能接下的订房意向</option>
+            </select>
+          </label>
+        </div>
+        <div class="shift-actions">
+          <button type="submit" class="shift-primary" data-shift-observe>带回这笔记录</button>
+          <button type="button" class="shift-primary" data-shift-demo-review hidden>用演示记录核一次</button>
+        </div>
+        <p class="shift-status" role="status" data-shift-review-status></p>
+      </form>
+      <div class="shift-result" data-shift-result hidden>
+        <div class="shift-options">
+          <div><span data-shift-before-label></span><strong data-shift-before-value></strong></div>
+          <div><span data-shift-after-label></span><strong data-shift-after-value></strong></div>
+        </div>
+        <p class="shift-threshold" data-shift-verdict></p>
+        <p class="shift-note" data-shift-observation-note></p>
+        <div class="shift-follow-up" data-shift-revise>
+          <h3>带着这笔账，你现在怎么排？</h3>
+          <div class="shift-actions">
+            <button type="button" data-shift-final="keep">现在按原班</button>
+            <button type="button" data-shift-final="add">现在多排一人</button>
+          </div>
+        </div>
+        <p class="shift-status" role="status" data-shift-final-status></p>
+        <div class="shift-actions" data-shift-finish hidden>
+          <a class="shift-button" href="index.html">回今日惠东</a>
+          <button type="button" data-shift-reset>开始新一轮</button>
+        </div>
+      </div>
+    </section>
+    <div class="shift-actions" data-shift-abandon hidden>
+      <button type="button" data-shift-reset>开始新一轮</button>
+    </div>
+    <noscript><p class="shift-note">开启 JavaScript 后可以试算和记录排班。</p></noscript>
+  </section>
+
+  <details class="shift-archive" data-shift-archive>
+    <summary>查各镇吃喝玩乐与当季资料</summary>
   <section id="friend-duel" class="friend-duel" aria-labelledby="duel-title" hidden></section>
 
 
   <div class="hero">
     <div class="kick">HUIDONG · 14 TOWNS</div>
     <h1>惠东各镇，一口<span class="sea">海味</span>、一片山海</h1>
-    <p class="sub">2 个街道、12 个镇与滨海度假区，滨海与山区各有烟火气。<br>点"换一换"，今天先去哪三个？</p>
+    <p class="sub">按镇街查看公开资料中的吃法和去处。</p>
   </div>
 
   <div class="scan-bar">
@@ -101,10 +226,9 @@ body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.65 -apple-system,"Pin
       <circle cx="32" cy="32" r="2.5" fill="#0891b2"/>
     </svg>
     <div style="flex:1">
-      <div style="font-size:14px;font-weight:700;color:#e6edf3">各镇今日扫描</div>
-      <div class="scan-info" id="scanInfo">雷达待命…</div>
+      <div style="font-size:14px;font-weight:700;color:#e6edf3">各镇资料快照</div>
+      <div class="scan-info" id="scanInfo">正在读取资料…</div>
     </div>
-    <button class="refresh" id="btnScan">🔄 换一换</button>
   </div>
 
   <div class="livebar" id="livebar">正在读今日惠东各镇…</div>
@@ -117,16 +241,15 @@ body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.65 -apple-system,"Pin
   <div class="grid" id="grid"></div>
 
   <div class="disc">
-    📌 数据说明：镇街与海味农品来自各镇政府公开介绍、南方+/惠州日报，以及点评/小红书/抖音近期公开打卡热度（高/较高/中三档，非平台后台真实人数）。当季海味按当月真实时令，不反季。
+    资料来源见各卡片。营业与可达情况请以当地当日公告为准。
   </div>
 
   <div class="next"><a href="network.html">下一步：看惠东在大湾区里的位置 →</a></div>
+  </details>
 </div>
 
 <script>
 let TOWNS=[],VEG=[],PULSE=[],UPDATED='',SRC='';
-let picks=[];
-
 function renderVeg(){
   const levelColor={"高":"#f87171","较高":"#fbbf24","中":"#34d399"};
   const cards=(VEG.length?VEG:[{n:"—",p:"",d:"",level:"中"}]).map(v=>{
@@ -135,20 +258,12 @@ function renderVeg(){
   }).join("");
   document.getElementById("vegInner").innerHTML=cards+cards;
 }
-function pickThree(){
-  const arr=[...TOWNS];
-  for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}
-  picks=arr.slice(0,3).map(t=>t.n);
-}
-
 function render(){
   const levelColor={"高":"#f87171","较高":"#fbbf24","中":"#34d399"};
   const g=document.getElementById("grid");
   g.innerHTML=TOWNS.map(t=>{
-    const isPick=picks.includes(t.n);
     const lc=levelColor[t.level]||"#34d399";
-    return `<div class="town${isPick?' pick':''}">
-      ${isPick?'<span class="pick-tag">✨ 今日推荐</span>':''}
+    return `<div class="town">
       <div class="head"><span class="n">${t.n}</span><span class="tag">${t.tag}</span></div>
       <div class="row"><span class="k">🍜 吃</span>${t.foods.join("、")}</div>
       <div class="row"><span class="k">🏔️ 玩</span>${t.plays.join("、")}</div>
@@ -165,20 +280,17 @@ async function loadLife(){
     TOWNS=d.towns||[];VEG=d.veg||[];PULSE=d.pulse||[];UPDATED=d.updated||"";SRC=d.sourceLabel||"";
     if(d.season)document.getElementById("vegTitle").textContent=`🦪 惠东${d.season}季当季海味·农品 · 按当月真实时令（悬停暂停）`;
   }catch(e){}
-  renderVeg();pickThree();render();
-  document.getElementById("scanInfo").textContent=`数据每日自动刷新 · 上次更新 ${UPDATED} · 共${TOWNS.length}个镇街`;
+  renderVeg();render();
+  document.getElementById("scanInfo").textContent=`上次更新 ${UPDATED || "日期未标注"} · 共${TOWNS.length}条镇街资料`;
   document.getElementById("livebar").innerHTML=PULSE.length
     ?"📡 最近大家在聊（公开渠道）："+PULSE.join("　｜　")
     :"📡 惠东的海味山海，不用上热搜也值得去。";
 }
 
-function refresh(){pickThree();render();}
 loadLife();
-document.getElementById("btnScan").onclick=refresh;
 </script>
 
 <div class="likebar">
-  <button type="button" onclick="likePage()">👍 <span id="pcount">0</span></button>
   <button type="button" data-duel-footer>发这题给朋友</button>
 </div>
 <style>
@@ -186,5 +298,4 @@ document.getElementById("btnScan").onclick=refresh;
 .likebar button{background:none;border:none;color:#e6edf3;font-size:14px;cursor:pointer}
 .likebar button:active{transform:scale(1.15)}
 </style>
-<script>(function(){var k="like_"+location.pathname;var n=parseInt(localStorage.getItem(k)||"0");document.getElementById("pcount").textContent=n;window.likePage=function(){n++;localStorage.setItem(k,n);document.getElementById("pcount").textContent=n;};})();</script>
 </body></html>

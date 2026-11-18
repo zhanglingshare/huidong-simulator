@@ -5,15 +5,71 @@ const mount = document.getElementById('friend-duel');
 const query = new URLSearchParams(location.search);
 const pageKey = query.get('duel');
 const canShare = typeof navigator.share === 'function';
+const NAME_KEY = 'duel:name';
+const ECHO_KEY = 'duel:echoes';
+
+function cleanName(value) {
+  return String(value || '').replace(/[<>&"']/g, '').replace(/\s+/g, ' ').trim().slice(0, 12);
+}
+
+function readName() {
+  try { return cleanName(localStorage.getItem(NAME_KEY)); } catch { return ''; }
+}
+
+function saveName(value) {
+  const name = cleanName(value);
+  try { name ? localStorage.setItem(NAME_KEY, name) : localStorage.removeItem(NAME_KEY); } catch {}
+  return name;
+}
+
+function readEchoes() {
+  try {
+    const list = JSON.parse(localStorage.getItem(ECHO_KEY) || '[]');
+    return Array.isArray(list) ? list : [];
+  } catch { return []; }
+}
+
+function recordEcho(spec, visit) {
+  if (visit.from === null || visit.reply === null) return;
+  const name = visit.by || '';
+  const key = `${spec.id}|${name}|${visit.from}|${visit.reply}`;
+  const list = readEchoes();
+  if (list.some(item => item.k === key)) return;
+  list.push({ k: key, d: spec.id, p: page, t: spec.title, o: (spec.options || []).slice(0, 8), name, from: visit.from, reply: visit.reply, at: Date.now() });
+  try { localStorage.setItem(ECHO_KEY, JSON.stringify(list.slice(-30))); } catch {}
+}
+
+function showEcho(spec, visit) {
+  let box = mount.querySelector('.duel-echo');
+  if (!box) {
+    box = document.createElement('div');
+    box.className = 'duel-echo';
+    mount.prepend(box);
+  }
+  if (visit.from !== null && visit.reply !== null) {
+    const who = visit.by || '朋友';
+    const same = visit.from === visit.reply;
+    const mine = readEchoes().filter(e => String(e.d) === String(spec.id));
+    const sameCount = mine.filter(e => String(e.from) === String(e.reply)).length;
+    const tally = mine.length > 1 ? `<span class="duel-echo-tally">第 ${mine.length} 个回你题的朋友${sameCount ? `，${sameCount} 个和你选一样` : '，都和你选得不一样'}</span>` : '';
+    box.innerHTML = `<strong>${who} 回了你</strong> TA 选「${spec.options[Number(visit.reply)]}」，你选「${spec.options[Number(visit.from)]}」，${same ? '你们选到一块了。' : '你们不一样。'} <a href="echo.html">我的回音 →</a>${tally}`;
+    box.hidden = false;
+    return;
+  }
+  const count = readEchoes().length;
+  box.hidden = count === 0;
+  if (count) box.innerHTML = `<strong>你收到过 ${count} 条回音</strong><a href="echo.html">查看全部 →</a>`;
+}
 
 function inviteFor(spec, valid) {
-  if (pageKey !== spec.id) return { incoming: false, from: null, reply: null };
+  if (pageKey !== spec.id) return { incoming: false, from: null, reply: null, by: null };
   const from = query.get('from');
   const reply = query.get('reply');
   return {
     incoming: true,
     from: valid(from) ? from : null,
-    reply: valid(from) && valid(reply) ? reply : null
+    reply: valid(from) && valid(reply) ? reply : null,
+    by: cleanName(query.get('by')) || null
   };
 }
 
@@ -30,6 +86,8 @@ function inviteMessage(spec, own, visit) {
   url.searchParams.set('duel', spec.id);
   if (own !== null || sharingComparison) url.searchParams.set('from', responding || sharingComparison ? visit.from : own);
   if (responding || sharingComparison) url.searchParams.set('reply', sharingComparison ? visit.reply : own);
+  const name = readName();
+  if (name) url.searchParams.set('by', name);
   const setting = spec.metric !== undefined;
   return {
     title: spec.title,
@@ -43,6 +101,9 @@ function inviteMessage(spec, own, visit) {
 
 function mountShare(getPayload) {
   mount.insertAdjacentHTML('beforeend', `
+    <label class="duel-name">对方会看到你的名字
+      <input type="text" maxlength="12" autocomplete="off" placeholder="留空就显示「朋友」">
+    </label>
     <div class="duel-actions">
       <button type="button" data-duel-action="share" class="duel-share"></button>
       ${canShare ? '<button type="button" data-duel-action="copy" class="duel-copy-button">复制题目和链接</button>' : ''}
@@ -57,10 +118,13 @@ function mountShare(getPayload) {
     </div>`);
   const button = mount.querySelector('[data-duel-action="share"]');
   const status = mount.querySelector('.duel-status');
+  const nameField = mount.querySelector('.duel-name input');
   const copyBox = mount.querySelector('.duel-copy');
   const manual = mount.querySelector('.duel-copy-text');
   const invite = mount.querySelector('.duel-invite-link');
   const field = mount.querySelector('textarea');
+  nameField.value = readName();
+  nameField.addEventListener('input', () => saveName(nameField.value));
 
   async function send(action) {
     const payload = getPayload();
@@ -98,10 +162,11 @@ function mountShare(getPayload) {
     button.focus({ preventScroll: true });
   });
 
-  return function setButton(label) {
+  return function setButton(label, hint = '') {
     button.textContent = label;
-    status.textContent = '';
+    status.textContent = hint;
     copyBox.hidden = true;
+    mount.classList.toggle('duel-needs-return', Boolean(hint));
   };
 }
 
@@ -153,7 +218,7 @@ function jumpToInvite(visit, target = mount) {
 
 function startQuiz(spec) {
   const visit = inviteFor(spec, token => validOption(spec, token));
-  let own = visit.reply;
+  let own = visit.reply !== null ? visit.from : null;
   let revealed;
   if (visit.incoming && own === null) mount.classList.add('duel-landing');
   mount.innerHTML = `
@@ -167,7 +232,9 @@ function startQuiz(spec) {
   const setButton = mountShare(() => inviteMessage(spec, own, visit));
 
   function update(animate = false) {
-    setButton(shareLabel(visit, own, false, spec.type === 'pick'));
+    const needsReturn = visit.from !== null && visit.reply === null && own !== null;
+    setButton(shareLabel(visit, own, false, spec.type === 'pick'),
+      needsReturn ? '把这条发回去，TA 才能看到你的答案。' : '');
     if (own === null) return;
     const option = Number(own);
     const pick = spec.type === 'pick';
@@ -197,6 +264,8 @@ function startQuiz(spec) {
     mount.classList.remove('duel-landing');
     update(first);
   });
+  recordEcho(spec, visit);
+  showEcho(spec, visit);
   update();
   jumpToInvite(visit);
 }
@@ -270,7 +339,8 @@ function startSetup(spec) {
       <div><span>${visit.reply !== null && own === visit.reply ? '收到的设置' : '你现在的设置'} · ${spec.metric}</span>
       <strong class="duel-number">${value}</strong><p>${binding.caption(own)}</p></div></div>
       ${summary ? `<p class="duel-delta">${summary}</p>` : ''}`;
-    setButton(shareLabel(visit, own, true));
+    setButton(shareLabel(visit, own, true),
+      visit.from !== null && visit.reply === null ? '把这条发回去，TA 才能看到你改的设置。' : '');
   }
 
   function controlChanged(event) {
@@ -319,13 +389,16 @@ function startNative() {
     const visit = view(spec);
     note.textContent = own !== null && visit.reply === null ? '' : invitationNote(visit);
     compare.innerHTML = choicesTogether(spec, own, visit);
-    setButton(shareLabel(visit, own));
+    recordEcho(spec, visit);
+    showEcho(spec, visit);
+    setButton(shareLabel(visit, own),
+      visit.from !== null && visit.reply === null && own !== null ? '把这条发回去，TA 才能看到你的答案。' : '');
   }
 
   const spec = specForPage();
   const visit = view(spec);
   if (visit.reply !== null) {
-    document.querySelector(spec.selectors.ballot + ` [data-vote="${spec.keys[Number(visit.reply)]}"]`)?.click();
+    document.querySelector(spec.selectors.ballot + ` [data-vote="${spec.keys[Number(visit.from)]}"]`)?.click();
   }
   document.addEventListener('click', event => {
     if (event.target.closest('[data-vote], #subject-switch button, #retake, #report-retake')) update();

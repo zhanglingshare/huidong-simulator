@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>我的回音 · 惠东产业风洞</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#080b12;color:#e6edf3;font:14px/1.6 -apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+.nav{position:sticky;top:0;z-index:50;display:flex;gap:5px;align-items:center;padding:9px 14px;background:rgba(8,11,18,.95);border-bottom:1px solid #1b2434;backdrop-filter:blur(8px);overflow-x:auto}
+.nav b{font-size:14px;margin-right:6px;letter-spacing:.5px;flex:none;color:#fff}
+.nav a{background:#131c2b;color:#93a4bd;border:1px solid #22304a;padding:6px 12px;border-radius:20px;font-size:12.5px;text-decoration:none;white-space:nowrap;flex:none}
+.nav a.on{background:#0e7490;border-color:#0891b2;color:#fff;font-weight:600}
+.wrap{max-width:720px;margin:auto;padding:18px 16px 40px}
+h1{font-size:22px;margin:0 0 4px;letter-spacing:.4px}
+.sub{color:#8fa3bf;font-size:13px;margin:0 0 16px}
+.stats{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.stat{flex:1 1 92px;background:#0e1523;border:1px solid #1c2739;border-radius:10px;padding:10px 12px}
+.stat i{display:block;font-style:normal;font-size:10.5px;color:#7d8fa8;letter-spacing:.5px}
+.stat b{font-size:20px;font-weight:800;color:#4ade80;font-variant-numeric:tabular-nums}
+.card{background:#0e1523;border:1px solid #1c2739;border-left:3px solid #fbbf24;border-radius:10px;padding:12px 14px;margin-bottom:9px}
+.card .top{display:flex;gap:8px;align-items:baseline;justify-content:space-between}
+.card .time{font-size:11px;color:#5b6b82;flex:none;font-variant-numeric:tabular-nums}
+.card .t{font-size:13.5px;font-weight:700;line-height:1.45;margin:0 0 8px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
+.pair div{background:#0a1220;border:1px solid #1a2436;border-radius:8px;padding:7px 10px;min-width:0}
+.pair span{display:block;font-size:10.5px;color:#7d8fa8;margin-bottom:2px}
+.pair strong{display:block;font-size:13px;color:#e6edf3;overflow-wrap:anywhere}
+.pair .mine strong{color:#9df4c8}
+.pair .theirs strong{color:#fbbf24}
+.verdict{font-size:12px;color:#8fa3bf;margin:0 0 8px}
+.verdict.same{color:#4ade80}
+.acts{display:flex;gap:6px;flex-wrap:wrap}
+.acts a,.acts button{background:#13231a;border:1px solid #22c55e;color:#dcffe9;border-radius:7px;padding:5px 11px;font:inherit;font-size:12px;font-weight:650;text-decoration:none;cursor:pointer;min-height:34px;display:inline-flex;align-items:center}
+.acts button.ghost{background:#131c2b;border-color:#22304a;color:#93a4bd}
+.empty{background:#0e1523;border:1px dashed #22304a;border-radius:12px;padding:26px 18px;text-align:center;color:#8fa3bf;font-size:13px}
+.empty b{display:block;color:#e6edf3;font-size:15px;margin-bottom:6px}
+.empty a{display:inline-block;margin-top:12px;background:#0e7490;color:#fff;border-radius:8px;padding:9px 20px;text-decoration:none;font-weight:650}
+.qsum{margin:0 0 16px}
+.qsum h2{font-size:12px;color:#7d8fa8;font-weight:600;letter-spacing:.5px;margin:0 0 8px}
+.qsum h2 em{font-style:normal;font-size:10.5px;color:#5b6b82;margin-left:6px}
+.qcard{background:#0e1523;border:1px solid #1c2739;border-radius:10px;padding:11px 13px;margin-bottom:7px}
+.qhead{display:flex;justify-content:space-between;gap:10px;align-items:baseline;margin-bottom:9px}
+.qhead b{font-size:13px;line-height:1.45}
+.qhead span{font-size:11px;color:#8fa3bf;flex:none;font-variant-numeric:tabular-nums}
+.bars{display:flex;flex-direction:column;gap:7px}
+.bar{display:grid;grid-template-columns:1fr auto;gap:3px 8px;align-items:center;font-size:12px;color:#c8d4e4}
+.bar u{text-decoration:none;color:#7d8fa8;font-size:10.5px;font-variant-numeric:tabular-nums}
+.bar .track{grid-column:1/-1;height:6px;background:#101a29;border-radius:3px;overflow:hidden}
+.bar .track i{display:block;height:100%;background:#2f6b4b;border-radius:3px;transition:width .5s}
+.bar.hot .track i{background:#22c55e}
+.bar.hot span{color:#9df4c8}
+.foot{margin-top:18px;font-size:11px;color:#7d8fa8;line-height:1.7}
+.clear{margin-top:10px;background:none;border:1px solid #3b2a2a;color:#b98484;border-radius:7px;padding:6px 12px;font:inherit;font-size:12px;cursor:pointer}
+@media(max-width:360px){.pair{grid-template-columns:1fr}}
+</style>
+</head><body>
+<div class="nav">
+  <b>惠东产业风洞</b>
+  <a href="echo.html" class="on">我的回音</a>
+  <a href="index.html">① 今日话题</a>
+  <a href="town.html">🏘️ 各镇吃喝玩乐</a>
+</div>
+<div class="wrap">
+  <h1>我的回音</h1>
+  <p class="sub">你发出去的题，朋友答完又发回来的那些。只存在这台设备的浏览器里，不上传。</p>
+  <div class="stats" id="stats" hidden>
+    <div class="stat"><i>回音</i><b id="n-all">0</b></div>
+    <div class="stat"><i>朋友</i><b id="n-people">0</b></div>
+    <div class="stat"><i>选到一块</i><b id="n-same">0</b></div>
+  </div>
+  <div id="qsum" class="qsum" hidden>
+    <h2>按题看<em>只看你收到的回音，不是全网统计</em></h2>
+    <div id="qsum-body"></div>
+  </div>
+  <div id="list"></div>
+  <div class="foot" id="foot" hidden>
+    回音是一段链接，不是服务器消息：你把题发出去，朋友答完点「把这条发回去」，你打开这条链接，它才会记在这里。<br>
+    换设备、清缓存、用无痕窗口，都不会带过来。
+  </div>
+  <button class="clear" id="clear" hidden>清空这台设备上的回音</button>
+</div>
+<script>
+const KEY = 'duel:echoes';
+const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+const opts = o => Array.isArray(o) ? o : [];
+const labelOf = (entry, idx, fallback) => {
+  const n = Number(idx);
+  const text = opts(entry.o)[n];
+  return text ? String(text) : fallback;
+};
+function when(ts) {
+  const d = new Date(ts);
+  if (Number.isNaN(d.getTime())) return '';
+  const now = new Date();
+  const sameDay = d.toDateString() === now.toDateString();
+  const hh = String(d.getHours()).padStart(2, '0');
+  const mm = String(d.getMinutes()).padStart(2, '0');
+  if (sameDay) return '今天 ' + hh + ':' + mm;
+  const y = new Date(now.getTime() - 86400000);
+  if (d.toDateString() === y.toDateString()) return '昨天 ' + hh + ':' + mm;
+  return (d.getMonth() + 1) + '月' + d.getDate() + '日 ' + hh + ':' + mm;
+}
+function linkFor(e) {
+  const p = (e.p || 'index') + '.html';
+  const q = new URLSearchParams({ duel: e.d, from: e.from, reply: e.reply });
+  if (e.name) q.set('by', e.name);
+  return p + '?' + q.toString();
+}
+function groupBlocks(sorted) {
+  const groups = new Map();
+  sorted.forEach(e => {
+    const key = (e.p || 'index') + '|' + e.d;
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(e);
+  });
+  const blocks = [];
+  for (const [, items] of groups) {
+    if (items.length < 2) continue;
+    const n = items.length;
+    const same = items.filter(e => String(e.from) === String(e.reply)).length;
+    const counts = new Map();
+    items.forEach(e => { const idx = String(e.reply); counts.set(idx, (counts.get(idx) || 0) + 1); });
+    const top = [...counts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 4);
+    const max = top[0][1];
+    const title = items[0].t || '一道题';
+    const bars = top.map(([idx, c]) => {
+      const label = labelOf(items[0], idx, '选项 ' + (Number(idx) + 1));
+      const pct = Math.round(c / max * 100);
+      return `<div class="bar${c === max ? ' hot' : ''}"><span>${esc(label)}</span><u>${c} 人</u><div class="track"><i style="width:${pct}%"></i></div></div>`;
+    }).join('');
+    blocks.push(`<div class="qcard"><div class="qhead"><b>${esc(title)}</b><span>${n} 条 · 一致 ${same}</span></div><div class="bars">${bars}</div></div>`);
+  }
+  return blocks;
+}
+function render(list) {
+  const sorted = list.slice().sort((a, b) => (b.at || 0) - (a.at || 0));
+  const stats = document.getElementById('stats');
+  const foot = document.getElementById('foot');
+  const clear = document.getElementById('clear');
+  const box = document.getElementById('list');
+  const qsum = document.getElementById('qsum');
+  const qbody = document.getElementById('qsum-body');
+  if (!sorted.length) {
+    box.innerHTML = `<div class="empty"><b>还没有回音</b>把一道题发给朋友，他答完点「把这条发回去」，你打开那条链接，这里就会多一条。<a href="index.html">去出一题 →</a></div>`;
+    stats.hidden = true; foot.hidden = true; clear.hidden = true; qsum.hidden = true;
+    return;
+  }
+  const blocks = groupBlocks(sorted);
+  qbody.innerHTML = blocks.join('');
+  qsum.hidden = !blocks.length;
+  const people = new Set(sorted.map(e => e.name || '朋友')).size;
+  const same = sorted.filter(e => String(e.from) === String(e.reply)).length;
+  document.getElementById('n-all').textContent = sorted.length;
+  document.getElementById('n-people').textContent = people;
+  document.getElementById('n-same').textContent = same;
+  stats.hidden = false; foot.hidden = false; clear.hidden = false;
+  box.innerHTML = sorted.map((e, i) => {
+    const who = e.name || '朋友';
+    const mine = labelOf(e, e.from, '选项 ' + (Number(e.from) + 1));
+    const theirs = labelOf(e, e.reply, '选项 ' + (Number(e.reply) + 1));
+    const equal = String(e.from) === String(e.reply);
+    return `<div class="card" data-i="${i}">
+      <div class="top"><p class="t">${e.t ? esc(e.t) : '一道题'}</p><span class="time">${when(e.at)}</span></div>
+      <div class="pair">
+        <div class="mine"><span>你选的</span><strong>${esc(mine)}</strong></div>
+        <div class="theirs"><span>${esc(who)} 选的</span><strong>${esc(theirs)}</strong></div>
+      </div>
+      <p class="verdict${equal ? ' same' : ''}">${esc(who)} ${equal ? '和你选到了一块。' : '和你选得不一样。'}</p>
+      <div class="acts">
+        <a href="${linkFor(e)}">重看这次对照 →</a>
+        <button class="ghost" data-del="${e.k}">删掉这条</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+function load() {
+  try { render(JSON.parse(localStorage.getItem(KEY) || '[]')); }
+  catch { render([]); }
+}
+document.getElementById('clear').addEventListener('click', () => {
+  if (!confirm('清空这台设备上的全部回音？此操作不可恢复。')) return;
+  localStorage.removeItem(KEY);
+  load();
+});
+document.getElementById('list').addEventListener('click', ev => {
+  const btn = ev.target.closest('[data-del]');
+  if (!btn) return;
+  const key = btn.dataset.del;
+  try {
+    const list = JSON.parse(localStorage.getItem(KEY) || '[]').filter(e => e.k !== key);
+    localStorage.setItem(KEY, JSON.stringify(list));
+  } catch {}
+  load();
+});
+load();
+</script>
+</body></html>

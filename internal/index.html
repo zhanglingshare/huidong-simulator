@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="data:,">
+<title>惠东产业风洞 · 内部版</title>
+<link rel="stylesheet" href="lab.css">
+</head>
+<body>
+<div class="ambient ambient1"></div><div class="ambient ambient2"></div><div class="ambient ambient3"></div>
+
+<div class="app">
+  <div class="topbar">
+    <a class="identity" href="#home"><span class="logo">惠<span>◈</span></span>
+      <span><b>惠东产业风洞 · 内部版</b><small>HUIDONG DECISION WIND TUNNEL · INTERNAL</small></span></a>
+    <div class="topright">
+      <span class="sourcechip"><i></i>数据分级：A 公报 · B 核算 · C 校准</span>
+      <span class="livechip" id="clock">--</span>
+    </div>
+  </div>
+
+  <div class="layout">
+    <nav class="sidebar">
+      <div class="navgroup">研究工作区</div>
+      <button data-page="home" class="navitem active"><span>◈</span><span><strong>00</strong> 研究总览</span></button>
+      <button data-page="mission" class="navitem"><span>◎</span><span><strong>01</strong> 研究任务</span></button>
+      <button data-page="data" class="navitem"><span>▤</span><span><strong>02</strong> 数据中心</span></button>
+      <button data-page="survey" class="navitem"><span>◉</span><span><strong>03</strong> 社会调查</span></button>
+      <button data-page="models" class="navitem"><span>⌁</span><span><strong>04</strong> 多模型实验室</span></button>
+      <button data-page="wind" class="navitem"><span>◭</span><span><strong>05</strong> 情景风洞</span></button>
+      <button data-page="archive" class="navitem"><span>◷</span><span><strong>06</strong> 研究档案</span></button>
+      <div class="sidefoot">
+        <strong>版本纪律</strong>
+        <p>内部版：给发改局的决策辅助。<br>真实数据标血统，模拟内容只给范围。2032 三产 1:5:4 是结构罗盘，不是考核紧箍咒。</p>
+      </div>
+    </nav>
+
+    <main class="maincol">
+      <div class="mobile-nav">
+        <button data-page="home" class="active">总览</button><button data-page="mission">任务</button>
+        <button data-page="data">数据</button><button data-page="survey">调查</button>
+        <button data-page="models">模型</button><button data-page="wind">风洞</button>
+        <button data-page="archive">档案</button>
+      </div>
+
+      <!-- ════════ 00 研究总览 ════════ -->
+      <section class="stage" data-stage="home">
+        <div class="pagehead">
+          <div><span class="eyebrow">00 · 研究总览</span>
+            <h1>本季最值得上会的一件事</h1>
+            <p>发改局看的是全县：这一轮项目落下去，惠东到 2032 年会长成什么结构？现在还来得及补哪一环？</p></div>
+          <span class="tag">本期议题 · 2026 Q4</span>
+        </div>
+
+        <div class="hero">
+          <div class="hero-panel">
+            <span class="eyebrow">首要判断 · FIRST CALL</span>
+            <h2>核电并网了，<strong>钱要留得下来</strong></h2>
+            <p>太平岭 1 号机 2026 年 2 月并网，能源产值进入放量期。但能源大投资的产值有过路成分——检测、设计、设备维护大量出县。下一季先把本地配套服务网络的组织工作做起来，比再办一场招商推介更划算。</p>
+            <div class="actions">
+              <button class="primary" data-jump="mission">凭什么这样判断？</button>
+              <button class="ghost" data-jump="models">如果你判断错了呢？</button>
+            </div>
+          </div>
+          <div class="panel" id="deskPanel">
+            <h3>今日桌面 · 三副面孔</h3>
+            <div id="deskCards"></div>
+          </div>
+        </div>
+
+        <div class="stats" id="homeStats"></div>
+
+        <div class="grid2">
+          <div class="card">
+            <h3>最可能推翻这条判断的证据</h3>
+            <div id="counterEvidence"></div>
+          </div>
+          <div class="card">
+            <h3>一个月内要看到的信号</h3>
+            <div id="earlySignals"></div>
+          </div>
+        </div>
+        <div class="footnote">血统纪律：A 级结构数据支撑判断方向；过路比例等微观数字为 C 级校准假设，只用于排出行动顺序，不用于折算 GDP。</div>
+      </section>
+
+      <!-- ════════ 01 研究任务 ════════ -->
+      <section class="stage" data-stage="mission" hidden>
+        <div class="pagehead">
+          <div><span class="eyebrow">01 · 研究任务</span>
+            <h1>下一季只有一支协调队，先干哪件？</h1>
+            <p>三个选项都值得做，但资源有限。让承办人员带着选择上会，而不是带着「研究一下」上会。</p></div>
+          <span class="tag">决策期限 · 2026 Q4 上会</span>
+        </div>
+        <div class="grid3" id="missionCards"></div>
+        <div class="card gap">
+          <h3>维持现状的代价</h3>
+          <p class="small muted">三个选项都不做：检测订单继续外流（留存率不动）、渔排保险继续裸奔（下一个台风季损失照旧）、女鞋订单继续下探（就业底盘漏得更快）。推迟一个季度，最便宜的是 A，最贵的是 C。</p>
+        </div>
+        <div class="footnote">上会口径：谁有权限推动、现在有哪两三个选项、推迟一个季度会失去什么——三句话讲完，不留开放式议题。</div>
+      </section>
+
+      <!-- ════════ 02 数据中心 ════════ -->
+      <section class="stage" data-stage="data" hidden>
+        <div class="pagehead">
+          <div><span class="eyebrow">02 · 数据中心</span>
+            <h1>先看家底，再谈未来</h1>
+            <p>2020–2025 为真实公开数据（A/B 级）；七县区 2025 为官方公报（A 级）。口径不同处明确标注。</p></div>
+        </div>
+        <div class="stats" id="dataStats"></div>
+        <div class="grid2">
+          <div class="card">
+            <h3>GDP 与增速（2020–2025）</h3>
+            <div class="chartwrap"><svg id="gdpChart" class="linechart" viewBox="0 0 640 300" preserveAspectRatio="xMidYMid meet"></svg></div>
+            <div class="chartkey"><span><b style="background:#6ce0f1"></b>GDP（亿元，左轴）</span><span><b style="background:#ffbe6d"></b>增速（%，右轴）</span></div>
+          </div>
+          <div class="card">
+            <h3>三产结构（2020–2025）</h3>
+            <div class="chartwrap"><svg id="structChart" class="linechart" viewBox="0 0 640 300" preserveAspectRatio="xMidYMid meet"></svg></div>
+            <div class="chartkey"><span><b style="background:#64dcbb"></b>一产</span><span><b style="background:#4e9ef9"></b>二产</span><span><b style="background:#eab475"></b>三产</span></div>
+          </div>
+        </div>
+        <div class="card gap">
+          <h3>惠州七县区 2025（官方公报）</h3>
+          <div class="chartwrap"><svg id="regionChart" class="linechart" viewBox="0 0 640 320" preserveAspectRatio="xMidYMid meet"></svg></div>
+          <p class="footnote" id="caliberNote"></p>
+        </div>
+        <div class="card gap">
+          <h3>关键事件台账</h3>
+          <div id="eventTable"></div>
+        </div>
+      </section>
+
+      <!-- ════════ 03 社会调查 ════════ -->
+      <section class="stage" data-stage="survey" hidden>
+        <div class="pagehead">
+          <div><span class="eyebrow">03 · 社会调查</span>
+            <h1>下午只有两小时，该给谁打电话？</h1>
+            <p>三通电话，三个最有辨别力的问题。每一通都可能改变「先补配套还是先固底盘」的答案。</p></div>
+          <span class="tag">OSINT 驱动 · 问卷 N=800 模拟 C</span>
+        </div>
+        <div class="grid3" id="callCards"></div>
+        <div class="card gap">
+          <h3>问卷管线状态</h3>
+          <div class="duo">
+            <div>
+              <div class="metric-line"><span>样本</span><b>N=800 · 模拟问卷</b></div>
+              <div class="metric-line"><span>血统</span><b>C 级 · 结构关系可用</b></div>
+              <div class="metric-line"><span>方法</span><b>OSINT 信号驱动 + 校准</b></div>
+            </div>
+            <div>
+              <div class="metric-line"><span>用途</span><b>排行动顺序，不折算 GDP</b></div>
+              <div class="metric-line"><span>接口就绪</span><b>真实问卷数据可直接替换</b></div>
+              <div class="metric-line"><span>下一批</span><b>发改局真实访谈回填</b></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════ 04 多模型实验室 ════════ -->
+      <section class="stage" data-stage="models" hidden>
+        <div class="pagehead">
+          <div><span class="eyebrow">04 · 多模型实验室</span>
+            <h1>同一组事实，两种解释，两套动作</h1>
+            <p>切换解释，看传导路径、证据与反例如何跟着变。别让一套模型垄断你的会议。</p></div>
+        </div>
+        <div class="view-tabs" id="hypoTabs"></div>
+        <div class="grid2">
+          <div class="card"><h3>传导路径</h3><div id="hypoPath"></div></div>
+          <div class="card"><h3>证据与反例</h3><div id="hypoEvidence"></div></div>
+        </div>
+        <div class="card gap"><h3>这个解释指向的行动</h3><div id="hypoAction"></div></div>
+      </section>
+
+      <!-- ════════ 05 情景风洞 ════════ -->
+      <section class="stage" data-stage="wind" hidden>
+        <div class="pagehead">
+          <div><span class="eyebrow">05 · 情景风洞</span>
+            <h1>条件变了，结论跟着变吗？</h1>
+            <p>2030 年总量区间对照 1200 亿目标线；再把台风、订单、价格的压力都吹一遍。</p></div>
+        </div>
+        <div class="view-tabs" id="scenTabs"></div>
+        <div class="stats" id="windStats"></div>
+        <div class="grid2">
+          <div class="card">
+            <h3>2030 总量区间（p10–p90）</h3>
+            <div class="chartwrap"><svg id="fanChart" class="linechart" viewBox="0 0 640 200" preserveAspectRatio="xMidYMid meet"></svg></div>
+          </div>
+          <div class="card">
+            <h3>参数敏感性（±20% 摆动）</h3>
+            <div class="tornado" id="tornadoChart"></div>
+          </div>
+        </div>
+        <div class="card gap">
+          <h3>台风「红霞」恢复曲线</h3>
+          <div class="chartwrap"><svg id="recoverChart" class="linechart" viewBox="0 0 640 220" preserveAspectRatio="xMidYMid meet"></svg></div>
+          <p class="footnote">损失结构：旅游 2.3 亿 · 渔业 4.0 亿 · 能源 0（B 级报道核算）；恢复曲线为 C 级模拟。</p>
+        </div>
+        <div class="card gap">
+          <h3>行动跟踪 · 明天能做什么</h3>
+          <div id="actionPlan"></div>
+        </div>
+      </section>
+
+      <!-- ════════ 06 研究档案 ════════ -->
+      <section class="stage" data-stage="archive" hidden>
+        <div class="pagehead">
+          <div><span class="eyebrow">06 · 研究档案</span>
+            <h1>判断账本：写下它，回来看它</h1>
+            <p>预注册你的判断——倾向、理由、预期先出现的信号、哪天回看。到期开奖：方向对了吗？机制对了吗？</p></div>
+          <span class="tag">本地保存 · 不上传</span>
+        </div>
+        <div class="card">
+          <h3>写一条新判断</h3>
+          <div class="formfield"><label>我的判断（一句话）</label><input type="text" id="judgeText" placeholder="例：能源配套订单先本地化，2027 年检测本地采购率超过 30%"></div>
+          <div class="duo">
+            <div class="formfield"><label>理由（当时为什么这么想）</label><input type="text" id="judgeWhy" placeholder="例：客户访谈显示检测出县主因是本地无资质"></div>
+            <div class="formfield"><label>回看日期</label><input type="text" id="judgeDate" placeholder="例：2027-06-01"></div>
+          </div>
+          <div class="actions"><button class="primary" id="saveJudge">预付 · 写入账本</button></div>
+        </div>
+        <div class="card gap">
+          <h3>账本（按回看日期排序）</h3>
+          <div id="ledgerList"></div>
+        </div>
+        <div class="card gap">
+          <h3>开奖口径 · 四种结果</h3>
+          <div class="logic">
+            <div><b>方向✓<br>机制✓</b><span>看准了</span></div>
+            <div><b>方向✓<br>机制✗</b><span>猜对结果，猜错原因——最值得复盘</span></div>
+            <div><b>方向✗</b><span>判断失误，记下被什么骗了</span></div>
+            <div><b>无法裁定</b><span>材料不足，允许「证据仍不足」</span></div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <span>惠东产业风洞 · 内部版 internal-2026-11</span>
+        <span>真实数据标血统 · 模拟内容只给范围 · 2032 三产 1:5:4 是罗盘不是紧箍咒</span>
+      </footer>
+    </main>
+  </div>
+</div>
+
+<script src="data.js"></script>
+<script src="lab.js"></script>
+</body>
+</html>

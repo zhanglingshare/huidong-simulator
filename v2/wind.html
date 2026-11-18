@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<link rel="icon" href="data:,">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>惠东产业风洞 · 风洞实验</title>
+<link rel="stylesheet" href="assets/app.css">
+<script src="lib/echarts.min.js"></script>
+<style>
+.scen-row{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 6px}
+.scen-btn{flex:1 1 140px;background:var(--surface2);border:1px solid var(--border2);border-radius:12px;
+  padding:12px 14px;cursor:pointer;color:var(--muted);text-align:left;transition:.15s}
+.scen-btn .n{font-size:13.5px;font-weight:700;color:var(--text);margin-bottom:3px}
+.scen-btn .d{font-size:11px;line-height:1.6}
+.scen-btn.on{border-color:var(--cyan2);background:#0c2630;color:#e6edf3}
+.scen-btn.on .n{color:var(--cyan)}
+.scen-btn .hit{margin-top:6px;font-size:11px;color:var(--gold);font-weight:700}
+.goal-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:4px}
+@media(max-width:700px){.goal-row{grid-template-columns:1fr}}
+.goal-card{background:var(--surface2);border:1px solid var(--border2);border-radius:12px;padding:13px 15px}
+.goal-card .g{font-size:11.5px;color:var(--muted);margin-bottom:6px}
+.goal-card .v{font-size:19px;font-weight:800;color:var(--gold);font-variant-numeric:tabular-nums}
+.goal-card .s{font-size:11px;color:var(--faint);margin-top:4px;line-height:1.6}
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <span class="brand">惠东产业风洞</span>
+  <a href="index.html">总览</a>
+  <a href="reality.html">现实底座</a>
+  <a href="region.html">区域比较</a>
+  <a href="history.html">历史诊断</a>
+  <a href="theory.html">机制框架</a>
+  <a href="network.html">网络结构</a>
+  <a href="models.html">路径研判</a>
+  <a href="measurement.html">调研佐证</a>
+  <a href="scenarios.html">情景推演</a>
+  <a href="wind.html" class="on">风洞实验</a>
+  <a href="typhoon.html">台风沙盘</a>
+  <a href="decision.html">决策解释</a>
+</div>
+
+<div class="wrap">
+
+  <div class="demo-banner">
+    <span>●</span>
+    <span><b>实验面板</b>：情景参数为校准假设（C 级）。这里玩的是「条件变了，结论怎么变」，不是预测 2030 年惠东 GDP。</span>
+  </div>
+
+  <div class="hero">
+    <div class="kick">HUIDONG WIND TUNNEL · LAB</div>
+    <h1>亲手拨动<span class="accent">惠东的变量</span></h1>
+    <p class="sub">选一组条件，看 2030 年总量区间与「1200 亿」命中率怎么移动。<br>再反过来问：要够到目标，哪条路必须先吃下最重的担子？</p>
+  </div>
+
+  <div class="section-title">第一步：选情景</div>
+  <div class="scen-row" id="scenRow"></div>
+
+  <div class="grid grid-2">
+    <div class="card">
+      <h2 id="fanTitle">2030 总量区间</h2>
+      <div class="cap">横线=p10–p90 · 圆点=p50 · 虚线=1200 亿目标线</div>
+      <div id="cFan" class="chart tall"></div>
+      <p class="takeaway" id="fanNote"></p>
+    </div>
+    <div class="card">
+      <h2>第二步：看谁的摆动最大</h2>
+      <div class="cap">各路径 ±20% 时，2030 总量的摆动幅度（亿元）</div>
+      <div id="cTornado" class="chart tall"></div>
+      <p class="takeaway"><span class="mk">解读</span>能源是最粗的操纵杆（±60 亿），农渔最细（±12 亿）。把协调资源押在摆动最大的变量上，收益最大，翻车也最大。</p>
+    </div>
+  </div>
+
+  <div class="section-title">第三步：从目标倒推</div>
+  <div class="card">
+    <h2>要够到 1200 亿，各条路分别需要什么</h2>
+    <div class="cap">倒推逻辑：固定其他路径按基准，只看这一条路要多强才能让 p50 站上 1200</div>
+    <div class="goal-row" id="goalRow"></div>
+  </div>
+
+  <div class="crosslink-row right">
+    <a class="crosslink" href="scenarios.html">← 情景推演</a>
+    <a class="crosslink" href="typhoon.html">台风沙盘 <span class="arrow">→</span></a>
+  </div>
+
+</div>
+
+<script src="data/payload.js"></script>
+<script>
+const AXIS = {
+  axisLabel:{color:'#93a4bd',fontSize:11},
+  axisLine:{lineStyle:{color:'#22304a'}},
+  splitLine:{lineStyle:{color:'#16202f'}}
+};
+
+function load(){fetch('data/payload.json').then(r=>r.json()).then(render).catch(()=>render(window.__EMBEDDED_PAYLOAD__));}
+
+function render(d){
+  const S = d.scenarios.list;
+  const T = d.scenarios.tornado;
+  const target = d.scenarios.target;
+  let cur = S[0];
+
+  const notes = {
+    base:'基准情景：各路径按校准节奏走，p50 1212 亿、命中率 56.8%——过线，但靠的是「刚刚好」，不是「稳」。',
+    energy:'能源提速：核电并网放量+风电 LME 扩产，p50 抬到 1268 亿、命中率 72%——总量最肥的一条路，但本地留存率取决于配套服务网络，产值里有「过路成分」。',
+    shoe:'女鞋承压：订单持续外移、用工收缩，p50 掉到 1175 亿、命中率 38%——总量尚可，就业饭碗的底盘在漏。',
+    storm:'台风叠加：再来一次红霞级台风，p50 1150 亿、命中率 31%——旅游与渔业双杀，能源无恙但独木难支。'
+  };
+
+  const scenRow = document.getElementById('scenRow');
+  scenRow.innerHTML = S.map(s=>`
+    <button class="scen-btn ${s.id===cur.id?'on':''}" data-id="${s.id}">
+      <div class="n">${s.name}</div>
+      <div class="d">p50 ${s.p50} · 区间 ${s.p10}–${s.p90}</div>
+      <div class="hit">命中 1200：${s.hit}%</div>
+    </button>`).join('');
+  scenRow.addEventListener('click', e=>{
+    const btn = e.target.closest('[data-id]');
+    if(!btn) return;
+    cur = S.find(s=>s.id===btn.dataset.id);
+    scenRow.querySelectorAll('.scen-btn').forEach(b=>b.classList.toggle('on', b.dataset.id===cur.id));
+    drawFan(); drawGoal();
+    document.getElementById('fanNote').innerHTML = `<span class="mk">解读</span>${notes[cur.id]}`;
+  });
+
+  let fanChart, torChart;
+  function drawFan(){
+    fanChart = echarts.getInstanceByDom(document.getElementById('cFan')) || echarts.init(document.getElementById('cFan'));
+    document.getElementById('fanTitle').textContent = `情景：${cur.name}`;
+    fanChart.setOption({
+      backgroundColor:'transparent', animation:false,
+      grid:{left:60,right:30,top:40,bottom:30},
+      tooltip:{backgroundColor:'#0e1523',borderColor:'#22304a',textStyle:{color:'#e6edf3'},
+        formatter:()=>`${cur.name}<br/>p50 ${cur.p50} 亿<br/>区间 ${cur.p10}–${cur.p90}<br/>命中率 ${cur.hit}%`},
+      xAxis:{type:'value',...AXIS,min:1000,max:1400},
+      yAxis:{type:'category',data:[cur.name],...AXIS},
+      series:[
+        {type:'custom',
+         renderItem:(_,api)=>{
+           const y=api.coord([cur.p10,0])[1];
+           const x0=api.coord([cur.p10,0])[0], x1=api.coord([cur.p90,0])[0], xm=api.coord([cur.p50,0])[0];
+           const xt=api.coord([target,0])[0];
+           return {type:'group',children:[
+             {type:'line',shape:{x1:x0,y1:y,x2:x1,y2:y},style:{stroke:'rgba(34,211,238,.5)',lineWidth:8,lineCap:'round'}},
+             {type:'line',shape:{x1:xt,y1:y-16,x2:xt,y2:y+16},style:{stroke:'#fbbf24',lineWidth:2,lineDash:[4,3]}},
+             {type:'circle',shape:{cx:xm,cy:y,r:6},style:{fill:'#fbbf24'}},
+             {type:'text',style:{text:`1200 目标`,x:xt-10,y:y-24,fill:'#fbbf24',font:'11px sans-serif'}}
+           ]};},
+         data:[cur.name]}
+      ]
+    });
+    torChart = echarts.getInstanceByDom(document.getElementById('cTornado')) || echarts.init(document.getElementById('cTornado'));
+    const t = T.slice().sort((a,b)=>Math.abs(a.lo)-Math.abs(b.lo));
+    torChart.setOption({
+      backgroundColor:'transparent', animation:false,
+      grid:{left:110,right:40,top:14,bottom:28},
+      tooltip:{backgroundColor:'#0e1523',borderColor:'#22304a',textStyle:{color:'#e6edf3'},
+        formatter:p=>`${t[p.dataIndex].var}<br/>波动：${t[p.dataIndex].lo} ~ +${t[p.dataIndex].hi} 亿`},
+      xAxis:{type:'value',...AXIS},
+      yAxis:{type:'category',data:t.map(x=>x.var),...AXIS},
+      series:[{
+        type:'custom',
+        renderItem:(_,api)=>{
+          const y=api.coord([0,api.value(0)])[1];
+          const x0=api.coord([api.value(1),api.value(0)])[0];
+          const x1=api.coord([api.value(2),api.value(0)])[0];
+          return {type:'rect',shape:{x:Math.min(x0,x1),y:y-7,width:Math.abs(x1-x0),height:14},
+            style:{fill:api.value(2)>=Math.abs(api.value(1)) ? '#22d3ee' : '#0891b2'}};
+        },
+        encode:{x:[1,2],y:0},
+        data:t.map(x=>[x.var,x.lo,x.hi])
+      }]
+    });
+  }
+
+  function drawGoal(){
+    const goals = [
+      {g:'能源路径需要', v:'+18%', s:'基准 118 亿 → 约 139 亿。对应核电并网放量且风电按计划扩建——最现实的路径，但本地留存另算。', ok:true},
+      {g:'女鞋路径需要', v:'+25%', s:'基准 96 亿 → 约 120 亿。订单稳住且附加值上移，难度不小；但就算做到，就业结构改善有限。', ok:false},
+      {g:'旅游+农渔需要', v:'+20%', s:'两线合计抬约 26 亿。靠人次与客单价双升，台风年里不可持续，最脆的一条。', ok:false}
+    ];
+    document.getElementById('goalRow').innerHTML = goals.map(g=>`
+      <div class="goal-card"><div class="g">${g.g}</div><div class="v" style="color:${g.ok?'#34d399':'#fbbf24'}">${g.v}</div><div class="s">${g.s}</div></div>`).join('');
+  }
+
+  drawFan(); drawGoal();
+  window.addEventListener('resize',()=>document.querySelectorAll('.chart').forEach(el=>{const i=echarts.getInstanceByDom(el);if(i)i.resize();}));
+}
+
+load();
+</script>
+</body>
+</html>

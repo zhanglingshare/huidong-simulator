@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<link rel="icon" href="data:,">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>惠东产业风洞 · 区域比较</title>
+<link rel="stylesheet" href="assets/app.css">
+<script src="lib/echarts.min.js"></script>
+</head>
+<body>
+
+<div class="nav">
+  <span class="brand">惠东产业风洞</span>
+  <a href="index.html">总览</a>
+  <a href="reality.html">现实底座</a>
+  <a href="region.html" class="on">区域比较</a>
+  <a href="history.html">历史诊断</a>
+  <a href="theory.html">机制框架</a>
+  <a href="network.html">网络结构</a>
+  <a href="models.html">路径研判</a>
+  <a href="measurement.html">调研佐证</a>
+  <a href="scenarios.html">情景推演</a>
+  <a href="wind.html">风洞实验</a>
+  <a href="typhoon.html">台风沙盘</a>
+  <a href="decision.html">决策解释</a>
+</div>
+
+<div class="wrap">
+
+  <div class="demo-banner">
+    <span>●</span>
+    <span><b>全部为官方公报数据</b>：惠州七县区 2025 年地区生产总值统一核算结果，来源为各县区政府门户与统计局公报（A 级）。</span>
+  </div>
+
+  <div class="hero">
+    <div class="kick">HUIDONG IN HUIZHOU · V2</div>
+    <h1>把惠东放回<span class="accent">惠州棋盘</span></h1>
+    <p class="sub">七县区 2025 年家底并排看：惠东总量第几、结构像谁、速度处在什么位置。<br>比较的目的不是排名，是看清自己手里是什么牌。</p>
+  </div>
+
+  <div class="grid grid-4" id="kpis"></div>
+
+  <div class="section-title">总量与增速</div>
+  <div class="card">
+    <h2>七县区 2025 GDP 与增速</h2>
+    <div class="cap">柱=GDP（亿元）· 点=不变价增速（%，右轴）· 数据来自各县区统计公报</div>
+    <div id="cGdp" class="chart tall"></div>
+    <p class="takeaway"><span class="mk">解读</span>总量上惠东第 5（861 亿），卡在千亿三强与龙门之间；增速 4.0% 属于中游——真正有辨识度的位置在结构那一栏。</p>
+  </div>
+
+  <div class="section-title">结构才是分水岭</div>
+  <div class="card">
+    <h2>三产结构并排（2025）</h2>
+    <div class="cap">按一、二、三产占比堆叠 · 惠东是唯一的「服务型县域」</div>
+    <div id="cStruct" class="chart tall"></div>
+    <p class="takeaway"><span class="mk">解读</span>仲恺、大亚湾是「二产高地」（70% 上下），惠城、惠东、龙门靠服务业主导（50% 以上）；博罗二产 54.6% 但一产仍占 10.7%。惠东 53% 的服务业占比，在全市仅次于惠城。</p>
+  </div>
+
+  <div class="section-title">增速 × 规模散点</div>
+  <div class="grid grid-2">
+    <div class="card">
+      <h2>谁在快跑，谁在换挡</h2>
+      <div class="cap">横轴=GDP 规模 · 纵轴=2025 增速 · 气泡=服务业占比</div>
+      <div id="cScatter" class="chart tall"></div>
+      <p class="takeaway"><span class="mk">解读</span>右上角是「又大又快」（博罗千亿+5.5%）；大亚湾 2025 年几乎零增长，是石化检修与价格下行的双重冲击——单一支柱的代价在图表上很直白。</p>
+    </div>
+    <div class="card">
+      <h2>惠东的位置读法</h2>
+      <div id="reads"></div>
+    </div>
+  </div>
+
+  <div class="crosslink-row right">
+    <a class="crosslink" href="reality.html">← 现实底座</a>
+    <a class="crosslink" href="scenarios.html">情景推演 <span class="arrow">→</span></a>
+  </div>
+
+  <div class="plain" style="margin-top:18px">
+    <span class="lab">口径说明</span>
+    2025 年数据为初步核算数；惠城、博罗、龙门等县区历史数据已按第五次全国经济普查结果修订。
+    总量按现价计算，增速按不变价格计算——两者放在一起时，读的是「规模位置 + 物量速度」，不做直接乘除。
+  </div>
+
+</div>
+
+<script>
+const AXIS = {
+  axisLabel:{color:'#93a4bd',fontSize:11},
+  axisLine:{lineStyle:{color:'#22304a'}},
+  splitLine:{lineStyle:{color:'#16202f'}}
+};
+
+const R = [
+  {name:'惠城区', gdp:1203.33, g:4.3, p1:3.4, p2:27.6, p3:69.0, kind:'中心区'},
+  {name:'仲恺高新区', gdp:1160.39, g:7.1, p1:1.0, p2:70.5, p3:28.5, kind:'园区'},
+  {name:'大亚湾开发区', gdp:1037.58, g:2.3, p1:0.1, p2:71.8, p3:28.1, kind:'园区'},
+  {name:'博罗县', gdp:1005.45, g:5.5, p1:10.7, p2:54.6, p3:34.7, kind:'县'},
+  {name:'惠东县', gdp:861.25, g:4.0, p1:11.5, p2:35.5, p3:53.0, kind:'县'},
+  {name:'龙门县', gdp:217.62, g:7.4, p1:20.4, p2:29.0, p3:50.5, kind:'县'}
+];
+
+function render(){
+  const sorted = R.slice().sort((a,b)=>b.gdp-a.gdp);
+  document.getElementById('kpis').innerHTML = [
+    {lab:'GDP 排名', val:5, unit:'/ 6', cls:'', note:'861.25 亿'},
+    {lab:'增速排名', val:5, unit:'/ 6', cls:'gold', note:'4.0% · 中游'},
+    {lab:'服务业占比', val:2, unit:'/ 6', cls:'green', note:'53.0% · 仅次惠城'},
+    {lab:'结构标签', val:'服务型', unit:'县域', cls:'pink', note:'三产主导'}
+  ].map(k=>`<div class="kpi ${k.cls}"><div class="lab">${k.lab}</div><div class="val">${k.val}<span class="unit">${k.unit}</span></div><div class="delta">${k.note}</div></div>`).join('');
+
+  const baseGrid={left:60,right:50,top:34,bottom:30};
+  const catX={type:'category',data:sorted.map(r=>r.name),...AXIS,axisTick:{show:false}};
+
+  echarts.init(document.getElementById('cGdp')).setOption({
+    backgroundColor:'transparent', animation:false, grid:baseGrid,
+    tooltip:{trigger:'axis',backgroundColor:'#0e1523',borderColor:'#22304a',textStyle:{color:'#e6edf3'}},
+    xAxis:catX,
+    yAxis:[
+      {type:'value',name:'亿元',nameTextStyle:{color:'#64748b'},...AXIS},
+      {type:'value',name:'%',nameTextStyle:{color:'#64748b'},...AXIS,splitLine:{show:false}}
+    ],
+    series:[
+      {name:'GDP',type:'bar',data:sorted.map(r=>({value:r.gdp,itemStyle:{color:r.name==='惠东县'?'#fbbf24':new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'#0e7490'},{offset:1,color:'#0891b2'}])}})),barWidth:'52%',borderRadius:[5,5,0,0],
+        label:{show:true,position:'top',color:'#93a4bd',fontSize:10.5}},
+      {name:'增速',type:'line',yAxisIndex:1,data:sorted.map(r=>r.g),smooth:true,symbolSize:8,
+        lineStyle:{color:'#fbbf24',width:2.5},itemStyle:{color:'#fbbf24'}}
+    ]
+  });
+
+  echarts.init(document.getElementById('cStruct')).setOption({
+    backgroundColor:'transparent', animation:false,
+    grid:{left:60,right:40,top:30,bottom:28},
+    tooltip:{trigger:'axis',backgroundColor:'#0e1523',borderColor:'#22304a',textStyle:{color:'#e6edf3'},
+      formatter:p=>{const r=sorted[p[0].dataIndex];return `${r.name}<br/>一产 ${r.p1}% · 二产 ${r.p2}% · 三产 ${r.p3}%`;}},
+    xAxis:{type:'value',max:100,...AXIS},
+    yAxis:{type:'category',data:sorted.map(r=>r.name),...AXIS},
+    series:[
+      {name:'一产',type:'bar',stack:'s',data:sorted.map(r=>r.p1),barWidth:'46%',itemStyle:{color:'#34d399'}},
+      {name:'二产',type:'bar',stack:'s',data:sorted.map(r=>r.p2),itemStyle:{color:'#0891b2'}},
+      {name:'三产',type:'bar',stack:'s',data:sorted.map(r=>r.p3),itemStyle:{color:'#fbbf24'},
+        label:{show:true,position:'right',color:'#fbbf24',fontSize:10.5,formatter:p=>p.value.toFixed(1)+'%'}}
+    ],
+    legend:{textStyle:{color:'#93a4bd'},top:0}
+  });
+
+  echarts.init(document.getElementById('cScatter')).setOption({
+    backgroundColor:'transparent', animation:false,
+    grid:{left:50,right:30,top:30,bottom:36},
+    tooltip:{backgroundColor:'#0e1523',borderColor:'#22304a',textStyle:{color:'#e6edf3'},
+      formatter:p=>{const r=R[p.dataIndex];return `${r.name}<br/>GDP ${r.gdp} 亿 · 增速 ${r.g}%<br/>服务业占比 ${r.p3}%`;}},
+    xAxis:{type:'value',name:'GDP(亿)',nameTextStyle:{color:'#64748b'},...AXIS},
+    yAxis:{type:'value',name:'增速(%)',nameTextStyle:{color:'#64748b'},...AXIS},
+    series:[{
+      type:'scatter', data:R.map(r=>({value:[r.gdp,r.g,r.p3],name:r.name})),
+      symbolSize:d=>d[2]/2.6,
+      itemStyle:{color:p=>p.data.name==='惠东县'?'#fbbf24':'rgba(34,211,238,.72)'},
+      label:{show:true,position:'top',color:'#c8d4e4',fontSize:10.5}
+    }]
+  });
+
+  const reads=[
+    {t:'总量第 5，但结构是全市稀缺品', b:'服务业 53% 且二产仅 35.5%——惠州产业版图里，惠东是唯一「低二产+高三产」的县。服务型县域的玩法与园区型、制造型都不同：比的不是产值堆量，是每亿元产值的本地留存与就业。'},
+    {t:'速度中游，但有结构动能', b:'4.0% 的增速不亮眼，但能源、文旅、农渔三条线都不依赖单一价格周期——对照大亚湾 2025 年因石化周期几乎零增长，惠东的「多线并进」本身就是韧性资产。'},
+    {t:'真正的对标物不在惠州', b:'服务业主导+滨海资源+能源基地的组合，对标的是深圳大鹏、珠海金湾这类「滨海功能县区」，而不是博罗式的制造大县。比较框架选错，结论就会错。'}
+  ];
+  document.getElementById('reads').innerHTML = reads.map(r=>`
+    <div style="padding:10px 0;border-bottom:1px dashed #1c2739">
+      <div style="font-size:13.5px;font-weight:700;color:#e6edf3;margin-bottom:5px">${r.t}</div>
+      <div style="font-size:12.5px;color:#93a4bd;line-height:1.8">${r.b}</div>
+    </div>`).join('');
+
+  window.addEventListener('resize',()=>document.querySelectorAll('.chart').forEach(el=>{const i=echarts.getInstanceByDom(el);if(i)i.resize();}));
+}
+
+render();
+</script>
+</body>
+</html>

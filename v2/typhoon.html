@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<link rel="icon" href="data:,">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>惠东产业风洞 · 台风沙盘</title>
+<link rel="stylesheet" href="assets/app.css">
+<script src="lib/echarts.min.js"></script>
+</head>
+<body>
+
+<div class="nav">
+  <span class="brand">惠东产业风洞</span>
+  <a href="index.html">总览</a>
+  <a href="reality.html">现实底座</a>
+  <a href="region.html">区域比较</a>
+  <a href="history.html">历史诊断</a>
+  <a href="theory.html">机制框架</a>
+  <a href="network.html">网络结构</a>
+  <a href="models.html">路径研判</a>
+  <a href="measurement.html">调研佐证</a>
+  <a href="scenarios.html">情景推演</a>
+  <a href="wind.html">风洞实验</a>
+  <a href="typhoon.html" class="on">台风沙盘</a>
+  <a href="decision.html">决策解释</a>
+</div>
+
+<div class="wrap">
+
+  <div class="demo-banner">
+    <span>●</span>
+    <span><b>事件为真实、损失为估算</b>：「红霞」2026-07-26 平海登陆 14 级；损失 6.3 亿为公开报道口径（B），恢复曲线为校准模拟（C）。</span>
+  </div>
+
+  <div class="hero">
+    <div class="kick">TYPHOON HONGXIA · 2026-07-26</div>
+    <h1>14 级风穿过<span class="accent">惠东</span></h1>
+    <p class="sub">一场台风就是一次免费的韧性实验：谁先倒下、谁几乎无损、多久爬回来。<br>惠东是全国少有的「能源+旅游+渔业」三线并存的岸线，红霞把三者同时照了一遍。</p>
+  </div>
+
+  <div class="grid grid-4" id="kpis"></div>
+
+  <div class="section-title">损失拆解：三种产业，三种结局</div>
+  <div class="grid grid-2">
+    <div class="card">
+      <h2>红霞损失结构</h2>
+      <div class="cap">单位：亿元 · 能源损失 0 —— 抗台标准建设的直接回报</div>
+      <div id="cLoss" class="chart tall"></div>
+      <p class="takeaway"><span class="mk">解读</span>旅游 2.3 亿、渔业 4.0 亿、能源 0——同样的风，不同标准建的产业，结果完全不同。这笔「建设标准账」在灾后看，是最便宜的一笔投资。</p>
+    </div>
+    <div class="card">
+      <h2>恢复曲线（模拟）</h2>
+      <div class="cap">灾后第 N 个月恢复到的产值比例（%）</div>
+      <div id="cRecover" class="chart tall"></div>
+      <p class="takeaway"><span class="mk">解读</span>头三个月恢复 72%，渔业要 6–9 个月才爬满——渔排重建慢于民宿修复。决定「恢复月数」的，不是风，是保险覆盖与复产组织。</p>
+    </div>
+  </div>
+
+  <div class="section-title">H3 假设检验：一次台风给出的证据</div>
+  <div class="grid grid-3">
+    <div class="card"><h2>假设 H3</h2><p style="font-size:12.5px;color:#93a4bd;line-height:1.8">「台风冲击的是民宿与渔排，按抗台标准建设的能源设施近乎无损」</p>
+    <div style="margin-top:10px"><span class="tag A">已有初步证据</span></div></div>
+    <div class="card"><h2>红霞给出的证词</h2><p style="font-size:12.5px;color:#93a4bd;line-height:1.8">能源损失 0.0 亿，渔业 4.0 亿、旅游 2.3 亿——冲击确实集中在暴露型产业，验证了方向。</p>
+    <div style="margin-top:10px"><span class="tag B">事件核算</span></div></div>
+    <div class="card"><h2>还没被检验的部分</h2><p style="font-size:12.5px;color:#93a4bd;line-height:1.8">「近乎无损」≠「完全无损」：并网初期停机检修、输电线路隐患等长期效应仍需观察；一次事件也不足以定论。</p>
+    <div style="margin-top:10px"><span class="tag C">待补证据</span></div></div>
+  </div>
+
+  <div class="section-title">灾后要盯的四件事</div>
+  <div class="card" id="watch"></div>
+
+  <div class="crosslink-row right">
+    <a class="crosslink" href="wind.html">← 风洞实验</a>
+    <a class="crosslink" href="decision.html">决策解释 <span class="arrow">→</span></a>
+  </div>
+
+  <div class="plain" style="margin-top:18px">
+    <span class="lab">口径说明</span>
+    事件与损失：公开报道口径（B 级）；恢复曲线：校准模拟（C 级）。
+    台风对 GDP 的影响按「当月/当季产值损失 + 恢复期爬坡」测算，不与总量增速直接做算术叠加。
+  </div>
+
+</div>
+
+<script src="data/payload.js"></script>
+<script>
+const AXIS = {
+  axisLabel:{color:'#93a4bd',fontSize:11},
+  axisLine:{lineStyle:{color:'#22304a'}},
+  splitLine:{lineStyle:{color:'#16202f'}}
+};
+
+function load(){fetch('data/payload.json').then(r=>r.json()).then(render).catch(()=>render(window.__EMBEDDED_PAYLOAD__));}
+
+function render(d){
+  const T = d.typhoon;
+  document.getElementById('kpis').innerHTML = [
+    {lab:'登陆强度', val:14, unit:'级', cls:'pink', note:'平海登陆'},
+    {lab:'总损失', val:T.loss.total, unit:'亿', cls:'', note:'B 级 · 报道口径'},
+    {lab:'能源损失', val:0, unit:'亿', cls:'green', note:'抗台标准'},
+    {lab:'渔业恢复', val:'6–9', unit:'个月', cls:'gold', note:'C 级模拟'}
+  ].map(k=>`<div class="kpi ${k.cls}"><div class="lab">${k.lab}</div><div class="val">${k.val}<span class="unit">${k.unit}</span></div><div class="delta">${k.note}</div></div>`).join('');
+
+  const loss = [['滨海旅游', T.loss.tourism, '#f59e0b'], ['渔业', T.loss.fishery, '#34d399'], ['能源', T.loss.energy, '#22d3ee']];
+  echarts.init(document.getElementById('cLoss')).setOption({
+    backgroundColor:'transparent', animation:false,
+    grid:{left:70,right:40,top:20,bottom:26},
+    tooltip:{backgroundColor:'#0e1523',borderColor:'#22304a',textStyle:{color:'#e6edf3'}},
+    xAxis:{type:'value',name:'亿元',nameTextStyle:{color:'#64748b'},...AXIS},
+    yAxis:{type:'category',data:loss.map(l=>l[0]),...AXIS},
+    series:[{type:'bar',data:loss.map(l=>({value:l[1],itemStyle:{color:l[2]}})),barWidth:'48%',borderRadius:[0,5,5,0],
+      label:{show:true,position:'right',color:'#e6edf3',fontSize:11,formatter:'{c} 亿'}}]
+  });
+
+  echarts.init(document.getElementById('cRecover')).setOption({
+    backgroundColor:'transparent', animation:false,
+    grid:{left:46,right:24,top:30,bottom:26},
+    tooltip:{trigger:'axis',backgroundColor:'#0e1523',borderColor:'#22304a',textStyle:{color:'#e6edf3'}},
+    xAxis:{type:'category',data:T.recovery.months.map(m=>'M'+m),...AXIS,axisTick:{show:false}},
+    yAxis:{type:'value',max:100,name:'%',nameTextStyle:{color:'#64748b'},...AXIS},
+    series:[{type:'line',data:T.recovery.recover,smooth:true,symbolSize:7,
+      lineStyle:{color:'#fbbf24',width:2.5},itemStyle:{color:'#fbbf24'},
+      areaStyle:{color:new echarts.graphic.LinearGradient(0,0,0,1,[{offset:0,color:'rgba(251,191,36,.28)'},{offset:1,color:'rgba(251,191,36,0)'}])},
+      markPoint:{data:[{coord:['M3',72],value:'72%',label:{color:'#fbbf24'}}]}
+    }]
+  });
+
+  const watch = [
+    {t:'保险覆盖率', q:'渔业与民宿的投保率，决定「损失」转成「灾后现金流缺口」的比例。'},
+    {t:'复产速度', q:'渔排重建、民宿重开的周数——不是风决定，是组织决定。'},
+    {t:'能源长期效应', q:'并网初期经历 14 级风后，设备检修与输电隐患是否在季度数据里显影。'},
+    {t:'第二次检验', q:'下一个台风季，H3 是否再次成立——一次事件是证据，两次才是规律。'}
+  ];
+  document.getElementById('watch').innerHTML = watch.map((w,i)=>`
+    <div style="display:flex;gap:12px;padding:10px 0;border-bottom:1px dashed #1c2739;${i===3?'border-bottom:0':''}">
+      <div style="flex:none;width:26px;height:26px;border-radius:8px;background:#0c2630;color:#22d3ee;font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center">${i+1}</div>
+      <div><div style="font-size:13px;font-weight:700;color:#e6edf3;margin-bottom:3px">${w.t}</div>
+      <div style="font-size:12px;color:#93a4bd;line-height:1.7">${w.q}</div></div>
+    </div>`).join('');
+
+  window.addEventListener('resize',()=>document.querySelectorAll('.chart').forEach(el=>{const i=echarts.getInstanceByDom(el);if(i)i.resize();}));
+}
+
+load();
+</script>
+</body>
+</html>

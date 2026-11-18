@@ -2,6 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
+<link rel="icon" href="data:,">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>惠东产业风洞 · 情景推演</title>
 <link rel="stylesheet" href="assets/app.css">
@@ -12,12 +13,16 @@
 <div class="nav">
   <span class="brand">惠东产业风洞</span>
   <a href="index.html">总览</a>
+  <a href="reality.html">现实底座</a>
+  <a href="region.html">区域比较</a>
   <a href="history.html">历史诊断</a>
   <a href="theory.html">机制框架</a>
   <a href="network.html">网络结构</a>
   <a href="models.html">路径研判</a>
   <a href="measurement.html">调研佐证</a>
   <a href="scenarios.html" class="on">情景推演</a>
+  <a href="wind.html">风洞实验</a>
+  <a href="typhoon.html">台风沙盘</a>
   <a href="decision.html">决策解释</a>
 </div>
 
@@ -49,8 +54,7 @@
       <p class="takeaway"><span class="mk">解读</span>结果最常落在 1190–1220 亿之间（中间最高），往两头走的次数越来越少，整体围绕 1200 亿分布。</p></div>
   </div>
 
-  <div class="section-title" id="typhoon-recovery" style="scroll-margin-top:72px">台风脉冲与恢复</div>
-  <p class="cap">这组研究示例按月展示恢复率。风洞按周展示滨海客流，两张图的时间和指标口径各有标注。</p>
+  <div class="section-title">台风脉冲与恢复</div>
   <div class="grid grid-2">
     <div class="card"><h2>当年损失结构（亿元）</h2><div id="cLoss" class="chart"></div>
       <p class="takeaway"><span class="mk">解读</span>台风当年合计损失约 6.3 亿，海洋渔业最重（4.0 亿）、旅游次之（2.3 亿），能源基本没受损失。</p></div>
@@ -137,6 +141,5 @@ function render(d){
   window.addEventListener('resize',()=>document.querySelectorAll('.chart').forEach(el=>{const i=echarts.getInstanceByDom(el);if(i)i.resize();}));
 }
 load();
-</script>
-<script src="relay.js"></script></body>
+</script></body>
 </html>

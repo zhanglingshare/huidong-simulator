@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<link rel="icon" href="data:,">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>惠东产业风洞 · 现实底座</title>
+<link rel="stylesheet" href="assets/app.css">
+<script src="lib/echarts.min.js"></script>
+</head>
+<body>
+
+<div class="nav">
+  <span class="brand">惠东产业风洞</span>
+  <a href="index.html">总览</a>
+  <a href="reality.html" class="on">现实底座</a>
+  <a href="region.html">区域比较</a>
+  <a href="history.html">历史诊断</a>
+  <a href="theory.html">机制框架</a>
+  <a href="network.html">网络结构</a>
+  <a href="models.html">路径研判</a>
+  <a href="measurement.html">调研佐证</a>
+  <a href="scenarios.html">情景推演</a>
+  <a href="wind.html">风洞实验</a>
+  <a href="typhoon.html">台风沙盘</a>
+  <a href="decision.html">决策解释</a>
+</div>
+
+<div class="wrap">
+
+  <div class="demo-banner">
+    <span>●</span>
+    <span><b>部分为已核实数据</b>：经济总量与关键事件来自官方公开渠道；产业规模为校准估计，标注血统等级，模拟内容仅供参考。</span>
+  </div>
+
+  <div class="hero">
+    <div class="kick">HUIDONG REALITY BASE · V2</div>
+    <h1>先看家底，<span class="accent">再看未来</span></h1>
+    <p class="sub">惠东手上有什么？四张产业牌 + 一条海岸线。<br>每个数字标血统：A 官方实测 · B 官方换算 · C 校准估计。</p>
+  </div>
+
+  <div class="grid grid-4" id="kpis"></div>
+
+  <div class="section-title">四张产业牌</div>
+  <div class="grid grid-4" id="cards"></div>
+
+  <div class="section-title">各路径 2030 规模区间（校准估计）</div>
+  <div class="card">
+    <h2>路径规模与不确定性</h2>
+    <div class="cap">圆点=校准估计 · 横线=区间（C 级，结构关系来自模拟问卷，水平值不折算 GDP）</div>
+    <div id="cRange" class="chart"></div>
+    <p class="takeaway"><span class="mk">解读</span>区间越宽，越不该把单个数字当结论——能源区间最宽（受项目进度与电价影响），农渔最窄（盘子小、波动有限）。</p>
+  </div>
+
+  <div class="section-title">海岸线骨架</div>
+  <div class="grid grid-2">
+    <div class="card">
+      <h2>沿海三镇 + 县城双核</h2>
+      <div class="cap">空间上的产业分布</div>
+      <div id="cSpace" class="chart tall"></div>
+      <p class="takeaway"><span class="mk">解读</span>能源与文旅挤在同一条海岸线上：平海既有核电站也有海龟湾，港口既有渔港也有海上风电母港——一片海的多种用法。</p>
+    </div>
+    <div class="card">
+      <h2>关键事件时间线</h2>
+      <div class="cap">公开渠道核实的事件，标 A/B</div>
+      <div id="timeline"></div>
+    </div>
+  </div>
+
+  <div class="crosslink-row right">
+    <a class="crosslink" href="history.html">历史诊断 <span class="arrow">→</span></a>
+    <a class="crosslink" href="network.html">网络结构 <span class="arrow">→</span></a>
+  </div>
+
+  <div class="plain" style="margin-top:18px">
+    <span class="lab">数据等级</span>
+    <span class="tag A">A 官方实测</span> <span class="tag B">B 官方口径换算</span> <span class="tag C">C 校准估计/模拟</span>。
+    C 级数字不直接相加或换算成经济总量；每个数字可追溯到 payload 与公开来源。
+  </div>
+
+</div>
+
+<script src="data/payload.js"></script>
+<script>
+const AXIS = {
+  axisLabel:{color:'#93a4bd',fontSize:11},
+  axisLine:{lineStyle:{color:'#22304a'}},
+  splitLine:{lineStyle:{color:'#16202f'}}
+};
+
+function load(){fetch('data/payload.json').then(r=>r.json()).then(render).catch(()=>render(window.__EMBEDDED_PAYLOAD__));}
+
+function render(d){
+  const H = d.history;
+  const last = k => H[k].values[H[k].values.length-1];
+  const p1=last('p1'), p2=last('p2'), p3=last('p3'), gdp=last('gdp');
+  const kpis=[
+    {lab:'2025 GDP', val:gdp, unit:'亿', cls:'', blood:'A'},
+    {lab:'三产结构', val:((p1/gdp*100).toFixed(1)+'·'+(p2/gdp*100).toFixed(1)+'·'+(p3/gdp*100).toFixed(1)), unit:'', cls:'green', blood:'A'},
+    {lab:'接待游客', val:last('tourists'), unit:'万', cls:'pink', blood:'A'},
+    {lab:'能源增加值', val:last('energy'), unit:'亿', cls:'gold', blood:'A'}
+  ];
+  document.getElementById('kpis').innerHTML = kpis.map(k=>
+    `<div class="kpi ${k.cls}"><div class="lab">${k.lab} <span class="tag ${k.blood}">${k.blood}</span></div><div class="val">${k.val}<span class="unit">${k.unit}</span></div></div>`).join('');
+
+  const cards=[
+    {t:'清洁能源', blood:'A', num:'80 亿', note:'2025 增加值', body:'太平岭核电「华龙一号」2026-02 并网发电；海上风电、LNG 在港口-平海一线集聚。', src:'统计公报 · 政协惠州'},
+    {t:'女鞋', blood:'B', num:'全国基地', note:'中国女鞋生产基地', body:'吉隆-黄埠制鞋带，外向订单为主，就业饭碗的底盘；近年受订单与用工双挤压。', src:'公开产业资料'},
+    {t:'滨海旅游', blood:'A', num:'1756 万', note:'2024 游客人次', body:'双月湾、巽寮湾、海龟湾三张名片；台风「红霞」2026 年直接检验了韧性。', src:'统计公报'},
+    {t:'特色农渔', blood:'B', num:'山海牌', note:'赤岸生蚝 · 海洋牧场', body:'山海资源转化农旅产品，盘子不大但对岸线生态最友好；台风年里最先受伤。', src:'公开产业资料'}
+  ];
+  document.getElementById('cards').innerHTML = cards.map(c=>`
+    <div class="card"><h2>${c.t} <span class="tag ${c.blood}">${c.blood}</span></h2>
+    <div class="kpi" style="background:transparent;border:0;box-shadow:none;padding:8px 0"><div class="val" style="font-size:22px">${c.num}<span class="unit">${c.note}</span></div></div>
+    <p style="font-size:12.5px;color:#93a4bd;line-height:1.8;margin:8px 0 10px">${c.body}</p>
+    <div class="cap" style="margin:0">来源：${c.src}</div></div>`).join('');
+
+  const est = d.models.estimates;
+  echarts.init(document.getElementById('cRange')).setOption({
+    backgroundColor:'transparent', animation:false,
+    grid:{left:90,right:30,top:16,bottom:30},
+    tooltip:{trigger:'item',backgroundColor:'#0e1523',borderColor:'#22304a',textStyle:{color:'#e6edf3'}},
+    xAxis:{type:'value',...AXIS},
+    yAxis:{type:'category',data:est.map(e=>e.path),...AXIS},
+    series:[{
+      type:'custom',
+      renderItem:(_,api)=>{
+        const y=api.coord([api.value(0),api.value(1)])[1];
+        const x0=api.coord([api.value(2),api.value(1)])[0];
+        const x1=api.coord([api.value(3),api.value(1)])[0];
+        const xm=api.coord([api.value(4),api.value(1)])[0];
+        return {
+          type:'group',
+          children:[
+            {type:'rect',shape:{x:x0,y:y-3,width:x1-x0,height:6},style:{fill:'rgba(34,211,238,.25)'}},
+            {type:'circle',shape:{cx:xm,cy:y,r:5},style:{fill:'#fbbf24'}}
+          ]
+        };
+      },
+      encode:{x:[2,3,4],y:1},
+      data:est.map(e=>({value:[e.path,e.path,e.lo,e.hi,e.est],name:e.path}))
+    }]
+  });
+
+  echarts.init(document.getElementById('cSpace')).setOption({
+    backgroundColor:'transparent', animation:false,
+    tooltip:{trigger:'item',backgroundColor:'#0e1523',borderColor:'#22304a',textStyle:{color:'#e6edf3'}},
+    series:[{
+      type:'graph', layout:'none',
+      coordinateSystem:null,
+      left:20, right:20, top:10, bottom:10,
+      data:[
+        {name:'平山·县城',x:120,y:190,symbolSize:34,itemStyle:{color:'#3b82f6'},label:{show:true,color:'#e6edf3',fontSize:11,position:'bottom'}},
+        {name:'大岭',x:120,y:90,symbolSize:24,itemStyle:{color:'#3b82f6'},label:{show:true,color:'#93a4bd',fontSize:10,position:'top'}},
+        {name:'太平岭核电',x:330,y:120,symbolSize:44,itemStyle:{color:'#22d3ee'},label:{show:true,color:'#e6edf3',fontSize:11,position:'top'}},
+        {name:'巽寮·双月湾',x:430,y:250,symbolSize:34,itemStyle:{color:'#f59e0b'},label:{show:true,color:'#e6edf3',fontSize:11,position:'bottom'}},
+        {name:'平海·海龟湾',x:300,y:280,symbolSize:30,itemStyle:{color:'#f59e0b'},label:{show:true,color:'#93a4bd',fontSize:10,position:'bottom'}},
+        {name:'港口·风电',x:380,y:330,symbolSize:26,itemStyle:{color:'#34d399'},label:{show:true,color:'#93a4bd',fontSize:10,position:'bottom'}},
+        {name:'吉隆·女鞋',x:80,y:250,symbolSize:30,itemStyle:{color:'#ec4899'},label:{show:true,color:'#e6edf3',fontSize:11,position:'bottom'}}
+      ],
+      links:[
+        {source:'平山·县城',target:'大岭'},{source:'平山·县城',target:'吉隆·女鞋'},
+        {source:'太平岭核电',target:'平海·海龟湾'},{source:'太平岭核电',target:'港口·风电'},
+        {source:'巽寮·双月湾',target:'平海·海龟湾'},{source:'平海·海龟湾',target:'港口·风电'}
+      ],
+      lineStyle:{color:'#22304a',width:1.5,curveness:0.08},
+      label:{position:'right'}
+    }]
+  });
+
+  const events=[
+    {t:'2025', ev:'GDP 861.25 亿，服务业占比 53%', blood:'A', src:'统计公报'},
+    {t:'2026-02', ev:'太平岭核电 1 号机组并网（大湾区首台华龙一号）', blood:'A', src:'公开报道'},
+    {t:'2026-07', ev:'台风「红霞」14 级平海登陆，损失 6.3 亿', blood:'B', src:'公开报道'},
+    {t:'2027-2032', ev:'海上风电、LNG 扩建、女鞋数字化按各自节奏推进', blood:'C', src:'情景假设'}
+  ];
+  document.getElementById('timeline').innerHTML = events.map(e=>`
+    <div style="display:flex;gap:12px;padding:9px 0;border-bottom:1px dashed #1c2739">
+      <div style="flex:none;width:64px;color:#22d3ee;font-size:11.5px;font-weight:700">${e.t}</div>
+      <div style="font-size:12.5px;color:#dbe4f0;line-height:1.7">${e.ev}<span class="tag ${e.blood}" style="margin-left:6px">${e.blood}</span>
+      <div class="cap" style="margin:2px 0 0">${e.src}</div></div>
+    </div>`).join('');
+
+  window.addEventListener('resize',()=>document.querySelectorAll('.chart').forEach(el=>{const i=echarts.getInstanceByDom(el);if(i)i.resize();}));
+}
+
+load();
+</script>
+</body>
+</html>

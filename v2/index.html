@@ -2,6 +2,7 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
+<link rel="icon" href="data:,">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>惠东产业风洞 · 总览</title>
 <link rel="stylesheet" href="assets/app.css">
@@ -11,12 +12,16 @@
 <div class="nav">
   <span class="brand">惠东产业风洞</span>
   <a href="index.html" class="on">总览</a>
+  <a href="reality.html">现实底座</a>
+  <a href="region.html">区域比较</a>
   <a href="history.html">历史诊断</a>
   <a href="theory.html">机制框架</a>
   <a href="network.html">网络结构</a>
   <a href="models.html">路径研判</a>
   <a href="measurement.html">调研佐证</a>
   <a href="scenarios.html">情景推演</a>
+  <a href="wind.html">风洞实验</a>
+  <a href="typhoon.html">台风沙盘</a>
   <a href="decision.html">决策解释</a>
 </div>
 
@@ -46,12 +51,17 @@
 
 <script>
 const stages=[
-  {n:'01',t:'历史结构诊断',d:'2020–2025 历年家底 · 三产结构',status:'ready',href:'history.html'},
-  {n:'02',t:'机制与变量',d:'分层机制 · 变量说明 · 待验证判断',status:'pending'},
-  {n:'03',t:'网络结构分析',d:'关系连线 · 历年变化 · 价值留存',status:'pending'},
-  {n:'04',t:'路径研判',d:'各条路径的强弱对比',status:'pending'},
-  {n:'05',t:'情景推演',d:'不同条件下的可能范围',status:'pending'},
-  {n:'06',t:'决策解释',d:'三把尺子 · 参考范围 · 观察指标',status:'pending'}
+  {n:'01',t:'现实底座',d:'四张产业牌 · 海岸线骨架 · 事件线',status:'ready',href:'reality.html'},
+  {n:'02',t:'区域比较',d:'惠州七县区 2025 家底并排',status:'ready',href:'region.html'},
+  {n:'03',t:'历史结构诊断',d:'2020–2025 历年家底 · 三产结构',status:'ready',href:'history.html'},
+  {n:'04',t:'机制框架',d:'分层机制 · 变量说明 · 待验证判断',status:'ready',href:'theory.html'},
+  {n:'05',t:'网络结构',d:'关系连线 · 价值留存',status:'ready',href:'network.html'},
+  {n:'06',t:'路径研判',d:'各条路径的强弱对比',status:'ready',href:'models.html'},
+  {n:'07',t:'调研佐证',d:'测量模型 · 问卷管线',status:'ready',href:'measurement.html'},
+  {n:'08',t:'情景推演',d:'不同条件下的可能范围',status:'ready',href:'scenarios.html'},
+  {n:'09',t:'风洞实验',d:'亲手拨动变量 · 从目标倒推',status:'ready',href:'wind.html'},
+  {n:'10',t:'台风沙盘',d:'红霞过境 · 恢复曲线 · H3 检验',status:'ready',href:'typhoon.html'},
+  {n:'11',t:'决策解释',d:'三把尺子 · 观察指标',status:'ready',href:'decision.html'}
 ];
 const badge = s => s==='ready'
   ? '<span class="tag A">已就绪</span>'
@@ -65,6 +75,5 @@ document.getElementById('chain').innerHTML = stages.map(s=>{
     ? `<a class="card" href="${s.href}" style="text-decoration:none;display:block">${inner}</a>`
     : `<div class="card" style="opacity:.75">${inner}</div>`;
 }).join('');
-</script>
-<script src="relay.js"></script></body>
+</script></body>
 </html>

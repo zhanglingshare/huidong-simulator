@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
   "project_key": "two-islands-2035-20261030",
-  "version": "20261117-official-evidence",
-  "updated_at": "2026-11-17T01:40:00Z",
+  "version": "20261118-official-evidence",
+  "updated_at": "2026-11-18T01:14:54Z",
   "mode": "reviewed_official_reference_only",
   "documents": [],
   "indicators": [
@@ -2048,8 +2048,83 @@
         "正式条文与最后签署日期",
         "跨境输电项目投运、交易量及可核验结算"
       ]
+    },
+    {
+      "tier": "A",
+      "reviewed_by": "official-primary-source-check",
+      "reviewed_at": "2026-11-18T01:14:54Z",
+      "model_impact": "none: reference evidence only; independent synthetic engine",
+      "id": "hn-sg-acfta-3-scheduled-commencement-2026-12-01",
+      "label": "中国—东盟自贸区3.0版升级议定书确认计划于12月1日生效",
+      "region": "海南",
+      "applicable_regions": [
+        "海南",
+        "新加坡"
+      ],
+      "jurisdiction": "中国—东盟",
+      "status": "verified",
+      "stage": "scheduled_entry_into_force_announced",
+      "published_at": "2026-11-16T14:25:00+08:00",
+      "published_at_precision": "minute",
+      "announced_at": "2026-11-16",
+      "effective_at": null,
+      "scheduled_effective_at": "2026-12-01",
+      "scheduled_effective_at_precision": "day",
+      "scheduled_effective_at_basis": "商务部11月16日原创答记者问，首问明确领导人宣布2026年12月1日正式生效实施。",
+      "observed_at": null,
+      "period": "2026-11-16宣布；计划2026-12-01生效",
+      "observation_period": {
+        "as_of": "2026-11-16",
+        "kind": "scheduled_treaty_commencement_announced"
+      },
+      "original_unit": "项（自贸区升级议定书及生效安排）",
+      "definition": "商务部确认中国—东盟自贸区3.0版升级议定书的计划生效日，并公开规则范围。逐一缔约方的适用时间依生效条款及内部程序通知确定。",
+      "source_url": "https://www.mofcom.gov.cn/xwfb/sjfzrfb/art/2026/art_6f60762e184145c4beda3aa4c692c260.html",
+      "official_protocol_text_url": "https://fta.mofcom.gov.cn/china_dongmeng_upgrade/annex/yds3_cn.pdf",
+      "official_conference_report_url": "https://sg.china-embassy.gov.cn/zgyw/202611/t20261116_12059914.htm",
+      "source_locator": "商务部答记者问首问及企业机遇问答；升级议定书第六条（生效）；驻新加坡使馆所载会议公告末段。",
+      "description": "升级安排涵盖数字经济、绿色经济、标准、供应链和贸易便利化。商务部说明本次升级以规则标准协同为重点。议定书第六条规定中国及至少五个东盟成员完成书面通知后60天生效，其余缔约方按各自通知时间计算。",
+      "source_notes": "按11月18日审校时的未来安排采录。商务部问答和其自由贸易区服务网属于同一发布体系。新加坡是否属于首批生效适用方，尚待逐国通知或主管机关确认。",
+      "revision_relation": "initial_verified_record_of_acfta3_scheduled_commencement; distinct_from_asean_defa",
+      "follow_up_evidence_needed": [
+        "正式生效公告及首批适用成员清单",
+        "新加坡完成内部程序的通知和适用日期",
+        "海南与新加坡企业的办理记录、交易量及成本观测"
+      ]
+    },
+    {
+      "tier": "A",
+      "reviewed_by": "official-primary-source-check",
+      "reviewed_at": "2026-11-18T01:14:54Z",
+      "model_impact": "none: reference evidence only; independent synthetic engine",
+      "id": "hn-global-hadal-exploration-regional-centres-inauguration-2026-11-04",
+      "label": "全球深渊探索计划国际区域分中心在三亚论坛期间揭牌成立",
+      "region": "海南",
+      "status": "observed",
+      "stage": "inauguration_observed",
+      "published_at": "2026-11-17T14:11:00+08:00",
+      "published_at_precision": "minute",
+      "observed_at": "2026-11-04",
+      "effective_at": null,
+      "period": "2026-11-04揭牌；海南省科技厅供稿于2026-11-17公开",
+      "observation_period": {
+        "as_of": "2026-11-04",
+        "kind": "research_cooperation_platform_inauguration"
+      },
+      "original_unit": "项（国际科研协作平台揭牌事件）",
+      "definition": "海南省科技厅确认，在三亚举行的第四届海南自贸港国际科技创新合作论坛暨深海技术创新大会开幕式上，全球深渊探索计划国际区域分中心成立。",
+      "source_url": "https://www.most.gov.cn/dfkj/hain/tpxw/202611/t20261117_197746.html",
+      "source_locator": "科技部网站所载海南省科技厅11月17日供稿，首段（开幕日期）和“开幕式上”段落（分中心成立）。",
+      "description": "计划由中国科学院深海科学与工程研究所发起，依托“奋斗者”号载人潜水器等装置开展国际深渊科学合作。分中心揭牌活动在三亚论坛开幕式上举行。",
+      "source_notes": "发布日与活动发生日分别保存。科技部网站载明供稿方为海南省科技厅，按这一官方来源核验。分中心各自的所在地、运营及成果另待原始文件确认。",
+      "revision_relation": "initial_verified_record_of_regional_centres_inauguration",
+      "follow_up_evidence_needed": [
+        "各分中心正式设立文件与运营安排",
+        "联合项目、实际科研人员交流及经费记录",
+        "科研成果转化和企业业务的原始观测"
+      ]
     }
   ],
   "failures": [],
-  "previous_version": "20261116-official-evidence"
+  "previous_version": "20261117-official-evidence"
 }

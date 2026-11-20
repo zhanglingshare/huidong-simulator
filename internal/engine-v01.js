@@ -174,13 +174,13 @@
       // T3-1 声称缺但需求未升 → 非绑定
       if (meanDelta <= 0) {
         out.push({ id: 'T3-1', resource: r, firms: claimedBy, kind: '非绑定约束', lever: null,
-          note: '声称缺' + r + '但样本需求未升（Δ订单均值≤0），先救需求，不补' + r + '。' });
+          msg: '声称缺' + r + '但样本需求未升（Δ订单均值≤0），先救需求，不补' + r + '。' });
         return;
       }
       // T3-2 四证齐全 → 绑定约束
       if (slack < 15 && meanLag > 1) {
         out.push({ id: 'T3-2', resource: r, firms: claimedBy, kind: '绑定约束', lever: LEVER_MAP[r],
-          note: r + '构成绑定约束（需求升+余量<15+交付变慢+主体声称缺），建议' + LEVER_MAP[r] + '。' });
+          msg: r + '构成绑定约束（需求升+余量<15+交付变慢+主体声称缺），建议' + LEVER_MAP[r] + '。' });
       }
     });
     return out;
@@ -362,7 +362,7 @@
     (inputs.shocks || []).forEach(function (sh) {
       propagateShock(state, sh.source, sh.shock);
       state.signals.push({ id: 'EVT-SHOCK', source: sh.source, shock: sh.shock, kind: '冲击事件',
-        note: '注入冲击：' + sh.source + ' 强度 ' + sh.shock + '。', trio: trio(state.q, 'injected', '情景S') });
+        msg: '注入冲击：' + sh.source + ' 强度 ' + sh.shock + '，两阶传导写入。', trio: trio(state.q, 'injected', '情景S') });
     });
     // 4. 瓶颈诊断
     diagnoseConstraints(state).forEach(function (sig) { state.signals.push(sig); });

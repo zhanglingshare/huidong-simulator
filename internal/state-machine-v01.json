@@ -1,0 +1,2110 @@
+{
+  "meta": {
+    "county": "惠东县",
+    "version": "state-machine-v01",
+    "designDoc": "惠东内部版-状态机与变量血缘设计底稿-2026-11-20",
+    "status": "P0-数据层，未挂渲染",
+    "synthetic": true,
+    "disciplines": [
+      "指数不折GDP/产值/就业",
+      "微观系数不折总量",
+      "未观测≠不存在",
+      "先验带区间",
+      "回填必须带来源+单位+时间"
+    ]
+  },
+  "system": {
+    "publicTotal": {
+      "value": 861.25,
+      "unit": "亿元",
+      "lineage": "A",
+      "note": "公报口径，不与卡分相加"
+    },
+    "structure": {
+      "value": [
+        11.5,
+        35.5,
+        53
+      ],
+      "note": "结构罗盘，非规划目标",
+      "lineage": "A"
+    },
+    "period": "2026Q1-2032Q4",
+    "quarters": 28
+  },
+  "resources": {
+    "land": {
+      "capacity": 100,
+      "allocated": 0,
+      "unit": "情景单位",
+      "lineage": "S"
+    },
+    "energy": {
+      "capacity": 100,
+      "allocated": 0,
+      "unit": "情景单位",
+      "lineage": "S"
+    },
+    "capital": {
+      "capacity": 100,
+      "allocated": 0,
+      "unit": "情景单位",
+      "lineage": "S"
+    },
+    "talent": {
+      "capacity": 100,
+      "allocated": 0,
+      "unit": "情景单位",
+      "lineage": "S"
+    },
+    "platform": {
+      "capacity": 100,
+      "allocated": 0,
+      "unit": "情景单位",
+      "lineage": "S"
+    }
+  },
+  "firms": [
+    {
+      "id": "fishery-coop",
+      "name": "港口渔业联合社",
+      "short": "渔业联社",
+      "sector": "primary",
+      "club": "海洋渔业与捕捞协作",
+      "role": "核心支柱",
+      "kind": "协作组织线索",
+      "tier": "龙头支柱",
+      "chain": "种养供给",
+      "zone": "农产片区",
+      "state": "线索·待核",
+      "stage": "方向待核",
+      "size": "小微档",
+      "legalForm": null,
+      "group": null,
+      "tradeStatus": null,
+      "grade": "C",
+      "blood": "C",
+      "coverage": 32,
+      "sixDim": {
+        "values": [
+          58,
+          60,
+          58,
+          78,
+          66,
+          80
+        ],
+        "pot": 76,
+        "ovr": 69,
+        "band": 8,
+        "lineage": "C"
+      },
+      "risks": [
+        "天气与病害",
+        "价格波动"
+      ],
+      "tags": [
+        "捕捞",
+        "渔业协作",
+        "联农带农"
+      ],
+      "fact": "港口渔业协作组织线索，捕捞与养殖联结待核。",
+      "verify": "核验注册主体、渔船与养殖户规模、销售渠道与联农带农合同。",
+      "evidence": "开发先验 · 待核",
+      "observations": {
+        "employment": null,
+        "output": null,
+        "capacityUtil": null,
+        "orderBook": null,
+        "deliveryLag": null,
+        "arDays": null,
+        "localProcureRate": null,
+        "localLaborRate": null,
+        "localServiceRate": null
+      }
+    },
+    {
+      "id": "fish-farm",
+      "name": "规模化水产养殖基地",
+      "short": "水产养殖",
+      "sector": "primary",
+      "club": "水产养殖",
+      "role": "骨干主体",
+      "kind": "主体线索",
+      "tier": "一般主体",
+      "chain": "种养供给",
+      "zone": "农产片区",
+      "state": "线索·待核",
+      "stage": "方向待核",
+      "size": "小微档",
+      "legalForm": null,
+      "group": null,
+      "tradeStatus": null,
+      "grade": "C",
+      "blood": "C",
+      "coverage": 18,
+      "sixDim": {
+        "values": [
+          59,
+          70,
+          70,
+          71,
+          64,
+          71
+        ],
+        "pot": 74,
+        "ovr": 68,
+        "band": 8,
+        "lineage": "C"
+      },
+      "risks": [
+        "天气与病害",
+        "价格波动"
+      ],
+      "tags": [
+        "对虾",
+        "水产养殖"
+      ],
+      "fact": "规模化水产养殖方向线索，品种与规模待核。",
+      "verify": "核验养殖主体、面积、产量、种苗与病害防控、销售去向。",
+      "evidence": "开发先验 · 待核",
+      "observations": {
+        "employment": null,
+        "output": null,
+        "capacityUtil": null,
+        "orderBook": null,
+        "deliveryLag": null,
+        "arDays": null,
+        "localProcureRate": null,
+        "localLaborRate": null,
+        "localServiceRate": null
+      }
+    },
+    {
+      "id": "potato-base",
+      "name": "惠东马铃薯种植集群",
+      "short": "马铃薯",
+      "sector": "primary",
+      "club": "特色种植 · 马铃薯果蔬",
+      "role": "骨干主体",
+      "kind": "产业集群线索",
+      "tier": "一般主体",
+      "chain": "种养供给",
+      "zone": "农产片区",
+      "state": "线索·待核",
+      "stage": "方向待核",
+      "size": "中型档",
+      "legalForm": null,
+      "group": null,
+      "tradeStatus": null,
+      "grade": "C",
+      "blood": "C",
+      "coverage": 18,
+      "sixDim": {
+        "values": [
+          64,
+          72,
+          71,
+          79,
+          75,
+          84
+        ],
+        "pot": 86,
+        "ovr": 75,
+        "band": 8,
+        "lineage": "C"
+      },
+      "risks": [
+        "天气与病害",
+        "价格波动"
+      ],
+      "tags": [
+        "马铃薯",
+        "冬种"
+      ],
+      "fact": "惠东冬种马铃薯特色种植线索，基地与品牌待核。",
+      "verify": "核验种植面积、龙头主体、加工与品牌渠道、收购农户联结。",
+      "evidence": "开发先验 · 待核",
+      "observations": {
+        "employment": null,
+        "output": null,
+        "capacityUtil": null,
+        "orderBook": null,
+        "deliveryLag": null,
+        "arDays": null,
+        "localProcureRate": null,
+        "localLaborRate": null,
+        "localServiceRate": null
+      }
+    },
+    {
+      "id": "livestock",
+      "name": "禽畜养殖主体",
+      "short": "禽畜养殖",
+      "sector": "primary",
+      "club": "畜牧与传统农产",
+      "role": "基础保障",
+      "kind": "主体线索",
+      "tier": "基础主体",
+      "chain": "种养供给",
+      "zone": "农产片区",
+      "state": "线索·待核",
+      "stage": "方向待核",
+      "size": "小微档",
+      "legalForm": null,
+      "group": null,
+      "tradeStatus": null,
+      "grade": "C",
+      "blood": "C",
+      "coverage": 18,
+      "sixDim": {
+        "values": [
+          52,
+          59,
+          64,
+          68,
+          62,
+          70
+        ],
+        "pot": 72,
+        "ovr": 63,
+        "band": 8,
+        "lineage": "C"
+      },
+      "risks": [
+        "天气与病害",
+        "价格波动"
+      ],
+      "tags": [
+        "生猪",
+        "家禽"
+      ],
+      "fact": "禽畜养殖主体线索，经营状态待核。",
+      "verify": "核验养殖主体、规模、环保合规、产销与带动农户情况。",
+      "evidence": "开发先验 · 待核",
+      "observations": {
+        "employment": null,
+        "output": null,
+        "capacityUtil": null,
+        "orderBook": null,
+        "deliveryLag": null,
+        "arDays": null,
+        "localProcureRate": null,
+        "localLaborRate": null,
+        "localServiceRate": null
+      }
+    },
+    {
+      "id": "salt-farm",
+      "name": "海盐传统生产主体",
+      "short": "海盐",
+      "sector": "primary",
+      "club": "畜牧与传统农产",
+      "role": "战略储备",
+      "kind": "传统业态线索",
+      "tier": "储备方向",
+      "chain": "种养供给",
+      "zone": "农产片区",
+      "state": "线索·待核",
+      "stage": "方向待核",
+      "size": "小微档",
+      "legalForm": null,
+      "group": null,
+      "tradeStatus": null,
+      "grade": "C",
+      "blood": "C",
+      "coverage": 18,
+      "sixDim": {
+        "values": [
+          55,
+          68,
+          69,
+          78,
+          67,
+          73
+        ],
+        "pot": 80,
+        "ovr": 69,
+        "band": 8,
+        "lineage": "C"
+      },
+      "risks": [
+        "天气与病害",
+        "价格波动"
+      ],
+      "tags": [
+        "海盐",
+        "传统技艺"
+      ],
+      "fact": "海盐传统生产方向线索，是否存续经营待核。",
+      "verify": "核验主体存续、产能、技艺传承与文旅转化可能。",
+      "evidence": "开发先验 · 待核",
+      "observations": {
+        "employment": null,
+        "output": null,
+        "capacityUtil": null,
+        "orderBook": null,
+        "deliveryLag": null,
+        "arDays": null,
+        "localProcureRate": null,
+        "localLaborRate": null,
+        "localServiceRate": null
+      }
+    },
+    {
+      "id": "fruit-veg",
+      "name": "特色果蔬与甜玉米基地",
+      "short": "果蔬基地",
+      "sector": "primary",
+      "club": "特色种植 · 马铃薯果蔬",
+      "role": "基础保障",
+      "kind": "基地线索",
+      "tier": "基础主体",
+      "chain": "种养供给",
+      "zone": "农产片区",
+      "state": "线索·待核",
+      "stage": "方向待核",
+      "size": "中型档",
+      "legalForm": null,
+      "group": null,
+      "tradeStatus": null,
+      "grade": "C",
+      "blood": "C",
+      "coverage": 18,
+      "sixDim": {
+        "values": [
+          64,
+          65,
+          60,
+          74,
+          65,
+          79
+        ],
+        "pot": 80,
+        "ovr": 69,
+        "band": 8,
+        "lineage": "C"
+      },
+      "risks": [
+        "天气与病害",
+        "价格波动"
+      ],
+      "tags": [
+        "果蔬",
+        "甜玉米"
+      ],
+      "fact": "特色果蔬种植基地线索，品类与主体待核。",
+      "verify": "核验基地主体、品种、产量、订单农业与冷链衔接。",
+      "evidence": "开发先验 · 待核",
+      "observations": {
+        "employment": null,
+        "output": null,
+        "capacityUtil": null,
+        "orderBook": null,
+        "deliveryLag": null,
+        "arDays": null,
+        "localProcureRate": null,
+        "localLaborRate": null,
+        "localServiceRate": null
+      }
+    },
+    {
+      "id": "aqua-feed",
+      "name": "水产饲料与农资主体",
+      "short": "水产饲料",
+      "sector": "primary",
+      "club": "水产养殖",
+      "role": "关键配套",
+      "kind": "配套线索",
+      "tier": "关键配套",
+      "chain": "种养供给",
+      "zone": "农产片区",
+      "state": "线索·待核",
+      "stage": "方向待核",
+      "size": "中型档",
+      "legalForm": null,
+      "group": null,
+      "tradeStatus": null,
+      "grade": "C",
+      "blood": "C",
+      "coverage": 18,
+      "sixDim": {
+        "values": [
+          66,
+          66,
+          68,
+          78,
+          75,
+          77
+        ],
+        "pot": 81,
+        "ovr": 73,
+        "band": 8,
+        "lineage": "C"
+      },
+      "risks": [
+        "天气与病害",
+        "价格波动"
+      ],
+      "tags": [
+        "饲料",
+        "农资"
+      ],
+      "fact": "水产饲料供应配套方向线索，本地主体待发现。",
+      "verify": "核验本地饲料主体、供货比例、价格与养殖户采购关系。",
+      "evidence": "开发先验 · 待核",
+      "observations": {
+        "employment": null,
+        "output": null,
+        "capacityUtil": null,
+        "orderBook": null,
+        "deliveryLag": null,
+        "arDays": null,
+        "localProcureRate": null,
+        "localLaborRate": null,
+        "localServiceRate": null
+      }
+    },
+    {
+      "id": "nuclear",
+      "name": "太平岭核电项目",
+      "short": "太平岭核电",
+      "sector": "secondary",
+      "club": "清洁能源 · 核电海风",
+      "role": "核心支柱",
+      "kind": "重大项目线索",
+      "tier": "龙头支柱",
+      "chain": "能源供给",
+      "zone": "沿海临港",
+      "state": "已投产·并网",
+      "stage": "运营期",
+      "size": "大型档",
+      "legalForm": null,
+      "group": null,
+      "tradeStatus": null,
+      "grade": "B-",
+      "blood": "B",
+      "coverage": 55,
+      "sixDim": {
+        "values": [
+          90,
+          72,
+          88,
+          55,
+          80,
+          58
+        ],
+        "pot": 82,
+        "ovr": 76,
+        "band": 5,
+        "lineage": "B"
+      },
+      "risks": [
+        "政策与审批",
+        "装备外购"
+      ],
+      "tags": [
+        "华龙一号",
+        "并网",
+        "能源重器"
+      ],
+      "fact": "太平岭核电 1 号机组 2026-02 并网（大湾区首台华龙一号）；本地配套与价值留存待核。",
+      "verify": "核验本地法人、运维主体、设备设计检测外购比例、本地就业与税收留存结构。",
+      "evidence": "公开事件线索 · B-",
+      "observations": {
+        "employment": null,
+        "output": null,
+        "capacityUtil": null,
+        "orderBook": null,
+        "deliveryLag": null,
+        "arDays": null,
+        "localProcureRate": null,
+        "localLaborRate": null,
+        "localServiceRate": null
+      }
+    },
+    {
+      "id": "offshore-wind",
+      "name": "海上风电基地",
+      "short": "海上风电",
+      "sector": "secondary",
+      "club": "清洁能源 · 核电海风",
+      "role": "成长突破",
+      "kind": "项目线索",
+      "tier": "成长骨干",
+      "chain": "能源供给",
+      "zone": "沿海临港",
+      "state": "筹建·待核",
+      "stage": "建设期待核",
+      "size": "中型档",
+      "legalForm": null,
+      "group": null,
+      "tradeStatus": null,
+      "grade": "C",
+      "blood": "C",
+      "coverage": 32,
+      "sixDim": {
+        "values": [
+          66,
+          74,
+          72,
+          60,
+          72,
+          64
+        ],
+        "pot": 83,
+        "ovr": 68,
+        "band": 8,
+        "lineage": "C"
+      },
+      "risks": [
+        "政策与审批",
+        "装备外购"
+      ],
+      "tags": [
+        "海风",
+        "可再生能源"
+      ],
+      "fact": "海上风电布局方向线索，本地主体与装备配套待核。",
+      "verify": "核准主体、海域手续、装备与运维本地化率、收益与用地用海关系。",
+      "evidence": "开发先验 · 待核",
+      "observations": {
+        "employment": null,
+        "output": null,
+        "capacityUtil": null,
+        "orderBook": null,
+        "deliveryLag": null,
+        "arDays": null,
+        "localProcureRate": null,
+        "localLaborRate": null,
+        "localServiceRate": null
+      }
+    },
+    {
+      "id": "shoe-core",
+      "name": "女鞋制造龙头企业",
+      "short": "鞋业龙头",
+      "sector": "secondary",
+      "club": "鞋业制造与配套",
+      "role": "核心支柱",
+      "kind": "集群主体线索",
+      "tier": "龙头支柱",
+      "chain": "制造加工",
+      "zone": "产业集群",
+      "state": "线索·待核",
+      "stage": "方向待核",
+      "size": "中型档",
+      "legalForm": null,
+      "group": null,
+      "tradeStatus": null,
+      "grade": "C",
+      "blood": "C",
+      "coverage": 32,
+      "sixDim": {
+        "values": [
+          64,
+          58,
+          62,
+          70,
+          60,
+          72
+        ],
+        "pot": 73,
+        "ovr": 64,
+        "band": 8,
+        "lineage": "C"
+      },
+      "risks": [
+        "订单外向",
+        "品牌升级压力"
+      ],
+      "tags": [
+        "女鞋",
+        "吉隆集群",
+        "品牌"
+      ],
+      "fact": "鞋业集群传统优势主体线索，龙头企业名单与经营数据待核。",
+      "verify": "核验工商全称、属地厂房、订单结构、品牌与设计能力、用工规模。",
+      "evidence": "开发先验 · 待核",
+      "observations": {
+        "employment": null,
+        "output": null,
+        "capacityUtil": null,
+        "orderBook": null,
+        "deliveryLag": null,
+        "arDays": null,
+        "localProcureRate": null,
+        "localLaborRate": null,
+        "localServiceRate": null
+      }
+    },
+    {
+      "id": "shoe-parts",
+      "name": "鞋材配套企业",
+      "short": "鞋材配套",
+      "sector": "secondary",
+      "club": "鞋业制造与配套",
+      "role": "关键配套",
+      "kind": "配套线索",
+      "tier": "关键配套",
+      "chain": "制造加工",
+      "zone": "产业集群",
+      "state": "线索·待核",
+      "stage": "方向待核",
+      "size": "中型档",
+      "legalForm": null,
+      "group": null,
+      "tradeStatus": null,
+      "grade": "C",
+      "blood": "C",
+      "coverage": 18,
+      "sixDim": {
+        "values": [
+          63,
+          67,
+          77,
+          73,
+          71,
+          76
+        ],
+        "pot": 79,
+        "ovr": 71,
+        "band": 8,
+        "lineage": "C"
+      },
+      "risks": [
+        "订单外向",
+        "品牌升级压力"
+      ],
+      "tags": [
+        "鞋材",
+        "五金配件"
+      ],
+      "fact": "鞋材、五金配件配套方向线索，本地配套密度待核。",
+      "verify": "核验配套主体、供货客户、材料品类与本地采购比例。",
+      "evidence": "开发先验 · 待核",
+      "observations": {
+        "employment": null,
+        "output": null,
+        "capacityUtil": null,
+        "orderBook": null,
+        "deliveryLag": null,
+        "arDays": null,
+        "localProcureRate": null,
+        "localLaborRate": null,
+        "localServiceRate": null
+      }
+    },
+    {
+      "id": "new-material",
+      "name": "新材料企业",
+      "short": "新材料",
+      "sector": "secondary",
+      "club": "新材料与五金",
+      "role": "成长突破",
+      "kind": "主体线索",
+      "tier": "成长骨干",
+      "chain": "制造加工",
+      "zone": "产业集群",
+      "state": "线索·待核",
+      "stage": "方向待核",
+      "size": "中型档",
+      "legalForm": null,
+      "group": null,
+      "tradeStatus": null,
+      "grade": "C",
+      "blood": "C",
+      "coverage": 18,
+      "sixDim": {
+        "values": [
+          71,
+          71,
+          79,
+          81,
+          75,
+          78
+        ],
+        "pot": 84,
+        "ovr": 76,
+        "band": 8,
+        "lineage": "C"
+      },
+      "risks": [
+        "客户集中",
+        "环保合规"
+      ],
+      "tags": [
+        "新材料"
+      ],
+      "fact": "新材料方向主体线索，具体品类与工艺待核。",
+      "verify": "核验主体、产品、专利设备、客户与产能利用率。",
+      "evidence": "开发先验 · 待核",
+      "observations": {
+        "employment": null,
+        "output": null,
+        "capacityUtil": null,
+        "orderBook": null,
+        "deliveryLag": null,
+        "arDays": null,
+        "localProcureRate": null,
+        "localLaborRate": null,
+        "localServiceRate": null
+      }
+    },
+    {
+      "id": "hardware",
+      "name": "五金制品企业",
+      "short": "五金制品",
+      "sector": "secondary",
+      "club": "新材料与五金",
+      "role": "关键配套",
+      "kind": "配套线索",
+      "tier": "关键配套",
+      "chain": "制造加工",
+      "zone": "产业集群",
+      "state": "线索·待核",
+      "stage": "方向待核",
+      "size": "中型档",
+      "legalForm": null,
+      "group": null,
+      "tradeStatus": null,
+      "grade": "C",
+      "blood": "C",
+      "coverage": 18,
+      "sixDim": {
+        "values": [
+          64,
+          75,
+          81,
+          75,
+          72,
+          69
+        ],
+        "pot": 83,
+        "ovr": 73,
+        "band": 8,
+        "lineage": "C"
+      },
+      "risks": [
+        "客户集中",
+        "环保合规"
+      ],
+      "tags": [
+        "五金",
+        "模具"
+      ],
+      "fact": "五金与精密制品配套线索。",
+      "verify": "核验主体、工艺、客户集中与表面处理环保合规。",
+      "evidence": "开发先验 · 待核",
+      "observations": {
+        "employment": null,
+        "output": null,
+        "capacityUtil": null,
+        "orderBook": null,
+        "deliveryLag": null,
+        "arDays": null,
+        "localProcureRate": null,
+        "localLaborRate": null,
+        "localServiceRate": null
+      }
+    },
+    {
+      "id": "textile",
+      "name": "纺织服装企业",
+      "short": "纺织服装",
+      "sector": "secondary",
+      "club": "鞋业制造与配套",
+      "role": "基础保障",
+      "kind": "主体线索",
+      "tier": "基础主体",
+      "chain": "制造加工",
+      "zone": "产业集群",
+      "state": "线索·待核",
+      "stage": "方向待核",
+      "size": "中型档",
+      "legalForm": null,
+      "group": null,
+      "tradeStatus": null,
+      "grade": "C",
+      "blood": "C",
+      "coverage": 18,
+      "sixDim": {
+        "values": [
+          74,
+          73,
+          80,
+          74,
+          72,
+          76
+        ],
+        "pot": 83,
+        "ovr": 75,
+        "band": 8,
+        "lineage": "C"
+      },
+      "risks": [
+        "订单外向",
+        "品牌升级压力"
+      ],
+      "tags": [
+        "服装",
+        "纺织"
+      ],
+      "fact": "纺织服装经营主体线索，经营状态待核。",
+      "verify": "核验主体、产能、订单与用工，判断是否处于收缩或转型。",
+      "evidence": "开发先验 · 待核",
+      "observations": {
+        "employment": null,
+        "output": null,
+        "capacityUtil": null,
+        "orderBook": null,
+        "deliveryLag": null,
+        "arDays": null,
+        "localProcureRate": null,
+        "localLaborRate": null,
+        "localServiceRate": null
+      }
+    },
+    {
+      "id": "energy-equip",
+      "name": "能源装备配套主体",
+      "short": "能源配套",
+      "sector": "secondary",
+      "club": "清洁能源 · 核电海风",
+      "role": "战略储备",
+      "kind": "配套线索",
+      "tier": "储备方向",
+      "chain": "能源供给",
+      "zone": "沿海临港",
+      "state": "线索·待核",
+      "stage": "方向待核",
+      "size": "中型档",
+      "legalForm": null,
+      "group": null,
+      "tradeStatus": null,
+      "grade": "C",
+      "blood": "C",
+      "coverage": 18,
+      "sixDim": {
+        "values": [
+          65,
+          76,
+          81,
+          82,
+          76,
+          71
+        ],
+        "pot": 84,
+        "ovr": 75,
+        "band": 8,
+        "lineage": "C"
+      },
+      "risks": [
+        "政策与审批",
+        "装备外购"
+      ],
+      "tags": [
+        "装备制造",
+        "运维配套"
+      ],
+      "fact": "能源装备与运维配套方向，本地主体待发现。",
+      "verify": "核验本地装备制造、检修运维主体及进入能源供应链的资质。",
+      "evidence": "开发先验 · 待核",
+      "observations": {
+        "employment": null,
+        "output": null,
+        "capacityUtil": null,
+        "orderBook": null,
+        "deliveryLag": null,
+        "arDays": null,
+        "localProcureRate": null,
+        "localLaborRate": null,
+        "localServiceRate": null
+      }
+    },
+    {
+      "id": "food-process",
+      "name": "水产与食品加工",
+      "short": "水产加工",
+      "sector": "secondary",
+      "club": "食品加工与包装",
+      "role": "关键配套",
+      "kind": "加工线索",
+      "tier": "关键配套",
+      "chain": "加工配套",
+      "zone": "产业集群",
+      "state": "线索·待核",
+      "stage": "方向待核",
+      "size": "中型档",
+      "legalForm": null,
+      "group": null,
+      "tradeStatus": null,
+      "grade": "C",
+      "blood": "C",
+      "coverage": 18,
+      "sixDim": {
+        "values": [
+          70,
+          78,
+          75,
+          79,
+          74,
+          70
+        ],
+        "pot": 82,
+        "ovr": 74,
+        "band": 8,
+        "lineage": "C"
+      },
+      "risks": [
+        "原料波动"
+      ],
+      "tags": [
+        "水产加工",
+        "预制菜"
+      ],
+      "fact": "水产与食品加工方向线索，加工主体与产能待核。",
+      "verify": "核验加工主体、原料来源、加工品类、冷库与品牌销售。",
+      "evidence": "开发先验 · 待核",
+      "observations": {
+        "employment": null,
+        "output": null,
+        "capacityUtil": null,
+        "orderBook": null,
+        "deliveryLag": null,
+        "arDays": null,
+        "localProcureRate": null,
+        "localLaborRate": null,
+        "localServiceRate": null
+      }
+    },
+    {
+      "id": "packaging",
+      "name": "包装印刷企业",
+      "short": "包装印刷",
+      "sector": "secondary",
+      "club": "食品加工与包装",
+      "role": "关键配套",
+      "kind": "配套线索",
+      "tier": "关键配套",
+      "chain": "加工配套",
+      "zone": "产业集群",
+      "state": "线索·待核",
+      "stage": "方向待核",
+      "size": "中型档",
+      "legalForm": null,
+      "group": null,
+      "tradeStatus": null,
+      "grade": "C",
+      "blood": "C",
+      "coverage": 18,
+      "sixDim": {
+        "values": [
+          62,
+          74,
+          73,
+          71,
+          70,
+          75
+        ],
+        "pot": 78,
+        "ovr": 70,
+        "band": 8,
+        "lineage": "C"
+      },
+      "risks": [
+        "原料波动"
+      ],
+      "tags": [
+        "包装",
+        "印刷"
+      ],
+      "fact": "包装印刷配套线索。",
+      "verify": "核验主体、服务客户、产能与环保合规。",
+      "evidence": "开发先验 · 待核",
+      "observations": {
+        "employment": null,
+        "output": null,
+        "capacityUtil": null,
+        "orderBook": null,
+        "deliveryLag": null,
+        "arDays": null,
+        "localProcureRate": null,
+        "localLaborRate": null,
+        "localServiceRate": null
+      }
+    },
+    {
+      "id": "coastal-scenic",
+      "name": "滨海景区运营主体",
+      "short": "滨海景区",
+      "sector": "tertiary",
+      "club": "滨海文旅与景区运营",
+      "role": "核心支柱",
+      "kind": "景区主体线索",
+      "tier": "龙头支柱",
+      "chain": "消费服务",
+      "zone": "滨海片区",
+      "state": "在营",
+      "stage": "运营期",
+      "size": "中型档",
+      "legalForm": null,
+      "group": null,
+      "tradeStatus": null,
+      "grade": "B-",
+      "blood": "B",
+      "coverage": 55,
+      "sixDim": {
+        "values": [
+          68,
+          70,
+          66,
+          80,
+          58,
+          84
+        ],
+        "pot": 83,
+        "ovr": 72,
+        "band": 5,
+        "lineage": "B"
+      },
+      "risks": [
+        "客流季节性",
+        "台风季节性"
+      ],
+      "tags": [
+        "巽寮湾",
+        "双月湾",
+        "景区运营"
+      ],
+      "fact": "2024 年游客 1756 万人次创新高；景区运营主体与经营数据待核。",
+      "verify": "核验运营主体、经营权、门票与二消收入、供应商及淡旺季就业。",
+      "evidence": "公开统计线索 · B-",
+      "observations": {
+        "employment": null,
+        "output": null,
+        "capacityUtil": null,
+        "orderBook": null,
+        "deliveryLag": null,
+        "arDays": null,
+        "localProcureRate": null,
+        "localLaborRate": null,
+        "localServiceRate": null
+      }
+    },
+    {
+      "id": "tourism-group",
+      "name": "县属文旅投资集团",
+      "short": "文旅平台",
+      "sector": "tertiary",
+      "club": "滨海文旅与景区运营",
+      "role": "生产服务",
+      "kind": "平台组织线索",
+      "tier": "平台组织",
+      "chain": "消费服务",
+      "zone": "滨海片区",
+      "state": "线索·待核",
+      "stage": "方向待核",
+      "size": "中型档",
+      "legalForm": null,
+      "group": null,
+      "tradeStatus": null,
+      "grade": "C+",
+      "blood": "C",
+      "coverage": 32,
+      "sixDim": {
+        "values": [
+          60,
+          64,
+          60,
+          82,
+          64,
+          78
+        ],
+        "pot": 79,
+        "ovr": 69,
+        "band": 8,
+        "lineage": "C"
+      },
+      "risks": [
+        "客流季节性",
+        "台风季节性"
+      ],
+      "tags": [
+        "文旅平台",
+        "国有平台"
+      ],
+      "fact": "县属文旅投资平台线索。",
+      "verify": "核验集团架构、子公司、资产经营、项目进度与经营性收入；资本规模不等于经营收入。",
+      "evidence": "开发先验 · 待核",
+      "observations": {
+        "employment": null,
+        "output": null,
+        "capacityUtil": null,
+        "orderBook": null,
+        "deliveryLag": null,
+        "arDays": null,
+        "localProcureRate": null,
+        "localLaborRate": null,
+        "localServiceRate": null
+      }
+    },
+    {
+      "id": "minsu",
+      "name": "滨海民宿集群平台",
+      "short": "民宿集群",
+      "sector": "tertiary",
+      "club": "民宿住宿与研学",
+      "role": "成长突破",
+      "kind": "业态线索",
+      "tier": "成长骨干",
+      "chain": "消费服务",
+      "zone": "滨海片区",
+      "state": "线索·待核",
+      "stage": "方向待核",
+      "size": "小微档",
+      "legalForm": null,
+      "group": null,
+      "tradeStatus": null,
+      "grade": "C",
+      "blood": "C",
+      "coverage": 18,
+      "sixDim": {
+        "values": [
+          59,
+          71,
+          67,
+          79,
+          76,
+          73
+        ],
+        "pot": 81,
+        "ovr": 71,
+        "band": 8,
+        "lineage": "C"
+      },
+      "risks": [
+        "客流季节性",
+        "台风季节性"
+      ],
+      "tags": [
+        "民宿",
+        "滨海度假"
+      ],
+      "fact": "滨海民宿集群方向线索，平台化程度待核。",
+      "verify": "核验民宿主体、入住率、客单价、淡旺季收入与本地就业。",
+      "evidence": "开发先验 · 待核",
+      "observations": {
+        "employment": null,
+        "output": null,
+        "capacityUtil": null,
+        "orderBook": null,
+        "deliveryLag": null,
+        "arDays": null,
+        "localProcureRate": null,
+        "localLaborRate": null,
+        "localServiceRate": null
+      }
+    },
+    {
+      "id": "study-tour",
+      "name": "研学旅行机构",
+      "short": "研学旅行",
+      "sector": "tertiary",
+      "club": "民宿住宿与研学",
+      "role": "成长突破",
+      "kind": "服务主体线索",
+      "tier": "成长骨干",
+      "chain": "消费服务",
+      "zone": "滨海片区",
+      "state": "线索·待核",
+      "stage": "方向待核",
+      "size": "小微档",
+      "legalForm": null,
+      "group": null,
+      "tradeStatus": null,
+      "grade": "C",
+      "blood": "C",
+      "coverage": 18,
+      "sixDim": {
+        "values": [
+          59,
+          71,
+          67,
+          79,
+          76,
+          80
+        ],
+        "pot": 82,
+        "ovr": 72,
+        "band": 8,
+        "lineage": "C"
+      },
+      "risks": [
+        "客流季节性",
+        "台风季节性"
+      ],
+      "tags": [
+        "研学",
+        "线路产品"
+      ],
+      "fact": "研学旅行机构线索。",
+      "verify": "核验工商全称、许可资质、线路产品、客源与复购。",
+      "evidence": "开发先验 · 待核",
+      "observations": {
+        "employment": null,
+        "output": null,
+        "capacityUtil": null,
+        "orderBook": null,
+        "deliveryLag": null,
+        "arDays": null,
+        "localProcureRate": null,
+        "localLaborRate": null,
+        "localServiceRate": null
+      }
+    },
+    {
+      "id": "logistics",
+      "name": "港口与冷链物流",
+      "short": "冷链物流",
+      "sector": "tertiary",
+      "club": "物流渔市与生产服务",
+      "role": "生产服务",
+      "kind": "物流线索",
+      "tier": "服务主体",
+      "chain": "流通交易",
+      "zone": "农产片区",
+      "state": "线索·待核",
+      "stage": "方向待核",
+      "size": "小微档",
+      "legalForm": null,
+      "group": null,
+      "tradeStatus": null,
+      "grade": "C",
+      "blood": "C",
+      "coverage": 18,
+      "sixDim": {
+        "values": [
+          56,
+          62,
+          70,
+          80,
+          77,
+          81
+        ],
+        "pot": 82,
+        "ovr": 71,
+        "band": 8,
+        "lineage": "C"
+      },
+      "risks": [
+        "客流季节性"
+      ],
+      "tags": [
+        "物流",
+        "冷链",
+        "港口"
+      ],
+      "fact": "港口与冷链物流方向线索。",
+      "verify": "核验物流主体、仓储冷库、线路时效、服务客户与货流数据。",
+      "evidence": "开发先验 · 待核",
+      "observations": {
+        "employment": null,
+        "output": null,
+        "capacityUtil": null,
+        "orderBook": null,
+        "deliveryLag": null,
+        "arDays": null,
+        "localProcureRate": null,
+        "localLaborRate": null,
+        "localServiceRate": null
+      }
+    },
+    {
+      "id": "fishery-market",
+      "name": "渔获交易市场",
+      "short": "渔市交易",
+      "sector": "tertiary",
+      "club": "物流渔市与生产服务",
+      "role": "基础保障",
+      "kind": "交易载体线索",
+      "tier": "基础主体",
+      "chain": "流通交易",
+      "zone": "农产片区",
+      "state": "线索·待核",
+      "stage": "方向待核",
+      "size": "中型档",
+      "legalForm": null,
+      "group": null,
+      "tradeStatus": null,
+      "grade": "C",
+      "blood": "C",
+      "coverage": 18,
+      "sixDim": {
+        "values": [
+          64,
+          66,
+          65,
+          70,
+          72,
+          78
+        ],
+        "pot": 80,
+        "ovr": 69,
+        "band": 8,
+        "lineage": "C"
+      },
+      "risks": [
+        "客流季节性"
+      ],
+      "tags": [
+        "渔市",
+        "交易集散"
+      ],
+      "fact": "渔获交易集散载体线索。",
+      "verify": "核验市场主体、交易量、辐射范围与渔户联结。",
+      "evidence": "开发先验 · 待核",
+      "observations": {
+        "employment": null,
+        "output": null,
+        "capacityUtil": null,
+        "orderBook": null,
+        "deliveryLag": null,
+        "arDays": null,
+        "localProcureRate": null,
+        "localLaborRate": null,
+        "localServiceRate": null
+      }
+    },
+    {
+      "id": "hotel",
+      "name": "滨海酒店住宿集群",
+      "short": "酒店住宿",
+      "sector": "tertiary",
+      "club": "民宿住宿与研学",
+      "role": "基础保障",
+      "kind": "业态线索",
+      "tier": "基础主体",
+      "chain": "消费服务",
+      "zone": "滨海片区",
+      "state": "线索·待核",
+      "stage": "方向待核",
+      "size": "中型档",
+      "legalForm": null,
+      "group": null,
+      "tradeStatus": null,
+      "grade": "C",
+      "blood": "C",
+      "coverage": 18,
+      "sixDim": {
+        "values": [
+          60,
+          64,
+          71,
+          73,
+          73,
+          79
+        ],
+        "pot": 81,
+        "ovr": 70,
+        "band": 8,
+        "lineage": "C"
+      },
+      "risks": [
+        "客流季节性",
+        "台风季节性"
+      ],
+      "tags": [
+        "酒店",
+        "度假住宿"
+      ],
+      "fact": "滨海酒店住宿集群线索。",
+      "verify": "核验主体、客房规模、入住率、客单价与配套留存。",
+      "evidence": "开发先验 · 待核",
+      "observations": {
+        "employment": null,
+        "output": null,
+        "capacityUtil": null,
+        "orderBook": null,
+        "deliveryLag": null,
+        "arDays": null,
+        "localProcureRate": null,
+        "localLaborRate": null,
+        "localServiceRate": null
+      }
+    },
+    {
+      "id": "eco-service",
+      "name": "生态环境服务主体",
+      "short": "生态服务",
+      "sector": "tertiary",
+      "club": "生态与数字化服务",
+      "role": "生产服务",
+      "kind": "服务主体线索",
+      "tier": "服务主体",
+      "chain": "生产服务",
+      "zone": "县域综合服务",
+      "state": "线索·待核",
+      "stage": "方向待核",
+      "size": "小微档",
+      "legalForm": null,
+      "group": null,
+      "tradeStatus": null,
+      "grade": "C",
+      "blood": "C",
+      "coverage": 18,
+      "sixDim": {
+        "values": [
+          55,
+          61,
+          62,
+          69,
+          71,
+          78
+        ],
+        "pot": 79,
+        "ovr": 66,
+        "band": 8,
+        "lineage": "C"
+      },
+      "risks": [
+        "客流季节性",
+        "本地覆盖不足"
+      ],
+      "tags": [
+        "生态",
+        "环境治理"
+      ],
+      "fact": "生态环境服务方向线索。",
+      "verify": "核验主体、业务范围、项目合同、资质与本地服务链条。",
+      "evidence": "开发先验 · 待核",
+      "observations": {
+        "employment": null,
+        "output": null,
+        "capacityUtil": null,
+        "orderBook": null,
+        "deliveryLag": null,
+        "arDays": null,
+        "localProcureRate": null,
+        "localLaborRate": null,
+        "localServiceRate": null
+      }
+    },
+    {
+      "id": "digital-service",
+      "name": "电商与数字化服务",
+      "short": "电商数字",
+      "sector": "tertiary",
+      "club": "生态与数字化服务",
+      "role": "成长突破",
+      "kind": "服务主体线索",
+      "tier": "成长骨干",
+      "chain": "生产服务",
+      "zone": "县域综合服务",
+      "state": "线索·待核",
+      "stage": "方向待核",
+      "size": "中型档",
+      "legalForm": null,
+      "group": null,
+      "tradeStatus": null,
+      "grade": "C",
+      "blood": "C",
+      "coverage": 18,
+      "sixDim": {
+        "values": [
+          66,
+          67,
+          65,
+          70,
+          64,
+          67
+        ],
+        "pot": 73,
+        "ovr": 67,
+        "band": 8,
+        "lineage": "C"
+      },
+      "risks": [
+        "客流季节性",
+        "本地覆盖不足"
+      ],
+      "tags": [
+        "电商",
+        "数字化服务"
+      ],
+      "fact": "电商与数字化服务方向，本地主体覆盖不足。",
+      "verify": "核验服务商、付费客户、部署量、续费率与带动销售情况。",
+      "evidence": "开发先验 · 待核",
+      "observations": {
+        "employment": null,
+        "output": null,
+        "capacityUtil": null,
+        "orderBook": null,
+        "deliveryLag": null,
+        "arDays": null,
+        "localProcureRate": null,
+        "localLaborRate": null,
+        "localServiceRate": null
+      }
+    },
+    {
+      "id": "nature-edu",
+      "name": "海洋自然教育机构",
+      "short": "自然教育",
+      "sector": "tertiary",
+      "club": "民宿住宿与研学",
+      "role": "成长突破",
+      "kind": "服务主体线索",
+      "tier": "成长骨干",
+      "chain": "消费服务",
+      "zone": "滨海片区",
+      "state": "线索·待核",
+      "stage": "方向待核",
+      "size": "中型档",
+      "legalForm": null,
+      "group": null,
+      "tradeStatus": null,
+      "grade": "C",
+      "blood": "C",
+      "coverage": 18,
+      "sixDim": {
+        "values": [
+          63,
+          65,
+          72,
+          74,
+          66,
+          75
+        ],
+        "pot": 78,
+        "ovr": 70,
+        "band": 8,
+        "lineage": "C"
+      },
+      "risks": [
+        "客流季节性",
+        "台风季节性"
+      ],
+      "tags": [
+        "自然教育",
+        "海龟湾"
+      ],
+      "fact": "海洋自然教育方向线索。",
+      "verify": "核验机构主体、课程产品、客源与季节性安排。",
+      "evidence": "开发先验 · 待核",
+      "observations": {
+        "employment": null,
+        "output": null,
+        "capacityUtil": null,
+        "orderBook": null,
+        "deliveryLag": null,
+        "arDays": null,
+        "localProcureRate": null,
+        "localLaborRate": null,
+        "localServiceRate": null
+      }
+    },
+    {
+      "id": "finance-service",
+      "name": "商务与金融服务",
+      "short": "商务服务",
+      "sector": "tertiary",
+      "club": "物流渔市与生产服务",
+      "role": "生产服务",
+      "kind": "服务线索",
+      "tier": "服务主体",
+      "chain": "生产服务",
+      "zone": "农产片区",
+      "state": "线索·待核",
+      "stage": "方向待核",
+      "size": "中型档",
+      "legalForm": null,
+      "group": null,
+      "tradeStatus": null,
+      "grade": "C",
+      "blood": "C",
+      "coverage": 18,
+      "sixDim": {
+        "values": [
+          64,
+          73,
+          68,
+          79,
+          69,
+          69
+        ],
+        "pot": 81,
+        "ovr": 71,
+        "band": 8,
+        "lineage": "C"
+      },
+      "risks": [
+        "客流季节性"
+      ],
+      "tags": [
+        "商务",
+        "金融配套"
+      ],
+      "fact": "商务与金融配套服务方向，主体待发现。",
+      "verify": "核验本地商务、金融、法务等生产性服务供给与企业使用情况。",
+      "evidence": "开发先验 · 待核",
+      "observations": {
+        "employment": null,
+        "output": null,
+        "capacityUtil": null,
+        "orderBook": null,
+        "deliveryLag": null,
+        "arDays": null,
+        "localProcureRate": null,
+        "localLaborRate": null,
+        "localServiceRate": null
+      }
+    }
+  ],
+  "projects": [
+    {
+      "id": "nuclear",
+      "name": "太平岭核电项目",
+      "type": "energy",
+      "stage": "投产",
+      "stageQ": 1,
+      "planInv": null,
+      "paidInv": null,
+      "rampRate": null,
+      "lineage": "B",
+      "fact": "太平岭核电 1 号机组 2026-02 并网（大湾区首台华龙一号）。",
+      "verify": "核验达产进度、设备外购比例与本地留存结构。"
+    },
+    {
+      "id": "nuclear-om",
+      "name": "核电本地化运维服务",
+      "type": "项目储备",
+      "stage": "线索",
+      "stageQ": null,
+      "planInv": null,
+      "paidInv": null,
+      "rampRate": null,
+      "lineage": "C",
+      "fact": "核电运维本地化是价值留存的关键环节。",
+      "verify": "识别本地检修、运维、技术服务主体与资质。"
+    },
+    {
+      "id": "om-wind",
+      "name": "海上风电装备与运维",
+      "type": "技术潜力方向",
+      "stage": "线索",
+      "stageQ": null,
+      "planInv": null,
+      "paidInv": null,
+      "rampRate": null,
+      "lineage": "C",
+      "fact": "海风装备与运维是产业链延伸方向。",
+      "verify": "寻找塔筒、叶片、电控、运维船等本地供给主体。"
+    },
+    {
+      "id": "marine-bio",
+      "name": "海洋生物与健康制品",
+      "type": "技术潜力方向",
+      "stage": "线索",
+      "stageQ": null,
+      "planInv": null,
+      "paidInv": null,
+      "rampRate": null,
+      "lineage": "C",
+      "fact": "海洋生物制品为长期探索方向，不代表已形成供给。",
+      "verify": "实验室、中试、企业与产品证据逐步补齐。"
+    },
+    {
+      "id": "coastal-premium",
+      "name": "高端滨海度假业态",
+      "type": "业态潜力",
+      "stage": "线索",
+      "stageQ": null,
+      "planInv": null,
+      "paidInv": null,
+      "rampRate": null,
+      "lineage": "C",
+      "fact": "高端度假与过夜消费提升方向。",
+      "verify": "核验项目主体、投资、开业进度与客群结构。"
+    },
+    {
+      "id": "shoe-brand",
+      "name": "鞋类品牌与设计升级",
+      "type": "产品潜力方向",
+      "stage": "线索",
+      "stageQ": null,
+      "planInv": null,
+      "paidInv": null,
+      "rampRate": null,
+      "lineage": "C",
+      "fact": "鞋业由代工向品牌设计升级的可能路径。",
+      "verify": "识别设计主体、自主品牌、渠道与溢价能力。"
+    },
+    {
+      "id": "agri-brand",
+      "name": "农产品区域公用品牌",
+      "type": "产品 / 产业机会",
+      "stage": "线索",
+      "stageQ": null,
+      "planInv": null,
+      "paidInv": null,
+      "rampRate": null,
+      "lineage": "C",
+      "fact": "农产品品牌化与渠道整合方向。",
+      "verify": "逐个锁定产品、主体、交易数据与农户收益。"
+    },
+    {
+      "id": "prepared-dish",
+      "name": "预制菜与冷链加工",
+      "type": "项目储备",
+      "stage": "线索",
+      "stageQ": null,
+      "planInv": null,
+      "paidInv": null,
+      "rampRate": null,
+      "lineage": "C",
+      "fact": "水产与农产预制化加工方向。",
+      "verify": "核验加工主体、原料、冷库、食品安全认证与订单。"
+    },
+    {
+      "id": "wind-solar",
+      "name": "风光互补与综合能源",
+      "type": "技术潜力方向",
+      "stage": "线索",
+      "stageQ": null,
+      "planInv": null,
+      "paidInv": null,
+      "rampRate": null,
+      "lineage": "C",
+      "fact": "综合能源与分布式互补布局方向。",
+      "verify": "寻找本地投资、建设与运营主体。"
+    }
+  ],
+  "links": [
+    {
+      "from": "nuclear",
+      "to": "energy-equip",
+      "type": "service",
+      "strength": 0.58,
+      "strengthLineage": "C",
+      "share": null,
+      "alternates": null,
+      "switchTime": null,
+      "switchCost": null,
+      "startQ": 1,
+      "endQ": null,
+      "status": "hypothesis",
+      "observed": false
+    },
+    {
+      "from": "offshore-wind",
+      "to": "energy-equip",
+      "type": "service",
+      "strength": 0.5,
+      "strengthLineage": "C",
+      "share": null,
+      "alternates": null,
+      "switchTime": null,
+      "switchCost": null,
+      "startQ": 1,
+      "endQ": null,
+      "status": "hypothesis",
+      "observed": false
+    },
+    {
+      "from": "offshore-wind",
+      "to": "nuclear",
+      "type": "share",
+      "strength": 0.22,
+      "strengthLineage": "C",
+      "share": null,
+      "alternates": null,
+      "switchTime": null,
+      "switchCost": null,
+      "startQ": 1,
+      "endQ": null,
+      "status": "hypothesis",
+      "observed": false
+    },
+    {
+      "from": "shoe-core",
+      "to": "shoe-parts",
+      "type": "procure",
+      "strength": 0.66,
+      "strengthLineage": "C",
+      "share": null,
+      "alternates": null,
+      "switchTime": null,
+      "switchCost": null,
+      "startQ": 1,
+      "endQ": null,
+      "status": "hypothesis",
+      "observed": false
+    },
+    {
+      "from": "shoe-core",
+      "to": "hardware",
+      "type": "procure",
+      "strength": 0.4,
+      "strengthLineage": "C",
+      "share": null,
+      "alternates": null,
+      "switchTime": null,
+      "switchCost": null,
+      "startQ": 1,
+      "endQ": null,
+      "status": "hypothesis",
+      "observed": false
+    },
+    {
+      "from": "shoe-parts",
+      "to": "hardware",
+      "type": "procure",
+      "strength": 0.3,
+      "strengthLineage": "C",
+      "share": null,
+      "alternates": null,
+      "switchTime": null,
+      "switchCost": null,
+      "startQ": 1,
+      "endQ": null,
+      "status": "hypothesis",
+      "observed": false
+    },
+    {
+      "from": "food-process",
+      "to": "fish-farm",
+      "type": "procure",
+      "strength": 0.55,
+      "strengthLineage": "C",
+      "share": null,
+      "alternates": null,
+      "switchTime": null,
+      "switchCost": null,
+      "startQ": 1,
+      "endQ": null,
+      "status": "hypothesis",
+      "observed": false
+    },
+    {
+      "from": "food-process",
+      "to": "fishery-coop",
+      "type": "procure",
+      "strength": 0.42,
+      "strengthLineage": "C",
+      "share": null,
+      "alternates": null,
+      "switchTime": null,
+      "switchCost": null,
+      "startQ": 1,
+      "endQ": null,
+      "status": "hypothesis",
+      "observed": false
+    },
+    {
+      "from": "food-process",
+      "to": "fruit-veg",
+      "type": "procure",
+      "strength": 0.34,
+      "strengthLineage": "C",
+      "share": null,
+      "alternates": null,
+      "switchTime": null,
+      "switchCost": null,
+      "startQ": 1,
+      "endQ": null,
+      "status": "hypothesis",
+      "observed": false
+    },
+    {
+      "from": "coastal-scenic",
+      "to": "minsu",
+      "type": "service",
+      "strength": 0.58,
+      "strengthLineage": "C",
+      "share": null,
+      "alternates": null,
+      "switchTime": null,
+      "switchCost": null,
+      "startQ": 1,
+      "endQ": null,
+      "status": "hypothesis",
+      "observed": false
+    },
+    {
+      "from": "coastal-scenic",
+      "to": "hotel",
+      "type": "service",
+      "strength": 0.52,
+      "strengthLineage": "C",
+      "share": null,
+      "alternates": null,
+      "switchTime": null,
+      "switchCost": null,
+      "startQ": 1,
+      "endQ": null,
+      "status": "hypothesis",
+      "observed": false
+    },
+    {
+      "from": "coastal-scenic",
+      "to": "study-tour",
+      "type": "service",
+      "strength": 0.44,
+      "strengthLineage": "C",
+      "share": null,
+      "alternates": null,
+      "switchTime": null,
+      "switchCost": null,
+      "startQ": 1,
+      "endQ": null,
+      "status": "hypothesis",
+      "observed": false
+    },
+    {
+      "from": "tourism-group",
+      "to": "coastal-scenic",
+      "type": "share",
+      "strength": 0.62,
+      "strengthLineage": "C",
+      "share": null,
+      "alternates": null,
+      "switchTime": null,
+      "switchCost": null,
+      "startQ": 1,
+      "endQ": null,
+      "status": "hypothesis",
+      "observed": false
+    },
+    {
+      "from": "tourism-group",
+      "to": "nature-edu",
+      "type": "service",
+      "strength": 0.38,
+      "strengthLineage": "C",
+      "share": null,
+      "alternates": null,
+      "switchTime": null,
+      "switchCost": null,
+      "startQ": 1,
+      "endQ": null,
+      "status": "hypothesis",
+      "observed": false
+    },
+    {
+      "from": "minsu",
+      "to": "nature-edu",
+      "type": "service",
+      "strength": 0.3,
+      "strengthLineage": "C",
+      "share": null,
+      "alternates": null,
+      "switchTime": null,
+      "switchCost": null,
+      "startQ": 1,
+      "endQ": null,
+      "status": "hypothesis",
+      "observed": false
+    },
+    {
+      "from": "fishery-market",
+      "to": "fish-farm",
+      "type": "procure",
+      "strength": 0.5,
+      "strengthLineage": "C",
+      "share": null,
+      "alternates": null,
+      "switchTime": null,
+      "switchCost": null,
+      "startQ": 1,
+      "endQ": null,
+      "status": "hypothesis",
+      "observed": false
+    },
+    {
+      "from": "logistics",
+      "to": "fishery-market",
+      "type": "service",
+      "strength": 0.46,
+      "strengthLineage": "C",
+      "share": null,
+      "alternates": null,
+      "switchTime": null,
+      "switchCost": null,
+      "startQ": 1,
+      "endQ": null,
+      "status": "hypothesis",
+      "observed": false
+    },
+    {
+      "from": "logistics",
+      "to": "food-process",
+      "type": "service",
+      "strength": 0.28,
+      "strengthLineage": "C",
+      "share": null,
+      "alternates": null,
+      "switchTime": null,
+      "switchCost": null,
+      "startQ": 1,
+      "endQ": null,
+      "status": "hypothesis",
+      "observed": false
+    }
+  ],
+  "scenarios": {
+    "pTable": {
+      "energy": {
+        "mode": 0.35,
+        "lo": 0.25,
+        "hi": 0.45,
+        "lineage": "C"
+      },
+      "manufacturing": {
+        "mode": 0.3,
+        "lo": 0.2,
+        "hi": 0.4,
+        "lineage": "C"
+      },
+      "tourism": {
+        "mode": 0.25,
+        "lo": 0.15,
+        "hi": 0.35,
+        "lineage": "C"
+      },
+      "agriculture": {
+        "mode": 0.4,
+        "lo": 0.3,
+        "hi": 0.5,
+        "lineage": "C"
+      }
+    },
+    "lostCoef": {
+      "lo": 0.05,
+      "hi": 0.15,
+      "mode": 0.1,
+      "lineage": "S"
+    },
+    "deliveryTolerance": {
+      "value": 1,
+      "unit": "季",
+      "lineage": "S"
+    },
+    "retentionWeights": [
+      0.4,
+      0.3,
+      0.3
+    ],
+    "shockFactors": {
+      "orders": 1,
+      "delay": 0.75,
+      "other": 1.18,
+      "lineage": "S"
+    },
+    "lags": {
+      "order": "月度",
+      "delivery": "季度",
+      "ramp": "年度"
+    }
+  }
+}

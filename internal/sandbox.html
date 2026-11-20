@@ -31,6 +31,16 @@ button,input,select{font:inherit}button{cursor:pointer;color:inherit}
 .disclaimer{margin-top:20px;border:1px solid #564a2e;background:#211e17;color:#c6b88e;padding:12px 14px;border-radius:12px;font-size:10px;line-height:1.6}.footer{color:#667f98;font-size:9px;text-align:center;margin-top:20px}
 .empty{border:1px dashed #40546a;border-radius:12px;padding:18px;text-align:center;color:#9aafc4;font-size:11px}
 @media(max-width:1080px){.board{grid-template-columns:1fr}.brief{grid-template-columns:1fr}.wind-panel{grid-template-columns:1fr}}
+/* ── 交互反馈与过渡补丁 ── */
+button,.play,.cand-row,.slot,.wind-stage button,.action{transition:background .18s,border-color .18s,color .18s,transform .12s}
+button:hover{border-color:#78b4d1}
+.play:hover{border-color:#78b4d1;transform:translateY(-2px)}
+.cand-row:hover{border-color:#53728d}
+.slot{transition:border-color .18s,background .18s,transform .12s}
+.slot:hover{border-color:#74c7dc}
+.factor .track i{transition:width .3s ease}
+.slot,.play,.cand-row{cursor:pointer}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
@@ -133,7 +143,7 @@ const entities=[
 const teamColor={primary:"#71d6a6",secondary:"#63d5ee",tertiary:"#b6a1ff"};
 function hashId(s){let h=0;for(const ch of s)h=(h*31+ch.charCodeAt(0))%100003;return h}
 function capFor(id,sector){const h=hashId(id),prior={primary:[59,66,64,72,68,77],secondary:[67,73,76,76,69,71],tertiary:[59,67,69,76,71,74]}[sector];return prior.map((x,i)=>Math.min(94,x+((h>>(i%6))%15)-7))}
-function needFor(id,sector,i){const h=hashId(id),v=capFor(id,sector);const raw=[10+Math.round(v[0]*.19)+h%8,8+Math.round(v[0]*.24)+h%7,6+Math.round(v[0]*.18)+h%5,6+Math.round(v[2]*.17)+h%6,5+Math.round(v[3]*.15)+h%5];const f=sector==="primary"?[1.12,.66,.66,.79,.71]:sector==="tertiary"?[.54,.87,.49,1.16,1.14]:[1,1,1,1,1];return raw.map((x,j)=>Math.round(x*f[j]))}
+function needFor(id,sector,i){const h=hashId(id),v=capFor(id,sector);const raw=[5+Math.round(v[0]*.10)+h%5,4+Math.round(v[0]*.12)+h%4,3+Math.round(v[0]*.09)+h%3,3+Math.round(v[2]*.09)+h%4,3+Math.round(v[3]*.08)+h%3];const f=sector==="primary"?[1.10,.70,.66,.82,.72]:sector==="tertiary"?[.56,.82,.52,1.05,1.02]:[1,1,1,1,1];return raw.map((x,j)=>Math.round(x*f[j]))}
 
 const plays={
  anchor:{label:"龙头优先",desc:"核心支柱先行，配套与基础保障围绕龙头展开。",slots:{core:"nuclear",supply:"shoe-core",base:"coastal-scenic",service:"tourism-group",growth:"offshore-wind",reserve:null}},

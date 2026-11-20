@@ -503,8 +503,8 @@ let tacticTeam="secondary",tacticIds=[],manager={slots:{...managerPlans.anchor}}
 function managerResource(p){
  let h=0;for(const ch of p.id)h=(h*31+ch.charCodeAt(0))%100003;
  const v=getModel(p).values;
- const raw=[10+Math.round(v[0]*.19)+h%8,8+Math.round(v[0]*.24)+h%7,6+Math.round(v[0]*.18)+h%5,6+Math.round(v[2]*.17)+h%6,5+Math.round(v[3]*.15)+h%5];
- const factors=p.team==="primary"?[1.12,.66,.66,.79,.71]:p.team==="tertiary"?[.54,.87,.49,1.16,1.14]:[1,1,1,1,1];
+ const raw=[5+Math.round(v[0]*.10)+h%5,4+Math.round(v[0]*.12)+h%4,3+Math.round(v[0]*.09)+h%3,3+Math.round(v[2]*.09)+h%4,3+Math.round(v[3]*.08)+h%3];
+ const factors=p.team==="primary"?[1.10,.70,.66,.82,.72]:p.team==="tertiary"?[.56,.82,.52,1.05,1.02]:[1,1,1,1,1];
  return raw.map((x,i)=>Math.round(x*factors[i]));
 }
 function managerSelected(){return Object.values(manager.slots).filter(Boolean).map(id=>company(id)).filter(Boolean)}

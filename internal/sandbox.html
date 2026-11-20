@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>惠东主体组合工作台 · 内部推演</title>
+<meta name="description" content="惠东主体线索组合推演：角色槽位、要素预算、布局对照与三阶段关系场。开发演示，非官方预测。">
+<style>
+:root{--bg:#0a1220;--panel:#111e30;--line:#263a52;--text:#edf4fb;--muted:#8ea3b9;--cyan:#63d5ee;--gold:#f1c56d;--green:#71d6a6;--purple:#b6a1ff;--red:#ff8c91;--radius:16px}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(1000px 600px at 70% -10%,#183451 0%,transparent 62%),linear-gradient(145deg,#08111d,#0c1727 55%,#101b2b);color:var(--text);font:14px/1.5 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}
+button,input,select{font:inherit}button{cursor:pointer;color:inherit}
+.shell{max-width:1440px;margin:auto;padding:22px 26px 70px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+.brand{display:flex;gap:13px;align-items:center}.brand-mark{width:50px;height:50px;border-radius:14px;background:linear-gradient(145deg,#e4bd68,#946d2e);display:grid;place-items:center;color:#172337;font-weight:1000;font-size:21px}
+.eyebrow{font-size:10px;letter-spacing:2.4px;color:var(--cyan);font-weight:800}.brand h1{font-size:20px;margin:3px 0 0}
+.pill{border:1px solid var(--line);border-radius:999px;padding:7px 11px;color:#b9c8d8;font-size:11px;background:#0d1a2a}.pill.warn{color:var(--gold);border-color:#765d2d;background:#2b2417}
+.brief{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0}.brief .b{border:1px solid #866a3c;border-radius:12px;background:linear-gradient(120deg,#45331f,#142e43);padding:12px}.brief b{font-size:12px;color:#ffe1a2;display:block}.brief small{font-size:9px;color:#9fc0d2;display:block;margin-top:3px}
+.strip{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center;padding:13px 15px;border:1px solid #496079;background:#182d41;border-radius:13px;margin:12px 0}.strip b{color:#e8cd8a}.strip p{font-size:10px;color:#a9bfd0;margin:3px 0}
+.board{display:grid;grid-template-columns:280px 1fr 300px;gap:14px;align-items:start}
+.panel{background:linear-gradient(145deg,#14253a,#101d2e);border:1px solid #263c54;border-radius:var(--radius);padding:16px}.panel h4{margin:0 0 11px;font-size:14px}
+.toolbar{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:10px}.toolbar button{border:1px solid #31475e;background:#102035;color:#9eb2c7;border-radius:10px;padding:7px 11px;font-size:11px}.toolbar button.active{background:#24415f;border-color:#5b8bb0;color:#fff}
+.search{width:100%;background:#0d1b2a;border:1px solid #30465f;border-radius:10px;padding:9px 12px;color:white;outline:none;margin-bottom:10px}
+.cand{display:grid;gap:8px;max-height:560px;overflow:auto}.cand-row{display:flex;justify-content:space-between;gap:8px;align-items:center;padding:9px 10px;background:#0c1928;border:1px solid #2a4056;border-radius:11px;font-size:11px}.cand-row b{font-size:12px}.cand-row small{display:block;color:#85a5bb;font-size:9px}.cand-row button{border:1px solid #3d5d78;background:#1d3b57;border-radius:8px;padding:5px 9px;font-size:10px}
+.slots{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;min-height:180px}.slot{min-height:72px;border:1px dashed #d0ead177;background:#0e2a25a8;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8px;cursor:pointer}.slot b{font-size:11px;color:#f0f8ef}.slot small{font-size:8px;color:#b2d0bc}.slot.filled{border-style:solid;background:#1d4355;border-color:#74c7dc}.slot button{margin-top:5px;border:none;background:transparent;color:#ffb3b8;font-size:9px}
+.factors{display:grid;gap:9px;margin-top:14px}.factor{display:grid;grid-template-columns:74px 1fr 64px;gap:8px;align-items:center;font-size:10px}.factor .track{background:#283f53;border-radius:10px;height:8px;overflow:hidden}.factor .track i{display:block;height:100%;border-radius:10px;background:#55bddb}.factor.over .track i{background:#ff8c91}
+.alert{margin-top:12px;padding:10px;border-radius:10px;font-size:10px}.alert.ok{border:1px solid #2d705b;background:#102a29;color:#9fe6c4}.alert.danger{border:1px solid #7a3540;background:#2b171c;color:#ffb3b8}
+.plays{display:grid;gap:9px}.play{border:1px solid #2a4056;background:#102035;border-radius:12px;padding:11px;cursor:pointer}.play.active{border-color:#78b4d1;background:#173552}.play b{font-size:12px;color:#f3d28c}.play p{font-size:9px;color:#9ab0c6;margin:4px 0 0}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.cmp{border:1px solid #2a4056;border-radius:11px;padding:10px;font-size:10px}.cmp b{display:block;color:#f3d28c;font-size:12px;margin-bottom:4px}
+.wind-stage{display:flex;gap:6px;margin:16px 0 10px}.wind-stage button{flex:1;border:1px solid #2a4056;background:#102035;border-radius:10px;padding:9px;color:#9eb2c7}.wind-stage button.active{background:#24415f;border-color:#5b8bb0;color:#fff}
+.wind-panel{display:grid;grid-template-columns:1fr 1fr;gap:14px}.wind-panel svg{width:100%;min-height:300px}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.action{border:1px solid #3d5d78;background:#1d3b57;padding:9px 12px;border-radius:9px;font-size:11px}.action.primary{background:#d9b96c;color:#152338;border-color:#d9b96c;font-weight:800}
+.disclaimer{margin-top:20px;border:1px solid #564a2e;background:#211e17;color:#c6b88e;padding:12px 14px;border-radius:12px;font-size:10px;line-height:1.6}.footer{color:#667f98;font-size:9px;text-align:center;margin-top:20px}
+.empty{border:1px dashed #40546a;border-radius:12px;padding:18px;text-align:center;color:#9aafc4;font-size:11px}
+@media(max-width:1080px){.board{grid-template-columns:1fr}.brief{grid-template-columns:1fr}.wind-panel{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="top">
+    <div class="brand"><div class="brand-mark">惠</div><div><div class="eyebrow">HUIDONG PORTFOLIO SANDBOX</div><h1>惠东主体组合工作台</h1></div></div>
+    <div><span class="pill warn">开发演示 · 主体待核</span></div>
+  </div>
+
+  <div class="brief">
+    <div class="b"><b>2025 基准 · GDP 861.25 亿元</b><small>统计公报口径；不与主体卡片分相加</small></div>
+    <div class="b"><b>三产 11.5 : 35.5 : 53.0</b><small>结构罗盘，非规划目标或增加值承诺</small></div>
+    <div class="b"><b>28 条候选主体线索</b><small>工商身份、属地、经营状态逐项待核</small></div>
+  </div>
+
+  <div class="strip">
+    <div><b>角色槽位 · 要素预算 · 假设关系场</b><p>组合内主体为情景估算样本；五要素（土地/资金/用能/人才/平台）为 0–100 情景单位，不可互抵，超限即阻断。</p></div>
+    <div class="actions"><button class="action" id="exportJson">导出组合 JSON</button><button class="action" id="importJson">导入 JSON</button><input type="file" id="fileInput" accept=".json" hidden></div>
+  </div>
+
+  <div class="board">
+    <!-- 候选 -->
+    <section class="panel">
+      <h4>◉ 候选主体线索</h4>
+      <input class="search" id="candSearch" placeholder="搜索主体 / 赛道…">
+      <div class="toolbar" id="candFilter"></div>
+      <div class="cand" id="candList"></div>
+    </section>
+
+    <!-- 阵容与要素 -->
+    <section class="panel">
+      <h4>◆ 当前组合 · 六角色槽位</h4>
+      <div class="slots" id="slots"></div>
+      <div class="factors" id="factors"></div>
+      <div id="slotAlert"></div>
+      <div class="actions"><button class="action" id="clearSlots">清空组合</button><button class="action primary" id="copyToB">存入对照 B</button></div>
+      <div class="compare">
+        <div class="cmp" id="cmpA"><b>组合 A · 当前</b><span id="cmpAbody"></span></div>
+        <div class="cmp" id="cmpB"><b>组合 B · 基准对照</b><span id="cmpBbody"></span></div>
+      </div>
+    </section>
+
+    <!-- 布局预设 -->
+    <section class="panel">
+      <h4>◈ 布局一键加载</h4>
+      <div class="plays" id="plays"></div>
+      <div class="disclaimer" style="margin-top:12px">预设仅为情景模板：路线不代表官方规划；被划入同一布局不等于已存在供应、采购或合作关系。</div>
+    </section>
+  </div>
+
+  <section class="panel" style="margin-top:14px">
+    <h4>◈ 三阶段关系场（假设边，非已验证交易）</h4>
+    <div class="wind-stage" id="stageBar">
+      <button data-stage="0" class="active">T0 基础配置</button>
+      <button data-stage="1">T1 配套衔接</button>
+      <button data-stage="2">T2 长期协同</button>
+    </div>
+    <div class="wind-panel"><svg id="windSvg" viewBox="0 0 700 320" role="img" aria-label="三阶段假设关系网络"></svg><div id="windNotes" class="micro" style="font-size:11px;color:#9db0c3;line-height:1.7"></div></div>
+  </section>
+
+  <div class="disclaimer"><b>口径纪律：</b>资源需求为开发阶段合成演示值（resourceModel: synthetic），不是真实用地、预算、能耗、人才或平台占用；组合指数不折算 GDP、产值、就业或税收；签约意向、地理邻近、规划方向均不作为已发生的供应协议或本地产能。所有主体证据等级与资料覆盖在接入核验数据后校准。</div>
+  <div class="footer">HUIDONG PORTFOLIO SANDBOX · INTERNAL SCENARIO · EVIDENCE BEFORE RELATIONSHIP</div>
+</div>
+
+<script>
+const factorNames=["土地","资金","用能","人才","平台"],factorKeys=["land","fund","energy","talent","platform"],caps=[100,100,100,100,100];
+const roles=[{id:"core",name:"核心支柱"},{id:"growth",name:"成长突破"},{id:"supply",name:"关键配套"},{id:"service",name:"生产服务"},{id:"base",name:"基础保障"},{id:"reserve",name:"战略储备"}];
+
+const entities=[
+ ["fishery-coop","港口渔业联合社","渔","primary","海洋渔业","核心支柱","渔业协作与联农带农线索，主体规模与合同待核"],
+ ["fish-farm","规模化水产养殖基地","养","primary","水产养殖","骨干主体","养殖品种、面积与销售待核"],
+ ["potato-base","惠东马铃薯种植集群","薯","primary","特色种植","骨干主体","冬种马铃薯特色种植线索"],
+ ["livestock","禽畜养殖主体","畜","primary","畜牧养殖","基础保障","经营状态与环保合规待核"],
+ ["salt-farm","海盐传统生产主体","盐","primary","传统农产","战略储备","存续经营与技艺传承待核"],
+ ["fruit-veg","特色果蔬与甜玉米基地","果","primary","特色种植","基础保障","品类、主体与冷链衔接待核"],
+ ["aqua-feed","水产饲料与农资主体","料","primary","水产养殖","关键配套","本地饲料主体待发现"],
+ ["nuclear","太平岭核电项目","核","secondary","清洁能源","核心支柱","华龙一号 2026-02 并网；本地配套与价值留存待核"],
+ ["offshore-wind","海上风电基地","风","secondary","清洁能源","成长突破","本地主体与装备配套待核"],
+ ["shoe-core","女鞋制造龙头企业","鞋","secondary","鞋业制造","核心支柱","集群龙头名单、品牌与用工待核"],
+ ["shoe-parts","鞋材配套企业","材","secondary","鞋业配套","关键配套","配套主体与本地采购比例待核"],
+ ["new-material","新材料企业","料","secondary","新材料","成长突破","品类、工艺与客户待核"],
+ ["hardware","五金制品企业","金","secondary","五金配套","关键配套","工艺、客户集中与环保待核"],
+ ["textile","纺织服装企业","纺","secondary","纺织服装","基础保障","经营状态与转型方向待核"],
+ ["energy-equip","能源装备配套主体","装","secondary","清洁能源","战略储备","本地装备/运维主体待发现"],
+ ["food-process","水产与食品加工","食","secondary","食品加工","关键配套","原料来源、产能与品牌待核"],
+ ["packaging","包装印刷企业","包","secondary","包装配套","关键配套","主体与环保合规待核"],
+ ["coastal-scenic","滨海景区运营主体","景","tertiary","滨海文旅","核心支柱","2024 游客 1756 万人次；运营主体与经营数据待核"],
+ ["tourism-group","县属文旅投资集团","旅","tertiary","文旅平台","生产服务","经营性收入待核；资本规模不等于经营收入"],
+ ["minsu","滨海民宿集群平台","宿","tertiary","民宿住宿","成长突破","入住率、客单价与就业待核"],
+ ["study-tour","研学旅行机构","研","tertiary","研学服务","成长突破","资质、线路与复购待核"],
+ ["logistics","港口与冷链物流","物","tertiary","物流服务","生产服务","仓储冷库、线路与货流待核"],
+ ["fishery-market","渔获交易市场","市","tertiary","渔市交易","基础保障","交易量与渔户联结待核"],
+ ["hotel","滨海酒店住宿集群","酒","tertiary","酒店住宿","基础保障","客房规模与入住率待核"],
+ ["eco-service","生态环境服务主体","环","tertiary","生态服务","生产服务","业务范围与项目合同待核"],
+ ["digital-service","电商与数字化服务","数","tertiary","数字服务","成长突破","服务商、付费客户与续费率待核"],
+ ["nature-edu","海洋自然教育机构","海","tertiary","自然教育","成长突破","机构主体与课程客源待核"],
+ ["finance-service","商务与金融服务","商","tertiary","生产服务","生产服务","本地商务金融供给待发现"]
+].map(([id,name,short,sector,club,role,fact],i)=>({id,name,short,sector,club,role,fact,evidence:"C · 待核",coverage:18+ (id==="nuclear"||id==="coastal-scenic"?37:0),sourceUrl:null,modelType:"scenario-estimate",resourceModel:"synthetic",cap:capFor(id,sector),need:needFor(id,sector,i)}));
+
+const teamColor={primary:"#71d6a6",secondary:"#63d5ee",tertiary:"#b6a1ff"};
+function hashId(s){let h=0;for(const ch of s)h=(h*31+ch.charCodeAt(0))%100003;return h}
+function capFor(id,sector){const h=hashId(id),prior={primary:[59,66,64,72,68,77],secondary:[67,73,76,76,69,71],tertiary:[59,67,69,76,71,74]}[sector];return prior.map((x,i)=>Math.min(94,x+((h>>(i%6))%15)-7))}
+function needFor(id,sector,i){const h=hashId(id),v=capFor(id,sector);const raw=[10+Math.round(v[0]*.19)+h%8,8+Math.round(v[0]*.24)+h%7,6+Math.round(v[0]*.18)+h%5,6+Math.round(v[2]*.17)+h%6,5+Math.round(v[3]*.15)+h%5];const f=sector==="primary"?[1.12,.66,.66,.79,.71]:sector==="tertiary"?[.54,.87,.49,1.16,1.14]:[1,1,1,1,1];return raw.map((x,j)=>Math.round(x*f[j]))}
+
+const plays={
+ anchor:{label:"龙头优先",desc:"核心支柱先行，配套与基础保障围绕龙头展开。",slots:{core:"nuclear",supply:"shoe-core",base:"coastal-scenic",service:"tourism-group",growth:"offshore-wind",reserve:null}},
+ balanced:{label:"链条均衡",desc:"文旅、加工、物流与渔农配套平衡布点，优先链条衔接。",slots:{core:"coastal-scenic",supply:"food-process",service:"logistics",growth:"shoe-core",base:"fishery-coop",reserve:"new-material"}},
+ future:{label:"成长接棒",desc:"向新材料、能源配套与数字服务倾斜，培育下一梯队。",slots:{core:"offshore-wind",growth:"new-material",supply:"energy-equip",service:"digital-service",base:null,reserve:"nature-edu"}}
+};
+
+const links=[["nuclear","energy-equip",.58],["offshore-wind","energy-equip",.50],["shoe-core","shoe-parts",.66],["shoe-core","hardware",.40],["food-process","fish-farm",.55],["food-process","fishery-coop",.42],["food-process","fruit-veg",.34],["coastal-scenic","minsu",.58],["coastal-scenic","hotel",.52],["coastal-scenic","study-tour",.44],["tourism-group","coastal-scenic",.62],["tourism-group","nature-edu",.38],["minsu","nature-edu",.30],["fishery-market","fish-farm",.50],["logistics","fishery-market",.46],["logistics","food-process",.28]];
+
+let slots={core:null,growth:null,supply:null,service:null,base:null,reserve:null};
+let slotB={...slots};
+let activePlay=null,activeStage=0,candFilter="all",candQuery="";
+
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const ent=id=>entities.find(e=>e.id===id);
+
+function totals(s){const used=[0,0,0,0,0];Object.values(s).filter(Boolean).forEach(id=>{const e=ent(id);e.need.forEach((n,i)=>used[i]+=n)});return used}
+function overloaded(used){return used.map((x,i)=>Math.max(0,x-caps[i]))}
+
+function renderCand(){
+ const list=entities.filter(e=>(candFilter==="all"||e.sector===candFilter)&&[e.name,e.club,e.role].join(" ").toLowerCase().includes(candQuery));
+ $("candList").innerHTML=list.map(e=>'<div class="cand-row"><div><b>'+esc(e.name)+'</b><small>'+esc(e.club)+" · "+esc(e.role)+" · 覆盖 "+e.coverage+"%</small></div><button data-add=\""+e.id+'">加入</button></div>').join("")||'<div class="empty">无匹配主体</div>';
+}
+function renderSlots(){
+ $("slots").innerHTML=roles.map(r=>{const id=slots[r.id],e=id?ent(id):null;
+  return '<div class="slot '+(e?"filled":"")+'" data-slot="'+r.id+'">'+(e?"<b>"+esc(e.short)+"</b><small>"+esc(e.club)+"</small><button data-un='"+r.id+"'>移除</button>":"<b>＋ "+r.name+"</b><small>待选择</small>")+'</div>';}).join("");
+ const used=totals(slots),over=overloaded(used);
+ $("factors").innerHTML=factorNames.map((f,i)=>'<div class="factor '+(used[i]>caps[i]?"over":"")+'"><span>'+f+'</span><span class="track"><i style="width:'+Math.min(100,used[i])+'%"></i></span><strong>'+used[i]+' / '+caps[i]+'</strong></div>').join("");
+ const isOver=over.some(x=>x>0);
+ $("slotAlert").innerHTML=isOver?'<div class="alert danger">⚠ '+(factorNames[over.findIndex(x=>x>0)])+'超出上限；要素不可互抵，组合暂不可行。</div>':'<div class="alert ok">✓ 五项要素暂未超限；仍需核验用地、环评、资金能力与主体间真实关系。</div>';
+ renderCompare(used);
+}
+function renderCompare(usedA){
+ const usedB=totals(slotB);
+ const summary=s=>{const ids=Object.values(s).filter(Boolean);const sectors=new Set(ids.map(id=>ent(id).sector)).size;return ids.length+" 主体 · "+sectors+" 板块 · 要素 "+totals(s).join("/")};
+ $("cmpAbody").textContent=summary(slots);$("cmpBbody").textContent=summary(slotB);
+}
+function renderPlays(){
+ $("plays").innerHTML=Object.entries(plays).map(([k,p])=>'<div class="play '+(activePlay===k?"active":"")+'" data-play="'+k+'"><b>'+p.label+'</b><p>'+p.desc+'</p></div>').join("");
+}
+function renderWind(){
+ const ids=Object.values(slots).filter(Boolean);
+ const pool=ids.length?ids:["nuclear","coastal-scenic","shoe-core","food-process","logistics","tourism-group","offshore-wind","new-material"];
+ const cx=350,cy=160,pos={};pool.slice(0,8).forEach((id,i)=>{const a=-Math.PI/2+i*2*Math.PI/Math.min(8,pool.length);pos[id]=[cx+Math.cos(a)*135,cy+Math.sin(a)*105]});
+ let svg="";
+ const stageLinks=links.filter(l=>activeStage===0?pool.includes(l[0])&&pool.includes(l[1]):activeStage===1?true:l[2]>.45);
+ for(const [a,b,w] of stageLinks){if(!pos[a]||!pos[b])continue;svg+='<line x1="'+pos[a][0]+'" y1="'+pos[a][1]+'" x2="'+pos[b][0]+'" y2="'+pos[b][1]+'" stroke="#62bdd4" stroke-opacity="'+(w*.7)+'"/>';}
+ for(const id of pool){const e=ent(id)||entities[0];const p=pos[id];if(!p)continue;svg+='<circle cx="'+p[0]+'" cy="'+p[1]+'" r="21" fill="'+teamColor[e.sector]+'22" stroke="'+teamColor[e.sector]+'"/><text x="'+p[0]+'" y="'+(p[1]+4)+'" text-anchor="middle" font-size="9" fill="#dff2f8">'+esc(e.short)+'</text>';}
+ $("windSvg").innerHTML=svg;
+ $("windNotes").innerHTML=["T0：当前槽位内主体的基础配置，边仅按产业逻辑假设。","T1：补出配套衔接可能涉及的原料、供货与服务环节，仍为假设边。","T2：长期协同仅在取得采购、供应、客户、技术合作或人才流动证据后成立；未核前不计算协同收益。"][activeStage];
+}
+
+// 事件
+$("candFilter").innerHTML=['<button data-f="all" class="active">全部</button>',...Object.entries(teamColor).map(([k,c])=>'<button data-f="'+k+'">'+({primary:"一产",secondary:"二产",tertiary:"三产"}[k])+'</button>')].join("");
+$("candFilter").onclick=e=>{const b=e.target.closest("[data-f]");if(b){candFilter=b.dataset.f;[...$("candFilter").children].forEach(x=>x.classList.toggle("active",x===b));renderCand()}};
+$("candSearch").oninput=e=>{candQuery=e.target.value.trim().toLowerCase();renderCand()};
+$("candList").onclick=e=>{const b=e.target.closest("[data-add]");if(!b)return;const role="core";if(!slots[role]){slots[role]=b.dataset.add}else{const free=roles.find(r=>!slots[r.id]);if(free)slots[free.id]=b.dataset.add}activePlay=null;renderSlots();renderWind()};
+$("slots").onclick=e=>{const u=e.target.closest("[data-un]");if(u){slots[u.dataset.un]=null;activePlay=null;renderSlots();renderWind();return}const s=e.target.closest("[data-slot]");if(s){const free=entities.find(x=>!Object.values(slots).includes(x.id));if(free)slots[s.dataset.slot]=free.id;activePlay=null;renderSlots();renderWind()}};
+$("clearSlots").onclick=()=>{slots={core:null,growth:null,supply:null,service:null,base:null,reserve:null};activePlay=null;renderSlots();renderWind()};
+$("copyToB").onclick=()=>{slotB={...slots};renderCompare()};
+$("plays").onclick=e=>{const p=e.target.closest("[data-play]");if(!p)return;activePlay=p.dataset.play;slots={...plays[p.dataset.play].slots};renderPlays();renderSlots();renderWind()};
+$("stageBar").onclick=e=>{const b=e.target.closest("[data-stage]");if(b){activeStage=Number(b.dataset.stage);[...$("stageBar").children].forEach(x=>x.classList.toggle("active",x===b));renderWind()}};
+$("exportJson").onclick=()=>{const payload={county:"惠东县",resourceModel:"synthetic",disclaimer:"开发演示组合，非官方预测；资源为情景单位，不折算总量。",caps,factors:factorNames,slots,entities:entities.map(e=>({id:e.id,name:e.name,sector:e.sector,club:e.club,role:e.role,evidence:e.evidence,coverage:e.coverage,need:e.need}))};const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="huidong-sandbox-composition.json";a.click();URL.revokeObjectURL(a.href)};
+$("importJson").onclick=()=>$("fileInput").click();
+$("fileInput").onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result);if(d.slots)slots=d.slots;renderSlots();renderWind()}catch(err){alert("JSON 解析失败："+err.message)}};r.readAsText(f)};
+
+renderCand();renderSlots();renderPlays();renderWind();
+</script>
+</body>
+</html>

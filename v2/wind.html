@@ -23,6 +23,13 @@
 .goal-card .v{font-size:19px;font-weight:800;color:var(--gold);font-variant-numeric:tabular-nums}
 .goal-card .s{font-size:11px;color:var(--faint);margin-top:4px;line-height:1.6}
 </style>
+<link rel="stylesheet" href="../ui/premium.css">
+<script>/* premium 样式偶发 503：失败自动重试一次 */
+(function(){var r={};Array.prototype.forEach.call(
+document.querySelectorAll('link[rel="stylesheet"][href*="premium"]'),
+function(l){l.addEventListener("error",function(){if(r[l.href])return;r[l.href]=1;
+var s=document.createElement("link");s.rel="stylesheet";
+s.href=l.href.split("?")[0]+"?retry="+Date.now();document.head.appendChild(s);});});})();</script>
 </head>
 <body>
 

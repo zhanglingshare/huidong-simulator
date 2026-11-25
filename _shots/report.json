@@ -1,0 +1,570 @@
+{
+  "src": "index.html",
+  "url": "file:///home/user/Doubao/chats/38445304647341314/huidong-simulator/index.html",
+  "outdir": "/home/user/Doubao/chats/38445304647341314/huidong-simulator/_shots",
+  "include": [
+    "lint",
+    "screenshots",
+    "structure"
+  ],
+  "shots": {
+    "mobile": {
+      "revealed": 0,
+      "screenshot": "/home/user/Doubao/chats/38445304647341314/huidong-simulator/_shots/index_mobile.jpg",
+      "screenshotBytes": 74154,
+      "truncated": false,
+      "structure": {
+        "title": "惠东产业风洞 · 今日话题",
+        "firstH1": "今日惠东话题",
+        "viewport": {
+          "w": 390,
+          "h": 844
+        },
+        "fullpage": {
+          "w": 390,
+          "h": 1201
+        },
+        "counts": {
+          "section": 0,
+          "h1": 1,
+          "h2": 0,
+          "img": 0,
+          "canvas": 0,
+          "svg": 1,
+          "links": 11,
+          "buttons": 28
+        }
+      },
+      "consoleErrors": [
+        {
+          "type": "error",
+          "text": "Access to fetch at 'file:///home/user/Doubao/chats/38445304647341314/huidong-simulator/hot.json?ts=1792702652046' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome, chrome-extension, chrome-untrusted, data, http, https, isolated",
+          "location": "file:///home/user/Doubao/chats/38445304647341314/huidong-simulator/index.html"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_FAILED",
+          "location": "file:///home/user/Doubao/chats/38445304647341314/huidong-simulator/hot.json?ts=1792702652046"
+        },
+        {
+          "type": "error",
+          "text": "Access to fetch at 'file:///home/user/Doubao/chats/38445304647341314/huidong-simulator/hot.json?ts=1792702652659' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome, chrome-extension, chrome-untrusted, data, http, https, isolated",
+          "location": "file:///home/user/Doubao/chats/38445304647341314/huidong-simulator/index.html"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_FAILED",
+          "location": "file:///home/user/Doubao/chats/38445304647341314/huidong-simulator/hot.json?ts=1792702652659"
+        },
+        {
+          "type": "error",
+          "text": "Access to fetch at 'file:///home/user/Doubao/chats/38445304647341314/huidong-simulator/hot.json?ts=1792702653160' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome, chrome-extension, chrome-untrusted, data, http, https, isolated",
+          "location": "file:///home/user/Doubao/chats/38445304647341314/huidong-simulator/index.html"
+        },
+        {
+          "type": "error",
+          "text": "Failed to load resource: net::ERR_FAILED",
+          "location": "file:///home/user/Doubao/chats/38445304647341314/huidong-simulator/hot.json?ts=1792702653160"
+        }
+      ],
+      "consoleWarnings": [],
+      "horizontalOverflow": [],
+      "resourceErrors": [
+        {
+          "url": "file:///home/user/Doubao/chats/38445304647341314/huidong-simulator/hot.json?ts=1792702652046",
+          "resourceType": "fetch",
+          "status": null,
+          "reason": "network_error"
+        },
+        {
+          "url": "file:///home/user/Doubao/chats/38445304647341314/huidong-simulator/hot.json?ts=1792702652659",
+          "resourceType": "fetch",
+          "status": null,
+          "reason": "network_error"
+        },
+        {
+          "url": "file:///home/user/Doubao/chats/38445304647341314/huidong-simulator/hot.json?ts=1792702653160",
+          "resourceType": "fetch",
+          "status": null,
+          "reason": "network_error"
+        }
+      ],
+      "emojiUsageWarning": [
+        {
+          "tag": "a",
+          "chars": "🏘",
+          "contextText": "🏘️ 各镇吃喝玩乐"
+        },
+        {
+          "tag": "div",
+          "chars": "🏘",
+          "contextText": "🏘️ 你是惠东哪个镇的？"
+        },
+        {
+          "tag": "div",
+          "chars": "🏆",
+          "contextText": "🏆 向外人介绍惠东，你最先说哪样？"
+        },
+        {
+          "tag": "button",
+          "chars": "🌊",
+          "contextText": "🌊 双月湾"
+        },
+        {
+          "tag": "button",
+          "chars": "🐢",
+          "contextText": "🐢 海龟湾"
+        },
+        {
+          "tag": "button",
+          "chars": "🦪",
+          "contextText": "🦪 赤岸生蚝"
+        },
+        {
+          "tag": "button",
+          "chars": "👠",
+          "contextText": "👠 惠东女鞋"
+        },
+        {
+          "tag": "button",
+          "chars": "⚛",
+          "contextText": "⚛️ 太平岭核电"
+        },
+        {
+          "tag": "button",
+          "chars": "🔵",
+          "contextText": "🔵 产业"
+        },
+        {
+          "tag": "button",
+          "chars": "🟠",
+          "contextText": "🟠 民生"
+        },
+        {
+          "tag": "button",
+          "chars": "⚪",
+          "contextText": "⚪ 城市"
+        },
+        {
+          "tag": "button",
+          "chars": "🌾",
+          "contextText": "🌾 农渔"
+        },
+        {
+          "tag": "button",
+          "chars": "🏖",
+          "contextText": "🏖️ 文旅"
+        },
+        {
+          "tag": "button",
+          "chars": "🔄",
+          "contextText": "🔄 重新扫描"
+        },
+        {
+          "tag": "button",
+          "chars": "👍",
+          "contextText": "👍"
+        }
+      ],
+      "emojiUsageHint": "warning · 含义：页面正文里检出 emoji 字符（U+1F300–U+1FAFF 或 U+2600–U+27BF 平面）。SKILL.md 视觉设计段明确禁用 emoji——不作图标、不作装饰、不放进数据。 | 修法：换成内联 SVG 图标（<svg viewBox=\"0 0 24 24\">）建立风格连贯的图标语言。 | 豁免：(1) **用户品牌资产明确包含 emoji**（罕见，但如即时通讯、社交媒体主题的产物合理）；(2) 主题本身就是关于 emoji 的（emoji 历史 / 表情包研究 / Unicode 演进）；(3) 引用某条真实文本原文（如推文截图的文字版），emoji 是内容而非装饰——保留原文可接受，但仍应权衡；(4) 装饰性 dingbat（如 U+2713 勾选符 ✓、U+2192 箭头 →、U+2605 星 ★）落入 U+2600–U+27BF 平面被误报的，如确认是符号非 emoji 可忽略。",
+      "faviconWarning": {
+        "present": false
+      },
+      "faviconHint": "warning · 含义：没有任何 favicon 声明——浏览器 tab、书签、历史记录里显示的是空白默认图标，产物看起来没做完。实测模型原始产物的缺失率 94%。 | 修法：用**内联 SVG data URI**，一行搞定、零额外文件：`<link rel=\"icon\" type=\"image/svg+xml\" href=\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230F766E'/%3E%3Ctext x='32' y='44' font-size='36' text-anchor='middle' fill='white'%3EA%3C/text%3E%3C/svg%3E\">`。图形取产物主题里的一个符号（首字母、核心图标、品牌形状），配色沿用页面主色，别用无关的通用图标。 | **三个必须注意的编码细节**：外层 href 用双引号、SVG 内部属性用单引号；`<` `>` 写成 `%3C` `%3E`；**颜色的 `#` 必须写成 `%23`**——不编码会被当成 URL fragment，图标直接不显示。想做深浅色两版就写两个 link，加 `media=\"(prefers-color-scheme: dark)\"`。 | 为什么只能用 data URI：`link href` **不在发布链路的资源收集白名单里**（那里只认 `src` 属性和 CSS `url()`），指向 `assets/` 的图标文件发布后必然 404；而且额外文件破坏单文件自包含，用户拿到一个 html 就该能用。 | 会不会被平台图标覆盖：不会。发布平台把自己的默认 favicon 注入在 `<head>` 最前面，浏览器对多个 icon link **取最后一个**，模型写在后面的那个生效。 | 豁免：(1) 产物是页面片段（没有完整 `<head>`）时不适用；(2) externalRefs 指向 CDN 域名（`lf3-static.bytednsdoc.com` 之类）时，那是**发布平台注入的**默认图标，不是你写的——迭代已发布产物时会看到，忽略即可，自己另加一个 data URI 的 link 就行（浏览器对多个 icon link 取最后一个）。"
+    }
+  },
+  "engine": "playwright",
+  "chromiumExec": "/opt/vm/preinstall/ms-playwright/chromium-1169/chrome-linux/chrome",
+  "elapsedSec": 5.33,
+  "schemaVersion": 2,
+  "status": "fail",
+  "engineInfo": {
+    "name": "playwright",
+    "degraded": false,
+    "degradedReasons": []
+  },
+  "input": {
+    "original": "index.html",
+    "resolvedPath": "/home/user/Doubao/chats/38445304647341314/huidong-simulator/index.html",
+    "baseUrl": "file:///home/user/Doubao/chats/38445304647341314/huidong-simulator/index.html",
+    "protocol": "file",
+    "cwd": "/home/user/Doubao/chats/38445304647341314/huidong-simulator",
+    "mediaMode": {
+      "reducedMotion": true
+    }
+  },
+  "artifacts": {
+    "screenshots": [
+      {
+        "viewport": "mobile",
+        "path": "/home/user/Doubao/chats/38445304647341314/huidong-simulator/_shots/index_mobile.jpg",
+        "size": 74154,
+        "visualCoverage": {
+          "complete": true,
+          "reason": null
+        }
+      }
+    ]
+  },
+  "summary": {
+    "blocker": 0,
+    "error": 9,
+    "warning": 16,
+    "info": 0
+  },
+  "findings": [
+    {
+      "ruleId": "consoleErrors",
+      "severity": "error",
+      "kind": "console",
+      "viewport": "mobile",
+      "selector": null,
+      "evidence": {
+        "type": "error",
+        "text": "Access to fetch at 'file:///home/user/Doubao/chats/38445304647341314/huidong-simulator/hot.json?ts=1792702652046' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome, chrome-extension, chrome-untrusted, data, http, https, isolated",
+        "location": "file:///home/user/Doubao/chats/38445304647341314/huidong-simulator/index.html"
+      },
+      "dedupeKey": "consoleErrors|mobile||0"
+    },
+    {
+      "ruleId": "consoleErrors",
+      "severity": "error",
+      "kind": "console",
+      "viewport": "mobile",
+      "selector": null,
+      "evidence": {
+        "type": "error",
+        "text": "Failed to load resource: net::ERR_FAILED",
+        "location": "file:///home/user/Doubao/chats/38445304647341314/huidong-simulator/hot.json?ts=1792702652046"
+      },
+      "dedupeKey": "consoleErrors|mobile||1"
+    },
+    {
+      "ruleId": "consoleErrors",
+      "severity": "error",
+      "kind": "console",
+      "viewport": "mobile",
+      "selector": null,
+      "evidence": {
+        "type": "error",
+        "text": "Access to fetch at 'file:///home/user/Doubao/chats/38445304647341314/huidong-simulator/hot.json?ts=1792702652659' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome, chrome-extension, chrome-untrusted, data, http, https, isolated",
+        "location": "file:///home/user/Doubao/chats/38445304647341314/huidong-simulator/index.html"
+      },
+      "dedupeKey": "consoleErrors|mobile||2"
+    },
+    {
+      "ruleId": "consoleErrors",
+      "severity": "error",
+      "kind": "console",
+      "viewport": "mobile",
+      "selector": null,
+      "evidence": {
+        "type": "error",
+        "text": "Failed to load resource: net::ERR_FAILED",
+        "location": "file:///home/user/Doubao/chats/38445304647341314/huidong-simulator/hot.json?ts=1792702652659"
+      },
+      "dedupeKey": "consoleErrors|mobile||3"
+    },
+    {
+      "ruleId": "consoleErrors",
+      "severity": "error",
+      "kind": "console",
+      "viewport": "mobile",
+      "selector": null,
+      "evidence": {
+        "type": "error",
+        "text": "Access to fetch at 'file:///home/user/Doubao/chats/38445304647341314/huidong-simulator/hot.json?ts=1792702653160' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: chrome, chrome-extension, chrome-untrusted, data, http, https, isolated",
+        "location": "file:///home/user/Doubao/chats/38445304647341314/huidong-simulator/index.html"
+      },
+      "dedupeKey": "consoleErrors|mobile||4"
+    },
+    {
+      "ruleId": "consoleErrors",
+      "severity": "error",
+      "kind": "console",
+      "viewport": "mobile",
+      "selector": null,
+      "evidence": {
+        "type": "error",
+        "text": "Failed to load resource: net::ERR_FAILED",
+        "location": "file:///home/user/Doubao/chats/38445304647341314/huidong-simulator/hot.json?ts=1792702653160"
+      },
+      "dedupeKey": "consoleErrors|mobile||5"
+    },
+    {
+      "ruleId": "resourceErrors",
+      "severity": "error",
+      "kind": "network",
+      "viewport": "mobile",
+      "selector": null,
+      "evidence": {
+        "url": "file:///home/user/Doubao/chats/38445304647341314/huidong-simulator/hot.json?ts=1792702652046",
+        "resourceType": "fetch",
+        "status": null,
+        "reason": "network_error"
+      },
+      "dedupeKey": "resourceErrors|mobile||0"
+    },
+    {
+      "ruleId": "resourceErrors",
+      "severity": "error",
+      "kind": "network",
+      "viewport": "mobile",
+      "selector": null,
+      "evidence": {
+        "url": "file:///home/user/Doubao/chats/38445304647341314/huidong-simulator/hot.json?ts=1792702652659",
+        "resourceType": "fetch",
+        "status": null,
+        "reason": "network_error"
+      },
+      "dedupeKey": "resourceErrors|mobile||1"
+    },
+    {
+      "ruleId": "resourceErrors",
+      "severity": "error",
+      "kind": "network",
+      "viewport": "mobile",
+      "selector": null,
+      "evidence": {
+        "url": "file:///home/user/Doubao/chats/38445304647341314/huidong-simulator/hot.json?ts=1792702653160",
+        "resourceType": "fetch",
+        "status": null,
+        "reason": "network_error"
+      },
+      "dedupeKey": "resourceErrors|mobile||2"
+    },
+    {
+      "ruleId": "emojiUsageWarning",
+      "severity": "warning",
+      "kind": "typography",
+      "viewport": "mobile",
+      "selector": "a",
+      "evidence": {
+        "tag": "a",
+        "chars": "🏘",
+        "contextText": "🏘️ 各镇吃喝玩乐"
+      },
+      "dedupeKey": "emojiUsageWarning|mobile|a|0"
+    },
+    {
+      "ruleId": "emojiUsageWarning",
+      "severity": "warning",
+      "kind": "typography",
+      "viewport": "mobile",
+      "selector": "div",
+      "evidence": {
+        "tag": "div",
+        "chars": "🏘",
+        "contextText": "🏘️ 你是惠东哪个镇的？"
+      },
+      "dedupeKey": "emojiUsageWarning|mobile|div|1"
+    },
+    {
+      "ruleId": "emojiUsageWarning",
+      "severity": "warning",
+      "kind": "typography",
+      "viewport": "mobile",
+      "selector": "div",
+      "evidence": {
+        "tag": "div",
+        "chars": "🏆",
+        "contextText": "🏆 向外人介绍惠东，你最先说哪样？"
+      },
+      "dedupeKey": "emojiUsageWarning|mobile|div|2"
+    },
+    {
+      "ruleId": "emojiUsageWarning",
+      "severity": "warning",
+      "kind": "typography",
+      "viewport": "mobile",
+      "selector": "button",
+      "evidence": {
+        "tag": "button",
+        "chars": "🌊",
+        "contextText": "🌊 双月湾"
+      },
+      "dedupeKey": "emojiUsageWarning|mobile|button|3"
+    },
+    {
+      "ruleId": "emojiUsageWarning",
+      "severity": "warning",
+      "kind": "typography",
+      "viewport": "mobile",
+      "selector": "button",
+      "evidence": {
+        "tag": "button",
+        "chars": "🐢",
+        "contextText": "🐢 海龟湾"
+      },
+      "dedupeKey": "emojiUsageWarning|mobile|button|4"
+    },
+    {
+      "ruleId": "emojiUsageWarning",
+      "severity": "warning",
+      "kind": "typography",
+      "viewport": "mobile",
+      "selector": "button",
+      "evidence": {
+        "tag": "button",
+        "chars": "🦪",
+        "contextText": "🦪 赤岸生蚝"
+      },
+      "dedupeKey": "emojiUsageWarning|mobile|button|5"
+    },
+    {
+      "ruleId": "emojiUsageWarning",
+      "severity": "warning",
+      "kind": "typography",
+      "viewport": "mobile",
+      "selector": "button",
+      "evidence": {
+        "tag": "button",
+        "chars": "👠",
+        "contextText": "👠 惠东女鞋"
+      },
+      "dedupeKey": "emojiUsageWarning|mobile|button|6"
+    },
+    {
+      "ruleId": "emojiUsageWarning",
+      "severity": "warning",
+      "kind": "typography",
+      "viewport": "mobile",
+      "selector": "button",
+      "evidence": {
+        "tag": "button",
+        "chars": "⚛",
+        "contextText": "⚛️ 太平岭核电"
+      },
+      "dedupeKey": "emojiUsageWarning|mobile|button|7"
+    },
+    {
+      "ruleId": "emojiUsageWarning",
+      "severity": "warning",
+      "kind": "typography",
+      "viewport": "mobile",
+      "selector": "button",
+      "evidence": {
+        "tag": "button",
+        "chars": "🔵",
+        "contextText": "🔵 产业"
+      },
+      "dedupeKey": "emojiUsageWarning|mobile|button|8"
+    },
+    {
+      "ruleId": "emojiUsageWarning",
+      "severity": "warning",
+      "kind": "typography",
+      "viewport": "mobile",
+      "selector": "button",
+      "evidence": {
+        "tag": "button",
+        "chars": "🟠",
+        "contextText": "🟠 民生"
+      },
+      "dedupeKey": "emojiUsageWarning|mobile|button|9"
+    },
+    {
+      "ruleId": "emojiUsageWarning",
+      "severity": "warning",
+      "kind": "typography",
+      "viewport": "mobile",
+      "selector": "button",
+      "evidence": {
+        "tag": "button",
+        "chars": "⚪",
+        "contextText": "⚪ 城市"
+      },
+      "dedupeKey": "emojiUsageWarning|mobile|button|10"
+    },
+    {
+      "ruleId": "emojiUsageWarning",
+      "severity": "warning",
+      "kind": "typography",
+      "viewport": "mobile",
+      "selector": "button",
+      "evidence": {
+        "tag": "button",
+        "chars": "🌾",
+        "contextText": "🌾 农渔"
+      },
+      "dedupeKey": "emojiUsageWarning|mobile|button|11"
+    },
+    {
+      "ruleId": "emojiUsageWarning",
+      "severity": "warning",
+      "kind": "typography",
+      "viewport": "mobile",
+      "selector": "button",
+      "evidence": {
+        "tag": "button",
+        "chars": "🏖",
+        "contextText": "🏖️ 文旅"
+      },
+      "dedupeKey": "emojiUsageWarning|mobile|button|12"
+    },
+    {
+      "ruleId": "emojiUsageWarning",
+      "severity": "warning",
+      "kind": "typography",
+      "viewport": "mobile",
+      "selector": "button",
+      "evidence": {
+        "tag": "button",
+        "chars": "🔄",
+        "contextText": "🔄 重新扫描"
+      },
+      "dedupeKey": "emojiUsageWarning|mobile|button|13"
+    },
+    {
+      "ruleId": "emojiUsageWarning",
+      "severity": "warning",
+      "kind": "typography",
+      "viewport": "mobile",
+      "selector": "button",
+      "evidence": {
+        "tag": "button",
+        "chars": "👍",
+        "contextText": "👍"
+      },
+      "dedupeKey": "emojiUsageWarning|mobile|button|14"
+    },
+    {
+      "ruleId": "faviconWarning",
+      "severity": "warning",
+      "kind": "metadata",
+      "viewport": "mobile",
+      "selector": null,
+      "evidence": {
+        "present": false
+      },
+      "dedupeKey": "faviconWarning|mobile||0"
+    }
+  ],
+  "prioritizedActions": [
+    {
+      "ruleId": "consoleErrors",
+      "severity": "error",
+      "viewport": "mobile",
+      "selector": null
+    },
+    {
+      "ruleId": "resourceErrors",
+      "severity": "error",
+      "viewport": "mobile",
+      "selector": null
+    },
+    {
+      "ruleId": "emojiUsageWarning",
+      "severity": "warning",
+      "viewport": "mobile",
+      "selector": "a"
+    },
+    {
+      "ruleId": "faviconWarning",
+      "severity": "warning",
+      "viewport": "mobile",
+      "selector": null
+    }
+  ],
+  "reportPath": "/home/user/Doubao/chats/38445304647341314/huidong-simulator/_shots/report.json"
+}
